@@ -1040,17 +1040,8 @@ async function submitForm(){
     return;
   }
 
-  // Show loading state
-  const btn = document.querySelector('.form-submit');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
-
   const payload = {
-    firstName,
-    lastName,
-    email,
-    company,
+    firstName, lastName, email, company,
     role:     document.getElementById('role').value.trim(),
     country:  document.getElementById('country').value,
     interest,
@@ -1059,21 +1050,15 @@ async function submitForm(){
     workshop: document.getElementById('workshop').checked
   };
 
-  try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    // no-cors means we can't read the response — but if no throw, it worked
-    showSuccess(firstName);
-  } catch(err) {
-    btn.textContent = 'Send Message →';
-    btn.disabled = false;
-    btn.style.opacity = '1';
-    showError('Something went wrong. Please email us directly at hello@tekravio.com');
-  }
+  // ── Fire and forget — show success immediately, send in background ──
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {}); // silent background — user already sees success
+
+  showSuccess(firstName);
 }
 
 function showSuccess(name){
