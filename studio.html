@@ -81,6 +81,8 @@ h2{font-family:'Clash Display',sans-serif;font-size:clamp(28px,4vw,46px);font-we
 .sc4::after{background:linear-gradient(90deg,var(--orange),#ffab40)} .sc4:hover{border-color:rgba(255,112,67,0.5);box-shadow:0 12px 40px rgba(255,112,67,0.12);background:rgba(255,112,67,0.03)}
 .sc5::before{background:linear-gradient(90deg,transparent,rgba(248,113,113,0.9),transparent)}
 .sc5::after{background:linear-gradient(90deg,var(--red),#fca5a5)} .sc5:hover{border-color:rgba(248,113,113,0.5);box-shadow:0 12px 40px rgba(248,113,113,0.12);background:rgba(248,113,113,0.03)}
+.sc6::before{background:linear-gradient(90deg,transparent,rgba(167,139,250,0.9),transparent)}
+.sc6::after{background:linear-gradient(90deg,var(--purple),#c4b5fd)} .sc6:hover{border-color:rgba(167,139,250,0.5);box-shadow:0 12px 40px rgba(167,139,250,0.14);background:rgba(167,139,250,0.03)}
 .svc-icon{font-size:30px;margin-bottom:14px}
 .svc-name{font-family:'Clash Display',sans-serif;font-size:19px;font-weight:700;margin-bottom:8px}
 .svc-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:16px}
@@ -91,7 +93,8 @@ h2{font-family:'Clash Display',sans-serif;font-size:clamp(28px,4vw,46px);font-we
 .sc3 .svc-item::before{content:'›';color:var(--purple);font-size:14px;line-height:1.2;flex-shrink:0}
 .sc4 .svc-item::before{content:'›';color:var(--orange);font-size:14px;line-height:1.2;flex-shrink:0}
 .sc5 .svc-item::before{content:'›';color:var(--red);font-size:14px;line-height:1.2;flex-shrink:0}
-.services-row2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:20px}
+.sc6 .svc-item::before{content:'›';color:var(--purple);font-size:14px;line-height:1.2;flex-shrink:0}
+.services-row2{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
 
 /* PROCESS */
 .process-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -154,7 +157,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:48p
 @media(max-width:960px){
   nav{padding:0 24px}.nav-links,.nav-cta{display:none}.hamburger{display:flex}
   section{padding:72px 24px}.stats-bar{gap:28px;padding:28px 24px}
-  .services-grid,.services-row2{grid-template-columns:1fr}
+  .services-grid,.services-row2{grid-template-columns:1fr !important}
   .hww-inner{grid-template-columns:1fr}.guarantees{position:static}
   .prob-heads,.prob-row{grid-template-columns:1fr}
   .ph-good{border-left:none;border-top:1px solid var(--border)}
@@ -291,6 +294,17 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:48p
           <div class="svc-item">CI/CD pipeline design &amp; build</div>
           <div class="svc-item">Containerisation (Docker &amp; Kubernetes)</div>
           <div class="svc-item">Cloud migration (AWS / Azure / GCP)</div>
+        </div>
+      </div>
+      <div class="svc-card sc6">
+        <div class="svc-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg" alt="ai" style="width:30px;height:30px;object-fit:contain;display:block"></div>
+        <div class="svc-name">AI &amp; ML Engineering</div>
+        <div class="svc-desc">Integrate LLMs, build RAG pipelines, and ship AI-powered features into your existing product. From OpenAI API wrappers to production vector search — designed, built, and handed over with full documentation.</div>
+        <div class="svc-items">
+          <div class="svc-item">LLM integration &amp; prompt engineering</div>
+          <div class="svc-item">RAG pipelines with vector databases (Chroma, Pinecone)</div>
+          <div class="svc-item">ML model deployment &amp; monitoring</div>
+          <div class="svc-item">AI feature delivery — fixed scope, fixed price</div>
         </div>
       </div>
     </div>
@@ -449,6 +463,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:48p
         <li><a href="#services">Architecture Reviews</a></li>
         <li><a href="#services">Team Augmentation</a></li>
         <li><a href="#services">DevOps Transformation</a></li>
+        <li><a href="#services">AI &amp; ML Engineering</a></li>
       </ul>
     </div>
     <div class="footer-col">
