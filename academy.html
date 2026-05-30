@@ -147,7 +147,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:48p
 
 @media(max-width:960px){
   nav{padding:0 24px}.nav-links,.nav-cta{display:none}.hamburger{display:flex}
-  section{padding:72px 24px}.stats-bar{gap:36px;padding:28px 24px}
+  section{padding:72px 24px}.stats-bar{gap:28px;padding:28px 24px}
   .programs-grid,.steps-grid,.student-grid,.sfb-grid{grid-template-columns:1fr}
   .prob-heads,.prob-row{grid-template-columns:1fr}
   .ph-good{border-left:none;border-top:1px solid var(--border)}
@@ -155,7 +155,35 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:48p
   footer{padding:40px 24px}.footer-top{grid-template-columns:1fr 1fr}
   .cta-band{padding:40px 24px}
 }
-@media(max-width:540px){.footer-top{grid-template-columns:1fr}.programs-grid{grid-template-columns:1fr}}
+@media(max-width:540px){
+  /* ── STRUCTURE ── */
+  section{padding:52px 18px}
+  .footer-top{grid-template-columns:1fr}
+  .programs-grid{grid-template-columns:1fr}
+  footer{padding:28px 18px}
+  .cta-band{padding:32px 18px}
+
+  /* ── STATS BAR ── */
+  .stats-bar{gap:12px 18px;padding:18px}
+  .stat-n{font-size:20px}.stat-l{font-size:10px}
+
+  /* ── HERO ── */
+  .hero-badge{font-size:20px;padding:10px 22px}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-ghost{text-align:center;padding:14px 20px}
+
+  /* ── PROGRAM CARDS: name + desc only ── */
+  .pcard-tags{display:none}
+  .pcard{padding:22px 18px}
+
+  /* ── STUDENT SECTION: hide "who is this for" details box ── */
+  .students-for-box{display:none}
+
+  /* ── COMPARISON TABLE: Tekravio side only ── */
+  .ph-bad,.prob-cell.bad{display:none}
+  .ph-good{border-top:none}
+  .prob-cell.good{border-top:none}
+}
 </style>
 </head>
 <body>

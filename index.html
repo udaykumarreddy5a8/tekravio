@@ -330,9 +330,11 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
   section{padding:72px 24px}
-  .stats-bar{gap:36px;padding:32px 24px}
+  .stats-bar{gap:28px;padding:28px 24px}
   .v3,.stacks-grid,.contact-inner,.founder-inner,.footer-top{grid-template-columns:1fr}
   .stacks-grid{grid-template-columns:1fr 1fr}
+  .gaps-intro{grid-template-columns:1fr;gap:36px}
+  .gap-cards{grid-template-columns:1fr}
   .prob-heads,.prob-row{grid-template-columns:1fr}
   .ph-good{border-left:none;border-top:1px solid var(--border)}
   .prob-cell.good{border-left:none;border-top:1px solid var(--border)}
@@ -344,10 +346,46 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
   .footer-top{grid-template-columns:1fr 1fr}
 }
 @media(max-width:540px){
-  .stacks-grid{grid-template-columns:1fr}
-  .f-stats{grid-template-columns:1fr 1fr}
-  .form-row{grid-template-columns:1fr}
+  /* ── STRUCTURE ── */
+  section{padding:52px 18px}
+  .hero{padding:90px 18px 44px}
   .footer-top{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .f-stats{grid-template-columns:repeat(3,1fr)}
+  footer{padding:28px 18px}
+
+  /* ── STATS BAR ── */
+  .stats-bar{gap:12px 18px;padding:18px}
+  .stat-n{font-size:20px}.stat-l{font-size:10px;letter-spacing:0.05em}
+
+  /* ── HERO: stack CTAs, remove decorative clutter ── */
+  .hero-actions{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-ghost{text-align:center;padding:14px 20px}
+  .ticker-wrap{display:none}   /* tech ticker scrolls off-screen on mobile */
+  .markets{display:none}       /* timezone/remote pills add 270px of noise */
+
+  /* ── SERVICE CARDS: name + desc + CTA only ── */
+  .vc-name{display:none}       /* brand name already clear enough */
+  .vc-tags{display:none}       /* detail tags hidden — desc covers it */
+  .vcard{padding:20px 18px}
+  .vc-explore{width:100%;justify-content:center}
+
+  /* ── TECH STACKS: icon + name grid only ── */
+  .stacks-grid{grid-template-columns:1fr 1fr}
+  .scard-list,.scard-tech{display:none}
+  .scard{padding:16px 14px}
+
+  /* ── COMPARISON TABLE: show Tekravio side only ── */
+  .ph-bad,.prob-cell.bad{display:none}
+  .ph-good{border-top:none;border-radius:0}
+  .prob-cell.good{border-top:none}
+
+  /* ── FOUNDER: strip secondary long-form boxes ── */
+  .deloitte-box,.why-box{display:none}
+
+  /* ── CONTACT: strip secondary offer box ── */
+  .workshop-box{display:none}
+  .contact-form{padding:24px 18px}
 }
 </style>
 </head>
