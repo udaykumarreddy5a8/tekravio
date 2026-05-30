@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio Academy — React Intern Assignment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--surface:#0b0f1e;--surface2:#111829;
+  --border:rgba(255,255,255,0.07);
+  --blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;
+  --red:#f87171;--purple:#a78bfa;--yellow:#fbbf24;
+  --text:#e2e8f0;--muted:#5a6080;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+.hero{padding:72px 56px 56px;background:linear-gradient(135deg,#04060e,#0b0f1e);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(59,111,245,0.08),transparent 65%);pointer-events:none}
+.hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;position:relative;z-index:1}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.08em;color:var(--text)}
+.logo span{color:var(--blue)}
+.academy-badge{background:rgba(59,111,245,0.1);border:1px solid rgba(59,111,245,0.25);border-radius:6px;padding:6px 16px;font-family:'Fira Code',monospace;font-size:11px;color:#7ba7ff;letter-spacing:0.1em;text-transform:uppercase}
+.hero-tag{font-family:'Fira Code',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;position:relative;z-index:1}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,68px);font-weight:400;letter-spacing:0.01em;line-height:1.0;margin-bottom:16px;position:relative;z-index:1}
+h1 .ac{display:block}
+.hero-sub{font-size:16px;color:var(--muted);max-width:600px;line-height:1.75;position:relative;z-index:1;margin-bottom:32px}
+.meta-row{display:flex;gap:24px;flex-wrap:wrap;position:relative;z-index:1}
+.meta-pill{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:13px;font-weight:500}
+.mi{font-size:16px}.ml{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em}.mv{font-size:13px;color:var(--text);font-weight:600}
+.container{max-width:960px;margin:0 auto;padding:52px 56px 80px}
+.sec-tag{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:32px;font-weight:400;letter-spacing:0.02em;margin-bottom:6px;color:var(--text)}
+h3{font-size:16px;font-weight:700;margin-bottom:10px;color:var(--text)}
+p{font-size:14px;color:#94a3b8;line-height:1.8;margin-bottom:12px}p strong{color:var(--text)}
+.callout{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0}
+.callout.blue{border-left:3px solid var(--blue);background:rgba(59,111,245,0.04)}.callout.cyan{border-left:3px solid var(--cyan);background:rgba(0,201,167,0.04)}.callout.orange{border-left:3px solid var(--orange);background:rgba(255,112,67,0.04)}.callout.red{border-left:3px solid var(--red);background:rgba(248,113,113,0.04)}.callout.yellow{border-left:3px solid var(--yellow);background:rgba(251,191,36,0.04)}
+.callout-head{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px}
+.callout.blue .callout-head{color:var(--blue)}.callout.cyan .callout-head{color:var(--cyan)}.callout.orange .callout-head{color:var(--orange)}.callout.red .callout-head{color:var(--red)}.callout.yellow .callout-head{color:var(--yellow)}
+.callout p{margin-bottom:0}
+.code-block{background:#020408;border:1px solid rgba(59,111,245,0.15);border-radius:10px;overflow:hidden;margin:16px 0}
+.code-header{background:var(--surface2);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.code-filename{font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)}.code-lang{font-family:'Fira Code',monospace;font-size:10px;color:var(--cyan);background:rgba(0,201,167,0.1);padding:2px 8px;border-radius:3px;letter-spacing:0.06em}
+pre{padding:20px 24px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:12px;line-height:1.7;color:#94a3b8}
+.kw{color:#7ba7ff}.cls{color:#00c9a7}.fn{color:#fbbf24}.st{color:#86efac}.cm{color:#3a4a6a}.an{color:#f472b6}.nu{color:#fb923c}
+.tasks{display:flex;flex-direction:column;gap:20px;margin-top:20px}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.task-header{padding:16px 24px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border)}
+.task-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;min-width:44px}
+.t1 .task-num{color:var(--blue)}.t2 .task-num{color:var(--cyan)}.t3 .task-num{color:var(--orange)}.t4 .task-num{color:var(--purple)}.t5 .task-num{color:var(--yellow)}.booster .task-num{color:var(--red)}
+.task-meta{}.task-title{font-size:15px;font-weight:700;margin-bottom:2px}.task-pts{font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em}
+.task-body{padding:20px 24px}.task-desc{font-size:13px;color:#94a3b8;line-height:1.75;margin-bottom:14px}
+.req-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.req{display:flex;gap:10px;font-size:12px;color:#94a3b8;align-items:flex-start;line-height:1.5}
+.req-check{width:16px;height:16px;border-radius:3px;border:1px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px}
+.t1 .req-check{border-color:rgba(59,111,245,0.4);color:var(--blue);background:rgba(59,111,245,0.06)}
+.t2 .req-check{border-color:rgba(0,201,167,0.4);color:var(--cyan);background:rgba(0,201,167,0.06)}
+.t3 .req-check{border-color:rgba(255,112,67,0.4);color:var(--orange);background:rgba(255,112,67,0.06)}
+.t4 .req-check{border-color:rgba(167,139,250,0.4);color:var(--purple);background:rgba(167,139,250,0.06)}
+.t5 .req-check{border-color:rgba(251,191,36,0.4);color:var(--yellow);background:rgba(251,191,36,0.06)}
+.booster .req-check{border-color:rgba(248,113,113,0.4);color:var(--red);background:rgba(248,113,113,0.06)}
+.ep-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12px}
+.ep-table th{padding:10px 14px;text-align:left;font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface2)}
+.ep-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#94a3b8;vertical-align:top}
+.ep-table tr:last-child td{border-bottom:none}.ep-table tr:hover td{background:rgba(255,255,255,0.02)}
+.method{font-family:'Fira Code',monospace;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:0.06em}
+.get{background:rgba(34,197,94,0.12);color:#4ade80}.post{background:rgba(59,111,245,0.12);color:#7ba7ff}.put{background:rgba(251,191,36,0.12);color:#fbbf24}.del{background:rgba(248,113,113,0.12);color:var(--red)}
+.ep-path{font-family:'Fira Code',monospace;color:#7ba7ff;font-size:11px}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.score-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.score-n{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--blue);margin-bottom:4px}
+.score-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.criteria{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.cr{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px}
+.cr-title{font-size:13px;font-weight:600;margin-bottom:3px}.cr-desc{font-size:12px;color:var(--muted)}.cr-pts{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--cyan);white-space:nowrap}
+.mq-list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.mq{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:16px 20px}
+.mq-num{font-family:'Fira Code',monospace;font-size:10px;color:var(--cyan);margin-bottom:6px;letter-spacing:0.1em}
+.mq-text{font-size:13px;color:#c8d8f0;line-height:1.65;font-weight:500}
+.submit-steps{display:flex;flex-direction:column;gap:0;position:relative;margin-top:20px}
+.submit-steps::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:1px;background:linear-gradient(to bottom,var(--blue),var(--cyan));opacity:0.2}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:16px;padding-bottom:24px;position:relative}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;border:1px solid rgba(59,111,245,0.3);background:rgba(59,111,245,0.1);color:var(--blue)}
+.ss-title{font-size:14px;font-weight:700;margin-bottom:4px}.ss-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.sep{height:1px;background:var(--border);margin:40px 0}
+@media(max-width:768px){.hero,.container{padding-left:24px;padding-right:24px}.score-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-top">
+    <div class="logo">Tekr<span>avio</span> <span style="font-size:14px;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400">Academy</span></div>
+    <div class="academy-badge">// Intern Assignment · React</div>
+  </div>
+  <div class="hero-tag">// Assignment · React · TypeScript · 2026</div>
+  <h1>Build UIs That<br><span class="ac" style="color:#38bdf8">Actually Work.</span><span class="ac" style="color:var(--cyan);-webkit-text-stroke:2px var(--cyan);color:transparent">Not Just Look Good.</span></h1>
+  <p class="hero-sub">Not a landing page. Not a UI clone. A real dashboard that enterprise engineering managers use to track their sprint operations. Think about state, performance, and the engineer who maintains this after you.</p>
+  <div class="meta-row">
+    <div class="meta-pill"><span class="mi">⏱️</span><div><div class="ml">Time Limit</div><div class="mv">2 Days</div></div></div>
+    <div class="meta-pill"><span class="mi">⚙️</span><div><div class="ml">Stack</div><div class="mv">React · TypeScript · TanStack Query</div></div></div>
+    <div class="meta-pill"><span class="mi">📊</span><div><div class="ml">Total Marks</div><div class="mv">100 + 20 Bonus</div></div></div>
+    <div class="meta-pill"><span class="mi">📧</span><div><div class="ml">Submit To</div><div class="mv">careers@tekravio.com</div></div></div>
+  </div>
+</div>
+<div class="container">
+  <div class="sec-tag">// 01 · The Brief</div>
+  <h2>What You're Building</h2>
+  <p>A <strong>Sprint Operations Dashboard</strong> for Tekravio Studio. Engineering managers use this to monitor projects, track sprint progress, manage tasks, and see engineer workloads in real time.</p>
+  <p>Use <strong>React + TypeScript</strong> with <strong>TanStack Query</strong> for server state and <strong>Zustand</strong> for client state. No class components. No any types. No inline styles.</p>
+  <div class="callout cyan"><div class="callout-head">// The Mock API</div><p>We provide a mock API via <strong>json-server</strong> or <strong>MSW (Mock Service Worker)</strong>. Set it up in your project. All API calls should hit your mock backend — structure it to match the domain model below.</p></div>
+
+  <div class="sep"></div>
+  <div class="sec-tag">// 02 · Domain Model</div>
+  <h2>Data Shape — TypeScript Interfaces</h2>
+  <div class="code-block"><div class="code-header"><span class="code-filename">types/index.ts — define these</span><span class="code-lang">TSX</span></div>
+  <pre>
+<span class="kw">interface</span> <span class="cls">Client</span> &#123; id, name, industry, contactEmail, country, createdAt &#125;
+<span class="kw">interface</span> <span class="cls">Project</span> &#123; id, name, description, status: <span class="st">'ACTIVE'|'COMPLETED'|'ON_HOLD'</span>, startDate, endDate, clientId &#125;
+<span class="kw">interface</span> <span class="cls">Sprint</span> &#123; id, sprintNumber, goal, status: <span class="st">'PLANNED'|'IN_PROGRESS'|'DONE'</span>, startDate, endDate, projectId &#125;
+<span class="kw">interface</span> <span class="cls">Task</span> &#123;
+  id, title, description,
+  priority: <span class="st">'LOW'|'MEDIUM'|'HIGH'|'CRITICAL'</span>,
+  status: <span class="st">'TODO'|'IN_PROGRESS'|'REVIEW'|'DONE'</span>,
+  estimatedHours, actualHours, sprintId, engineerId
+&#125;
+<span class="kw">interface</span> <span class="cls">Engineer</span> &#123; id, name, email, primaryStack, experienceYears, isAvailable &#125;</pre></div>
+
+  <div class="sep"></div>
+  <div class="sec-tag">// 03 · Tasks</div>
+  <h2>What You Need to Build</h2>
+  <div class="tasks">
+    <div class="task t1">
+      <div class="task-header"><div class="task-num">01</div><div class="task-meta"><div class="task-title">Project Setup & Architecture</div><div class="task-pts">// 15 marks · Foundation</div></div></div>
+      <div class="task-body">
+        <div class="code-block"><div class="code-header"><span class="code-filename">Component Structure</span><span class="code-lang">TSX</span></div>
+        <pre>
+src/
+  ├── <span class="cls">components</span>/
+  │   ├── ui/          <span class="cm">// reusable: Button, Badge, Card, Table, Modal</span>
+  │   └── features/    <span class="cm">// domain: TaskCard, SprintBoard, EngineerAvatar</span>
+  ├── <span class="cls">pages</span>/           <span class="cm">// Dashboard, Projects, Sprints, Engineers</span>
+  ├── <span class="cls">hooks</span>/           <span class="cm">// useProjects, useTasks, useEngineers</span>
+  ├── <span class="cls">store</span>/           <span class="cm">// Zustand slices</span>
+  ├── <span class="cls">api</span>/             <span class="cm">// axios instance + query functions</span>
+  └── <span class="cls">types</span>/           <span class="cm">// all TypeScript interfaces</span></pre></div>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Vite + React + TypeScript — <code style="font-family:'Fira Code',monospace;color:#7ba7ff;font-size:11px">npm create vite@latest</code></div>
+          <div class="req"><div class="req-check">✓</div>React Router v6 — 4 routes: Dashboard, Projects, Sprints, Engineers</div>
+          <div class="req"><div class="req-check">✓</div>TanStack Query for all server state — no useEffect + fetch patterns</div>
+          <div class="req"><div class="req-check">✓</div>Zustand for client-only state (selected filters, UI state)</div>
+          <div class="req"><div class="req-check">✓</div>MSW or json-server mock API with seeded data</div>
+          <div class="req"><div class="req-check">✓</div>Zero TypeScript errors on build — strict mode enabled</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task t2">
+      <div class="task-header"><div class="task-num">02</div><div class="task-meta"><div class="task-title">Core Pages & Components</div><div class="task-pts">// 25 marks · Core Delivery</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Build 4 pages. Every page fetches real data from your mock API. No hardcoded arrays.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>Dashboard</strong> — Summary cards: active projects count, tasks in progress, overdue tasks, available engineers. All from API.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Projects Page</strong> — List of all projects with status badge, client name, date range. Click to see sprints.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Sprint Board</strong> — Kanban-style board: 4 columns (TODO · IN_PROGRESS · REVIEW · DONE). Drag task to update status via API call.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Engineers Page</strong> — List of engineers with availability indicator, primary stack badge, active task count.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Task Detail Modal</strong> — Click any task to see full details. Edit title, priority. Reassign engineer from available list.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task t3">
+      <div class="task-header"><div class="task-num">03</div><div class="task-meta"><div class="task-title">Forms, Validation & UX</div><div class="task-pts">// 20 marks · Craft Matters</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Forms that actually work in production. Loading states that don't freeze the UI. Errors that don't confuse the user.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Create Task form using <strong>React Hook Form</strong> + <strong>Zod</strong> schema validation</div>
+          <div class="req"><div class="req-check">✓</div>Create Project form — client dropdown, date pickers, status selector</div>
+          <div class="req"><div class="req-check">✓</div>Loading skeletons (not spinners) on all data-fetching pages</div>
+          <div class="req"><div class="req-check">✓</div>Optimistic UI updates on task status changes — update instantly, rollback on error</div>
+          <div class="req"><div class="req-check">✓</div>Toast notifications for success/error states using react-hot-toast or sonner</div>
+          <div class="req"><div class="req-check">✓</div>Empty states — don't show blank pages when there's no data</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task t4">
+      <div class="task-header"><div class="task-num">04</div><div class="task-meta"><div class="task-title">Sprint Intelligence — Visualised</div><div class="task-pts">// 25 marks · Think Like a Product Engineer</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Turn raw data into insight. This is what separates a frontend engineer from a UI copier.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>Sprint Progress Bar</strong> — Visual completion % for each sprint. Colour-coded: red &lt;30%, yellow 30–70%, green &gt;70%.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Task Priority Breakdown</strong> — Bar or donut chart showing task count by priority per sprint. Use Recharts or Chart.js.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Engineer Workload View</strong> — Each engineer shown with their active task count and a visual workload bar (0–5 tasks = green, 5+ = amber).</div>
+          <div class="req"><div class="req-check">✓</div><strong>Project Health Score</strong> — Display the health score from the API as a circular progress indicator. Define the colour thresholds.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Filtering & Search</strong> — Filter tasks by status, priority, engineer. Live search on project and engineer names. All client-side, no refetch.</div>
+        </div>
+        <div class="callout yellow"><div class="callout-head">// Uday's Note</div><p>We will look at this on a real screen. If it looks bad, it won't matter how well the code is structured. <strong>Design matters. Don't ship ugly.</strong> Use Tailwind CSS or a component library — just be consistent.</p></div>
+      </div>
+    </div>
+
+    <div class="task t5">
+      <div class="task-header"><div class="task-num">05</div><div class="task-meta"><div class="task-title">Testing</div><div class="task-pts">// 15 marks · Ship With Confidence</div></div></div>
+      <div class="task-body">
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Component tests using <strong>Vitest</strong> + <strong>React Testing Library</strong></div>
+          <div class="req"><div class="req-check">✓</div>Test at least 3 components — render correctly, handle loading, handle empty state</div>
+          <div class="req"><div class="req-check">✓</div>Test a form — submit with valid data, show errors with invalid data</div>
+          <div class="req"><div class="req-check">✓</div>Custom hook tests — useProjects or useTasks with mocked TanStack Query</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task booster">
+      <div class="task-header"><div class="task-num">⚡</div><div class="task-meta"><div class="task-title">Bonus Challenges</div><div class="task-pts">// 20 bonus marks · Not Required · Very Noticed</div></div></div>
+      <div class="task-body">
+        <div class="req-list">
+          <div class="req"><div class="req-check">+5</div><strong>Dark/Light Mode</strong> — Full theme toggle persisted to localStorage. Consistent across all components.</div>
+          <div class="req"><div class="req-check">+5</div><strong>Drag & Drop Sprint Board</strong> — Use @dnd-kit to move tasks between columns. API call on drop.</div>
+          <div class="req"><div class="req-check">+5</div><strong>Real-time Updates</strong> — WebSocket or polling every 30s — task status changes from another tab show up automatically.</div>
+          <div class="req"><div class="req-check">+5</div><strong>Export to CSV</strong> — "Export Sprint" button downloads all tasks as a CSV file using client-side generation.</div>
+        </div>
+        <div class="callout red"><div class="callout-head">// Warning</div><p>Finish core before bonus. <strong>A polished Task 4 beats a broken drag-and-drop implementation.</strong></p></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- MINDSET QUESTIONS -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 04 · Mindset Questions</div>
+  <h2>The README Must Answer These</h2>
+  <p>Include a README.md in your submission. Answer all five. <strong>We read these before we run your code.</strong></p>
+  <div class="mq-list">
+    <div class="mq"><div class="mq-num">// Question 01</div><div class="mq-text">Why did you choose this architecture? What tradeoffs did you make and what would you change at scale?</div></div>
+    <div class="mq"><div class="mq-num">// Question 02</div><div class="mq-text">What is your Project Health Score formula and why? Walk us through your reasoning — not the code.</div></div>
+    <div class="mq"><div class="mq-num">// Question 03</div><div class="mq-text">What part was hardest? What did you Google and what did you figure out yourself?</div></div>
+    <div class="mq"><div class="mq-num">// Question 04</div><div class="mq-text">If you had one more day, what would you add or fix first — and why?</div></div>
+    <div class="mq"><div class="mq-num">// Question 05</div><div class="mq-text">What's one thing in your submission you're genuinely proud of? Don't be humble.</div></div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 05 · Scoring</div>
+  <h2>How We Evaluate</h2>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-n">60</div><div class="score-l">Code Works</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--cyan)">25</div><div class="score-l">Code Quality</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--orange)">15</div><div class="score-l">How You Think</div></div>
+  </div>
+  <div class="criteria">
+    <div class="cr"><div><div class="cr-title">All 5 Tasks Implemented & Functional</div><div class="cr-desc">Features work, edge cases handled, data persists</div></div><div class="cr-pts">40</div></div>
+    <div class="cr"><div><div class="cr-title">Tests Pass</div><div class="cr-desc">Unit + integration + sad path coverage</div></div><div class="cr-pts">20</div></div>
+    <div class="cr"><div><div class="cr-title">Code Quality & Architecture</div><div class="cr-desc">Clean structure, meaningful naming, no code smells</div></div><div class="cr-pts">15</div></div>
+    <div class="cr"><div><div class="cr-title">API / Component Design</div><div class="cr-desc">Correct patterns, consistent structure</div></div><div class="cr-pts">10</div></div>
+    <div class="cr"><div><div class="cr-title">README & Mindset Questions</div><div class="cr-desc">We're hiring a thinker, not a typist</div></div><div class="cr-pts">15</div></div>
+    <div class="cr" style="border-color:rgba(248,113,113,0.2)"><div><div class="cr-title" style="color:var(--red)">Bonus Challenges</div><div class="cr-desc">Extra features showing genuine hunger</div></div><div class="cr-pts" style="color:var(--red)">+20</div></div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 06 · Submission</div>
+  <h2>How to Submit</h2>
+  <div class="submit-steps">
+    <div class="ss"><div class="ss-dot">01</div><div><div class="ss-title">Push to GitHub</div><div class="ss-desc">Public repo. Clean commit history — each task should have its own commits. We read commits.</div></div></div>
+    <div class="ss"><div class="ss-dot">02</div><div><div class="ss-title">README.md in Root</div><div class="ss-desc">Setup instructions, how to run, all 5 mindset answers, assumptions made. Keep it honest.</div></div></div>
+    <div class="ss"><div class="ss-dot">03</div><div><div class="ss-title">Email to careers@tekravio.com</div><div class="ss-desc">Subject: <code style="font-family:'Fira Code',monospace;color:#7ba7ff;font-size:12px">[STACK] Intern Assignment — [Your Name]</code><br>Body: GitHub link + what you built + what you'd do differently.</div></div></div>
+    <div class="ss"><div class="ss-dot">04</div><div><div class="ss-title">Deadline: 2 Days from Receipt</div><div class="ss-desc">Late submissions are not reviewed. Email us before the deadline if something comes up — not after.</div></div></div>
+  </div>
+  <div class="sep"></div>
+  <div class="callout blue">
+    <div class="callout-head">// From Uday · Founder, Tekravio</div>
+    <p>We don't care if your code is perfect. We care if you <strong>thought about it</strong>. The README questions matter as much as the code. Build something you're proud of. That's the only brief that matters.</p>
+  </div>
+  <div style="margin-top:40px;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div style="font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)">// Tekravio Academy · careers@tekravio.com · tekravio.com</div>
+    <div style="font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)">© 2026 Tekravio · Build. Train. Deliver.</div>
+  </div>
+</div>
+</body>
+</html>
+
