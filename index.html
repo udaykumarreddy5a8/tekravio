@@ -390,6 +390,40 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
   .workshop-box{display:none}
   .contact-form{padding:24px 18px}
 }
+
+/* ── SCROLL HINT ── */
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;animation:fadeIn 1s 1.2s ease both;opacity:0}
+.scroll-hint-label{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.scroll-mouse{width:22px;height:34px;border:2px solid rgba(255,255,255,0.15);border-radius:11px;display:flex;align-items:flex-start;justify-content:center;padding:5px}
+.scroll-wheel{width:3px;height:7px;background:var(--blue);border-radius:2px;animation:scrollWheel 1.6s ease-in-out infinite}
+@keyframes scrollWheel{0%{opacity:1;transform:translateY(0)}80%{opacity:0;transform:translateY(10px)}100%{opacity:0;transform:translateY(0)}}
+
+/* ── CURIOSITY STRIPS ── */
+.curiosity-strip{background:linear-gradient(90deg,rgba(59,111,245,0.04),rgba(0,201,167,0.04),rgba(59,111,245,0.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 56px;display:flex;align-items:center;justify-content:center;gap:16px;overflow:hidden;position:relative}
+.curiosity-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(59,111,245,0.03) 50%,transparent 100%);animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:0}50%{opacity:1}}
+.cs-inner{display:flex;align-items:center;gap:14px;max-width:760px}
+.cs-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse 2s infinite}
+.cs-text{font-family:'Fira Code',monospace;font-size:11.5px;letter-spacing:0.06em;color:#6878a0;line-height:1.6;text-align:center}
+.cs-text em{color:var(--cyan);font-style:normal;font-weight:600}
+.cs-arrow{font-size:13px;color:var(--blue);flex-shrink:0;animation:bobDown 1.4s ease-in-out infinite}
+@keyframes bobDown{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.curiosity-strip.cs-warn .cs-text{color:#b0607a}
+.curiosity-strip.cs-warn .cs-dot{background:var(--red)}
+.curiosity-strip.cs-orange .cs-text{color:#b08060}
+.curiosity-strip.cs-orange .cs-dot{background:var(--orange)}
+
+/* ── SCROLL-REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── HERO ACCENT ── */
+.hero-sub em{color:var(--cyan);font-style:normal;border-bottom:1px dashed rgba(0,201,167,0.4)}
+
+/* ── SECTION TEASE ── */
+.sec-tease{font-family:'Fira Code',monospace;font-size:11px;color:#4a5470;letter-spacing:0.07em;margin-top:10px;line-height:1.6}
+.sec-tease strong{color:var(--muted)}
+@media(max-width:540px){.curiosity-strip{padding:14px 18px}.cs-text{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -425,9 +459,9 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
   <div class="hero-glow2"></div>
   <div class="hero-badge"><span class="badge-dot"></span>Enterprise Technology Firm · Global Delivery</div>
   <h1>We Build.<br><span class="a1">We Train.</span><span class="a2">We Deliver.</span></h1>
-  <p class="hero-sub">Tekravio is the tech firm that enterprise clients turn to when their last vendor failed them. Fixed scope. Senior engineers. Guaranteed outcomes. No excuses.</p>
+  <p class="hero-sub">Most enterprises come to us <em>after being burned once</em>. Then they stay because no one else works like this. Every answer you need is on this page — if you keep scrolling.</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn-primary">Start a Project →</a>
+    <a href="#services" class="btn-primary">Explore What We Do →</a>
     <a href="#gaps" class="btn-ghost">See Why We're Different</a>
   </div>
   <div class="markets">
@@ -473,15 +507,27 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
       <span class="tick-item" ><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" alt="gcp" style="width:18px;height:18px;object-fit:contain;vertical-align:middle"> GCP</span>
     </div>
   </div>
+  <div class="scroll-hint">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span class="scroll-hint-label">Scroll to discover</span>
+  </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-bar">
+<div class="stats-bar reveal">
   <div class="stat"><div class="stat-n">17+</div><div class="stat-l">Tech Stacks</div></div>
   <div class="stat"><div class="stat-n">🌍</div><div class="stat-l">Global Delivery</div></div>
   <div class="stat"><div class="stat-n">Fixed</div><div class="stat-l">Price Always</div></div>
   <div class="stat"><div class="stat-n">Senior</div><div class="stat-l">Only Delivery</div></div>
   <div class="stat"><div class="stat-n">$0</div><div class="stat-l">Surprise Invoices</div></div>
+</div>
+
+<div class="curiosity-strip">
+  <div class="cs-inner">
+    <span class="cs-dot"></span>
+    <span class="cs-text">// Most enterprises only ever buy <em>one</em> of these three things — and wonder why the other two keep failing. Scroll to see the full picture.</span>
+    <span class="cs-arrow">↓</span>
+  </div>
 </div>
 
 <!-- SERVICES -->
@@ -490,6 +536,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
     <div class="sec-tag">// What We Do</div>
     <h2>Three ways we create<br>value for enterprises</h2>
     <p class="sec-desc">Training that sticks, consulting that ships, and products that multiply your team's capability — without the overhead.</p>
+    <p class="sec-tease">// Each one is completely different. Each one solves a problem the others can't. <strong>Most firms only offer one.</strong></p>
     <div class="v3">
       <a href="academy.html" class="vcard vc1" style="display:block;text-decoration:none;color:inherit">
         <div class="vc-icon">🎓</div>
@@ -538,12 +585,21 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
   </div>
 </section>
 
+<div class="curiosity-strip cs-warn">
+  <div class="cs-inner">
+    <span class="cs-dot"></span>
+    <span class="cs-text">// What you're about to read is something most consulting firms spend millions hoping you never find out.</span>
+    <span class="cs-arrow">↓</span>
+  </div>
+</div>
+
 <!-- PROBLEM -->
 <section class="problem" id="gaps">
   <div class="container">
     <div class="sec-tag">// The Problem We Solve</div>
     <h2>Tired of vendors who<br>bill more, deliver less?</h2>
     <p class="sec-desc">Enterprise tech projects fail because of a broken consulting model. We built Tekravio to fix exactly that.</p>
+    <p class="sec-tease">// Read each row carefully. You've probably experienced at least three of these firsthand — <strong>without realising it at the time.</strong></p>
     <div class="prob-table">
       <div class="prob-heads">
         <div class="ph ph-bad">❌ What Most Vendors Do</div>
@@ -579,6 +635,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
     <div class="sec-tag">// Technologies</div>
     <h2>17 stacks.<br>One accountable team.</h2>
     <p class="sec-desc">Deep expertise across the full enterprise technology spectrum — backend to frontend, infrastructure to data, and now AI/ML to production.</p>
+    <p class="sec-tease">// One firm. One contract. One accountable person. <strong>Not a marketplace of freelancers stitched together.</strong></p>
     <div class="stacks-grid">
       <div class="scard">
         <div class="scard-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="java" style="width:36px;height:36px;object-fit:contain"></div>
@@ -771,12 +828,21 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:56p
   </div>
 </section>
 
+<div class="curiosity-strip cs-orange">
+  <div class="cs-inner">
+    <span class="cs-dot"></span>
+    <span class="cs-text">// The tech stack is only half the story. <em>How</em> a firm works is the part that determines whether any of it actually ships.</span>
+    <span class="cs-arrow">↓</span>
+  </div>
+</div>
+
 <!-- HOW WE WORK -->
 <section id="how">
   <div class="container">
     <div class="sec-tag">// Our Process</div>
     <h2>How every engagement<br>works at Tekravio</h2>
     <p class="sec-desc">No surprises. Every project follows the same transparent, sprint-based process from day one.</p>
+    <p class="sec-tease">// Step 4 is the one most firms structurally avoid — <strong>because it ends their revenue stream.</strong></p>
     <div class="hww-inner">
       <div class="hww-steps">
         <div class="hww-line"></div>
@@ -1195,6 +1261,18 @@ function showError(msg){
   err.textContent = msg;
   err.scrollIntoView({behavior:'smooth', block:'center'});
 }
+
+// ── SCROLL REVEAL ──
+(function(){
+  const els = document.querySelectorAll('section, .curiosity-strip, .stats-bar');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+    });
+  },{threshold:0.08});
+  els.forEach(el=>{el.classList.add('reveal');io.observe(el);});
+})();
+
 </script>
 </body>
 </html>
