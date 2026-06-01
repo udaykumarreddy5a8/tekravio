@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Careers at Tekravio — Intern Openings | Java, React, Python, Node.js, AI</title>
 <meta name="description" content="Join Tekravio as a tech intern. Java, React, Python, Node.js, and AI Research roles open. No GPA filter. No college filter. Just hunger, mindset, and a 3-day real-world assignment.">
 <meta name="keywords" content="Tekravio careers, tech internship, Java intern, React intern, Python intern, AI intern, software intern India">
@@ -305,15 +305,118 @@ footer{border-top:1px solid var(--border);padding:2.5rem 0}
   transition:color var(--transition)}
 .footer-links a:hover{color:var(--ink)}
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE — MOBILE FIRST ── */
+
+/* Tablet */
+@media(max-width:900px){
+  .roles-grid{grid-template-columns:1fr}
+  .perks-grid{grid-template-columns:1fr 1fr}
+  .steps-grid{grid-template-columns:1fr 1fr}
+}
+
+/* Mobile */
 @media(max-width:768px){
+  /* Nav */
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
-  .form-grid{grid-template-columns:1fr}
-  .steps-grid::before{display:none}
+
+  /* Hero */
+  .hero-title{font-size:clamp(2.5rem,11vw,3.5rem)}
+  .hero-actions{flex-direction:column;gap:.75rem}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;padding:1rem 1.5rem}
   .manifesto{flex-wrap:wrap}
-  .mf-item{min-width:45%}
-  .hero-title{font-size:clamp(2.5rem,10vw,3.5rem)}
+  .mf-item{flex:1;min-width:calc(33% - 1px)}
+
+  /* Sections */
+  .section{padding:48px 0}
+  .sec-title{font-size:clamp(1.625rem,6vw,2.25rem)}
+
+  /* Perks */
+  .perks-grid{grid-template-columns:1fr}
+
+  /* Roles */
+  .roles-grid{grid-template-columns:1fr}
+  .role-header{padding:1.25rem 1.25rem}
+  .role-body{padding:1.25rem 1.25rem}
+
+  /* Steps */
+  .steps-grid{grid-template-columns:1fr}
+  .steps-grid::before{display:none}
+  .step-card{padding:1.5rem 1.25rem;display:flex;align-items:flex-start;gap:1rem;text-align:left}
+  .step-num{width:44px;height:44px;font-size:1.125rem;flex-shrink:0;margin:0}
+
+  /* Screening banner */
+  .screening-banner{padding:1.25rem}
+
+  /* Form */
+  .form-grid{grid-template-columns:1fr}
+  .form-full{grid-column:1}
+  .form-header{padding:1.5rem}
+  .form-body{padding:1.25rem}
+  .form-header-title{font-size:1.375rem}
+  .field-input,.field-select,.field-textarea{font-size:16px} /* prevents iOS zoom */
+  .file-upload{flex-direction:column;text-align:center;gap:.75rem}
+
+  /* Footer */
+  .footer-inner{flex-direction:column;text-align:center;gap:.75rem}
+  .footer-links{justify-content:center;flex-wrap:wrap;gap:1rem}
+}
+
+/* Small mobile */
+@media(max-width:400px){
+  .hero-title{font-size:2.25rem}
+  .mf-item{min-width:calc(50% - 1px)}
+  .manifesto{border-radius:var(--radius-sm)}
+}
+
+/* ── MOBILE UX EXTRAS ── */
+
+/* Larger tap targets on mobile */
+@media(max-width:768px){
+  .nav-links a,.footer-links a{min-height:44px;display:flex;align-items:center}
+
+  /* Form field sizing — critical for iOS */
+  .field-input,.field-select,.field-textarea{
+    font-size:16px !important; /* prevents iOS auto-zoom */
+    min-height:48px;
+  }
+  .field-textarea{min-height:100px}
+
+  /* Submit button tap target */
+  .submit-btn{min-height:56px;font-size:1rem}
+
+  /* Role card tap states */
+  .role-card:hover{transform:none} /* disable hover transform on touch */
+
+  /* Hero padding adjustment for mobile */
+  .careers-hero{min-height:auto;padding-top:68px}
+  .hero-inner{padding:56px 0 48px}
+
+  /* Manifesto — show as 2x3 grid on mobile */
+  .manifesto{display:grid;grid-template-columns:1fr 1fr 1fr;border-radius:var(--radius-sm)}
+  .mf-item{border-right:1px solid var(--border);border-bottom:none;padding:12px 8px}
+  .mf-item:nth-child(3),.mf-item:nth-child(6){border-right:none}
+
+  /* Steps horizontal scroll on very small screens */
+  .step-card{padding:1.25rem}
+
+  /* Perk card hover disabled on touch */
+  .perk-card:hover{transform:none}
+
+  /* Screening banner mobile */
+  .screening-banner{flex-direction:column;gap:.75rem;border-left-width:4px}
+  .sb-icon{font-size:1.25rem;margin-top:0}
+
+  /* File upload full width */
+  .file-upload{padding:.875rem 1rem}
+
+  /* Check label */
+  .check-label{padding:.875rem 1rem}
+
+  /* Success panel */
+  .success-panel{padding:2rem 1rem}
+  .success-icon{font-size:2.75rem}
+  .success-title{font-size:1.5rem}
 }
 </style>
 </head>
