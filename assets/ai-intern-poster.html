@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tekravio — AI Intern Hiring Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;gap:20px;font-family:'Outfit',sans-serif}
+.post{width:1080px;height:1080px;position:relative;overflow:hidden;background:#04060e;flex-shrink:0}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);background-size:72px 72px;pointer-events:none}
+.orb1{position:absolute;top:-180px;left:-80px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(139,92,246,0.12) 0%,transparent 65%);pointer-events:none}
+.orb2{position:absolute;bottom:-150px;right:-80px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(59,111,245,0.1) 0%,transparent 65%);pointer-events:none}
+.orb3{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%);pointer-events:none}
+.bar-top{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#8b5cf6,#3b6ff5,#00c9a7);z-index:20}
+.bar-bot{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#8b5cf6,#3b6ff5);z-index:20}
+.c{position:absolute;z-index:10}
+.tl{top:0;left:0;width:72px;height:72px;border-top:3px solid #8b5cf6;border-left:3px solid #8b5cf6}
+.tr{top:0;right:0;width:72px;height:72px;border-top:3px solid #8b5cf6;border-right:3px solid #8b5cf6}
+.bl{bottom:0;left:0;width:72px;height:72px;border-bottom:3px solid #00c9a7;border-left:3px solid #00c9a7}
+.br{bottom:0;right:0;width:72px;height:72px;border-bottom:3px solid #00c9a7;border-right:3px solid #00c9a7}
+.nav{position:absolute;top:0;left:0;right:0;padding:32px 52px 0;display:flex;align-items:center;justify-content:space-between;z-index:15}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.08em;color:#f0f2ff}
+.logo em{color:#8b5cf6;font-style:normal}
+.badge{display:flex;align-items:center;gap:7px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);border-radius:100px;padding:7px 18px;font-family:'Fira Code',monospace;font-size:11px;color:#a78bfa;letter-spacing:0.1em;text-transform:uppercase}
+.bdot{width:6px;height:6px;border-radius:50%;background:#8b5cf6;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.main{position:absolute;top:96px;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;padding:0 52px;z-index:10}
+.eyebrow{font-family:'Fira Code',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#8b5cf6;margin:12px 0;display:flex;align-items:center;gap:12px}
+.eyebrow::before,.eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,92,246,0.3));max-width:80px}
+.eyebrow::after{background:linear-gradient(to left,transparent,rgba(139,92,246,0.3))}
+.headline{font-family:'Bebas Neue',sans-serif;font-size:90px;line-height:0.88;letter-spacing:0.01em;text-align:center;margin-bottom:12px}
+.h1{color:#f0f2ff;display:block}.h2{color:#8b5cf6;display:block}
+.h3{-webkit-text-stroke:2px #f0f2ff;color:transparent;display:block}
+.subline{font-size:15px;color:#5a6080;text-align:center;max-width:720px;line-height:1.65;margin-bottom:22px}
+.subline strong{color:#c0d0e8;font-weight:600}
+.manifesto{display:flex;align-items:center;justify-content:center;gap:22px;background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.12);border-radius:8px;padding:12px 28px;margin-bottom:20px;width:100%}
+.mf-bad{display:flex;align-items:center;gap:7px;font-size:11px;color:#6a7090}
+.mf-bad span{color:#f87171}.mf-sep{width:1px;height:18px;background:rgba(255,255,255,0.07)}
+.mf-good{display:flex;align-items:center;gap:7px;font-size:11px;color:#a0c8e8;font-weight:600}
+.mf-good span{color:#8b5cf6}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-bottom:16px}
+.role{border-radius:10px;padding:18px 16px;text-align:center;position:relative;overflow:hidden}
+.role::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px}
+.r1{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.18)}
+.r1::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.r2{background:rgba(59,111,245,0.06);border:1px solid rgba(59,111,245,0.18)}
+.r2::before{background:linear-gradient(90deg,#3b6ff5,#6891ff)}
+.r3{background:rgba(0,201,167,0.06);border:1px solid rgba(0,201,167,0.18)}
+.r3::before{background:linear-gradient(90deg,#00c9a7,#00e5c4)}
+.role-icon{font-size:28px;margin-bottom:8px}
+.role-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;margin-bottom:4px}
+.r1 .role-name{color:#a78bfa}.r2 .role-name{color:#7ba7ff}.r3 .role-name{color:#00c9a7}
+.role-sub{font-size:10px;color:#5a6080;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.role-pts{display:flex;flex-direction:column;gap:4px}
+.rp{font-size:10px;color:#6878a0;display:flex;align-items:center;justify-content:center;gap:5px}
+.rp::before{content:'→';font-size:9px}
+.r1 .rp::before{color:#8b5cf6}.r2 .rp::before{color:#3b6ff5}.r3 .rp::before{color:#00c9a7}
+.perks{display:flex;align-items:stretch;width:100%;border:1px solid rgba(255,255,255,0.06);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.perk{flex:1;padding:12px 8px;text-align:center;background:rgba(255,255,255,0.015);border-right:1px solid rgba(255,255,255,0.06)}
+.perk:last-child{border-right:none}
+.pk-icon{font-size:18px;margin-bottom:4px}.pk-title{font-size:11px;font-weight:700;color:#c0d0e8;margin-bottom:2px}.pk-sub{font-size:9px;color:#5a6080}
+.cta{width:100%;background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(59,111,245,0.06));border:1px solid rgba(139,92,246,0.18);border-radius:12px;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.cta-tag{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#8b5cf6;margin-bottom:5px}
+.cta-title{font-size:18px;font-weight:800;color:#f0f2ff;margin-bottom:2px}
+.cta-sub{font-size:11px;color:#5a6080}
+.email-box{font-family:'Fira Code',monospace;font-size:13px;color:#8b5cf6;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);padding:9px 18px;border-radius:7px;white-space:nowrap}
+.website-box{font-family:'Fira Code',monospace;font-size:11px;color:#00c9a7;letter-spacing:0.04em;text-align:right;margin-top:6px}
+.footer{position:absolute;bottom:0;left:0;right:0;padding:0 52px 30px;display:flex;align-items:flex-end;justify-content:space-between;z-index:15}
+.footer-tagline{font-size:11px;font-weight:600;color:#5a6080;letter-spacing:0.12em;text-transform:uppercase}
+.footer-right{font-family:'Fira Code',monospace;font-size:9px;color:#2a3a5a;text-align:right;line-height:1.7}
+.hint{color:#555;font-size:12px;font-family:'Fira Code',monospace}
+.btn{background:linear-gradient(135deg,#8b5cf6,#3b6ff5);color:white;border:none;padding:13px 32px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif}
+</style>
+</head>
+<body>
+<div class="post" id="post">
+  <div class="grid"></div><div class="orb1"></div><div class="orb2"></div><div class="orb3"></div>
+  <div class="bar-top"></div><div class="bar-bot"></div>
+  <div class="c tl"></div><div class="c tr"></div><div class="c bl"></div><div class="c br"></div>
+  <div class="nav">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:12px;color:#2a3a5a;font-family:'Outfit',sans-serif;font-weight:500;letter-spacing:0"> Labs</span></div>
+    <div class="badge"><span class="bdot"></span>AI Intern · Now Hiring</div>
+  </div>
+  <div class="main">
+    <div class="eyebrow">AI / LLM Intern Openings · 2026</div>
+    <div class="headline">
+      <span class="h1">We're Hiring</span>
+      <span class="h2">AI Curious</span>
+      <span class="h3">Minds.</span>
+    </div>
+    <p class="subline">Not prompt engineers. Not hype followers.<br><strong>People who want to understand how every AI model thinks — and why.</strong></p>
+    <div class="manifesto">
+      <div class="mf-bad"><span>✗</span> ChatGPT power users</div>
+      <div class="mf-bad"><span>✗</span> AI hype collectors</div>
+      <div class="mf-sep"></div>
+      <div class="mf-good"><span>✓</span> Model researchers</div>
+      <div class="mf-good"><span>✓</span> First-principles thinkers</div>
+      <div class="mf-good"><span>✓</span> Builders with curiosity</div>
+    </div>
+    <div class="roles">
+      <div class="role r1">
+        <div class="role-icon">🧠</div>
+        <div class="role-name">LLM Research</div>
+        <div class="role-sub">AI Intern</div>
+        <div class="role-pts">
+          <div class="rp">Model benchmarking</div>
+          <div class="rp">Use-case mapping</div>
+          <div class="rp">Capability analysis</div>
+        </div>
+      </div>
+      <div class="role r2">
+        <div class="role-icon">⚙️</div>
+        <div class="role-name">AI Engineering</div>
+        <div class="role-sub">AI Intern</div>
+        <div class="role-pts">
+          <div class="rp">API integration</div>
+          <div class="rp">Prompt engineering</div>
+          <div class="rp">RAG pipelines</div>
+        </div>
+      </div>
+      <div class="role r3">
+        <div class="role-icon">📊</div>
+        <div class="role-name">AI Documentation</div>
+        <div class="role-sub">AI Intern</div>
+        <div class="role-pts">
+          <div class="rp">Model comparison docs</div>
+          <div class="rp">Use-case playbooks</div>
+          <div class="rp">Research reports</div>
+        </div>
+      </div>
+    </div>
+    <div class="perks">
+      <div class="perk"><div class="pk-icon">🤖</div><div class="pk-title">Real AI Projects</div><div class="pk-sub">Not toy demos</div></div>
+      <div class="perk"><div class="pk-icon">🧑‍🏫</div><div class="pk-title">Senior Mentors</div><div class="pk-sub">Ex-Big 4 guidance</div></div>
+      <div class="perk"><div class="pk-icon">🌍</div><div class="pk-title">Remote-First</div><div class="pk-sub">Work from anywhere</div></div>
+      <div class="perk"><div class="pk-icon">📄</div><div class="pk-title">Certificate</div><div class="pk-sub">Verified & official</div></div>
+      <div class="perk"><div class="pk-icon">🚀</div><div class="pk-title">PPO</div><div class="pk-sub">Top performers</div></div>
+      <div class="perk"><div class="pk-icon">⏱️</div><div class="pk-title">3 Day Assignment</div><div class="pk-sub">No interviews</div></div>
+    </div>
+    <div class="cta">
+      <div>
+        <div class="cta-tag">// How to Apply</div>
+        <div class="cta-title">Send your curiosity. Not your CV.</div>
+        <div class="cta-sub">Tell us which AI model fascinates you most — and why. That's your application.</div>
+      </div>
+      <div>
+        <div class="email-box">careers@tekravio.com</div>
+        <div class="website-box">tekravio.com</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-tagline">Build · Train · Deliver</div>
+    <div class="footer-right">#AIIntern · #LLM · #TekravioLabs · #HiringNow<br>#ArtificialIntelligence · #Tekravio · #PassionOverPaper</div>
+  </div>
+</div>
+<p class="hint">// Chrome DevTools → right-click post → "Capture node screenshot"</p>
+<button class="btn" onclick="save()">📸 Save as PNG</button>
+<script>
+function save(){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';document.head.appendChild(s);s.onload=async()=>{const c=await html2canvas(document.getElementById('post'),{scale:1,useCORS:true,backgroundColor:'#04060e',width:1080,height:1080});const a=document.createElement('a');a.download='tekravio-ai-intern-poster.png';a.href=c.toDataURL('image/png');a.click()};}
+</script>
+</body>
+</html>
