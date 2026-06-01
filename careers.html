@@ -445,6 +445,70 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
     .container{padding-left:max(32px,env(safe-area-inset-left));
       padding-right:max(32px,env(safe-area-inset-right))}}
 }
+
+/* ── FORM VALIDATION STATES ── */
+.field-input.is-error,
+.field-select.is-error,
+.field-textarea.is-error{
+  border-color:var(--red) !important;
+  box-shadow:0 0 0 3px rgba(248,113,113,.1) !important;
+  background:rgba(248,113,113,.03);
+}
+.field-input.is-valid,
+.field-select.is-valid,
+.field-textarea.is-valid{
+  border-color:rgba(0,201,167,.4);
+}
+.field-error{
+  font-size:.75rem;color:var(--red);
+  min-height:1rem;display:block;margin-top:-.25rem;
+  font-weight:500;
+  display:flex;align-items:center;gap:.3rem;
+}
+.field-error:not(:empty)::before{content:"⚠ ";}
+
+/* Field footer: hint + char counter side by side */
+.field-footer{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:.5rem;margin-top:-.125rem;
+}
+.char-count{
+  font-family:'Fira Code',monospace;font-size:.7rem;
+  color:var(--muted);white-space:nowrap;flex-shrink:0;
+  transition:color .2s;
+}
+.char-count.warn{color:var(--orange);}
+.char-count.danger{color:var(--red);}
+
+/* Bigger tap targets on inputs */
+.field-input,.field-select{min-height:56px;}
+.field-textarea{min-height:100px;}
+
+/* Resume upload bigger */
+.file-upload{min-height:80px;padding:1rem 1.125rem;}
+
+/* Clear form error banner style */
+.form-error-banner{
+  display:none;
+  background:rgba(248,113,113,.06);
+  border:1px solid rgba(248,113,113,.25);
+  border-left:3px solid var(--red);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:1rem 1.125rem;
+  font-size:.875rem;color:var(--red);
+  margin-bottom:1.25rem;line-height:1.55;
+}
+
+/* Shake animation on error */
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px)}
+  40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)}
+  80%{transform:translateX(4px)}
+}
+.shake{animation:shake .35s ease;}
+
 </style>
 </head>
 <body>
@@ -760,9 +824,10 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
           <!-- Row 1: Name -->
           <div class="form-grid" style="margin-bottom:1.25rem">
-            <div class="field-group">
+            <div class="field-group" id="fg-fname">
               <label class="field-label" for="fname">First Name <span class="field-req">*</span></label>
               <input class="field-input" type="text" id="fname" placeholder="First name" autocomplete="given-name" required>
+              <span class="field-error" id="err-fname"></span>
             </div>
             <div class="field-group">
               <label class="field-label" for="lname">Last Name</label>
@@ -772,9 +837,10 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
           <!-- Row 2: Email + Phone -->
           <div class="form-grid" style="margin-bottom:1.25rem">
-            <div class="field-group">
+            <div class="field-group" id="fg-email">
               <label class="field-label" for="email">Email Address <span class="field-req">*</span></label>
               <input class="field-input" type="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+              <span class="field-error" id="err-email"></span>
             </div>
             <div class="field-group">
               <label class="field-label" for="phone">Phone (optional)</label>
@@ -784,7 +850,7 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
           <!-- Row 3: Stack + College -->
           <div class="form-grid" style="margin-bottom:1.25rem">
-            <div class="field-group">
+            <div class="field-group" id="fg-stack">
               <label class="field-label" for="stack">Applying For <span class="field-req">*</span></label>
               <select class="field-select" id="stack" required>
                 <option value="" disabled selected>Select a role</option>
@@ -803,9 +869,10 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
           <!-- Row 4: GitHub + LinkedIn -->
           <div class="form-grid" style="margin-bottom:1.25rem">
-            <div class="field-group">
+            <div class="field-group" id="fg-github">
               <label class="field-label" for="github">GitHub Profile <span class="field-req">*</span></label>
               <input class="field-input" type="url" id="github" placeholder="https://github.com/yourname" required>
+              <span class="field-error" id="err-github"></span>
               <p class="field-hint">This is the most important field. An active GitHub says more than any resume.</p>
             </div>
             <div class="field-group">
@@ -819,14 +886,15 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
           <!-- What have you built -->
           <div class="field-group form-full" style="margin-bottom:1.25rem">
             <label class="field-label" for="built">What have you built? <span class="field-req">*</span></label>
-            <textarea class="field-textarea" id="built" placeholder="Tell us about something you've built — personal project, open source contribution, anything. No matter how small. What was it, what problem did it solve, and what did you learn?" required style="min-height:120px"></textarea>
-            <p class="field-hint">2–4 sentences is enough. Be specific. Generic answers tell us nothing.</p>
+            <textarea class="field-textarea" id="built" placeholder="e.g. Built a task tracker in Spring Boot. Used JWT auth, REST APIs, deployed on Railway. Learned a lot about JPA lazy loading issues." required maxlength="400" style="min-height:110px" oninput="updateCount(this,'builtCount',400)"></textarea>
+            <div class="field-footer"><p class="field-hint">2–3 sentences max. Be specific.</p><span class="char-count" id="builtCount">400 left</span></div>
           </div>
 
           <!-- Why Tekravio -->
           <div class="field-group form-full" style="margin-bottom:1.25rem">
             <label class="field-label" for="why">Why Tekravio specifically? <span class="field-req">*</span></label>
-            <textarea class="field-textarea" id="why" placeholder="Not 'great learning opportunity' — that tells us nothing. Tell us what about Tekravio resonated with you. The story. The model. The passion-over-paper approach. Something specific." required style="min-height:110px"></textarea>
+            <textarea class="field-textarea" id="why" placeholder="e.g. The \'passion over paper\' angle hit home. I\'ve been building side projects for 2 years but my college GPA doesn\'t reflect that." required maxlength="300" style="min-height:100px" oninput="updateCount(this,'whyCount',300)"></textarea>
+            <div class="field-footer"><p class="field-hint">2–3 sentences. Be honest, not polished.</p><span class="char-count" id="whyCount">300 left</span></div>
           </div>
 
           <!-- Resume upload -->
@@ -888,31 +956,31 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 </footer>
 
 <script>
-// ── Apps Script URL ─────────────────────────────────
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2USJCWwyFAOaeS9GlJbK5_pNtUwabTP2s2fBdnKaBZFea4dqBnsRksItqTx6OCgXDeA/exec";
 
-// ── Header scroll behaviour ──────────────────────────
+// ── Header scroll ────────────────────────────────────────────────
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
   header.style.background = window.scrollY > 40
-    ? 'rgba(4,6,14,0.96)' : 'rgba(4,6,14,0.88)';
-}, { passive: true });
+    ? 'rgba(4,6,14,0.96)' : 'rgba(4,6,14,0.92)';
+}, { passive:true });
 
-// ── Mobile nav ───────────────────────────────────────
+// ── Mobile nav ───────────────────────────────────────────────────
 function toggleMenu() {
   const nav = document.getElementById('mobileNav');
   const btn = document.getElementById('hamburger');
   const open = nav.classList.toggle('open');
   btn.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 }
 
-// ── Scroll reveal ────────────────────────────────────
+// ── Scroll reveal ────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+}, { threshold:0.1, rootMargin:'0px 0px -32px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ── File selected ────────────────────────────────────
+// ── File selected ────────────────────────────────────────────────
 function fileSelected(input) {
   const label = document.getElementById('fileSelectedText');
   if (input.files && input.files[0]) {
@@ -921,34 +989,103 @@ function fileSelected(input) {
   }
 }
 
-// ── Form submission ──────────────────────────────────
+// ── Character counter ────────────────────────────────────────────
+function updateCount(el, counterId, max) {
+  const remaining = max - el.value.length;
+  const counter = document.getElementById(counterId);
+  counter.textContent = remaining + ' left';
+  counter.className = 'char-count' +
+    (remaining < 40 ? ' danger' : remaining < 80 ? ' warn' : '');
+}
+
+// ── Per-field validation ─────────────────────────────────────────
+function setError(fieldId, message) {
+  const input = document.getElementById(fieldId);
+  const err   = document.getElementById('err-' + fieldId);
+  if (!input) return;
+  input.classList.add('is-error');
+  input.classList.remove('is-valid');
+  if (err) err.textContent = message;
+}
+function clearError(fieldId) {
+  const input = document.getElementById(fieldId);
+  const err   = document.getElementById('err-' + fieldId);
+  if (!input) return;
+  input.classList.remove('is-error');
+  input.classList.add('is-valid');
+  if (err) err.textContent = '';
+}
+function clearAll() {
+  ['fname','email','stack','github','built','why'].forEach(id => {
+    const el  = document.getElementById(id);
+    const err = document.getElementById('err-' + id);
+    if (el)  el.classList.remove('is-error','is-valid');
+    if (err) err.textContent = '';
+  });
+  document.getElementById('formErrorBanner').style.display = 'none';
+}
+
+// Live blur validation
+const liveFields = {
+  fname:  v => !v ? 'First name is required' : '',
+  email:  v => !v ? 'Email is required' :
+               !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Enter a valid email address' : '',
+  github: v => !v ? 'GitHub profile is required' :
+               !v.includes('github.com') ? 'Enter your full GitHub URL (https://github.com/…)' : ''
+};
+Object.keys(liveFields).forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('blur', () => {
+    const msg = liveFields[id](el.value.trim());
+    msg ? setError(id, msg) : clearError(id);
+  });
+  el.addEventListener('input', () => {
+    if (el.classList.contains('is-error') && el.value.trim()) {
+      const msg = liveFields[id](el.value.trim());
+      if (!msg) clearError(id);
+    }
+  });
+});
+
+// ── Form submit ──────────────────────────────────────────────────
 document.getElementById('applyForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const errBanner = document.getElementById('formErrorBanner');
-  errBanner.style.display = 'none';
+  clearAll();
 
-  // Validation
-  const fname   = document.getElementById('fname').value.trim();
-  const email   = document.getElementById('email').value.trim();
-  const stack   = document.getElementById('stack').value;
-  const github  = document.getElementById('github').value.trim();
-  const built   = document.getElementById('built').value.trim();
-  const why     = document.getElementById('why').value.trim();
-  const resume  = document.getElementById('resume').files[0];
+  const fname  = document.getElementById('fname').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  const stack  = document.getElementById('stack').value;
+  const github = document.getElementById('github').value.trim();
+  const built  = document.getElementById('built').value.trim();
+  const why    = document.getElementById('why').value.trim();
+  const resume = document.getElementById('resume').files[0];
 
-  if (!fname || !email || !stack || !github || !built || !why || !resume) {
-    errBanner.textContent = 'Please fill in all required fields and upload your resume.';
-    errBanner.style.display = 'block';
-    errBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  let hasError = false;
+
+  if (!fname)  { setError('fname',  'First name is required'); hasError = true; }
+  if (!email)  { setError('email',  'Email is required'); hasError = true; }
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setError('email', 'Enter a valid email address'); hasError = true; }
+  if (!stack)  { hasError = true; }
+  if (!github) { setError('github', 'GitHub profile is required'); hasError = true; }
+  else if (!github.includes('github.com')) {
+    setError('github', 'Enter your full GitHub URL'); hasError = true; }
+  if (built.length < 20) { hasError = true; }
+  if (why.length   < 20) { hasError = true; }
+  if (!resume)           { hasError = true; }
+
+  if (hasError) {
+    const banner = document.getElementById('formErrorBanner');
+    banner.textContent = 'Please fill in all required fields before submitting.';
+    banner.style.display = 'block';
+    banner.scrollIntoView({ behavior:'smooth', block:'center' });
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('shake');
+    setTimeout(() => btn.classList.remove('shake'), 400);
     return;
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errBanner.textContent = 'Please enter a valid email address.';
-    errBanner.style.display = 'block';
-    return;
-  }
 
-  // Disable button
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.innerHTML = '<span>Submitting…</span>';
@@ -967,51 +1104,16 @@ document.getElementById('applyForm').addEventListener('submit', function(e) {
     source:     'tekravio.com/careers'
   };
 
-  // Fire and forget
   fetch(SCRIPT_URL, {
-    method: 'POST', mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
   }).catch(() => {});
 
-  // Show success immediately
   document.getElementById('applyForm').style.display = 'none';
   document.getElementById('successPanel').style.display = 'block';
-  document.getElementById('successPanel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('successPanel').scrollIntoView({ behavior:'smooth', block:'center' });
 });
-</script>
-
-<!-- JSON-LD structured data for SEO -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "JobPosting",
-  "title": "Software Engineering Intern",
-  "description": "Join Tekravio Academy as a tech intern in Java, React, Python, Node.js, or AI Research. Work on real enterprise projects, get mentored by senior engineers, and earn a PPO if you perform.",
-  "hiringOrganization": {
-    "@type": "Organization",
-    "name": "Tekravio",
-    "sameAs": "https://tekravio.com",
-    "logo": "https://tekravio.com/og-social.png"
-  },
-  "jobLocation": {
-    "@type": "Place",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bengaluru",
-      "addressCountry": "IN"
-    }
-  },
-  "jobLocationType": "TELECOMMUTE",
-  "employmentType": "INTERN",
-  "datePosted": "2026-01-01",
-  "validThrough": "2026-12-31",
-  "baseSalary": {
-    "@type": "MonetaryAmount",
-    "currency": "INR",
-    "value": { "@type": "QuantitativeValue", "value": 10000, "unitText": "MONTH" }
-  }
-}
 </script>
 
 </body>
