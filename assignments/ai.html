@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio Labs — AI Intern Assignment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--surface:#0b0f1e;--surface2:#111829;--border:rgba(255,255,255,0.07);--blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;--purple:#8b5cf6;--yellow:#fbbf24;--red:#f87171;--green:#4ade80;--text:#e2e8f0;--muted:#5a6080}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--purple);border-radius:2px}
+.hero{padding:64px 52px 48px;background:linear-gradient(135deg,#04060e,#0b0f1e);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-150px;right:-100px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(139,92,246,0.1),transparent 65%);pointer-events:none}
+.hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;position:relative;z-index:1}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.08em;color:var(--text)}.logo span{color:var(--purple)}
+.badge{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);border-radius:6px;padding:6px 16px;font-family:'Fira Code',monospace;font-size:11px;color:#a78bfa;letter-spacing:0.1em;text-transform:uppercase}
+.hero-tag{font-family:'Fira Code',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;position:relative;z-index:1}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:400;line-height:0.95;margin-bottom:14px;position:relative;z-index:1}
+.hero-sub{font-size:15px;color:var(--muted);max-width:640px;line-height:1.75;position:relative;z-index:1;margin-bottom:28px}
+.meta-row{display:flex;gap:20px;flex-wrap:wrap;position:relative;z-index:1}
+.meta-pill{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 18px}
+.mi{font-size:16px}.ml{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em}.mv{font-size:13px;color:var(--text);font-weight:600}
+.container{max-width:960px;margin:0 auto;padding:40px 52px 80px}
+.sec-tag{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:32px;font-weight:400;letter-spacing:0.02em;margin-bottom:6px;color:var(--text)}
+p{font-size:13px;color:#94a3b8;line-height:1.8;margin-bottom:10px}p strong{color:var(--text)}
+.callout{border-radius:8px;padding:16px 20px;margin:14px 0;font-size:13px;line-height:1.7}
+.callout.purple{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.15);border-left:3px solid var(--purple)}
+.callout.cyan{background:rgba(0,201,167,0.06);border:1px solid rgba(0,201,167,0.15);border-left:3px solid var(--cyan)}
+.callout.yellow{background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);border-left:3px solid var(--yellow)}
+.callout.red{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.15);border-left:3px solid var(--red)}
+.callout-head{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px}
+.callout.purple .callout-head{color:var(--purple)}.callout.cyan .callout-head{color:var(--cyan)}.callout.yellow .callout-head{color:var(--yellow)}.callout.red .callout-head{color:var(--red)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--text)}
+.tasks{display:flex;flex-direction:column;gap:20px;margin-top:20px}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.task-header{padding:16px 24px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border)}
+.task-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;min-width:44px}
+.t1 .task-num{color:var(--purple)}.t2 .task-num{color:var(--blue)}.t3 .task-num{color:var(--cyan)}.t4 .task-num{color:var(--orange)}.t5 .task-num{color:var(--yellow)}.bonus .task-num{color:var(--red)}
+.task-title{font-size:15px;font-weight:700;margin-bottom:2px}
+.task-pts{font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em}
+.task-body{padding:20px 24px}
+.task-desc{font-size:13px;color:#94a3b8;line-height:1.75;margin-bottom:14px}
+.req-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.req{display:flex;gap:10px;font-size:12px;color:#94a3b8;align-items:flex-start;line-height:1.5}
+.req-check{width:16px;height:16px;border-radius:3px;border:1px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px}
+.t1 .req-check{border-color:rgba(139,92,246,0.4);color:var(--purple);background:rgba(139,92,246,0.06)}
+.t2 .req-check{border-color:rgba(59,111,245,0.4);color:var(--blue);background:rgba(59,111,245,0.06)}
+.t3 .req-check{border-color:rgba(0,201,167,0.4);color:var(--cyan);background:rgba(0,201,167,0.06)}
+.t4 .req-check{border-color:rgba(255,112,67,0.4);color:var(--orange);background:rgba(255,112,67,0.06)}
+.t5 .req-check{border-color:rgba(251,191,36,0.4);color:var(--yellow);background:rgba(251,191,36,0.06)}
+.bonus .req-check{border-color:rgba(248,113,113,0.4);color:var(--red);background:rgba(248,113,113,0.06)}
+.code-block{background:#020408;border:1px solid rgba(139,92,246,0.15);border-radius:8px;overflow:hidden;margin:12px 0}
+.code-header{background:var(--surface2);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.code-filename{font-family:'Fira Code',monospace;font-size:10px;color:var(--muted)}
+.code-lang{font-family:'Fira Code',monospace;font-size:9px;color:var(--purple);background:rgba(139,92,246,0.1);padding:2px 8px;border-radius:3px}
+pre{padding:16px 20px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:11px;line-height:1.7;color:#94a3b8}
+.mq-list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.mq{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:16px 20px}
+.mq-num{font-family:'Fira Code',monospace;font-size:10px;color:var(--purple);margin-bottom:6px;letter-spacing:0.1em}
+.mq-text{font-size:13px;color:#c8d8f0;line-height:1.65;font-weight:500}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.score-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.score-n{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--purple);margin-bottom:4px}
+.score-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.criteria{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.cr{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px}
+.cr-title{font-size:13px;font-weight:600;margin-bottom:3px}.cr-desc{font-size:12px;color:var(--muted)}.cr-pts{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--cyan);white-space:nowrap}
+.submit-steps{display:flex;flex-direction:column;gap:0;position:relative;margin-top:20px}
+.submit-steps::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:1px;background:linear-gradient(to bottom,var(--purple),var(--cyan));opacity:0.2}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:16px;padding-bottom:24px;position:relative}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;border:1px solid rgba(139,92,246,0.3);background:rgba(139,92,246,0.1);color:var(--purple)}
+.ss-title{font-size:14px;font-weight:700;margin-bottom:4px}.ss-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.sep{height:1px;background:var(--border);margin:36px 0}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-top">
+    <div class="logo">Tekr<span>avio</span> <span style="font-size:13px;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400"> Labs</span></div>
+    <div class="badge">// AI Intern Assignment · 2026</div>
+  </div>
+  <div class="hero-tag">// Assignment · AI Research · LLM Intelligence</div>
+  <h1>Don't Just Use AI.<br><span style="color:var(--purple)">Understand</span> It.<br><span style="-webkit-text-stroke:1.5px var(--text);color:transparent">Map It.</span></h1>
+  <p class="hero-sub">Anyone can open ChatGPT. We want someone who can look at every model in the AI landscape, understand what each one is actually built for, and produce a document so clear that any enterprise client could use it to choose the right model for their use case.</p>
+  <div class="meta-row">
+    <div class="meta-pill"><span class="mi">⏱️</span><div><div class="ml">Deadline</div><div class="mv">3 Days</div></div></div>
+    <div class="meta-pill"><span class="mi">🧠</span><div><div class="ml">Focus</div><div class="mv">AI Model Research & Documentation</div></div></div>
+    <div class="meta-pill"><span class="mi">📊</span><div><div class="ml">Total Marks</div><div class="mv">100 + 20 Bonus</div></div></div>
+    <div class="meta-pill"><span class="mi">📧</span><div><div class="ml">Submit To</div><div class="mv">careers@tekravio.com</div></div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="sec-tag">// 01 · The Brief</div>
+  <h2>What You're Building</h2>
+  <p>The AI model landscape is overwhelming. New models launch every week. Enterprise clients ask: <strong>"Which AI should we use for our use case?"</strong> Most people can't answer this clearly. You will.</p>
+  <p>Your assignment is to research every major AI model currently available — across all major providers — and produce a <strong>clear, structured, honest reference document</strong> that maps each model to its specific purpose. Not marketing copy. Not hype. The truth about what each model does best, what it doesn't, and when to use it.</p>
+
+  <div class="callout purple">
+    <div class="callout-head">// The Deliverable</div>
+    <p>A <strong>comprehensive AI Model Reference Document</strong> — structured, well-researched, and written for an enterprise technology decision-maker (CTO, VP Eng, or Head of L&D) who needs to pick the right AI tool for their problem. Delivered as a PDF or well-structured Markdown document.</p>
+  </div>
+
+  <div class="sep"></div>
+  <div class="sec-tag">// 02 · Scope — What to Cover</div>
+  <h2>Model Categories to Research</h2>
+  <p>Your document must cover all of the following categories. Within each, research every significant model that exists today:</p>
+
+  <div class="tasks">
+
+    <div class="task t1">
+      <div class="task-header"><div class="task-num">01</div><div><div class="task-title">Foundation / General Purpose LLMs</div><div class="task-pts">// 20 marks · The core landscape</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">The models that most people think of when they say "AI". Map each one clearly — capability, context window, strengths, limitations, best use case.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>OpenAI family:</strong> GPT-4o, GPT-4o mini, GPT-4 Turbo, o1, o3, o4-mini — what's different about each</div>
+          <div class="req"><div class="req-check">✓</div><strong>Anthropic family:</strong> Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Haiku, Claude 3.5 Haiku — when each shines</div>
+          <div class="req"><div class="req-check">✓</div><strong>Google family:</strong> Gemini 1.5 Pro, Gemini 1.5 Flash, Gemini Ultra, Gemini Nano — enterprise vs edge</div>
+          <div class="req"><div class="req-check">✓</div><strong>Meta family:</strong> Llama 3, Llama 3.1, Llama 3.2 — open source vs commercial implications</div>
+          <div class="req"><div class="req-check">✓</div><strong>Mistral family:</strong> Mistral 7B, Mistral Large, Mixtral 8x7B, Codestral — the European open-weight contender</div>
+          <div class="req"><div class="req-check">✓</div><strong>xAI:</strong> Grok 1, Grok 2, Grok 3 — positioning and real-world differentiation</div>
+        </div>
+        <div class="callout purple"><div class="callout-head">// What We Want to Know for Each Model</div><p>Context window size · Modalities (text/image/audio/video) · Best use case · Not good at · Pricing tier · Open source or proprietary · API available</p></div>
+      </div>
+    </div>
+
+    <div class="task t2">
+      <div class="task-header"><div class="task-num">02</div><div><div class="task-title">Code-Specific Models</div><div class="task-pts">// 15 marks · Developer tools</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Models purpose-built for writing, reviewing, and understanding code. Not just "can write code" — but designed from the ground up for it.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>GitHub Copilot models</strong> — underlying model, IDE integration, what it actually does well</div>
+          <div class="req"><div class="req-check">✓</div><strong>Codestral</strong> (Mistral) — specifically built for code, fill-in-the-middle, supported languages</div>
+          <div class="req"><div class="req-check">✓</div><strong>Code Llama</strong> — Meta's open-source code model family, when to self-host vs API</div>
+          <div class="req"><div class="req-check">✓</div><strong>StarCoder / StarCoder2</strong> — BigCode project, open weights, enterprise use case</div>
+          <div class="req"><div class="req-check">✓</div><strong>DeepSeek Coder</strong> — Chinese open-source code model, benchmark performance, privacy considerations</div>
+          <div class="req"><div class="req-check">✓</div><strong>Amazon CodeWhisperer</strong> — AWS-native, when to use within AWS ecosystem</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task t3">
+      <div class="task-header"><div class="task-num">03</div><div><div class="task-title">Reasoning & Agentic Models</div><div class="task-pts">// 20 marks · The thinking machines</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Models specifically built for multi-step reasoning, planning, and autonomous task completion. This is the fastest-moving category right now.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>OpenAI o1, o3, o4-mini</strong> — chain-of-thought reasoning, when reasoning models beat standard LLMs</div>
+          <div class="req"><div class="req-check">✓</div><strong>DeepSeek R1</strong> — open-source reasoning model that shocked the industry, benchmark comparisons</div>
+          <div class="req"><div class="req-check">✓</div><strong>Claude 3.5 Sonnet (extended thinking)</strong> — Anthropic's approach to reasoning</div>
+          <div class="req"><div class="req-check">✓</div><strong>Agentic frameworks</strong> — AutoGPT, LangGraph, CrewAI — what they are, how they differ from base models</div>
+          <div class="req"><div class="req-check">✓</div><strong>Tool use / function calling</strong> — which models support it, how it enables agents</div>
+          <div class="req"><div class="req-check">✓</div><strong>When to use a reasoning model vs a standard LLM</strong> — with real examples</div>
+        </div>
+        <div class="callout yellow"><div class="callout-head">// Uday's Note</div><p>This section should include a clear decision tree: "Use a reasoning model when X. Use a standard LLM when Y." Make it so simple that a non-technical L&D manager can follow it.</p></div>
+      </div>
+    </div>
+
+    <div class="task t4">
+      <div class="task-header"><div class="task-num">04</div><div><div class="task-title">Multimodal & Specialised Models</div><div class="task-pts">// 20 marks · Beyond text</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Models that go beyond text — image, audio, video, embeddings, and domain-specific models. Map what each type is actually used for in enterprise contexts.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>Image generation:</strong> DALL-E 3, Stable Diffusion, Midjourney, Flux, Ideogram — quality, cost, commercial use rights</div>
+          <div class="req"><div class="req-check">✓</div><strong>Vision models:</strong> GPT-4 Vision, Claude Vision, Gemini Vision — document understanding, image analysis</div>
+          <div class="req"><div class="req-check">✓</div><strong>Audio / Speech:</strong> Whisper, ElevenLabs, Suno, Udio — transcription vs generation vs voice cloning</div>
+          <div class="req"><div class="req-check">✓</div><strong>Video generation:</strong> Sora, Runway, Pika, Kling — current capabilities vs limitations</div>
+          <div class="req"><div class="req-check">✓</div><strong>Embedding models:</strong> text-embedding-3, Cohere Embed, BGE — what embeddings are and why they matter for RAG</div>
+          <div class="req"><div class="req-check">✓</div><strong>Domain-specific:</strong> Med-PaLM (healthcare), BloombergGPT (finance), legal AI models — enterprise specialist use</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task t5">
+      <div class="task-header"><div class="task-num">05</div><div><div class="task-title">Enterprise AI Platforms & Decision Framework</div><div class="task-pts">// 25 marks · The most valuable section</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">This is the section enterprise clients actually need. Not a list of models — a framework for choosing between them. This is where your document becomes a reference, not a catalogue.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>Enterprise AI platforms:</strong> AWS Bedrock, Azure OpenAI Service, Google Vertex AI, Hugging Face — what each offers and when to use which cloud</div>
+          <div class="req"><div class="req-check">✓</div><strong>Open source vs proprietary</strong> — decision matrix covering cost, privacy, customisation, compliance</div>
+          <div class="req"><div class="req-check">✓</div><strong>Model selection framework</strong> — build a clear table or decision tree: given a use case, which model? Cover at least 10 real enterprise use cases</div>
+          <div class="req"><div class="req-check">✓</div><strong>Cost comparison</strong> — pricing per million tokens for top models, rough monthly cost for common use cases</div>
+          <div class="req"><div class="req-check">✓</div><strong>Privacy & compliance</strong> — GDPR implications, data residency, which models can be self-hosted</div>
+          <div class="req"><div class="req-check">✓</div><strong>Fine-tuning vs RAG vs prompt engineering</strong> — when each approach makes sense, with examples</div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-filename">Use Case → Model Decision Table (build this)</span><span class="code-lang">FRAMEWORK</span></div>
+          <pre>
+Use Case                        | Recommended Model    | Why               | Alternative
+--------------------------------|---------------------|-------------------|------------------
+Customer support chatbot         | GPT-4o mini          | Cost + speed      | Claude Haiku
+Legal document review            | Claude 3.5 Sonnet    | Long context+accuracy | GPT-4o
+Code review automation           | Codestral / Copilot  | Code-specific     | GPT-4o
+Internal knowledge search (RAG)  | Embed + Llama 3      | Privacy + cost    | Azure OpenAI
+Complex multi-step reasoning     | o1 / DeepSeek R1     | Reasoning ability | Claude w/ thinking
+Image extraction from documents  | GPT-4 Vision         | OCR + context     | Claude Vision
+Training content generation      | GPT-4o               | Quality + speed   | Gemini 1.5 Pro
+Real-time transcription          | Whisper              | Open source       | Azure Speech
+... [add 3+ more rows]           |                     |                   |</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="task bonus">
+      <div class="task-header"><div class="task-num">⚡</div><div><div class="task-title">Bonus — Build a Live AI Comparison Tool</div><div class="task-pts">// 20 bonus marks · Not Required · Very Noticed</div></div></div>
+      <div class="task-body">
+        <p class="task-desc">Instead of just a static document — build an interactive HTML page or simple Python script that takes a use case as input and recommends the right AI model. Shows you can turn research into something usable.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">+10</div><strong>Interactive HTML tool</strong> — user selects use case, budget, privacy requirement → tool recommends top 3 models with reasoning</div>
+          <div class="req"><div class="req-check">+5</div><strong>Live API comparison</strong> — send same prompt to 3 different models via API (OpenAI + Anthropic + any open-source) and compare outputs side-by-side</div>
+          <div class="req"><div class="req-check">+5</div><strong>Benchmark your own test</strong> — design 5 test prompts covering different capabilities, run all major models, score and compare</div>
+        </div>
+        <div class="callout red"><div class="callout-head">// Warning</div><p>Finish the core document first. A complete, well-researched document beats a half-finished interactive tool every time.</p></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MINDSET QUESTIONS -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 03 · Mindset Questions</div>
+  <h2>Answer These in Your README</h2>
+  <p>We read these before we read your document. No right answers — we're evaluating how you think.</p>
+  <div class="mq-list">
+    <div class="mq"><div class="mq-num">// Question 01</div><div class="mq-text">If a mid-size Indian enterprise asked you "should we use OpenAI or build on open-source models?" — what would you tell them? Be specific. Not generic.</div></div>
+    <div class="mq"><div class="mq-num">// Question 02</div><div class="mq-text">Which single model surprised you most during your research — and why? What did you expect vs what you found?</div></div>
+    <div class="mq"><div class="mq-num">// Question 03</div><div class="mq-text">What's one thing that's genuinely confusing or unclear in the AI model landscape right now? What would you need to understand it better?</div></div>
+    <div class="mq"><div class="mq-num">// Question 04</div><div class="mq-text">If you had to pick ONE model to bet Tekravio's AI strategy on for the next 2 years — what would it be and why?</div></div>
+    <div class="mq"><div class="mq-num">// Question 05</div><div class="mq-text">What's missing from this assignment? What did we forget to ask you to research that you think matters?</div></div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 04 · Scoring</div>
+  <h2>How We Evaluate</h2>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-n" style="color:var(--purple)">50</div><div class="score-l">Completeness & Accuracy</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--cyan)">30</div><div class="score-l">Clarity & Usefulness</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--orange)">20</div><div class="score-l">Insight & Thinking</div></div>
+  </div>
+  <div class="criteria">
+    <div class="cr"><div><div class="cr-title">Model Coverage</div><div class="cr-desc">All 5 categories covered, major models in each included</div></div><div class="cr-pts">30</div></div>
+    <div class="cr"><div><div class="cr-title">Accuracy of Information</div><div class="cr-desc">Context windows, pricing, capabilities are factually correct</div></div><div class="cr-pts">20</div></div>
+    <div class="cr"><div><div class="cr-title">Decision Framework Quality</div><div class="cr-desc">Can a non-technical reader use your framework to pick a model?</div></div><div class="cr-pts">20</div></div>
+    <div class="cr"><div><div class="cr-title">Writing Quality & Structure</div><div class="cr-desc">Clear, scannable, no fluff, good use of tables and structure</div></div><div class="cr-pts">15</div></div>
+    <div class="cr"><div><div class="cr-title">Mindset Questions</div><div class="cr-desc">Original thinking, honesty, genuine curiosity visible</div></div><div class="cr-pts">15</div></div>
+    <div class="cr" style="border-color:rgba(248,113,113,0.2)"><div><div class="cr-title" style="color:var(--red)">Bonus — Interactive Tool</div><div class="cr-desc">Live comparison tool, API calls, custom benchmark</div></div><div class="cr-pts" style="color:var(--red)">+20</div></div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 05 · Submission</div>
+  <h2>How to Submit</h2>
+  <div class="submit-steps">
+    <div class="ss"><div class="ss-dot">01</div><div><div class="ss-title">Push to GitHub</div><div class="ss-desc">Public repo. Your document as PDF + Markdown. Bonus tool code if applicable. Clean, readable repo structure.</div></div></div>
+    <div class="ss"><div class="ss-dot">02</div><div><div class="ss-title">README.md</div><div class="ss-desc">How to read your document, all 5 mindset answers, your research sources, and any tools used.</div></div></div>
+    <div class="ss"><div class="ss-dot">03</div><div><div class="ss-title">Email to careers@tekravio.com</div><div class="ss-desc">Subject: <code style="font-family:'Fira Code',monospace;color:#a78bfa;font-size:11px">AI Intern Assignment — [Your Name]</code><br>Include: GitHub link + one paragraph on what you found most interesting and what you'd want to explore next.</div></div></div>
+    <div class="ss"><div class="ss-dot">04</div><div><div class="ss-title">Deadline: 3 Days from Receipt</div><div class="ss-desc">Late submissions are not reviewed. Quality over speed — but we need both.</div></div></div>
+  </div>
+
+  <div class="sep"></div>
+  <div class="callout purple">
+    <div class="callout-head">// From Uday · Founder, Tekravio</div>
+    <p>The AI space is the most confusing it has ever been. New models every week. Every company claiming their model is best. Most people using AI without understanding what they're using or why. <strong>We need someone who can cut through that noise.</strong> Not someone who knows all the answers — someone who knows how to find them, organise them, and communicate them clearly. That document you produce might end up informing how Tekravio advises enterprise clients on AI adoption. Build it like it matters.</p>
+  </div>
+
+  <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div style="font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)">// Tekravio Labs · careers@tekravio.com · tekravio.com</div>
+    <div style="font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)">© 2026 Tekravio · Build. Train. Deliver.</div>
+  </div>
+
+</div>
+</body>
+</html>
