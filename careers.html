@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Careers at Tekravio — Intern Openings | Java, React, Python, Node.js, AI</title>
+<meta name="description" content="Join Tekravio as a tech intern. Java, React, Python, Node.js, and AI Research roles open. No GPA filter. No college filter. Just hunger, mindset, and a 3-day real-world assignment.">
+<meta name="keywords" content="Tekravio careers, tech internship, Java intern, React intern, Python intern, AI intern, software intern India">
+<meta property="og:title" content="Careers at Tekravio — We hire passion, not paper">
+<meta property="og:description" content="5 intern roles open. Java · React · Python · Node.js · AI. No GPA filter. 3-day real assignment. PPO for top performers.">
+<meta property="og:image" content="https://tekravio.com/og-social.png">
+<meta property="og:url" content="https://tekravio.com/careers">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://tekravio.com/careers">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS — same as main site
+───────────────────────────────────────────── */
+:root{
+  --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
+  --surface:#0b0f1e;--surface2:#111829;--surface3:#0d1220;
+  --border:rgba(255,255,255,0.07);--border-med:rgba(255,255,255,0.12);
+  --blue:#3b6ff5;--blue-dim:rgba(59,111,245,0.1);--blue-mid:rgba(59,111,245,0.18);
+  --cyan:#00c9a7;--cyan-dim:rgba(0,201,167,0.08);
+  --orange:#ff7043;--red:#f87171;--purple:#a78bfa;--green:#4ade80;
+  --radius-sm:8px;--radius:12px;--radius-lg:20px;
+  --shadow-blue:0 0 40px rgba(59,111,245,0.25);
+  --shadow-card:0 4px 24px rgba(0,0,0,0.4);
+  --transition:0.25s cubic-bezier(0.4,0,0.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;
+  font-size:1rem;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-0.02em;line-height:1.1}
+.mono{font-family:'Fira Code',monospace}
+.tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+
+/* ── LAYOUT ── */
+.container{max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.section{padding:clamp(64px,10vw,120px) 0}
+
+/* ── HEADER — identical to main site ── */
+#header{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,5vw,56px);height:68px;
+  background:rgba(4,6,14,0.88);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);transition:background var(--transition)}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.4rem;font-weight:700;
+  color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.logo-accent{color:var(--blue)}
+.nav-links{display:flex;list-style:none;gap:2rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;
+  font-weight:500;transition:color var(--transition)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--blue);color:#fff;padding:.5rem 1.25rem;
+  border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;
+  text-decoration:none;transition:opacity var(--transition)}
+.nav-cta:hover{opacity:.9}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:var(--transition)}
+.mobile-nav{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:rgba(4,6,14,0.97);backdrop-filter:blur(20px);
+  padding:2rem clamp(20px,5vw,56px);z-index:99;overflow-y:auto}
+.mobile-nav.open{display:flex;flex-direction:column;gap:1rem}
+.mobile-nav a{color:var(--mid);text-decoration:none;font-size:1.1rem;
+  font-weight:500;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.mobile-nav a:hover{color:var(--ink)}
+.mobile-nav .nav-cta{margin-top:1rem;text-align:center;padding:.875rem}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+/* ── HERO ── */
+.careers-hero{padding-top:68px;min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(59,111,245,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(59,111,245,0.04) 1px,transparent 1px);
+  background-size:64px 64px;pointer-events:none}
+.hero-orb1{position:absolute;top:-200px;left:-100px;width:700px;height:700px;
+  background:radial-gradient(ellipse,rgba(59,111,245,0.12) 0%,transparent 60%);pointer-events:none}
+.hero-orb2{position:absolute;bottom:-150px;right:-80px;width:600px;height:600px;
+  background:radial-gradient(ellipse,rgba(0,201,167,0.08) 0%,transparent 60%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;width:100%;padding:80px 0}
+.hero-tag{margin-bottom:1.5rem}
+.hero-title{font-size:clamp(3rem,7vw,6rem);font-weight:700;line-height:.92;
+  letter-spacing:-.03em;margin-bottom:1.5rem}
+.hero-title .line1{display:block;color:var(--ink)}
+.hero-title .line2{display:block;color:var(--blue)}
+.hero-title .line3{display:block;-webkit-text-stroke:2px var(--ink);color:transparent}
+.hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:600px;
+  line-height:1.75;margin-bottom:2.5rem}
+.hero-sub strong{color:var(--ink)}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-primary{background:var(--blue);color:#fff;padding:.875rem 2rem;border-radius:var(--radius-sm);
+  font-size:.9375rem;font-weight:700;text-decoration:none;
+  box-shadow:var(--shadow-blue);transition:all var(--transition);display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 56px rgba(59,111,245,.35)}
+.btn-ghost{border:1px solid var(--border-med);color:var(--mid);padding:.875rem 2rem;
+  border-radius:var(--radius-sm);font-size:.9375rem;font-weight:600;text-decoration:none;
+  transition:all var(--transition);display:inline-flex;align-items:center;gap:.5rem}
+.btn-ghost:hover{border-color:var(--blue);color:var(--ink)}
+
+/* Manifesto strip */
+.manifesto{display:flex;gap:0;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;max-width:680px}
+.mf-item{flex:1;padding:14px 16px;text-align:center;border-right:1px solid var(--border)}
+.mf-item:last-child{border-right:none}
+.mf-x{display:block;font-size:.875rem;color:var(--red);margin-bottom:4px}
+.mf-check{display:block;font-size:.875rem;color:var(--cyan);margin-bottom:4px}
+.mf-label{font-size:.75rem;font-weight:600;letter-spacing:.04em}
+.mf-bad{color:var(--muted)}.mf-good{color:var(--ink)}
+
+/* ── SECTION HEADERS ── */
+.sec-header{text-align:center;margin-bottom:clamp(40px,5vw,64px)}
+.sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:.75rem}
+.sec-sub{font-size:1rem;color:var(--muted);max-width:540px;margin:0 auto;line-height:1.75}
+
+/* ── WHY TEKRAVIO ── */
+.perks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.perk-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:2rem;position:relative;overflow:hidden;transition:border-color var(--transition),transform var(--transition)}
+.perk-card:hover{border-color:var(--border-med);transform:translateY(-3px)}
+.perk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.perk-card:nth-child(1)::before{background:linear-gradient(90deg,var(--blue),#6891ff)}
+.perk-card:nth-child(2)::before{background:linear-gradient(90deg,var(--cyan),#00e5c4)}
+.perk-card:nth-child(3)::before{background:linear-gradient(90deg,var(--orange),#ff9c7b)}
+.perk-card:nth-child(4)::before{background:linear-gradient(90deg,var(--purple),#c4b5fd)}
+.perk-card:nth-child(5)::before{background:linear-gradient(90deg,#fbbf24,#fde68a)}
+.perk-card:nth-child(6)::before{background:linear-gradient(90deg,var(--green),#86efac)}
+.perk-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.perk-title{font-size:1.125rem;font-weight:700;margin-bottom:.5rem;font-family:'Clash Display',sans-serif}
+.perk-desc{font-size:.9rem;color:var(--muted);line-height:1.65}
+.perk-desc strong{color:var(--mid)}
+
+/* ── ROLES ── */
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.25rem}
+.role-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:all var(--transition)}
+.role-card:hover{border-color:var(--border-med);transform:translateY(-3px);box-shadow:var(--shadow-card)}
+.role-header{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:1rem}
+.role-logo{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;flex-shrink:0}
+.role-logo img{width:30px;height:30px;object-fit:contain}
+.role-stack{font-family:'Clash Display',sans-serif;font-size:1.375rem;font-weight:700}
+.role-type{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);margin-top:2px}
+.role-open{margin-left:auto;font-size:.75rem;font-weight:700;padding:4px 12px;
+  border-radius:100px;letter-spacing:.04em;white-space:nowrap}
+.open-yes{background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2);color:var(--cyan)}
+.role-body{padding:1.5rem 1.75rem}
+.role-desc{font-size:.9rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem}
+.role-skills{display:flex;flex-wrap:wrap;gap:.5rem}
+.skill-tag{font-family:'Fira Code',monospace;font-size:.7rem;padding:3px 10px;
+  border-radius:4px;border:1px solid var(--border);color:var(--muted);letter-spacing:.04em}
+
+/* stack colours */
+.r-java .role-stack{color:#fb923c}.r-java .role-logo{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2)}
+.r-react .role-stack{color:#38bdf8}.r-react .role-logo{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2)}
+.r-python .role-stack{color:#818cf8}.r-python .role-logo{background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2)}
+.r-node .role-stack{color:#4ade80}.r-node .role-logo{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)}
+.r-ai .role-stack{color:#a78bfa}.r-ai .role-logo{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2)}
+
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;
+  position:relative}
+.steps-grid::before{content:'';position:absolute;top:36px;left:5%;right:5%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);
+  pointer-events:none}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:2rem 1.5rem;text-align:center;position:relative;
+  transition:border-color var(--transition)}
+.step-card:hover{border-color:var(--border-med)}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;
+  font-family:'Clash Display',sans-serif;font-size:1.375rem;font-weight:700;
+  position:relative;z-index:1;color:var(--blue)}
+.step-title{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.step-desc{font-size:.875rem;color:var(--muted);line-height:1.65}
+.step-time{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cyan);margin-top:.75rem;display:block}
+
+/* ── SCREENING NOTE ── */
+.screening-banner{background:var(--surface2);border:1px solid var(--border);
+  border-left:3px solid var(--orange);border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.5rem 2rem;margin:2.5rem 0;display:flex;gap:1rem;align-items:flex-start}
+.sb-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.sb-title{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;
+  color:var(--orange);margin-bottom:.375rem}
+.sb-desc{font-size:.9rem;color:var(--muted);line-height:1.65}
+.sb-desc strong{color:var(--ink)}
+
+/* ── APPLICATION FORM ── */
+.form-section{background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden}
+.form-header{padding:2.5rem clamp(1.5rem,4vw,3rem);border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,var(--surface2),var(--surface3))}
+.form-header-tag{margin-bottom:.75rem}
+.form-header-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.5rem}
+.form-header-sub{font-size:.9rem;color:var(--muted);line-height:1.65}
+.form-body{padding:clamp(1.5rem,4vw,2.5rem)}
+
+/* Grid */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.form-full{grid-column:1/-1}
+
+/* Fields */
+.field-group{display:flex;flex-direction:column;gap:.5rem}
+.field-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-family:'Fira Code',monospace}
+.field-req{color:var(--blue)}
+.field-input,.field-select,.field-textarea{width:100%;background:var(--bg);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:.8rem 1rem;font-family:'Satoshi',sans-serif;font-size:.9375rem;
+  color:var(--ink);outline:none;transition:border-color var(--transition),box-shadow var(--transition);
+  -webkit-appearance:none}
+.field-input::placeholder,.field-textarea::placeholder{color:var(--muted)}
+.field-input:focus,.field-select:focus,.field-textarea:focus{
+  border-color:rgba(59,111,245,.5);box-shadow:0 0 0 3px rgba(59,111,245,.08)}
+.field-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6080' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:2.5rem}
+.field-select option{background:var(--surface2);color:var(--ink)}
+.field-textarea{resize:vertical;min-height:110px;line-height:1.65}
+.field-hint{font-size:.75rem;color:var(--muted);margin-top:-.25rem;line-height:1.5}
+.field-hint a{color:var(--blue)}
+
+/* File upload */
+.file-upload{display:flex;align-items:center;gap:1rem;padding:1rem;
+  background:var(--bg);border:1px dashed var(--border);border-radius:var(--radius-sm);
+  cursor:pointer;transition:border-color var(--transition)}
+.file-upload:hover{border-color:var(--blue)}
+.file-upload input{position:absolute;opacity:0;width:0;height:0}
+.file-upload-icon{font-size:1.5rem;flex-shrink:0}
+.file-upload-text{font-size:.875rem;color:var(--muted)}
+.file-upload-text strong{color:var(--ink);display:block;margin-bottom:2px}
+.file-selected{font-size:.75rem;color:var(--cyan);margin-top:.375rem;display:none}
+
+/* Checkbox */
+.check-label{display:flex;align-items:flex-start;gap:.875rem;cursor:pointer;
+  padding:1rem 1.25rem;background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius-sm);transition:border-color var(--transition)}
+.check-label:hover{border-color:var(--border-med)}
+.check-label input{display:none}
+.check-box{width:18px;height:18px;border-radius:4px;border:1px solid var(--border);
+  flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);font-size:.65rem;color:#fff}
+.check-label input:checked ~ .check-box{background:var(--blue);border-color:var(--blue)}
+.check-text{font-size:.9rem;color:var(--muted);line-height:1.55}
+.check-text strong{color:var(--ink);font-weight:600}
+
+/* Form divider */
+.form-divider{height:1px;background:var(--border);margin:1.5rem 0;position:relative}
+.form-divider-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--surface);padding:0 1rem;font-family:'Fira Code',monospace;
+  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* Submit */
+.submit-area{margin-top:1.75rem}
+.submit-btn{width:100%;padding:1.1rem;background:var(--blue);color:#fff;border:none;
+  border-radius:var(--radius-sm);font-family:'Satoshi',sans-serif;font-size:1rem;
+  font-weight:700;cursor:pointer;letter-spacing:.02em;
+  box-shadow:var(--shadow-blue);transition:all var(--transition);
+  display:flex;align-items:center;justify-content:center;gap:.625rem}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 0 48px rgba(59,111,245,.4)}
+.submit-btn:active{transform:translateY(0)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-arrow{transition:transform var(--transition)}
+.submit-btn:hover .btn-arrow{transform:translateX(4px)}
+.submit-note{text-align:center;margin-top:.875rem;font-size:.8rem;color:var(--muted)}
+
+/* Error + Success */
+.field-error{font-size:.75rem;color:var(--red);margin-top:-.25rem}
+.form-error-banner{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);
+  border-radius:var(--radius-sm);padding:.875rem 1rem;font-size:.875rem;color:var(--red);
+  margin-bottom:1rem;display:none}
+.success-panel{display:none;text-align:center;padding:3rem 1.5rem}
+.success-icon{font-size:3.5rem;margin-bottom:1rem}
+.success-title{font-size:1.875rem;font-weight:700;font-family:'Clash Display',sans-serif;
+  color:var(--cyan);margin-bottom:.75rem}
+.success-desc{font-size:.9375rem;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.75}
+.success-desc strong{color:var(--ink)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:2.5rem 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;
+  color:var(--ink);text-decoration:none}
+.footer-logo span{color:var(--blue)}
+.footer-copy{font-size:.8rem;color:var(--muted)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:.8rem;color:var(--muted);text-decoration:none;
+  transition:color var(--transition)}
+.footer-links a:hover{color:var(--ink)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .form-grid{grid-template-columns:1fr}
+  .steps-grid::before{display:none}
+  .manifesto{flex-wrap:wrap}
+  .mf-item{min-width:45%}
+  .hero-title{font-size:clamp(2.5rem,10vw,3.5rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="header">
+  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<span class="logo-accent">avio</span></a>
+  <nav aria-label="Main navigation">
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#stacks">Tech Stacks</a></li>
+      <li><a href="/#how">How We Work</a></li>
+      <li><a href="/#founder">About</a></li>
+    </ul>
+    <a href="#apply" class="nav-cta">Apply Now →</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="/" onclick="toggleMenu()">Home</a>
+  <a href="/#services" onclick="toggleMenu()">Services</a>
+  <a href="/#stacks" onclick="toggleMenu()">Tech Stacks</a>
+  <a href="/#how" onclick="toggleMenu()">How We Work</a>
+  <a href="/#founder" onclick="toggleMenu()">About</a>
+  <a href="#apply" class="nav-cta" onclick="toggleMenu()">Apply Now →</a>
+</nav>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="careers-hero" aria-label="Careers hero">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-orb1" aria-hidden="true"></div>
+  <div class="hero-orb2" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <p class="tag reveal">// Tekravio Academy · Careers · 2026</p>
+      <h1 class="hero-title reveal">
+        <span class="line1">We Don't Hire</span>
+        <span class="line2">Resumes.</span>
+        <span class="line3">We Hire Hunger.</span>
+      </h1>
+      <p class="hero-sub reveal">
+        No GPA filter. No college name. No years of experience.<br>
+        Just <strong>genuine curiosity, right mindset,</strong> and the willingness
+        to do real work from Day 1.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="#roles" class="btn-primary">See Open Roles <span class="btn-arrow">↓</span></a>
+        <a href="#apply" class="btn-ghost">Apply Now →</a>
+      </div>
+      <div class="manifesto reveal">
+        <div class="mf-item">
+          <span class="mf-x">✗</span>
+          <span class="mf-label mf-bad">College name</span>
+        </div>
+        <div class="mf-item">
+          <span class="mf-x">✗</span>
+          <span class="mf-label mf-bad">GPA or grades</span>
+        </div>
+        <div class="mf-item">
+          <span class="mf-x">✗</span>
+          <span class="mf-label mf-bad">Certifications</span>
+        </div>
+        <div class="mf-item">
+          <span class="mf-check">✓</span>
+          <span class="mf-label mf-good">Passion</span>
+        </div>
+        <div class="mf-item">
+          <span class="mf-check">✓</span>
+          <span class="mf-label mf-good">Mindset</span>
+        </div>
+        <div class="mf-item">
+          <span class="mf-check">✓</span>
+          <span class="mf-label mf-good">Hunger</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY TEKRAVIO ── -->
+<section class="section" id="why" aria-label="Why Tekravio">
+  <div class="container">
+    <div class="sec-header">
+      <p class="tag reveal">// Why Join Us</p>
+      <h2 class="sec-title reveal">What you actually get<br>as a Tekravio intern</h2>
+      <p class="sec-sub reveal">Not promises. Not perks decks. Real things that matter for your career.</p>
+    </div>
+    <div class="perks-grid">
+      <div class="perk-card reveal">
+        <span class="perk-icon">💻</span>
+        <h3 class="perk-title">Real Enterprise Projects</h3>
+        <p class="perk-desc">Not dummy assignments or internal tools with no impact. You work on <strong>live projects for real clients</strong> — the kind that show up on your GitHub and mean something in an interview.</p>
+      </div>
+      <div class="perk-card reveal reveal-delay-1">
+        <span class="perk-icon">🧑‍🏫</span>
+        <h3 class="perk-title">Senior Mentorship Daily</h3>
+        <p class="perk-desc">Every intern gets a senior mentor. <strong>Ex-Big 4, real delivery experience.</strong> Daily async updates, fortnightly code reviews, and someone who's genuinely invested in your growth.</p>
+      </div>
+      <div class="perk-card reveal reveal-delay-2">
+        <span class="perk-icon">🌍</span>
+        <h3 class="perk-title">Remote-First Flexibility</h3>
+        <p class="perk-desc">Work from anywhere. Core hours: 10 AM–6 PM IST. <strong>No micromanagement.</strong> We measure output, not hours logged. Your results matter. Your location doesn't.</p>
+      </div>
+      <div class="perk-card reveal">
+        <span class="perk-icon">🚀</span>
+        <h3 class="perk-title">PPO for Top Performers</h3>
+        <p class="perk-desc">Score 75+ in your final evaluation and you get a <strong>Pre-Placement Offer</strong>. Score 90+ and we fast-track you to a Senior Intern track. Real path to a full-time role — earned, not gifted.</p>
+      </div>
+      <div class="perk-card reveal reveal-delay-1">
+        <span class="perk-icon">📜</span>
+        <h3 class="perk-title">Verified Certificate</h3>
+        <p class="perk-desc">Official Tekravio completion certificate signed by Uday. Includes your <strong>performance rating tier</strong>. Interns scoring 80+ also receive a LinkedIn recommendation from the Founder directly.</p>
+      </div>
+      <div class="perk-card reveal reveal-delay-2">
+        <span class="perk-icon">⚡</span>
+        <h3 class="perk-title">Sprint-Based Learning</h3>
+        <p class="perk-desc">You learn by building, not watching. <strong>2-week sprints, real deliverables,</strong> live demos at the end of every cycle. By month 3 you will have shipped something real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OPEN ROLES ── -->
+<section class="section" id="roles" style="padding-top:0" aria-label="Open roles">
+  <div class="container">
+    <div class="sec-header">
+      <p class="tag reveal">// Open Positions</p>
+      <h2 class="sec-title reveal">5 roles open right now</h2>
+      <p class="sec-sub reveal">All roles are remote-first, 3-month internships with stipend and PPO potential.</p>
+    </div>
+    <div class="roles-grid">
+
+      <article class="role-card r-java reveal">
+        <div class="role-header">
+          <div class="role-logo">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy">
+          </div>
+          <div>
+            <h3 class="role-stack">Java</h3>
+            <p class="role-type">Backend Intern</p>
+          </div>
+          <span class="role-open open-yes">● Open</span>
+        </div>
+        <div class="role-body">
+          <p class="role-desc">Build enterprise-grade REST APIs with Spring Boot. Work on real microservices, JPA/Hibernate, and production-quality backend systems used by actual clients.</p>
+          <div class="role-skills">
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">JPA / Hibernate</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">JUnit 5</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="role-card r-react reveal reveal-delay-1">
+        <div class="role-header">
+          <div class="role-logo">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" loading="lazy">
+          </div>
+          <div>
+            <h3 class="role-stack">React</h3>
+            <p class="role-type">Frontend Intern</p>
+          </div>
+          <span class="role-open open-yes">● Open</span>
+        </div>
+        <div class="role-body">
+          <p class="role-desc">Build polished enterprise dashboards with React and TypeScript. Think TanStack Query, Zustand, and Vitest — not jQuery and hope.</p>
+          <div class="role-skills">
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">TanStack Query</span>
+            <span class="skill-tag">Zustand</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag">Vitest</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="role-card r-python reveal reveal-delay-2">
+        <div class="role-header">
+          <div class="role-logo">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" loading="lazy">
+          </div>
+          <div>
+            <h3 class="role-stack">Python</h3>
+            <p class="role-type">Backend / Data Intern</p>
+          </div>
+          <span class="role-open open-yes">● Open</span>
+        </div>
+        <div class="role-body">
+          <p class="role-desc">Build FastAPI backends, automation scripts, and data pipelines. Python done properly — async, typed, tested — not scripting glued together with prayer.</p>
+          <div class="role-skills">
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">SQLAlchemy</span>
+            <span class="skill-tag">Pydantic</span>
+            <span class="skill-tag">pytest</span>
+            <span class="skill-tag">Alembic</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="role-card r-node reveal">
+        <div class="role-header">
+          <div class="role-logo">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
+          </div>
+          <div>
+            <h3 class="role-stack">Node.js</h3>
+            <p class="role-type">Backend Intern</p>
+          </div>
+          <span class="role-open open-yes">● Open</span>
+        </div>
+        <div class="role-body">
+          <p class="role-desc">Build fast, clean Express APIs with Sequelize and PostgreSQL. Real-time features with Socket.io. Async/await everywhere — no callback hell allowed.</p>
+          <div class="role-skills">
+            <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">Sequelize</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Jest / Supertest</span>
+            <span class="skill-tag">Socket.io</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="role-card r-ai reveal reveal-delay-1">
+        <div class="role-header">
+          <div class="role-logo" style="font-size:1.5rem;display:flex;align-items:center;justify-content:center;">🤖</div>
+          <div>
+            <h3 class="role-stack">AI Research</h3>
+            <p class="role-type">AI / LLM Intern</p>
+          </div>
+          <span class="role-open open-yes">● Open</span>
+        </div>
+        <div class="role-body">
+          <p class="role-desc">Map every major AI model, understand what each one is built for, and produce a reference document so clear that any enterprise CTO could use it. No ML PhD required — just deep curiosity.</p>
+          <div class="role-skills">
+            <span class="skill-tag">LLM Research</span>
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">API Integration</span>
+            <span class="skill-tag">RAG Pipelines</span>
+            <span class="skill-tag">Documentation</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section" id="process" style="padding-top:0" aria-label="Hiring process">
+  <div class="container">
+    <div class="sec-header">
+      <p class="tag reveal">// The Process</p>
+      <h2 class="sec-title reveal">How we hire</h2>
+      <p class="sec-sub reveal">No aptitude tests. No HR rounds. No group discussions. Just real work.</p>
+    </div>
+
+    <div class="screening-banner reveal">
+      <span class="sb-icon">👁️</span>
+      <div>
+        <p class="sb-title">Resume screening happens first</p>
+        <p class="sb-desc">We read every application personally. We look at your <strong>GitHub, what you've built, and why you want to join Tekravio</strong> — not your CGPA. If we like what we see, we send you the assignment within 24 hours. If not, you get an honest reply.</p>
+      </div>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Apply Below</h3>
+        <p class="step-desc">Fill the short form. Tell us who you are, what you've built, and why Tekravio specifically. Attach your resume.</p>
+        <span class="step-time">// 5 minutes</span>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <h3 class="step-title">We Screen</h3>
+        <p class="step-desc">Uday reviews your application personally. We look at your GitHub, your answers, and your genuine interest — not your grades.</p>
+        <span class="step-time">// Within 24 hrs</span>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Get Your Assignment</h3>
+        <p class="step-desc">If you pass screening, we send you a 2–3 day real-world technical assignment. Not a quiz — actual engineering work.</p>
+        <span class="step-time">// 2–3 day window</span>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <h3 class="step-title">You're In</h3>
+        <p class="step-desc">Good work earns you an offer. We evaluate on thinking, quality, and ownership — not perfection. We hire people who give a damn.</p>
+        <span class="step-time">// 48 hrs after submit</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APPLICATION FORM ── -->
+<section class="section" id="apply" style="padding-top:0;padding-bottom:80px" aria-label="Apply now">
+  <div class="container">
+    <div class="form-section reveal">
+      <div class="form-header">
+        <p class="tag form-header-tag">// Application Form</p>
+        <h2 class="form-header-title">Apply to Tekravio Academy</h2>
+        
+      </div>
+      <div class="form-body">
+        <div id="formErrorBanner" class="form-error-banner" role="alert"></div>
+        <form id="applyForm" novalidate>
+
+          <!-- Row 1: Name -->
+          <div class="form-grid" style="margin-bottom:1.25rem">
+            <div class="field-group">
+              <label class="field-label" for="fname">First Name <span class="field-req">*</span></label>
+              <input class="field-input" type="text" id="fname" placeholder="First name" autocomplete="given-name" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="lname">Last Name</label>
+              <input class="field-input" type="text" id="lname" placeholder="Last name" autocomplete="family-name">
+            </div>
+          </div>
+
+          <!-- Row 2: Email + Phone -->
+          <div class="form-grid" style="margin-bottom:1.25rem">
+            <div class="field-group">
+              <label class="field-label" for="email">Email Address <span class="field-req">*</span></label>
+              <input class="field-input" type="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="phone">Phone (optional)</label>
+              <input class="field-input" type="tel" id="phone" placeholder="+91 98765 43210" autocomplete="tel">
+            </div>
+          </div>
+
+          <!-- Row 3: Stack + College -->
+          <div class="form-grid" style="margin-bottom:1.25rem">
+            <div class="field-group">
+              <label class="field-label" for="stack">Applying For <span class="field-req">*</span></label>
+              <select class="field-select" id="stack" required>
+                <option value="" disabled selected>Select a role</option>
+                <option value="java">☕ Java — Backend Intern</option>
+                <option value="react">⚛️ React — Frontend Intern</option>
+                <option value="python">🐍 Python — Backend / Data Intern</option>
+                <option value="node">🟢 Node.js — Backend Intern</option>
+                <option value="ai">🤖 AI Research — LLM Intern</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="college">College / Institution</label>
+              <input class="field-input" type="text" id="college" placeholder="Any — we don't filter by this">
+            </div>
+          </div>
+
+          <!-- Row 4: GitHub + LinkedIn -->
+          <div class="form-grid" style="margin-bottom:1.25rem">
+            <div class="field-group">
+              <label class="field-label" for="github">GitHub Profile <span class="field-req">*</span></label>
+              <input class="field-input" type="url" id="github" placeholder="https://github.com/yourname" required>
+              <p class="field-hint">This is the most important field. An active GitHub says more than any resume.</p>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="linkedin">LinkedIn Profile</label>
+              <input class="field-input" type="url" id="linkedin" placeholder="https://linkedin.com/in/yourname">
+            </div>
+          </div>
+
+          <div class="form-divider"><span class="form-divider-label">// Tell us about yourself</span></div>
+
+          <!-- What have you built -->
+          <div class="field-group form-full" style="margin-bottom:1.25rem">
+            <label class="field-label" for="built">What have you built? <span class="field-req">*</span></label>
+            <textarea class="field-textarea" id="built" placeholder="Tell us about something you've built — personal project, open source contribution, anything. No matter how small. What was it, what problem did it solve, and what did you learn?" required style="min-height:120px"></textarea>
+            <p class="field-hint">2–4 sentences is enough. Be specific. Generic answers tell us nothing.</p>
+          </div>
+
+          <!-- Why Tekravio -->
+          <div class="field-group form-full" style="margin-bottom:1.25rem">
+            <label class="field-label" for="why">Why Tekravio specifically? <span class="field-req">*</span></label>
+            <textarea class="field-textarea" id="why" placeholder="Not 'great learning opportunity' — that tells us nothing. Tell us what about Tekravio resonated with you. The story. The model. The passion-over-paper approach. Something specific." required style="min-height:110px"></textarea>
+          </div>
+
+          <!-- Resume upload -->
+          <div class="field-group form-full" style="margin-bottom:1.25rem">
+            <label class="field-label">Resume / CV <span class="field-req">*</span></label>
+            <label class="file-upload" for="resume">
+              <input type="file" id="resume" accept=".pdf,.doc,.docx" onchange="fileSelected(this)">
+              <span class="file-upload-icon">📄</span>
+              <div class="file-upload-text">
+                <strong>Click to upload your resume</strong>
+                PDF, DOC, or DOCX · Max 5MB
+              </div>
+            </label>
+            <p class="file-selected" id="fileSelectedText"></p>
+            <p class="field-hint">We look at your projects and experience — not your CGPA or the brand of your college.</p>
+          </div>
+
+          
+          <div class="submit-area">
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span>Submit My Application</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            
+          </div>
+
+        </form>
+
+        <!-- Success state -->
+        <div class="success-panel" id="successPanel">
+          <div class="success-icon">✅</div>
+          <h3 class="success-title">Application Received.</h3>
+          <p class="success-desc">
+            Thank you for applying to Tekravio Academy.<br><br>
+            Uday will personally review your application and GitHub profile.
+            <strong>You'll hear back within 24 hours</strong> — whether we're moving forward or not.<br><br></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">Tekr<span>avio</span></a>
+      <p class="footer-copy">© 2026 Tekravio Private Limited · Build. Train. Deliver.</p>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/#contact">Contact</a>
+        <a href="mailto:careers@tekravio.com">careers@tekravio.com</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Apps Script URL ─────────────────────────────────
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2USJCWwyFAOaeS9GlJbK5_pNtUwabTP2s2fBdnKaBZFea4dqBnsRksItqTx6OCgXDeA/exec";
+
+// ── Header scroll behaviour ──────────────────────────
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.style.background = window.scrollY > 40
+    ? 'rgba(4,6,14,0.96)' : 'rgba(4,6,14,0.88)';
+}, { passive: true });
+
+// ── Mobile nav ───────────────────────────────────────
+function toggleMenu() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+
+// ── Scroll reveal ────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── File selected ────────────────────────────────────
+function fileSelected(input) {
+  const label = document.getElementById('fileSelectedText');
+  if (input.files && input.files[0]) {
+    label.textContent = '✓ ' + input.files[0].name;
+    label.style.display = 'block';
+  }
+}
+
+// ── Form submission ──────────────────────────────────
+document.getElementById('applyForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const errBanner = document.getElementById('formErrorBanner');
+  errBanner.style.display = 'none';
+
+  // Validation
+  const fname   = document.getElementById('fname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const stack   = document.getElementById('stack').value;
+  const github  = document.getElementById('github').value.trim();
+  const built   = document.getElementById('built').value.trim();
+  const why     = document.getElementById('why').value.trim();
+  const resume  = document.getElementById('resume').files[0];
+
+  if (!fname || !email || !stack || !github || !built || !why || !resume) {
+    errBanner.textContent = 'Please fill in all required fields and upload your resume.';
+    errBanner.style.display = 'block';
+    errBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errBanner.textContent = 'Please enter a valid email address.';
+    errBanner.style.display = 'block';
+    return;
+  }
+
+  // Disable button
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>Submitting…</span>';
+
+  const payload = {
+    type: 'careers_application',
+    firstName:  fname,
+    lastName:   document.getElementById('lname').value.trim(),
+    email, stack,
+    phone:      document.getElementById('phone').value.trim(),
+    college:    document.getElementById('college').value.trim(),
+    github,
+    linkedin:   document.getElementById('linkedin').value.trim(),
+    built, why,
+    resumeName: resume ? resume.name : '',
+    source:     'tekravio.com/careers'
+  };
+
+  // Fire and forget
+  fetch(SCRIPT_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+
+  // Show success immediately
+  document.getElementById('applyForm').style.display = 'none';
+  document.getElementById('successPanel').style.display = 'block';
+  document.getElementById('successPanel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+
+<!-- JSON-LD structured data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "Software Engineering Intern",
+  "description": "Join Tekravio Academy as a tech intern in Java, React, Python, Node.js, or AI Research. Work on real enterprise projects, get mentored by senior engineers, and earn a PPO if you perform.",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Tekravio",
+    "sameAs": "https://tekravio.com",
+    "logo": "https://tekravio.com/og-social.png"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bengaluru",
+      "addressCountry": "IN"
+    }
+  },
+  "jobLocationType": "TELECOMMUTE",
+  "employmentType": "INTERN",
+  "datePosted": "2026-01-01",
+  "validThrough": "2026-12-31",
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "INR",
+    "value": { "@type": "QuantitativeValue", "value": 10000, "unitText": "MONTH" }
+  }
+}
+</script>
+
+</body>
+</html>
