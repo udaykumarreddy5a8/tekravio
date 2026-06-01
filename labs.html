@@ -7,7 +7,57 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 <meta name="description" content="Ready-to-deploy accelerator kits, automation frameworks, and SaaS tools built from real consulting IP. Stop starting from scratch on every engagement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://tekravio.com/labs.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tekravio.com/labs.html">
+<meta property="og:site_name" content="Tekravio">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Tekravio Labs — Accelerator Products & Frameworks">
+<meta property="og:description" content="Ready-to-deploy accelerator kits, automation frameworks, and SaaS tools built from real consulting IP. Test Automation, DevOps Pipelines, Dev Frameworks, AI/RAG Starter Kits.">
+<meta property="og:image" content="https://tekravio.com/og-social.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tekravio Labs — Accelerator Products & Frameworks">
+<meta name="twitter:description" content="Production-ready kits from real consulting IP. Stop starting from scratch on every engagement.">
+<meta name="twitter:image" content="https://tekravio.com/og-social.png">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Udaykumar Reddy">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://tekravio.com/labs.html",
+      "url": "https://tekravio.com/labs.html",
+      "name": "Tekravio Labs — Accelerator Products & Frameworks",
+      "isPartOf": {"@type": "WebSite", "url": "https://tekravio.com", "name": "Tekravio"},
+      "description": "Ready-to-deploy accelerator kits, automation frameworks, and SaaS tools built from real consulting IP."
+    },
+    {
+      "@type": "Service",
+      "name": "Tekravio Labs — Developer Accelerator Products",
+      "url": "https://tekravio.com/labs.html",
+      "provider": {"@type": "Organization", "@id": "https://tekravio.com/#organization", "name": "Tekravio"},
+      "description": "Ready-to-deploy accelerator kits, automation frameworks, and SaaS tools built from real consulting IP.",
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Labs Products",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "Test Automation Kit", "applicationCategory": "DeveloperApplication"}},
+          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "DevOps Pipeline Templates", "applicationCategory": "DeveloperApplication"}},
+          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "Dev Accelerator Framework", "applicationCategory": "DeveloperApplication"}},
+          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "Code Quality SaaS", "applicationCategory": "DeveloperApplication"}},
+          {"@type": "Offer", "itemOffered": {"@type": "SoftwareApplication", "name": "AI / RAG Starter Kit", "applicationCategory": "DeveloperApplication"}}
+        ]
+      }
+    }
+  ]
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -166,9 +216,16 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:48p
   .prod-card.pc5{grid-column:span 1}
   .why-card{padding:20px 16px}
 }
+
+/* ── PREMIUM ADDITIONS ── */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--cyan));z-index:400;width:0%;transition:width 0.08s linear;pointer-events:none}
+::selection{background:rgba(255,112,67,0.2);color:var(--ink)}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page reading progress"></div>
 
 <nav id="navbar">
   <a href="index.html" class="logo">Tekr<span>avio</span></a>
@@ -447,7 +504,10 @@ document.addEventListener('click',function(e){
   if(m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target)){m.classList.remove('open')}
 });
 window.addEventListener('scroll',function(){
-  document.getElementById('navbar').style.background=window.scrollY>60?'rgba(4,6,14,0.98)':'rgba(4,6,14,0.9)';
+  const y=window.scrollY;
+  document.getElementById('navbar').style.background=y>60?'rgba(4,6,14,0.98)':'rgba(4,6,14,0.9)';
+  const sp=document.getElementById('scrollProgress');
+  if(sp){sp.style.width=Math.min((y/(document.documentElement.scrollHeight-innerHeight))*100,100)+'%'}
 });
 </script>
 </body>
