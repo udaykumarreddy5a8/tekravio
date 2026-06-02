@@ -14,6 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://tekravio.com/careers">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -409,7 +410,7 @@ nav[aria-label="Main navigation"] a.nav-cta{display:none}
 .btn-arrow{transition:transform var(--transition)}
 
 /* Success */
-.success-panel{display:none;text-align:center;padding:2.5rem 1.25rem}
+.success-panel{display:none;text-align:center;padding:2.5rem 1.25rem;animation:fadeUp .4s ease both}
 @media(min-width:640px){.success-panel{padding:3rem 1.5rem}}
 .success-icon{font-size:3rem;margin-bottom:1rem}
 @media(min-width:640px){.success-icon{font-size:3.5rem}}
@@ -500,6 +501,7 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 }
 
 /* Shake animation on error */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
   20%{transform:translateX(-6px)}
@@ -510,6 +512,10 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 .shake{animation:shake .35s ease;}
 
 
+/* ── PROCESS STRIP MOBILE ── */
+@media(max-width:480px){
+  .process-strip > div{flex:1 1 40%;min-width:80px}
+}
 /* ── OPTGROUP STYLING ── */
 optgroup{font-weight:700;color:var(--muted);font-size:.8rem}
 optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
@@ -645,10 +651,10 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
     <div class="sec-header">
       <p class="tag reveal">// Full-Time Openings</p>
       <h2 class="sec-title reveal">Senior roles open now</h2>
-      <p class="sec-sub reveal">5–10 years experience. Fixed salary. Permanent. Remote-friendly. Hiring process: Resume screen → Assignment → 1 interview round.</p>
+      <p class="sec-sub reveal">Fixed salary. Permanent. Remote-friendly. Hiring: Resume screen → Assignment → 1 interview round.</p>
     </div>
 
-    <div class="process-strip reveal" style="display:flex;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2.5rem">
+    <div class="process-strip reveal" style="display:flex;flex-wrap:wrap;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2.5rem">
       <div style="flex:1;padding:14px 16px;text-align:center;border-right:1px solid var(--border)">
         <div style="font-size:1.25rem;margin-bottom:4px">📄</div>
         <div style="font-size:.75rem;font-weight:700;color:var(--ink);margin-bottom:2px">Resume Screen</div>
@@ -670,7 +676,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 
       <article class="role-card r-java reveal">
         <div class="role-header">
-          <div class="role-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy"></div>
+          <div class="role-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy" decoding="async"></div>
           <div>
             <h3 class="role-stack">Java Full Stack</h3>
             <p class="role-type">Full-time · 5–7 Years</p>
@@ -689,7 +695,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 
       <article class="role-card reveal reveal-delay-1" style="--role-color:#818cf8">
         <div class="role-header">
-          <div class="role-logo" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" loading="lazy"></div>
+          <div class="role-logo" style="background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2)"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" loading="lazy" decoding="async"></div>
           <div>
             <h3 class="role-stack" style="color:#818cf8">Data Analyst</h3>
             <p class="role-type">Full-time · 5–7 Years</p>
@@ -748,7 +754,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 
     <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 var(--radius) var(--radius) 0">
       <p style="font-size:.875rem;color:var(--muted);line-height:1.65">
-        <strong style="color:var(--ink)">For full JDs:</strong> Email <a href="mailto:careers@tekravio.com" style="color:var(--blue)">careers@tekravio.com</a> with the role name — we'll send the detailed JD within 24 hours. Or apply directly below.
+        <strong style="color:var(--ink)">For full JDs:</strong> Email <a href="mailto:careers@tekravio.com" style="color:var(--blue)" rel="noopener">careers@tekravio.com</a> with the role name — we'll send the detailed JD within 24 hours. Or apply directly below.
       </p>
     </div>
   </div>
@@ -776,7 +782,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
       <article class="role-card r-java reveal">
         <div class="role-header">
           <div class="role-logo">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" loading="lazy" decoding="async">
           </div>
           <div>
             <h3 class="role-stack">Java</h3>
@@ -799,7 +805,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
       <article class="role-card r-react reveal reveal-delay-1">
         <div class="role-header">
           <div class="role-logo">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" loading="lazy">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" loading="lazy" decoding="async">
           </div>
           <div>
             <h3 class="role-stack">React</h3>
@@ -822,7 +828,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
       <article class="role-card r-python reveal reveal-delay-2">
         <div class="role-header">
           <div class="role-logo">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" loading="lazy">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" loading="lazy" decoding="async">
           </div>
           <div>
             <h3 class="role-stack">Python</h3>
@@ -845,7 +851,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
       <article class="role-card r-node reveal">
         <div class="role-header">
           <div class="role-logo">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" loading="lazy" decoding="async">
           </div>
           <div>
             <h3 class="role-stack">Node.js</h3>
@@ -967,12 +973,12 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
           <div class="form-grid" style="margin-bottom:1.25rem">
             <div class="field-group" id="fg-email">
               <label class="field-label" for="email">Email Address <span class="field-req">*</span></label>
-              <input class="field-input" type="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+              <input class="field-input" type="email" id="email" placeholder="you@email.com" title="Enter your email address" autocomplete="email" required>
               <span class="field-error" id="err-email"></span>
             </div>
             <div class="field-group">
               <label class="field-label" for="phone">Phone (optional)</label>
-              <input class="field-input" type="tel" id="phone" placeholder="+91 98765 43210" autocomplete="tel">
+              <input class="field-input" type="tel" id="phone" placeholder="+91 98765 43210" autocomplete="tel" autocomplete="tel">
             </div>
           </div>
 
@@ -999,7 +1005,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
             </div>
             <div class="field-group">
               <label class="field-label" for="college">College / Institution</label>
-              <input class="field-input" type="text" id="college" placeholder="Any — we don't filter by this">
+              <input class="field-input" type="text" id="college" placeholder="Any — we don't filter by this" autocomplete="organization">
             </div>
           </div>
 
@@ -1050,7 +1056,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 
           
           <div class="submit-area">
-            <button type="submit" class="submit-btn" id="submitBtn">
+            <button type="submit" class="submit-btn" id="submitBtn" aria-label="Submit your application">
               <span>Submit My Application</span>
               <span class="btn-arrow">→</span>
             </button>
@@ -1238,7 +1244,7 @@ document.getElementById('applyForm').addEventListener('submit', function(e) {
 
   if (hasError) {
     const banner = document.getElementById('formErrorBanner');
-    banner.textContent = 'Please fill in all required fields and upload your resume.';
+    banner.textContent = 'Please fill in all required fields and attach your resume.';
     banner.style.display = 'block';
     banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
     const btn = document.getElementById('submitBtn');
