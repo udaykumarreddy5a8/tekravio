@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio — Node.js Assignment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
+  --surface:#0b0f1e;--surface2:#111829;--surface3:#0d1220;
+  --border:rgba(255,255,255,0.07);--border-med:rgba(255,255,255,0.12);
+  --blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;--red:#f87171;
+  --purple:#a78bfa;--yellow:#fbbf24;--green:#4ade80;
+  --node:#4ade80;--node-dim:rgba(34,197,94,0.1);
+  --radius:12px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;
+  font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--node);border-radius:2px}
+a{color:var(--cyan);text-decoration:none}
+h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-0.02em;line-height:1.1}
+.mono{font-family:'Fira Code',monospace}
+code{font-family:'Fira Code',monospace;font-size:.85em;background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.2);color:#86efac;padding:2px 7px;border-radius:4px}
+.container{max-width:900px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+.section{padding:56px 0}
+p{color:#94a3b8;margin-bottom:10px}p strong{color:var(--ink)}
+ul{padding-left:0;list-style:none}
+
+/* ── HEADER ── */
+.header{background:rgba(4,6,14,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:0 clamp(20px,5vw,48px);
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
+.logo span{color:var(--node)}
+.header-badge{font-family:'Fira Code',monospace;font-size:.7rem;padding:4px 12px;
+  border-radius:100px;background:var(--node-dim);border:1px solid rgba(74,222,128,0.25);
+  color:var(--node);letter-spacing:.1em;text-transform:uppercase}
+
+/* ── HERO ── */
+.hero{padding:64px 0 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero-orb1{position:absolute;top:-120px;right:-80px;width:500px;height:500px;
+  background:radial-gradient(ellipse,rgba(34,197,94,.1) 0%,transparent 65%);pointer-events:none}
+.hero-orb2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;
+  background:radial-gradient(ellipse,rgba(59,111,245,.07) 0%,transparent 65%);pointer-events:none}
+.hero-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--node);margin-bottom:1rem}
+.hero-title{font-size:clamp(2.25rem,6vw,4rem);font-weight:700;line-height:.92;
+  letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero-title .accent{color:var(--node)}
+.hero-title .outline{-webkit-text-stroke:2px var(--ink);color:transparent}
+.hero-desc{font-size:1.0625rem;color:var(--muted);max-width:680px;line-height:1.75;margin-bottom:2rem}
+.hero-desc strong{color:var(--ink)}
+
+/* meta pills */
+.meta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
+.meta-pill{display:flex;align-items:center;gap:.5rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;font-size:.8125rem}
+.meta-icon{font-size:1rem}.meta-label{color:var(--muted);font-size:.7rem;
+  font-family:'Fira Code',monospace;letter-spacing:.08em;text-transform:uppercase}
+.meta-val{font-weight:600;color:var(--ink)}
+
+/* ── CONTEXT BOX ── */
+.context-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:2rem}
+.context-header{padding:1rem 1.5rem;background:var(--surface2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.875rem}
+.context-dot{width:8px;height:8px;border-radius:50%;background:var(--node)}
+.context-label{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--node)}
+.context-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}
+.context-body strong{color:var(--ink)}
+
+/* ── SECTION HEADERS ── */
+.sec-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;margin-bottom:.625rem}
+.sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.5rem}
+.sec-sub{font-size:.9375rem;color:var(--muted);margin-bottom:2rem;line-height:1.7}
+
+/* ── ARCH CARDS ── */
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.arch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.375rem;position:relative;overflow:hidden}
+.arch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ac-node::before{background:linear-gradient(90deg,#4ade80,#22c55e)}
+.ac-aws::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+.ac-db::before{background:linear-gradient(90deg,#38bdf8,#0ea5e9)}
+.ac-realtime::before{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
+.ac-notif::before{background:linear-gradient(90deg,#fb923c,#f97316)}
+.arch-icon{font-size:1.5rem;margin-bottom:.75rem}
+.arch-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.375rem}
+.arch-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+.arch-tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.75rem}
+.atag{font-family:'Fira Code',monospace;font-size:.65rem;padding:2px 8px;border-radius:3px;
+  border:1px solid var(--border);color:var(--muted)}
+
+/* ── TASK CARDS ── */
+.tasks{display:flex;flex-direction:column;gap:1.25rem}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.task-header{padding:1.125rem 1.5rem;display:flex;align-items:center;gap:1rem;
+  border-bottom:1px solid var(--border);background:var(--surface2)}
+.task-num{font-family:'Clash Display',sans-serif;font-size:1.75rem;font-weight:700;
+  min-width:2.5rem;line-height:1}
+.t1 .task-num{color:var(--node)} .t2 .task-num{color:#fbbf24}
+.t3 .task-num{color:#38bdf8} .t4 .task-num{color:#a78bfa}
+.t5 .task-num{color:#fb923c} .t6 .task-num{color:var(--cyan)}
+.task-title{font-size:1rem;font-weight:700;margin-bottom:2px}
+.task-pts{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+.task-body{padding:1.375rem 1.5rem}
+.task-desc{font-size:.9rem;color:#94a3b8;line-height:1.7;margin-bottom:1rem}
+.req-list{display:flex;flex-direction:column;gap:.5rem}
+.req{display:flex;gap:.75rem;font-size:.875rem;color:#94a3b8;align-items:flex-start;line-height:1.55}
+.req::before{content:'→';flex-shrink:0;margin-top:.125rem}
+.t1 .req::before{color:var(--node)} .t2 .req::before{color:#fbbf24}
+.t3 .req::before{color:#38bdf8} .t4 .req::before{color:#a78bfa}
+.t5 .req::before{color:#fb923c} .t6 .req::before{color:var(--cyan)}
+.req strong{color:var(--ink)}
+
+/* code block */
+.code-block{background:#020408;border:1px solid rgba(74,222,128,.15);border-radius:8px;
+  overflow:hidden;margin:1rem 0}
+.cb-header{background:var(--surface2);padding:.5rem 1rem;display:flex;align-items:center;
+  justify-content:space-between;border-bottom:1px solid var(--border)}
+.cb-file{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted)}
+.cb-lang{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--node);
+  background:var(--node-dim);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:'Fira Code',monospace;
+  font-size:.78rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--node)}.cm{color:#3a4a6a}
+
+/* ── BONUS / FEATURES ── */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.25rem}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.25rem;cursor:pointer;transition:border-color .2s,transform .2s;position:relative}
+.feature-card:hover{border-color:var(--border-med);transform:translateY(-2px)}
+.feature-card input[type=checkbox]{position:absolute;opacity:0;width:0;height:0}
+.feature-card label{display:flex;flex-direction:column;gap:.5rem;cursor:pointer}
+.fc-check{width:20px;height:20px;border-radius:5px;border:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:#fff;transition:all .2s;background:transparent;margin-bottom:.375rem}
+.feature-card input:checked ~ label .fc-check{background:var(--node);border-color:var(--node)}
+.feature-card input:checked ~ label .fc-title{color:var(--node)}
+.fc-icon{font-size:1.375rem}
+.fc-title{font-family:'Clash Display',sans-serif;font-size:.9375rem;font-weight:700;color:var(--ink);transition:color .2s}
+.fc-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+.fc-difficulty{font-family:'Fira Code',monospace;font-size:.65rem;padding:2px 8px;
+  border-radius:100px;border:1px solid;align-self:flex-start;margin-top:.25rem}
+.fd-easy{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.2);color:#4ade80}
+.fd-med{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.2);color:#fbbf24}
+.fd-hard{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.2);color:#f87171}
+
+/* ── EVAL TABLE ── */
+.eval-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-table th{padding:.75rem 1rem;text-align:left;font-family:'Fira Code',monospace;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);background:var(--surface2)}
+.eval-table td{padding:.875rem 1rem;border-bottom:1px solid var(--border);color:#94a3b8;vertical-align:top}
+.eval-table tr:last-child td{border-bottom:none}
+.eval-table tr:hover td{background:rgba(255,255,255,.02)}
+.score-badge{font-family:'Clash Display',sans-serif;font-size:1.25rem;color:var(--node)}
+
+/* ── SUBMIT ── */
+.submit-section{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:2rem;margin-top:1.25rem}
+.submit-steps{display:flex;flex-direction:column;gap:0;position:relative}
+.submit-steps::before{content:'';position:absolute;left:19px;top:16px;bottom:16px;
+  width:1px;background:linear-gradient(to bottom,var(--node),var(--cyan));opacity:.18}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding-bottom:1.25rem;position:relative}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.875rem;font-weight:700;font-family:'Fira Code',monospace;
+  flex-shrink:0;position:relative;z-index:1;
+  background:var(--node-dim);border:1px solid rgba(74,222,128,.25);color:var(--node)}
+.ss-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:.25rem}
+.ss-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+
+/* callout */
+.callout{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout.orange{background:rgba(255,112,67,.06);border:1px solid rgba(255,112,67,.15);border-left:3px solid var(--orange)}
+.callout.cyan{background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.15);border-left:3px solid var(--cyan)}
+.callout.yellow{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-left:3px solid var(--yellow)}
+.callout.green{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-left:3px solid var(--green)}
+.callout-head{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.callout.orange .callout-head{color:var(--orange)}.callout.cyan .callout-head{color:var(--cyan)}
+.callout.yellow .callout-head{color:var(--yellow)}.callout.green .callout-head{color:var(--green)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--ink)}
+
+/* mindset questions */
+.mq-list{display:flex;flex-direction:column;gap:.875rem;margin-top:1.25rem}
+.mq{background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--node);border-radius:0 8px 8px 0;padding:1rem 1.25rem}
+.mq-num{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--node);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.mq-text{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+
+.sep{height:1px;background:var(--border);margin:3rem 0}
+footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:var(--muted)}
+.footer-logo{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
+.footer-logo span{color:var(--node)}
+
+@media(max-width:640px){
+  .arch-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}
+  .eval-table{font-size:.8rem}.eval-table th,.eval-table td{padding:.625rem .75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Tekr<span>avio</span></div>
+  <div class="header-badge">Node.js Assignment · 2 Yrs Exp</div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb1" aria-hidden="true"></div>
+  <div class="hero-orb2" aria-hidden="true"></div>
+  <div class="container">
+    <p class="hero-tag">// Tekravio Academy · Node.js Assignment · 2026</p>
+    <h1 class="hero-title">
+      <span class="accent">Smart Healthcare</span><br>
+      Reminder<br>
+      <span class="outline">System.</span>
+    </h1>
+    <p class="hero-desc">
+      Build a backend that helps patients take medicines and follow diet plans on time.
+      <strong>Node.js + Express + PostgreSQL + AWS + Firebase.</strong>
+      Designed for someone with 2 years of Node.js experience — solid fundamentals expected, real-time and cloud integrations are the learning edge.
+    </p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="meta-icon">⏱️</span><div><div class="meta-label">Deadline</div><div class="meta-val">3 Days</div></div></div>
+      <div class="meta-pill"><span class="meta-icon">👤</span><div><div class="meta-label">Target Profile</div><div class="meta-val">2 Years Experience</div></div></div>
+      <div class="meta-pill"><span class="meta-icon">🟢</span><div><div class="meta-label">Stack</div><div class="meta-val">Node.js · PostgreSQL · AWS · FCM</div></div></div>
+      <div class="meta-pill"><span class="meta-icon">📊</span><div><div class="meta-label">Total Marks</div><div class="meta-val">100 + 30 Bonus</div></div></div>
+      <div class="meta-pill"><span class="meta-icon">📧</span><div><div class="meta-label">Submit To</div><div class="meta-val">careers@tekravio.com</div></div></div>
+    </div>
+
+    <div class="context-box">
+      <div class="context-header">
+        <div class="context-dot"></div>
+        <div class="context-label">// Project Context</div>
+      </div>
+      <div class="context-body">
+        <strong>Note:</strong> You are not expected to deploy to AWS ECS/EKS or build microservices for this assignment. Focus on getting the core Node.js backend, S3 integration, Textract, and FCM working cleanly. Architecture decisions matter more than completeness at every edge case.<br><br>
+        Patients or admins upload <strong>prescription images</strong>, stored in <strong>AWS S3</strong> and processed using <strong>AWS Textract</strong> to extract medicine details, dosage, and timings. The backend <strong>schedules reminders</strong> and sends push notifications through <strong>Firebase Cloud Messaging (FCM)</strong> and optionally <strong>WhatsApp reminders</strong>. The platform supports recurring medicine alerts, diet reminders, prescription management, and patient tracking.<br><br>
+        Built using <strong>Node.js (Express), PostgreSQL, Sequelize, AWS services, and a React or Flutter frontend</strong>, with a scalable architecture that can later evolve into a microservices-based healthcare platform.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" style="padding-bottom:0">
+  <div class="container">
+    <p class="sec-tag" style="color:var(--node)">// System Architecture</p>
+    <h2 class="sec-title">What You're Building</h2>
+    <p class="sec-sub">A full-stack Node.js healthcare backend with cloud integrations. Every component below must be implemented.</p>
+    <div class="arch-grid">
+      <div class="arch-card ac-node">
+        <div class="arch-icon">🟢</div>
+        <div class="arch-title">Express.js Backend</div>
+        <div class="arch-desc">REST APIs, JWT auth, role-based access (Admin / Patient), node-cron for scheduled reminders</div>
+        <div class="arch-tags"><span class="atag">Express 5</span><span class="atag">Sequelize</span><span class="atag">JWT</span><span class="atag">node-cron</span></div>
+      </div>
+      <div class="arch-card ac-aws">
+        <div class="arch-icon">☁️</div>
+        <div class="arch-title">AWS Integration</div>
+        <div class="arch-desc">S3 for prescription image storage, Textract for OCR-based prescription parsing using AWS SDK v3</div>
+        <div class="arch-tags"><span class="atag">S3</span><span class="atag">Textract</span><span class="atag">IAM</span><span class="atag">SDK v3</span></div>
+      </div>
+      <div class="arch-card ac-db">
+        <div class="arch-icon">🗄️</div>
+        <div class="arch-title">PostgreSQL + Sequelize</div>
+        <div class="arch-desc">Patient data, prescriptions, medicines, schedules, reminder logs — clean schema with Sequelize ORM and migrations</div>
+        <div class="arch-tags"><span class="atag">PostgreSQL</span><span class="atag">Sequelize</span><span class="atag">Migrations</span><span class="atag">Associations</span></div>
+      </div>
+      <div class="arch-card ac-realtime">
+        <div class="arch-icon">⚡</div>
+        <div class="arch-title">Real-Time with Socket.io</div>
+        <div class="arch-desc">Live reminder alerts to connected patients via WebSocket — optional but a strong bonus differentiator</div>
+        <div class="arch-tags"><span class="atag">Socket.io</span><span class="atag">WebSocket</span><span class="atag">Events</span></div>
+      </div>
+      <div class="arch-card ac-notif">
+        <div class="arch-icon">🔔</div>
+        <div class="arch-title">Notifications</div>
+        <div class="arch-desc">Firebase Cloud Messaging for push notifications via Admin SDK, optional WhatsApp via Twilio/WATI</div>
+        <div class="arch-tags"><span class="atag">FCM</span><span class="atag">Firebase Admin</span><span class="atag">WhatsApp API</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TASKS -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--node)">// Core Tasks</p>
+    <h2 class="sec-title">What You Must Build</h2>
+    <p class="sec-sub">Six core modules. All required. Partial implementations score partial marks.</p>
+
+    <div class="tasks">
+
+      <!-- TASK 1 -->
+      <div class="task t1">
+        <div class="task-header">
+          <div class="task-num">01</div>
+          <div>
+            <div class="task-title">Auth, Patient & Admin Management</div>
+            <div class="task-pts">// 15 marks · JWT + Role basics</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Set up the security and user management layer. Every API must be secured. Role-based access must be enforced from the start — this is a healthcare app.</p>
+          <div class="req-list">
+            <div class="req"><strong>JWT authentication</strong> — register, login, refresh token, logout (token blacklist using Redis or in-memory Set)</div>
+            <div class="req"><strong>Roles:</strong> ADMIN and PATIENT — different route access enforced via middleware, not controller conditionals</div>
+            <div class="req"><strong>Patient profile API</strong> — CRUD: name, age, medical history, FCM device token, WhatsApp number. Validate all inputs with Joi or express-validator</div>
+            <div class="req"><strong>Admin APIs</strong> — list all patients, activate/deactivate, view any patient's prescriptions</div>
+            <div class="req"><strong>Passwords</strong> — hashed with bcrypt. Never stored or returned in plaintext</div>
+          </div>
+          <div class="code-block">
+            <div class="cb-header"><span class="cb-file">authMiddleware.js</span><span class="cb-lang">JS</span></div>
+            <pre><span class="kw">const</span> authMiddleware = <span class="kw">async</span> (req, res, next) => {
+  <span class="kw">const</span> token = req.headers[<span class="str">'authorization'</span>]?.split(<span class="str">' '</span>)[<span class="ty">1</span>];
+  <span class="kw">if</span> (!token) <span class="kw">return</span> res.status(<span class="ty">401</span>).json({ error: <span class="str">'No token'</span> });
+  <span class="kw">try</span> {
+    req.user = jwt.verify(token, process.env.<span class="ty">JWT_SECRET</span>);
+    next();
+  } <span class="kw">catch</span> { res.status(<span class="ty">401</span>).json({ error: <span class="str">'Invalid token'</span> }); }
+};
+
+<span class="kw">const</span> requireRole = (role) => (req, res, next) => {
+  <span class="kw">if</span> (req.user.role !== role)
+    <span class="kw">return</span> res.status(<span class="ty">403</span>).json({ error: <span class="str">'Forbidden'</span> });
+  next();
+};</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 2 -->
+      <div class="task t2">
+        <div class="task-header">
+          <div class="task-num">02</div>
+          <div>
+            <div class="task-title">Prescription Upload — S3 + AWS Textract</div>
+            <div class="task-pts">// 20 marks · AWS S3 + Textract integration</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Patients upload a prescription image. Your backend stores it in S3, sends it to Textract, parses the extracted text into structured medicine data, and saves it to PostgreSQL. Handle failures gracefully.</p>
+          <div class="req-list">
+            <div class="req"><strong>Multer + S3</strong> — use multer-s3 or pipe the buffer to S3 directly. Store with key: <code>prescriptions/{patientId}/{uuid}.jpg</code>. Validate file type (JPG/PNG/PDF) and size ≤ 10MB</div>
+            <div class="req"><strong>AWS Textract</strong> — call <code>DetectDocumentText</code> using @aws-sdk/client-textract. Parse LINE blocks to extract medicine name, dosage, frequency, duration</div>
+            <div class="req"><strong>Prescription model</strong> — store: S3 URL, raw Textract response (JSONB), extracted medicines array, upload timestamp, status (PENDING / DONE / FAILED)</div>
+            <div class="req"><strong>Fallback</strong> — if Textract extraction fails or confidence is low, return a clear error and allow manual medicine entry as fallback</div>
+            <div class="req"><strong>Prescription history API</strong> — paginated list for a patient, filter by date range, most recent first</div>
+          </div>
+          <div class="callout orange">
+            <div class="callout-head">// AWS SDK v3</div>
+            <p>Use <strong>@aws-sdk/client-s3</strong> and <strong>@aws-sdk/client-textract</strong> (modular SDK). Do not use the old aws-sdk v2 — it's deprecated. Use environment variables for credentials. Never hardcode AWS keys.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 3 -->
+      <div class="task t3">
+        <div class="task-header">
+          <div class="task-num">03</div>
+          <div>
+            <div class="task-title">Medicine Schedule & Reminder Engine</div>
+            <div class="task-pts">// 20 marks · Core feature</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Build the scheduling engine using <code>node-cron</code>. It must reliably poll for due reminders and fire FCM notifications. Handle edge cases like missed reminders on server restart.</p>
+          <div class="req-list">
+            <div class="req"><strong>Medicine schedule model</strong> — medicine name, dosage, frequency (ONCE_DAILY / TWICE_DAILY / THRICE_DAILY / CUSTOM), time slots as array, start date, end date, is_active</div>
+            <div class="req"><strong>node-cron scheduler</strong> — run every 5 minutes, query for reminders due in the next 5-minute window, fire FCM for each, log result to reminder_log table</div>
+            <div class="req"><strong>Recurring support</strong> — daily, weekly, custom interval in hours</div>
+            <div class="req"><strong>Snooze API</strong> — patient snoozes by 10/20/30 minutes, system updates next_reminder_at timestamp</div>
+            <div class="req"><strong>Taken / Skipped API</strong> — patient marks reminder taken or skipped, logged in reminder_log with timestamp</div>
+            <div class="req"><strong>Adherence calculation</strong> — percentage of reminders marked taken vs total for the last 7 days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 4 -->
+      <div class="task t4">
+        <div class="task-header">
+          <div class="task-num">04</div>
+          <div>
+            <div class="task-title">Push Notifications — Firebase FCM</div>
+            <div class="task-pts">// 15 marks · Notification layer</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Integrate Firebase Admin SDK to deliver push notifications. Notifications must be structured, actionable, and logged. Invalid tokens must be handled cleanly.</p>
+          <div class="req-list">
+            <div class="req"><strong>Firebase Admin SDK</strong> — initialise with service account JSON from environment variable. Send FCM message with title, body, and data payload</div>
+            <div class="req"><strong>Notification payload</strong> — include <code>scheduleId</code>, <code>action</code> (TAKE / SNOOZE / SKIP), <code>patientId</code> in FCM data map so the app can handle deep-linking</div>
+            <div class="req"><strong>notification_log table</strong> — every FCM call logged: patientId, scheduleId, sent_at, fcm_response, status (SUCCESS / FAILED)</div>
+            <div class="req"><strong>Retry on failure</strong> — if FCM call fails, retry once after 60 seconds. Log final status regardless</div>
+            <div class="req"><strong>WhatsApp fallback (optional)</strong> — if patient has no FCM token, send message via Twilio WhatsApp API or WATI</div>
+          </div>
+          <div class="code-block">
+            <div class="cb-header"><span class="cb-file">notificationService.js</span><span class="cb-lang">JS</span></div>
+            <pre><span class="kw">const</span> sendReminder = <span class="kw">async</span> (patient, schedule) => {
+  <span class="kw">const</span> message = {
+    token: patient.fcm_token,
+    notification: {
+      title: <span class="str">`Time for ${schedule.medicine_name}`</span>,
+      body:  <span class="str">`${schedule.dosage} · Tap to confirm`</span>
+    },
+    data: {
+      scheduleId: String(schedule.id),
+      patientId:  String(patient.id),
+      action:     <span class="str">'TAKE'</span>
+    }
+  };
+  <span class="kw">const</span> response = <span class="kw">await</span> admin.messaging().send(message);
+  <span class="kw">return</span> response; <span class="cm">// FCM message ID</span>
+};</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 5 -->
+      <div class="task t5">
+        <div class="task-header">
+          <div class="task-num">05</div>
+          <div>
+            <div class="task-title">Diet Reminder Module</div>
+            <div class="task-pts">// 15 marks · Secondary feature</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Extend the system to support diet and meal reminders alongside medicine reminders. Use the same cron-based scheduler — just a different entity type and notification template.</p>
+          <div class="req-list">
+            <div class="req"><strong>DietPlan model</strong> — meal type (BREAKFAST / LUNCH / DINNER / SNACK), description, scheduled_time, dietary_restrictions, assigned patient, start/end date</div>
+            <div class="req"><strong>Admin creates diet plan</strong> — assign to a patient, set start/end dates</div>
+            <div class="req"><strong>Patient views diet plan</strong> — paginated list, today's meals highlighted in response</div>
+            <div class="req"><strong>Diet reminders</strong> — node-cron scheduler sends FCM reminders 15 minutes before meal time</div>
+            <div class="req"><strong>Diet adherence tracking</strong> — mark meals as eaten/skipped, calculate weekly compliance percentage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 6 -->
+      <div class="task t6">
+        <div class="task-header">
+          <div class="task-num">06</div>
+          <div>
+            <div class="task-title">Frontend — React Web or Flutter</div>
+            <div class="task-pts">// 15 marks · Frontend (React OR Flutter)</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Build a simple frontend — React (web) or Flutter (mobile). Functional over polished. It should demonstrate your full backend working end-to-end.</p>
+          <div class="req-list">
+            <div class="req"><strong>Login screen</strong> — calls your Express auth API, stores JWT in localStorage / secure storage</div>
+            <div class="req"><strong>Dashboard</strong> — today's medicine schedule, upcoming reminders, adherence % for last 7 days</div>
+            <div class="req"><strong>Prescription upload</strong> — file picker, upload to backend, view extracted medicines from Textract</div>
+            <div class="req"><strong>FCM / notifications</strong> — receive push notifications, handle Take / Snooze / Skip actions via API calls</div>
+            <div class="req"><strong>Reminder history</strong> — list of past reminders with taken / skipped status and timestamp</div>
+          </div>
+          <div class="callout cyan">
+            <div class="callout-head">// Not a Frontend Role?</div>
+            <p>If frontend is not your strength, build the backend fully and deliver a <strong>well-documented Postman collection</strong> covering every endpoint. Same marks — we care about the backend being solid.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THINK AHEAD -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--purple)">// Think Ahead</p>
+    <h2 class="sec-title">What Features Would You Add?</h2>
+    <p class="sec-sub">Pick any <strong>1 or 2</strong> and implement them as bonus, or propose your own in the README. One well-implemented bonus feature beats three half-done ones.</p>
+
+    <div class="callout yellow">
+      <div class="callout-head">// What We're Looking For</div>
+      <p>Given an open-ended problem, can you identify what's <strong>missing, broken, or improvable</strong>? The features you choose to add tell us more about your Node.js instincts than the features we asked for. Choose based on what you genuinely find interesting.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card"><input type="checkbox" id="f1"><label for="f1">
+        <div class="fc-check">✓</div><div class="fc-icon">⚡</div>
+        <div class="fc-title">Real-Time Reminders via Socket.io</div>
+        <div class="fc-desc">When a reminder is due, push it to the connected patient in real-time via WebSocket in addition to FCM. Show live countdown in the dashboard.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f2"><label for="f2">
+        <div class="fc-check">✓</div><div class="fc-icon">🔁</div>
+        <div class="fc-title">Bull Queue for Background Jobs</div>
+        <div class="fc-desc">Replace node-cron with a proper Bull (Redis-backed) queue. Each reminder is a job — retries, backoff, and monitoring are built in. Much more production-ready.</div>
+        <span class="fc-difficulty fd-hard">Hard</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f3"><label for="f3">
+        <div class="fc-check">✓</div><div class="fc-icon">🩺</div>
+        <div class="fc-title">Doctor Portal</div>
+        <div class="fc-desc">Add a DOCTOR role. Doctors directly upload prescriptions for their patients and track adherence. Alert doctor when patient misses 3+ reminders in a row.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f4"><label for="f4">
+        <div class="fc-check">✓</div><div class="fc-icon">🔁</div>
+        <div class="fc-title">Auto-Refill Alerts</div>
+        <div class="fc-desc">Track medicine quantity. When stock drops below a threshold (e.g. 3 days remaining), automatically fire a "Time to refill" FCM notification.</div>
+        <span class="fc-difficulty fd-easy">Easy</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f5"><label for="f5">
+        <div class="fc-check">✓</div><div class="fc-icon">🌍</div>
+        <div class="fc-title">Multi-Language Notifications</div>
+        <div class="fc-desc">Send FCM messages in the patient's preferred language — English, Hindi, Tamil, Telugu. Store preference in the patient profile and use i18n for message templates.</div>
+        <span class="fc-difficulty fd-easy">Easy</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f6"><label for="f6">
+        <div class="fc-check">✓</div><div class="fc-icon">👨‍👩‍👧</div>
+        <div class="fc-title">Caregiver / Family Mode</div>
+        <div class="fc-desc">A patient can add a caregiver. If the patient misses a reminder, the caregiver also gets an FCM notification. New role: CAREGIVER with limited read access.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f7"><label for="f7">
+        <div class="fc-check">✓</div><div class="fc-icon">📊</div>
+        <div class="fc-title">Admin Analytics API</div>
+        <div class="fc-desc">Aggregated endpoints: overall adherence rates, top missed medicines, reminder delivery success rates, patients with lowest adherence. Use PostgreSQL window functions.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f8"><label for="f8">
+        <div class="fc-check">✓</div><div class="fc-icon">🔐</div>
+        <div class="fc-title">Rate Limiting + Security Headers</div>
+        <div class="fc-desc">Add express-rate-limit to all auth routes. Add helmet.js for security headers. Add express-mongo-sanitize or input sanitisation. These matter in a healthcare app.</div>
+        <span class="fc-difficulty fd-easy">Easy</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f9"><label for="f9">
+        <div class="fc-check">✓</div><div class="fc-icon">🧪</div>
+        <div class="fc-title">Jest + Supertest API Tests</div>
+        <div class="fc-desc">Unit tests for service layer. Integration tests for all API endpoints using Supertest with a test PostgreSQL database. Target 75%+ coverage on the core modules.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f10"><label for="f10">
+        <div class="fc-check">✓</div><div class="fc-icon">🐳</div>
+        <div class="fc-title">Docker Compose Setup</div>
+        <div class="fc-desc">Dockerise the Express app + PostgreSQL + Redis (for Bull queue or token blacklist). One <code>docker-compose up</code> should run the full system locally with zero manual setup.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f11"><label for="f11">
+        <div class="fc-check">✓</div><div class="fc-icon">📈</div>
+        <div class="fc-title">Vitals Tracking</div>
+        <div class="fc-desc">Patients log blood pressure, blood sugar, or weight after taking medicine. Track trends over 30 days. Return a simple chart-ready data structure from the API.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f12"><label for="f12">
+        <div class="fc-check">✓</div><div class="fc-icon">⚙️</div>
+        <div class="fc-title">GitHub Actions CI Pipeline</div>
+        <div class="fc-desc">On every push to main — run ESLint, Jest tests, and build the Docker image. Fail the pipeline if tests don't pass. Simple but shows professional discipline.</div>
+        <span class="fc-difficulty fd-hard">Hard</span>
+      </label></div>
+    </div>
+
+    <div class="callout cyan" style="margin-top:1.5rem">
+      <div class="callout-head">// Or Propose Your Own</div>
+      <p>Have an idea not in the list? <strong>Build it and document it clearly in your README.</strong> Original thinking scores higher than implementing a feature we listed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MINDSET QUESTIONS -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--node)">// Mindset Questions</p>
+    <h2 class="sec-title">Answer These in Your README</h2>
+    <p class="sec-sub">We read these before we read your code. No right answers — we're evaluating how you think.</p>
+    <div class="mq-list">
+      <div class="mq">
+        <div class="mq-num">// Q1</div>
+        <div class="mq-text">Your node-cron scheduler runs every 5 minutes. What could go wrong if the server restarts mid-run? How would you ensure no reminders are missed or sent twice after a restart?</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q2</div>
+        <div class="mq-text">AWS Textract sometimes misreads handwritten prescriptions. What is your strategy for handling low-confidence extractions, and how would you let the patient or admin correct the result?</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q3</div>
+        <div class="mq-text">A patient uninstalls the app — their FCM token becomes invalid and your notification fails silently. How do you detect this and clean it up? What happens to future reminders for that patient?</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q4</div>
+        <div class="mq-text">Prescription data is highly sensitive. List three specific security measures you implemented and explain why each one matters in a healthcare context.</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q5</div>
+        <div class="mq-text">Your system currently serves 100 patients. What would need to change in your Node.js architecture or database design to handle 10,000 patients reliably?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVALUATION -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--node)">// Evaluation</p>
+    <h2 class="sec-title">How We Score</h2>
+    <table class="eval-table">
+      <thead><tr><th>Criteria</th><th>Marks</th><th>What We Look For</th></tr></thead>
+      <tbody>
+        <tr><td>Auth + Patient Management</td><td><span class="score-badge">15</span></td><td>JWT works, roles enforced via middleware, validation correct</td></tr>
+        <tr><td>S3 Upload + Textract OCR</td><td><span class="score-badge">20</span></td><td>Real AWS SDK v3 calls, structured extraction, fallback handled</td></tr>
+        <tr><td>Scheduler + Reminder Engine</td><td><span class="score-badge">20</span></td><td>node-cron reliable, snooze works, adherence calculated</td></tr>
+        <tr><td>FCM Push Notifications</td><td><span class="score-badge">15</span></td><td>Messages delivered, retry logic, notification_log populated</td></tr>
+        <tr><td>Diet Reminder Module</td><td><span class="score-badge">15</span></td><td>Complete CRUD, integrated into scheduler, adherence tracked</td></tr>
+        <tr><td>React / Flutter Frontend</td><td><span class="score-badge">15</span></td><td>Functional, FCM receiving, prescription upload works</td></tr>
+        <tr><td>Code Quality & Architecture</td><td><span class="score-badge">+10</span></td><td>Clean service/controller separation, proper error handling, no anti-patterns</td></tr>
+        <tr><td>Bonus Features (any 1–2)</td><td><span class="score-badge">+20</span></td><td>Well implemented, documented, explained in README</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SUBMISSION -->
+<section class="section" style="padding-top:2rem;padding-bottom:64px">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--node)">// Submission</p>
+    <h2 class="sec-title">How to Submit</h2>
+    <div class="submit-section">
+      <div class="submit-steps">
+        <div class="ss"><div class="ss-dot">01</div><div>
+          <div class="ss-title">Push to GitHub — Public Repo</div>
+          <div class="ss-desc">Clean folder structure: <code>backend/</code>, <code>frontend/</code> (if applicable), <code>docs/</code>. <code>.gitignore</code> must exclude <code>.env</code> files. No AWS keys or Firebase service account JSON committed.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">02</div><div>
+          <div class="ss-title">README.md — Required</div>
+          <div class="ss-desc">Architecture overview, setup instructions, all environment variables listed (with placeholders), Postman collection link, all 5 mindset question answers, bonus features you added and why.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">03</div><div>
+          <div class="ss-title">Postman Collection</div>
+          <div class="ss-desc">Export your full Postman collection as JSON and include it in <code>docs/</code>. Every endpoint present with sample request/response bodies. We run your APIs directly.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">04</div><div>
+          <div class="ss-title">Email to careers@tekravio.com</div>
+          <div class="ss-desc">Subject: <code>Node.js Assignment — [Your Name]</code><br>Include GitHub link + one paragraph on the hardest problem you solved and how you approached it.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">05</div><div>
+          <div class="ss-title">Deadline: 3 Days from Receipt</div>
+          <div class="ss-desc">Late submissions are not reviewed. A working subset delivered on time beats a complete submission delivered late.</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="callout green" style="margin-top:1.5rem">
+      <div class="callout-head">// From Uday · Founder, Tekravio</div>
+      <p>At 2 years of Node.js experience, we don't expect perfection. We expect <strong>solid fundamentals, clean async/await patterns, and genuine effort</strong>. Show us you understand why each piece of the architecture exists — not just that you followed a tutorial. The README matters as much as the code. Explain your decisions. Tell us what you would do differently with more time. Build this like it's going to be used by real patients — because the next version might be.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Tekr<span>avio</span></div>
+      <div>careers@tekravio.com · tekravio.com</div>
+      <div>© 2026 Tekravio Private Limited · Build. Train. Deliver.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
