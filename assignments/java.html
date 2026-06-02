@@ -3,763 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tekravio — Java Spring Boot Assignment</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<title>Tekravio Academy — Java Spring Boot Intern Assignment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
-  --surface:#0b0f1e;--surface2:#111829;--surface3:#0d1220;
-  --border:rgba(255,255,255,0.07);--border-med:rgba(255,255,255,0.12);
-  --blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;--red:#f87171;
-  --purple:#a78bfa;--yellow:#fbbf24;--green:#4ade80;
-  --java:#fb923c;
-  --radius:12px;--radius-sm:8px;
+  --bg:#04060e; --surface:#0b0f1e; --surface2:#111829;
+  --border:rgba(255,255,255,0.07);
+  --blue:#3b6ff5; --cyan:#00c9a7; --orange:#ff7043;
+  --red:#f87171; --purple:#a78bfa; --yellow:#fbbf24;
+  --text:#e2e8f0; --muted:#5a6080;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;
-  font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--java);border-radius:2px}
-a{color:var(--cyan);text-decoration:none}
-h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-0.02em;line-height:1.1}
-.mono{font-family:'Fira Code',monospace}
-code{font-family:'Fira Code',monospace;font-size:.85em;background:rgba(251,146,60,0.08);
-  border:1px solid rgba(251,146,60,0.2);color:#fbbf24;padding:2px 7px;border-radius:4px}
-.container{max-width:900px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
-.section{padding:56px 0}
-p{color:#94a3b8;margin-bottom:10px}p strong{color:var(--ink)}
-ul{padding-left:0;list-style:none}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 
-/* ── HEADER ── */
-.header{background:rgba(4,6,14,0.92);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);padding:0 clamp(20px,5vw,48px);
-  height:60px;display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100}
-.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
-.logo span{color:var(--java)}
-.header-badge{font-family:'Fira Code',monospace;font-size:.7rem;padding:4px 12px;
-  border-radius:100px;background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.25);
-  color:var(--java);letter-spacing:.1em;text-transform:uppercase}
+/* HERO */
+.hero{padding:72px 56px 56px;background:linear-gradient(135deg,#04060e,#0b0f1e);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(59,111,245,0.08),transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-100px;left:10%;width:500px;height:400px;background:radial-gradient(ellipse,rgba(0,201,167,0.05),transparent 65%);pointer-events:none}
+.hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;position:relative;z-index:1}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.08em;color:var(--text)}
+.logo span{color:var(--blue)}
+.academy-badge{background:rgba(59,111,245,0.1);border:1px solid rgba(59,111,245,0.25);border-radius:6px;padding:6px 16px;font-family:'Fira Code',monospace;font-size:11px;color:#7ba7ff;letter-spacing:0.1em;text-transform:uppercase}
+.hero-tag{font-family:'Fira Code',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;position:relative;z-index:1}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,68px);font-weight:400;letter-spacing:0.01em;line-height:1.0;margin-bottom:16px;position:relative;z-index:1}
+h1 .blue{color:var(--blue)} h1 .cyan{color:var(--cyan)}
+.hero-sub{font-size:16px;color:var(--muted);max-width:600px;line-height:1.75;position:relative;z-index:1;margin-bottom:32px}
+.meta-row{display:flex;gap:24px;flex-wrap:wrap;position:relative;z-index:1}
+.meta-pill{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;font-size:13px;font-weight:500}
+.meta-pill .mi{font-size:16px}
+.meta-pill .ml{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em}
+.meta-pill .mv{font-size:13px;color:var(--text);font-weight:600}
 
-/* ── HERO ── */
-.hero{padding:64px 0 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
-.hero-orb1{position:absolute;top:-120px;right:-80px;width:500px;height:500px;
-  background:radial-gradient(ellipse,rgba(251,146,60,.1) 0%,transparent 65%);pointer-events:none}
-.hero-orb2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;
-  background:radial-gradient(ellipse,rgba(59,111,245,.07) 0%,transparent 65%);pointer-events:none}
-.hero-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--java);margin-bottom:1rem}
-.hero-title{font-size:clamp(2.25rem,6vw,4rem);font-weight:700;line-height:.92;
-  letter-spacing:-.03em;margin-bottom:1.25rem}
-.hero-title .accent{color:var(--java)}
-.hero-title .outline{-webkit-text-stroke:2px var(--ink);color:transparent}
-.hero-desc{font-size:1.0625rem;color:var(--muted);max-width:680px;line-height:1.75;margin-bottom:2rem}
-.hero-desc strong{color:var(--ink)}
+/* SECTIONS */
+.container{max-width:960px;margin:0 auto;padding:52px 56px 80px}
+.sec-tag{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:32px;font-weight:400;letter-spacing:0.02em;margin-bottom:6px;color:var(--text)}
+h3{font-size:16px;font-weight:700;margin-bottom:10px;color:var(--text)}
+h4{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px;font-family:'Fira Code',monospace;letter-spacing:0.06em;text-transform:uppercase}
+p{font-size:14px;color:#94a3b8;line-height:1.8;margin-bottom:12px}
+p strong{color:var(--text)}
 
-/* meta pills */
-.meta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
-.meta-pill{display:flex;align-items:center;gap:.5rem;background:var(--surface);
-  border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;font-size:.8125rem}
-.meta-icon{font-size:1rem}.meta-label{color:var(--muted);font-size:.7rem;
-  font-family:'Fira Code',monospace;letter-spacing:.08em;text-transform:uppercase}
-.meta-val{font-weight:600;color:var(--ink)}
-
-/* ── CONTEXT BOX ── */
-.context-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;margin-bottom:2rem}
-.context-header{padding:1rem 1.5rem;background:var(--surface2);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:.875rem}
-.context-dot{width:8px;height:8px;border-radius:50%;background:var(--java)}
-.context-label{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--java)}
-.context-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}
-.context-body strong{color:var(--ink)}
-
-/* ── SECTION HEADERS ── */
-.sec-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.18em;
-  text-transform:uppercase;margin-bottom:.625rem}
-.sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.5rem}
-.sec-sub{font-size:.9375rem;color:var(--muted);margin-bottom:2rem;line-height:1.7}
-
-/* ── ARCH CARDS ── */
-.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
-.arch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.375rem;position:relative;overflow:hidden}
-.arch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.ac-java::before{background:linear-gradient(90deg,#fb923c,#f97316)}
-.ac-aws::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
-.ac-db::before{background:linear-gradient(90deg,#38bdf8,#0ea5e9)}
-.ac-mobile::before{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
-.ac-notif::before{background:linear-gradient(90deg,#4ade80,#22c55e)}
-.arch-icon{font-size:1.5rem;margin-bottom:.75rem}
-.arch-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.375rem}
-.arch-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
-.arch-tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.75rem}
-.atag{font-family:'Fira Code',monospace;font-size:.65rem;padding:2px 8px;border-radius:3px;
-  border:1px solid var(--border);color:var(--muted)}
-
-/* ── TASK CARDS ── */
-.tasks{display:flex;flex-direction:column;gap:1.25rem}
-.task{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.task-header{padding:1.125rem 1.5rem;display:flex;align-items:center;gap:1rem;
-  border-bottom:1px solid var(--border);background:var(--surface2)}
-.task-num{font-family:'Clash Display',sans-serif;font-size:1.75rem;font-weight:700;
-  min-width:2.5rem;line-height:1}
-.t1 .task-num{color:var(--java)} .t2 .task-num{color:#fbbf24}
-.t3 .task-num{color:#38bdf8} .t4 .task-num{color:#a78bfa}
-.t5 .task-num{color:#4ade80} .t6 .task-num{color:var(--cyan)}
-.task-title{font-size:1rem;font-weight:700;margin-bottom:2px}
-.task-pts{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em}
-.task-body{padding:1.375rem 1.5rem}
-.task-desc{font-size:.9rem;color:#94a3b8;line-height:1.7;margin-bottom:1rem}
-.req-list{display:flex;flex-direction:column;gap:.5rem}
-.req{display:flex;gap:.75rem;font-size:.875rem;color:#94a3b8;align-items:flex-start;line-height:1.55}
-.req::before{content:'→';flex-shrink:0;margin-top:.125rem}
-.t1 .req::before{color:var(--java)} .t2 .req::before{color:#fbbf24}
-.t3 .req::before{color:#38bdf8} .t4 .req::before{color:#a78bfa}
-.t5 .req::before{color:#4ade80} .t6 .req::before{color:var(--cyan)}
-.req strong{color:var(--ink)}
-
-/* code block */
-.code-block{background:#020408;border:1px solid rgba(251,146,60,.15);border-radius:8px;
-  overflow:hidden;margin:1rem 0}
-.cb-header{background:var(--surface2);padding:.5rem 1rem;display:flex;align-items:center;
-  justify-content:space-between;border-bottom:1px solid var(--border)}
-.cb-file{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted)}
-.cb-lang{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--java);
-  background:rgba(251,146,60,.1);padding:2px 8px;border-radius:3px}
-pre{padding:1rem 1.25rem;overflow-x:auto;font-family:'Fira Code',monospace;
-  font-size:.78rem;line-height:1.8;color:#94a3b8}
-.kw{color:#a78bfa} .ty{color:#38bdf8} .str{color:#4ade80} .ann{color:var(--java)}
-.cm{color:#3a4a6a}
-
-/* ── BONUS SECTION ── */
-.bonus-card{background:var(--surface);border:1px solid rgba(251,146,60,.18);
-  border-left:3px solid var(--java);border-radius:0 var(--radius) var(--radius) 0;padding:1.5rem 2rem}
-.bonus-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--java);margin-bottom:.5rem}
-.bonus-title{font-size:1.25rem;font-weight:700;margin-bottom:.75rem}
-
-/* ── THINK AHEAD — feature ideas ── */
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.25rem}
-.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.25rem;cursor:pointer;transition:border-color .2s,transform .2s;position:relative}
-.feature-card:hover{border-color:var(--border-med);transform:translateY(-2px)}
-.feature-card input[type=checkbox]{position:absolute;opacity:0;width:0;height:0}
-.feature-card label{display:flex;flex-direction:column;gap:.5rem;cursor:pointer}
-.fc-check{width:20px;height:20px;border-radius:5px;border:1px solid var(--border);
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:#fff;transition:all .2s;background:transparent;margin-bottom:.375rem}
-.feature-card input:checked ~ label .fc-check{background:var(--java);border-color:var(--java)}
-.feature-card input:checked ~ label{color:var(--ink)}
-.feature-card input:checked ~ label .fc-title{color:var(--java)}
-.fc-icon{font-size:1.375rem}
-.fc-title{font-family:'Clash Display',sans-serif;font-size:.9375rem;font-weight:700;
-  color:var(--ink);transition:color .2s}
-.fc-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
-.fc-difficulty{font-family:'Fira Code',monospace;font-size:.65rem;padding:2px 8px;
-  border-radius:100px;border:1px solid;align-self:flex-start;margin-top:.25rem}
-.fd-easy{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.2);color:#4ade80}
-.fd-med{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.2);color:#fbbf24}
-.fd-hard{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.2);color:#f87171}
-
-/* ── EVAL TABLE ── */
-.eval-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
-.eval-table th{padding:.75rem 1rem;text-align:left;font-family:'Fira Code',monospace;
-  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  border-bottom:1px solid var(--border);background:var(--surface2)}
-.eval-table td{padding:.875rem 1rem;border-bottom:1px solid var(--border);color:#94a3b8;vertical-align:top}
-.eval-table tr:last-child td{border-bottom:none}
-.eval-table tr:hover td{background:rgba(255,255,255,.02)}
-.score-badge{font-family:'Clash Display',sans-serif;font-size:1.25rem;color:var(--java)}
-
-/* ── SUBMIT ── */
-.submit-section{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);
-  padding:2rem;margin-top:1.25rem}
-.submit-steps{display:flex;flex-direction:column;gap:0;position:relative}
-.submit-steps::before{content:'';position:absolute;left:19px;top:16px;bottom:16px;
-  width:1px;background:linear-gradient(to bottom,var(--java),var(--cyan));opacity:.18}
-.ss{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding-bottom:1.25rem;position:relative}
-.ss:last-child{padding-bottom:0}
-.ss-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.875rem;font-weight:700;font-family:'Fira Code',monospace;
-  flex-shrink:0;position:relative;z-index:1;
-  background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.25);color:var(--java)}
-.ss-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:.25rem}
-.ss-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
-
-/* callout */
-.callout{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
-.callout.orange{background:rgba(255,112,67,.06);border:1px solid rgba(255,112,67,.15);border-left:3px solid var(--orange)}
-.callout.cyan{background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.15);border-left:3px solid var(--cyan)}
-.callout.yellow{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-left:3px solid var(--yellow)}
-.callout-head{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;
-  text-transform:uppercase;margin-bottom:.375rem}
-.callout.orange .callout-head{color:var(--orange)} .callout.cyan .callout-head{color:var(--cyan)}
+/* CALLOUT */
+.callout{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin:20px 0}
+.callout.blue{border-left:3px solid var(--blue);background:rgba(59,111,245,0.04)}
+.callout.cyan{border-left:3px solid var(--cyan);background:rgba(0,201,167,0.04)}
+.callout.orange{border-left:3px solid var(--orange);background:rgba(255,112,67,0.04)}
+.callout.red{border-left:3px solid var(--red);background:rgba(248,113,113,0.04)}
+.callout.yellow{border-left:3px solid var(--yellow);background:rgba(251,191,36,0.04)}
+.callout-head{font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px}
+.callout.blue .callout-head{color:var(--blue)}
+.callout.cyan .callout-head{color:var(--cyan)}
+.callout.orange .callout-head{color:var(--orange)}
+.callout.red .callout-head{color:var(--red)}
 .callout.yellow .callout-head{color:var(--yellow)}
-.callout p{color:#94a3b8;margin:0} .callout p strong{color:var(--ink)}
+.callout p{margin-bottom:0}
 
-/* mindset questions */
-.mq-list{display:flex;flex-direction:column;gap:.875rem;margin-top:1.25rem}
-.mq{background:var(--surface);border:1px solid var(--border);
-  border-left:3px solid var(--java);border-radius:0 8px 8px 0;padding:1rem 1.25rem}
-.mq-num{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--java);
-  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
-.mq-text{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+/* CODE BLOCK */
+.code-block{background:#020408;border:1px solid rgba(59,111,245,0.15);border-radius:10px;overflow:hidden;margin:16px 0}
+.code-header{background:var(--surface2);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.code-filename{font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)}
+.code-lang{font-family:'Fira Code',monospace;font-size:10px;color:var(--cyan);background:rgba(0,201,167,0.1);padding:2px 8px;border-radius:3px;letter-spacing:0.06em}
+pre{padding:20px 24px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:12px;line-height:1.7;color:#94a3b8}
+.kw{color:#7ba7ff} .cls{color:#00c9a7} .fn{color:#fbbf24} .st{color:#86efac}
+.cm{color:#3a4a6a} .an{color:#f472b6} .nu{color:#fb923c} .op{color:#94a3b8}
 
-/* sep */
-.sep{height:1px;background:var(--border);margin:3rem 0}
+/* TASK CARDS */
+.tasks{display:flex;flex-direction:column;gap:20px;margin-top:20px}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.task-header{padding:16px 24px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border)}
+.task-num{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;min-width:44px}
+.t1 .task-num{color:var(--blue)} .t2 .task-num{color:var(--cyan)}
+.t3 .task-num{color:var(--orange)} .t4 .task-num{color:var(--purple)}
+.t5 .task-num{color:var(--yellow)} .booster .task-num{color:var(--red)}
+.task-meta{}
+.task-title{font-size:15px;font-weight:700;margin-bottom:2px}
+.task-pts{font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em}
+.task-body{padding:20px 24px}
+.task-desc{font-size:13px;color:#94a3b8;line-height:1.75;margin-bottom:14px}
+.req-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.req{display:flex;gap:10px;font-size:12px;color:#94a3b8;align-items:flex-start;line-height:1.5}
+.req-check{width:16px;height:16px;border-radius:3px;border:1px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px}
+.t1 .req-check{border-color:rgba(59,111,245,0.4);color:var(--blue);background:rgba(59,111,245,0.06)}
+.t2 .req-check{border-color:rgba(0,201,167,0.4);color:var(--cyan);background:rgba(0,201,167,0.06)}
+.t3 .req-check{border-color:rgba(255,112,67,0.4);color:var(--orange);background:rgba(255,112,67,0.06)}
+.t4 .req-check{border-color:rgba(167,139,250,0.4);color:var(--purple);background:rgba(167,139,250,0.06)}
+.t5 .req-check{border-color:rgba(251,191,36,0.4);color:var(--yellow);background:rgba(251,191,36,0.06)}
+.booster .req-check{border-color:rgba(248,113,113,0.4);color:var(--red);background:rgba(248,113,113,0.06)}
 
-/* footer */
-footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;font-size:.8rem;color:var(--muted)}
-.footer-logo{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
-.footer-logo span{color:var(--java)}
+/* ENDPOINTS TABLE */
+.ep-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12px}
+.ep-table th{padding:10px 14px;text-align:left;font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface2)}
+.ep-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:#94a3b8;vertical-align:top}
+.ep-table tr:last-child td{border-bottom:none}
+.ep-table tr:hover td{background:rgba(255,255,255,0.02)}
+.method{font-family:'Fira Code',monospace;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:0.06em}
+.get{background:rgba(34,197,94,0.12);color:#4ade80}
+.post{background:rgba(59,111,245,0.12);color:#7ba7ff}
+.put{background:rgba(251,191,36,0.12);color:#fbbf24}
+.del{background:rgba(248,113,113,0.12);color:var(--red)}
+.ep-path{font-family:'Fira Code',monospace;color:#7ba7ff;font-size:11px}
 
-@media(max-width:640px){
-  .arch-grid{grid-template-columns:1fr}
-  .feature-grid{grid-template-columns:1fr}
-  .eval-table{font-size:.8rem}
-  .eval-table th,.eval-table td{padding:.625rem .75rem}
+/* SCORING */
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.score-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.score-n{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--blue);margin-bottom:4px}
+.score-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+
+/* CRITERIA */
+.criteria{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.cr{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px}
+.cr-left{}
+.cr-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.cr-desc{font-size:12px;color:var(--muted)}
+.cr-pts{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--cyan);white-space:nowrap}
+
+/* MINDSET Q */
+.mq-list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.mq{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:16px 20px}
+.mq-num{font-family:'Fira Code',monospace;font-size:10px;color:var(--cyan);margin-bottom:6px;letter-spacing:0.1em}
+.mq-text{font-size:13px;color:#c8d8f0;line-height:1.65;font-weight:500}
+
+/* SUBMIT */
+.submit-steps{display:flex;flex-direction:column;gap:0;position:relative;margin-top:20px}
+.submit-steps::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:1px;background:linear-gradient(to bottom,var(--blue),var(--cyan));opacity:0.2}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:16px;padding-bottom:24px;position:relative}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fira Code',monospace;font-size:12px;font-weight:700;flex-shrink:0;position:relative;z-index:1;border:1px solid rgba(59,111,245,0.3);background:rgba(59,111,245,0.1);color:var(--blue)}
+.ss-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.ss-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* SEPARATOR */
+.sep{height:1px;background:var(--border);margin:40px 0}
+
+@media(max-width:768px){
+  .hero,.container{padding-left:24px;padding-right:24px}
+  .score-grid{grid-template-columns:1fr}
+  .meta-row{gap:12px}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="logo">Tekr<span>avio</span></div>
-  <div class="header-badge">Java Assignment · 2 Yrs Exp</div>
-</header>
-
-<main>
-
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-orb1" aria-hidden="true"></div>
-  <div class="hero-orb2" aria-hidden="true"></div>
-  <div class="container">
-    <p class="hero-tag">// Tekravio Academy · Java Assignment · 2026</p>
-    <h1 class="hero-title">
-      <span class="accent">Smart Healthcare</span><br>
-      Reminder<br>
-      <span class="outline">System.</span>
-    </h1>
-    <p class="hero-desc">
-      Build a backend that helps patients take medicines and follow diet plans on time.
-      <strong>Spring Boot + PostgreSQL + AWS + Firebase.</strong>
-      Designed for someone with 2 years of Java experience — solid fundamentals expected, cloud integration is the learning edge.
-    </p>
-
-    <div class="meta-row">
-      <div class="meta-pill"><span class="meta-icon">⏱️</span><div><div class="meta-label">Deadline</div><div class="meta-val">3 Days</div></div></div>
-      <div class="meta-pill"><span class="meta-icon">👤</span><div><div class="meta-label">Target Profile</div><div class="meta-val">2 Years Experience</div></div></div>
-      <div class="meta-pill"><span class="meta-icon">☕</span><div><div class="meta-label">Stack</div><div class="meta-val">Spring Boot · PostgreSQL · AWS · FCM</div></div></div>
-      <div class="meta-pill"><span class="meta-icon">📊</span><div><div class="meta-label">Total Marks</div><div class="meta-val">100 + 30 Bonus</div></div></div>
-      <div class="meta-pill"><span class="meta-icon">📧</span><div><div class="meta-label">Submit To</div><div class="meta-val">careers@tekravio.com</div></div></div>
+<div class="hero">
+  <div class="hero-top">
+    <div class="logo">Tekr<span>avio</span> <span style="font-size:14px;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400;letter-spacing:0">Academy</span></div>
+    <div class="academy-badge">// Intern Assignment · Java</div>
+  </div>
+  <div class="hero-tag">// Assignment · Spring Boot · 2026</div>
+  <h1>Build a <span class="blue">Real</span><br>API. Not a <span class="cyan">Tutorial.</span></h1>
+  <p class="hero-sub">You're not submitting a textbook exercise. You're building something that could run in a real company. Think like an engineer. Own your decisions. Ship something you're proud of.</p>
+  <div class="meta-row">
+    <div class="meta-pill">
+      <span class="mi">⏱️</span>
+      <div><div class="ml">Time Limit</div><div class="mv">2 Days</div></div>
     </div>
-
-    <div class="context-box">
-      <div class="context-header">
-        <div class="context-dot"></div>
-        <div class="context-label">// Project Context</div>
-      </div>
-      <div class="context-body"><strong>Note for 2-year experienced candidates:</strong> You are not expected to deploy to AWS ECS/EKS or build microservices for this assignment. Focus on getting the core Spring Boot backend, S3 integration, Textract, and FCM working cleanly. Architecture decisions matter more than completeness at every edge case.<br><br>
-        Patients or admins upload <strong>prescription images</strong>, which are stored in <strong>AWS S3</strong> and processed using <strong>AWS Textract</strong> to extract medicine details, dosage, and timings. The backend system <strong>schedules reminders</strong> and sends push notifications through <strong>Firebase Cloud Messaging (FCM)</strong> and optionally <strong>WhatsApp reminders</strong>. The platform supports recurring medicine alerts, diet reminders, prescription management, and patient tracking.<br><br>
-        Built using <strong>Spring Boot, PostgreSQL, AWS services, and Flutter</strong>, with a scalable architecture that can later evolve into a <strong>microservices-based healthcare platform deployed on AWS ECS/EKS</strong>.
-      </div>
+    <div class="meta-pill">
+      <span class="mi">⚙️</span>
+      <div><div class="ml">Stack</div><div class="mv">Java · Spring Boot · JPA</div></div>
+    </div>
+    <div class="meta-pill">
+      <span class="mi">📊</span>
+      <div><div class="ml">Total Marks</div><div class="mv">100 + 20 Bonus</div></div>
+    </div>
+    <div class="meta-pill">
+      <span class="mi">📧</span>
+      <div><div class="ml">Submit To</div><div class="mv">careers@tekravio.com</div></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ARCHITECTURE -->
-<section class="section" style="padding-bottom:0">
-  <div class="container">
-    <p class="sec-tag" style="color:var(--java)">// System Architecture</p>
-    <h2 class="sec-title">What You're Building</h2>
-    <p class="sec-sub">A full-stack healthcare backend with cloud integrations. Every component listed below must be implemented.</p>
-    <div class="arch-grid">
-      <div class="arch-card ac-java">
-        <div class="arch-icon">☕</div>
-        <div class="arch-title">Spring Boot Backend</div>
-        <div class="arch-desc">REST APIs, JWT auth, role-based access (Admin / Patient), Spring Scheduler for reminders</div>
-        <div class="arch-tags"><span class="atag">Spring Boot 3</span><span class="atag">Spring Security</span><span class="atag">JPA</span><span class="atag">Scheduler</span></div>
-      </div>
-      <div class="arch-card ac-aws">
-        <div class="arch-icon">☁️</div>
-        <div class="arch-title">AWS Integration</div>
-        <div class="arch-desc">S3 for prescription image storage, Textract for OCR-based prescription parsing</div>
-        <div class="arch-tags"><span class="atag">S3</span><span class="atag">Textract</span><span class="atag">IAM</span><span class="atag">SDK v2</span></div>
-      </div>
-      <div class="arch-card ac-db">
-        <div class="arch-icon">🗄️</div>
-        <div class="arch-title">PostgreSQL</div>
-        <div class="arch-desc">Patient data, prescriptions, medicines, schedules, reminder logs — clean schema design</div>
-        <div class="arch-tags"><span class="atag">PostgreSQL</span><span class="atag">Flyway</span><span class="atag">JPA</span><span class="atag">Queries</span></div>
-      </div>
-      <div class="arch-card ac-notif">
-        <div class="arch-icon">🔔</div>
-        <div class="arch-title">Notifications</div>
-        <div class="arch-desc">Firebase Cloud Messaging for push notifications, optional WhatsApp via Twilio/WATI</div>
-        <div class="arch-tags"><span class="atag">FCM</span><span class="atag">Firebase SDK</span><span class="atag">WhatsApp API</span></div>
-      </div>
-      <div class="arch-card ac-mobile">
-        <div class="arch-icon">📱</div>
-        <div class="arch-title">Flutter Frontend</div>
-        <div class="arch-desc">Patient mobile app — prescription upload, reminder dashboard, medication history</div>
-        <div class="arch-tags"><span class="atag">Flutter</span><span class="atag">FCM</span><span class="atag">Dio HTTP</span><span class="atag">BLoC</span></div>
-      </div>
-    </div>
+<div class="container">
+
+  <!-- THE BRIEF -->
+  <div class="sec-tag">// 01 · The Brief</div>
+  <h2>What You're Building</h2>
+  <p>Tekravio manages <strong>sprint-based consulting projects</strong> for enterprise clients. Every project has tasks, deadlines, and engineers assigned. Your job is to build the backend REST API that powers this system.</p>
+  <p>This is not a todo app. This is a <strong>Project & Sprint Tracker</strong> — the kind of system that runs real consulting operations. Think about what breaks in production. Think about what an enterprise CTO would reject in a code review. Build accordingly.</p>
+
+  <div class="callout cyan">
+    <div class="callout-head">// The System You're Building</div>
+    <p>A <strong>Spring Boot REST API</strong> for Tekravio's internal sprint tracker. Clients have projects. Projects have sprints. Sprints have tasks. Engineers are assigned to tasks. Everything is tracked, filtered, and reported through your API.</p>
   </div>
-</section>
 
-<!-- TASKS -->
-<section class="section" style="padding-top:2rem">
-  <div class="container">
-    <p class="sep" style="margin-top:0"></p>
-    <p class="sec-tag" style="color:var(--java)">// Core Tasks</p>
-    <h2 class="sec-title">What You Must Build</h2>
-    <p class="sec-sub">Six core modules. All required. Partial implementations score partial marks.</p>
+  <!-- DOMAIN MODEL -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 02 · Domain Model</div>
+  <h2>Entities & Relationships</h2>
+  <p>Design your database around these entities. Relationships are yours to define — justify your choices in the README.</p>
 
-    <div class="tasks">
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-filename">domain-model.txt</span>
+      <span class="code-lang">SCHEMA</span>
+    </div>
+    <pre>
+<span class="cm">// Core Entities — model these in your JPA layer</span>
 
-      <!-- TASK 1 -->
-      <div class="task t1">
-        <div class="task-header">
-          <div class="task-num">01</div>
-          <div>
-            <div class="task-title">Auth, Patient & Admin Management</div>
-            <div class="task-pts">// 15 marks · JWT + Role basics</div>
-          </div>
+<span class="cls">Client</span>
+  id, name, industry, contactEmail, country, createdAt
+
+<span class="cls">Project</span>
+  id, name, description, status <span class="cm">[ACTIVE | COMPLETED | ON_HOLD]</span>
+  startDate, endDate, clientId
+
+<span class="cls">Sprint</span>
+  id, sprintNumber, goal, status <span class="cm">[PLANNED | IN_PROGRESS | DONE]</span>
+  startDate, endDate, projectId
+
+<span class="cls">Task</span>
+  id, title, description, priority <span class="cm">[LOW | MEDIUM | HIGH | CRITICAL]</span>
+  status <span class="cm">[TODO | IN_PROGRESS | REVIEW | DONE]</span>
+  estimatedHours, actualHours, sprintId, assignedEngineerId
+
+<span class="cls">Engineer</span>
+  id, name, email, primaryStack <span class="cm">[JAVA | REACT | PYTHON | DEVOPS | QA]</span>
+  experienceYears, isAvailable</pre>
+  </div>
+
+  <!-- TASKS -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 03 · Tasks</div>
+  <h2>What You Need to Build</h2>
+
+  <div class="tasks">
+
+    <!-- TASK 1 -->
+    <div class="task t1">
+      <div class="task-header">
+        <div class="task-num">01</div>
+        <div class="task-meta">
+          <div class="task-title">Project Setup & Entity Modelling</div>
+          <div class="task-pts">// 15 marks · Foundation</div>
         </div>
-        <div class="task-body">
-          <p class="task-desc">Set up the security and user management layer. Every API must be secured. Role-based access must be enforced from the start.</p>
-          <div class="req-list">
-            <div class="req"><strong>JWT authentication</strong> — register, login, refresh token, logout with token blacklisting</div>
-            <div class="req"><strong>Roles:</strong> ADMIN and PATIENT — different access scopes, enforced at method level with Spring Security</div>
-            <div class="req"><strong>Patient profile API</strong> — CRUD: name, age, medical history, FCM device token, WhatsApp number</div>
-            <div class="req"><strong>Admin APIs</strong> — view all patients, activate/deactivate patients, view patient prescriptions</div>
-            <div class="req"><strong>Input validation</strong> — Bean Validation annotations on all request DTOs, proper error responses</div>
-          </div>
-          <div class="code-block">
-            <div class="cb-header"><span class="cb-file">PatientController.java</span><span class="cb-lang">JAVA</span></div>
-            <pre><span class="ann">@RestController</span>
-<span class="ann">@RequestMapping</span>(<span class="str">"/api/v1/patients"</span>)
-<span class="kw">public class</span> <span class="ty">PatientController</span> {
+      </div>
+      <div class="task-body">
+        <p class="task-desc">Set up a clean Spring Boot project with proper layering. Your architecture should make sense to a senior engineer reading it for the first time.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Spring Boot project with Maven or Gradle — your choice, justify it</div>
+          <div class="req"><div class="req-check">✓</div>All 5 entities modelled using JPA annotations</div>
+          <div class="req"><div class="req-check">✓</div>Proper relationships: OneToMany, ManyToOne — no lazy loading mistakes</div>
+          <div class="req"><div class="req-check">✓</div>H2 in-memory DB for dev, MySQL config for prod (application.properties)</div>
+          <div class="req"><div class="req-check">✓</div>Data seeding — at least 3 clients, 2 projects, 2 sprints, 5 tasks on startup</div>
+          <div class="req"><div class="req-check">✓</div>Layered architecture: Controller → Service → Repository — no business logic in controllers</div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-filename">Project Structure</span><span class="code-lang">JAVA</span></div>
+          <pre>
+src/main/java/com/tekravio/tracker/
+  ├── <span class="cls">controller</span>/
+  ├── <span class="cls">service</span>/
+  ├── <span class="cls">repository</span>/
+  ├── <span class="cls">model</span>/          <span class="cm">// JPA entities</span>
+  ├── <span class="cls">dto</span>/            <span class="cm">// Request/Response DTOs</span>
+  ├── <span class="cls">exception</span>/
+  └── <span class="cls">config</span>/</pre>
+        </div>
+      </div>
+    </div>
 
-    <span class="ann">@PostMapping</span>(<span class="str">"/register"</span>)
-    <span class="kw">public</span> <span class="ty">ResponseEntity</span>&lt;<span class="ty">PatientResponse</span>&gt; register(
-            <span class="ann">@Valid @RequestBody</span> <span class="ty">RegisterRequest</span> request) { ... }
+    <!-- TASK 2 -->
+    <div class="task t2">
+      <div class="task-header">
+        <div class="task-num">02</div>
+        <div class="task-meta">
+          <div class="task-title">REST API — CRUD Endpoints</div>
+          <div class="task-pts">// 25 marks · Core Delivery</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">Build clean, RESTful endpoints for all entities. Use proper HTTP methods, status codes, and response structures. An enterprise client's frontend team will consume these.</p>
+        <table class="ep-table">
+          <thead>
+            <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="method post">POST</span></td><td><span class="ep-path">/api/clients</span></td><td>Create a new client</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><span class="ep-path">/api/clients</span></td><td>List all clients (with pagination)</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><span class="ep-path">/api/clients/{id}</span></td><td>Get client by ID</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><span class="ep-path">/api/clients/{id}</span></td><td>Update client details</td></tr>
+            <tr><td><span class="method del">DELETE</span></td><td><span class="ep-path">/api/clients/{id}</span></td><td>Soft delete a client</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><span class="ep-path">/api/projects</span></td><td>Create project for a client</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><span class="ep-path">/api/projects/{id}/sprints</span></td><td>Get all sprints for a project</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><span class="ep-path">/api/sprints/{id}/tasks</span></td><td>Add task to sprint</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><span class="ep-path">/api/tasks/{id}/status</span></td><td>Update task status</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><span class="ep-path">/api/tasks/{id}/assign/{engineerId}</span></td><td>Assign engineer to task</td></tr>
+          </tbody>
+        </table>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Use DTOs for all request and response bodies — never expose JPA entities directly</div>
+          <div class="req"><div class="req-check">✓</div>Correct HTTP status codes — 201 for create, 404 for not found, 400 for bad input</div>
+          <div class="req"><div class="req-check">✓</div>Consistent JSON response wrapper: <code style="font-family:'Fira Code',monospace;color:#7ba7ff;font-size:11px">{"success": true, "data": {}, "message": ""}</code></div>
+          <div class="req"><div class="req-check">✓</div>Pagination on all list endpoints — page, size, sort params</div>
+        </div>
+      </div>
+    </div>
 
-    <span class="ann">@PutMapping</span>(<span class="str">"/{id}/fcm-token"</span>)
-    <span class="kw">public</span> <span class="ty">ResponseEntity</span>&lt;<span class="ty">Void</span>&gt; updateFcmToken(
-            <span class="ann">@PathVariable</span> <span class="ty">Long</span> id,
-            <span class="ann">@RequestBody</span> <span class="ty">FcmTokenRequest</span> request) { ... }
+    <!-- TASK 3 -->
+    <div class="task t3">
+      <div class="task-header">
+        <div class="task-num">03</div>
+        <div class="task-meta">
+          <div class="task-title">Validation & Exception Handling</div>
+          <div class="task-pts">// 20 marks · Production Readiness</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">A real API never crashes with a 500. Handle every edge case. A frontend developer should never get a raw stack trace from your API.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Bean validation on all request DTOs — @NotNull, @NotBlank, @Email, @Size etc.</div>
+          <div class="req"><div class="req-check">✓</div>Global exception handler using @ControllerAdvice</div>
+          <div class="req"><div class="req-check">✓</div>Custom exceptions: ResourceNotFoundException, InvalidStatusTransitionException, EngineerNotAvailableException</div>
+          <div class="req"><div class="req-check">✓</div>Business rule: An engineer marked isAvailable=false cannot be assigned to a task</div>
+          <div class="req"><div class="req-check">✓</div>Business rule: A task's status can only move forward — TODO→IN_PROGRESS→REVIEW→DONE. Reject backwards transitions.</div>
+          <div class="req"><div class="req-check">✓</div>Meaningful error responses with field-level validation messages</div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-filename">Expected error response shape</span><span class="code-lang">JSON</span></div>
+          <pre>
+{
+  <span class="st">"success"</span>: <span class="kw">false</span>,
+  <span class="st">"message"</span>: <span class="st">"Validation failed"</span>,
+  <span class="st">"errors"</span>: [
+    { <span class="st">"field"</span>: <span class="st">"email"</span>, <span class="st">"message"</span>: <span class="st">"must be a valid email"</span> },
+    { <span class="st">"field"</span>: <span class="st">"name"</span>,  <span class="st">"message"</span>: <span class="st">"must not be blank"</span> }
+  ],
+  <span class="st">"timestamp"</span>: <span class="st">"2026-05-30T10:30:00"</span>
 }</pre>
-          </div>
         </div>
       </div>
+    </div>
 
-      <!-- TASK 2 -->
-      <div class="task t2">
-        <div class="task-header">
-          <div class="task-num">02</div>
-          <div>
-            <div class="task-title">Prescription Upload — S3 + AWS Textract</div>
-            <div class="task-pts">// 20 marks · AWS S3 + Textract integration</div>
-          </div>
-        </div>
-        <div class="task-body">
-          <p class="task-desc">The core intelligence of the system. Patients upload a prescription image. Your backend stores it in S3, sends it to Textract, parses the extracted text into structured medicine data, and saves it to the database.</p>
-          <div class="req-list">
-            <div class="req"><strong>File upload API</strong> — accept image (JPG/PNG/PDF), validate size ≤ 10MB and type, upload to S3 with structured key: <code>prescriptions/{patientId}/{uuid}.jpg</code></div>
-            <div class="req"><strong>AWS Textract integration</strong> — call Textract Detect Document Text API, parse response blocks to extract medicine name, dosage, frequency, duration</div>
-            <div class="req"><strong>Prescription entity</strong> — store S3 URL, extracted medicine list (even if manually entered as fallback), upload timestamp, status (PENDING / DONE / FAILED)</div>
-            <div class="req"><strong>Error handling</strong> — if Textract extraction fails or confidence is low, return a clear error and allow manual medicine entry as fallback</div>
-            <div class="req"><strong>Prescription history API</strong> — list all prescriptions for a patient with pagination, filter by date range</div>
-          </div>
+    <!-- TASK 4 -->
+    <div class="task t4">
+      <div class="task-header">
+        <div class="task-num">04</div>
+        <div class="task-meta">
+          <div class="task-title">Business Logic — Sprint Intelligence</div>
+          <div class="task-pts">// 25 marks · Think Like an Engineer</div>
         </div>
       </div>
-
-      <!-- TASK 3 -->
-      <div class="task t3">
-        <div class="task-header">
-          <div class="task-num">03</div>
-          <div>
-            <div class="task-title">Medicine Schedule & Reminder Engine</div>
-            <div class="task-pts">// 20 marks · Core feature</div>
-          </div>
+      <div class="task-body">
+        <p class="task-desc">This is where average submissions fall apart. Anyone can do CRUD. Build the logic that makes the system useful.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div><strong>Sprint Summary API</strong> — GET /api/sprints/{id}/summary → returns: total tasks, completed %, average completion time, tasks by priority, overdue tasks count</div>
+          <div class="req"><div class="req-check">✓</div><strong>Engineer Workload API</strong> — GET /api/engineers/{id}/workload → returns: active tasks count, tasks by status, total estimated vs actual hours</div>
+          <div class="req"><div class="req-check">✓</div><strong>Project Health API</strong> — GET /api/projects/{id}/health → returns a simple health score (0–100) based on sprint completion rate and overdue tasks. Define your own formula and explain it in the README.</div>
+          <div class="req"><div class="req-check">✓</div><strong>Available Engineers API</strong> — GET /api/engineers/available?stack=JAVA → returns engineers by stack who are available and have fewer than 3 active tasks</div>
+          <div class="req"><div class="req-check">✓</div><strong>Filtering</strong> — GET /api/tasks?status=IN_PROGRESS&priority=HIGH&sprintId=1 → multi-param filtering using Spring Data JPA Specifications or dynamic queries</div>
         </div>
-        <div class="task-body">
-          <p class="task-desc">Build the scheduling engine that drives the entire reminder system. This is the heart of the application — it must be reliable, configurable, and handle edge cases correctly.</p>
-          <div class="req-list">
-            <div class="req"><strong>Medicine schedule model</strong> — medicine name, dosage, frequency (ONCE_DAILY / TWICE_DAILY / THRICE_DAILY / CUSTOM), time slots, start date, end date, active flag</div>
-            <div class="req"><strong>Spring Scheduler</strong> — poll every 5 minutes for due reminders, fire FCM notifications, log attempt status in reminder_log table</div>
-            <div class="req"><strong>Recurring schedule support</strong> — daily, weekly, custom interval in hours</div>
-            <div class="req"><strong>Snooze API</strong> — patient can snooze a reminder by 10/20/30 minutes, system reschedules</div>
-            <div class="req"><strong>Taken / Skipped API</strong> — patient marks a reminder as taken or skipped, tracked in reminder log table</div>
-            <div class="req"><strong>Adherence calculation</strong> — % of reminders marked as taken vs total for the last 7 days</div>
-          </div>
+        <div class="callout yellow">
+          <div class="callout-head">// Uday's Note</div>
+          <p>The Project Health API has no right answer. We want to see <strong>how you think</strong>, not what formula you picked. Define it. Justify it. Own it. That matters more than the number you return.</p>
         </div>
       </div>
+    </div>
 
-      <!-- TASK 4 -->
-      <div class="task t4">
-        <div class="task-header">
-          <div class="task-num">04</div>
-          <div>
-            <div class="task-title">Push Notifications — Firebase FCM</div>
-            <div class="task-pts">// 15 marks · Notification layer</div>
-          </div>
-        </div>
-        <div class="task-body">
-          <p class="task-desc">Integrate Firebase Cloud Messaging to deliver real-time push notifications to the Flutter app. Notifications must be structured, actionable, and logged.</p>
-          <div class="req-list">
-            <div class="req"><strong>FCM service</strong> — initialise Firebase Admin SDK, build and send FCM message with title, body, and data payload (medicine name, schedule ID, action buttons)</div>
-            <div class="req"><strong>Notification payload</strong> — include <code>scheduleId</code>, <code>action</code> (TAKE / SNOOZE / SKIP), <code>patientId</code> in FCM data map</div>
-            <div class="req"><strong>Notification log table</strong> — every FCM call logged: patientId, scheduleId, sent timestamp, FCM response, success/failure</div>
-            <div class="req"><strong>Retry on failure</strong> — if FCM call fails, retry once after 60 seconds. Log final status.</div>
-            <div class="req"><strong>WhatsApp fallback (optional)</strong> — if patient has no FCM token, send WhatsApp message via Twilio or WATI API</div>
-          </div>
-          <div class="callout orange">
-            <div class="callout-head">// Important</div>
-            <p>Use <strong>Firebase Admin SDK</strong> on the backend — not the client SDK. Server-side FCM messages use a service account JSON. Never hardcode credentials — use environment variables or AWS Secrets Manager.</p>
-          </div>
+    <!-- TASK 5 -->
+    <div class="task t5">
+      <div class="task-header">
+        <div class="task-num">05</div>
+        <div class="task-meta">
+          <div class="task-title">Testing</div>
+          <div class="task-pts">// 15 marks · You Don't Skip Tests</div>
         </div>
       </div>
-
-      <!-- TASK 5 -->
-      <div class="task t5">
-        <div class="task-header">
-          <div class="task-num">05</div>
-          <div>
-            <div class="task-title">Diet Reminder Module</div>
-            <div class="task-pts">// 15 marks · Secondary feature</div>
-          </div>
+      <div class="task-body">
+        <p class="task-desc">We don't ship untested code. Not even interns. Write tests that prove your code works — and prove it breaks correctly too.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✓</div>Unit tests for all service layer methods using JUnit 5 + Mockito</div>
+          <div class="req"><div class="req-check">✓</div>Integration tests for at least 3 controller endpoints using @SpringBootTest + MockMvc</div>
+          <div class="req"><div class="req-check">✓</div>Test the sad paths — what happens when you assign an unavailable engineer? When status goes backwards?</div>
+          <div class="req"><div class="req-check">✓</div>Minimum coverage: 60% on service layer (use JaCoCo — include the report)</div>
         </div>
-        <div class="task-body">
-          <p class="task-desc">Extend the system to support diet and meal reminders alongside medicine reminders. Diet plans should be separately manageable but integrated into the same notification engine.</p>
-          <div class="req-list">
-            <div class="req"><strong>Diet plan entity</strong> — meal type (BREAKFAST / LUNCH / DINNER / SNACK), description, scheduled time, dietary restrictions, calories (optional)</div>
-            <div class="req"><strong>Admin creates diet plan</strong> — assign diet plan to patient, with start/end date</div>
-            <div class="req"><strong>Patient views diet plan</strong> — paginated list with today's meals highlighted</div>
-            <div class="req"><strong>Diet reminders</strong> — same scheduler handles diet reminders, sent 15 minutes before meal time</div>
-            <div class="req"><strong>Diet adherence tracking</strong> — mark meals as eaten/skipped, calculate weekly compliance %</div>
-          </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-filename">TaskServiceTest.java — example structure</span><span class="code-lang">JAVA</span></div>
+          <pre>
+<span class="an">@ExtendWith</span>(MockitoExtension.<span class="kw">class</span>)
+<span class="kw">class</span> <span class="cls">TaskServiceTest</span> {
+
+    <span class="an">@Mock</span> <span class="kw">private</span> <span class="cls">TaskRepository</span> taskRepository;
+    <span class="an">@Mock</span> <span class="kw">private</span> <span class="cls">EngineerRepository</span> engineerRepository;
+    <span class="an">@InjectMocks</span> <span class="kw">private</span> <span class="cls">TaskService</span> taskService;
+
+    <span class="an">@Test</span>
+    <span class="kw">void</span> <span class="fn">assignTask_whenEngineerUnavailable_throwsException</span>() {
+        <span class="cm">// Arrange</span>
+        <span class="cls">Engineer</span> eng = <span class="kw">new</span> <span class="cls">Engineer</span>();
+        eng.<span class="fn">setAvailable</span>(<span class="kw">false</span>);
+        <span class="fn">when</span>(engineerRepository.<span class="fn">findById</span>(<span class="nu">1L</span>)).<span class="fn">thenReturn</span>(<span class="cls">Optional</span>.<span class="fn">of</span>(eng));
+
+        <span class="cm">// Act + Assert</span>
+        <span class="fn">assertThrows</span>(<span class="cls">EngineerNotAvailableException</span>.<span class="kw">class</span>,
+            () -> taskService.<span class="fn">assignEngineer</span>(<span class="nu">1L</span>, <span class="nu">1L</span>));
+    }
+}</pre>
         </div>
       </div>
+    </div>
 
-      <!-- TASK 6 -->
-      <div class="task t6">
-        <div class="task-header">
-          <div class="task-num">06</div>
-          <div>
-            <div class="task-title">Flutter App — Patient Interface</div>
-            <div class="task-pts">// 15 marks · Frontend (Flutter OR React web)</div>
-          </div>
-        </div>
-        <div class="task-body">
-          <p class="task-desc">Build a simple frontend — either a Flutter app OR a React/HTML web interface. It should demonstrate your backend working end-to-end. Functional over polished.</p>
-          <div class="req-list">
-            <div class="req"><strong>Login screen</strong> — calls your Spring Boot auth API, stores JWT in secure storage</div>
-            <div class="req"><strong>Dashboard screen</strong> — today's medicine schedule, upcoming reminders, adherence % for last 7 days</div>
-            <div class="req"><strong>Prescription upload</strong> — image picker, upload to your backend, view extracted medicines</div>
-            <div class="req"><strong>FCM integration</strong> — receive push notifications, tap → navigate to relevant reminder, handle Take/Snooze/Skip actions</div>
-            <div class="req"><strong>Reminder history</strong> — list of all past reminders with taken/skipped status and timestamp</div>
-          </div>
-          <div class="callout cyan">
-            <div class="callout-head">// Flutter Not Your Stack?</div>
-            <p>If you don't know Flutter, build the backend fully and deliver a <strong>well-documented Postman collection</strong> instead. The Flutter requirement can be substituted with a React web dashboard for the same marks.</p>
-          </div>
+    <!-- BONUS -->
+    <div class="task booster">
+      <div class="task-header">
+        <div class="task-num">⚡</div>
+        <div class="task-meta">
+          <div class="task-title">Bonus Challenges — For the Truly Hungry</div>
+          <div class="task-pts">// 20 bonus marks · Not Required · Very Noticed</div>
         </div>
       </div>
+      <div class="task-body">
+        <p class="task-desc">These are not expected. If you do them, it tells us everything we need to know about your mindset.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">+5</div><strong>Spring Security</strong> — Basic JWT auth. Two roles: ADMIN (full access) and ENGINEER (read-only + update own tasks only)</div>
+          <div class="req"><div class="req-check">+5</div><strong>Audit Trail</strong> — Every status change on a task is logged with timestamp + who changed it. GET /api/tasks/{id}/history endpoint.</div>
+          <div class="req"><div class="req-check">+5</div><strong>Docker</strong> — Dockerfile + docker-compose.yml. Run the full app with one command: docker-compose up</div>
+          <div class="req"><div class="req-check">+5</div><strong>Swagger / OpenAPI</strong> — Full API documentation at /swagger-ui.html. Every endpoint documented with examples.</div>
+        </div>
+        <div class="callout red">
+          <div class="callout-head">// Warning</div>
+          <p>Don't attempt bonus tasks if your core 5 tasks aren't solid. A working Task 4 beats a broken JWT implementation. <strong>Finish before you expand.</strong></p>
+        </div>
+      </div>
+    </div>
 
+  </div>
+
+  <!-- MINDSET QUESTIONS -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 04 · Mindset Questions</div>
+  <h2>The README Must Answer These</h2>
+  <p>Include a README.md in your submission. It must answer all five questions below. <strong>We read these before we run your code.</strong> There are no right answers — we're evaluating how you think.</p>
+
+  <div class="mq-list">
+    <div class="mq">
+      <div class="mq-num">// Question 01</div>
+      <div class="mq-text">Why did you choose this database schema? What tradeoffs did you make and what would you change if this needed to scale to 10,000 projects?</div>
+    </div>
+    <div class="mq">
+      <div class="mq-num">// Question 02</div>
+      <div class="mq-text">What is your Project Health Score formula and why? Walk us through your thinking — not the code, the reasoning.</div>
+    </div>
+    <div class="mq">
+      <div class="mq-num">// Question 03</div>
+      <div class="mq-text">What part of this assignment was hardest for you? What did you Google, and what did you figure out yourself?</div>
+    </div>
+    <div class="mq">
+      <div class="mq-num">// Question 04</div>
+      <div class="mq-text">If you had one more day, what would you add or fix first — and why?</div>
+    </div>
+    <div class="mq">
+      <div class="mq-num">// Question 05</div>
+      <div class="mq-text">What's one thing in your submission you're genuinely proud of? Don't be humble.</div>
     </div>
   </div>
-</section>
 
-<!-- THINK AHEAD — FEATURE IDEAS -->
-<section class="section" style="padding-top:2rem">
-  <div class="container">
-    <p class="sep" style="margin-top:0"></p>
-    <p class="sec-tag" style="color:var(--purple)">// Think Ahead</p>
-    <h2 class="sec-title">What Features Would You Add?</h2>
-    <p class="sec-sub">Below are 12 feature ideas. <strong>Pick any 1 or 2 and implement them as bonus.</strong> Or propose your own in the README. At 2 years experience, one well-implemented bonus feature beats three half-done ones.</p>
+  <!-- SCORING -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 05 · Scoring</div>
+  <h2>How We Evaluate</h2>
 
-    <div class="callout yellow">
-      <div class="callout-head">// What We're Looking For</div>
-      <p>We want to know: given an open-ended problem, can you identify what's <strong>missing, broken, or improvable</strong>? The features you choose to add tell us more about your engineering instincts than the features we asked for. Choose based on what you genuinely find interesting — not what you think we want to hear.</p>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-n">60</div>
+      <div class="score-l">Code Works</div>
     </div>
-
-    <div class="feature-grid">
-
-      <div class="feature-card">
-        <input type="checkbox" id="f1">
-        <label for="f1">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🤖</div>
-          <div class="fc-title">AI Dosage Conflict Detector</div>
-          <div class="fc-desc">Use an LLM API or rules engine to detect dangerous drug interactions from a patient's full prescription list. Alert admin immediately.</div>
-          <span class="fc-difficulty fd-hard">Hard</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f2">
-        <label for="f2">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">📊</div>
-          <div class="fc-title">Admin Analytics Dashboard</div>
-          <div class="fc-desc">Patient adherence charts, reminder delivery rates, most skipped medicines — all in a React or Flutter admin panel.</div>
-          <span class="fc-difficulty fd-med">Medium</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f3">
-        <label for="f3">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🩺</div>
-          <div class="fc-title">Doctor Portal</div>
-          <div class="fc-desc">Add a DOCTOR role. Doctors directly upload prescriptions for their patients and track adherence. SMS alert to doctor when patient misses 3+ reminders.</div>
-          <span class="fc-difficulty fd-med">Medium</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f4">
-        <label for="f4">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🔁</div>
-          <div class="fc-title">Auto-Refill Alerts</div>
-          <div class="fc-desc">Track medicine quantity. When stock drops below a threshold (e.g. 3 days remaining), send a "Time to refill" notification automatically.</div>
-          <span class="fc-difficulty fd-easy">Easy</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f5">
-        <label for="f5">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">📍</div>
-          <div class="fc-title">Nearest Pharmacy Locator</div>
-          <div class="fc-desc">When a refill alert fires, include a Google Maps deep link to the nearest pharmacy using the patient's stored location.</div>
-          <span class="fc-difficulty fd-easy">Easy</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f6">
-        <label for="f6">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🌍</div>
-          <div class="fc-title">Multi-Language Notifications</div>
-          <div class="fc-desc">Send FCM notifications in the patient's preferred language — English, Hindi, Tamil, Telugu. Store preference in patient profile.</div>
-          <span class="fc-difficulty fd-easy">Easy</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f7">
-        <label for="f7">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">👨‍👩‍👧</div>
-          <div class="fc-title">Caregiver / Family Mode</div>
-          <div class="fc-desc">A patient can add a caregiver (family member). If the patient misses a reminder, the caregiver also gets notified. Role: CAREGIVER.</div>
-          <span class="fc-difficulty fd-med">Medium</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f8">
-        <label for="f8">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">📈</div>
-          <div class="fc-title">Vitals Tracking Integration</div>
-          <div class="fc-desc">Allow patients to log blood pressure, blood sugar, weight after taking medicine. Track trends over time and visualise in the app.</div>
-          <span class="fc-difficulty fd-med">Medium</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f9">
-        <label for="f9">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🔐</div>
-          <div class="fc-title">HIPAA-Ready Audit Log</div>
-          <div class="fc-desc">Log every data access and modification event to an immutable audit trail table. Who accessed what patient data, when, and from which IP.</div>
-          <span class="fc-difficulty fd-med">Medium</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f10">
-        <label for="f10">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🗂️</div>
-          <div class="fc-title">Microservices Decomposition</div>
-          <div class="fc-desc">Split the monolith into: auth-service, prescription-service, reminder-service, notification-service. Add an API gateway and deploy via Docker Compose.</div>
-          <span class="fc-difficulty fd-hard">Hard</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f11">
-        <label for="f11">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">🧪</div>
-          <div class="fc-title">Comprehensive Test Suite</div>
-          <div class="fc-desc">Unit tests for all service layer methods. Integration tests for all APIs using TestContainers (real PostgreSQL). Target 80%+ code coverage.</div>
-          <span class="fc-difficulty fd-med">Medium</span>
-        </label>
-      </div>
-
-      <div class="feature-card">
-        <input type="checkbox" id="f12">
-        <label for="f12">
-          <div class="fc-check">✓</div>
-          <div class="fc-icon">⚙️</div>
-          <div class="fc-title">CI/CD Pipeline</div>
-          <div class="fc-desc">GitHub Actions workflow: on push to main — run tests, build Docker image, push to ECR, deploy to AWS ECS or EC2. Full automated pipeline.</div>
-          <span class="fc-difficulty fd-hard">Hard</span>
-        </label>
-      </div>
-
+    <div class="score-card">
+      <div class="score-n" style="color:var(--cyan)">25</div>
+      <div class="score-l">Code Quality</div>
     </div>
-
-    <div class="callout cyan" style="margin-top:1.5rem">
-      <div class="callout-head">// Or Propose Your Own</div>
-      <p>Have an idea that's not in the list? <strong>Build it and document it clearly in your README.</strong> Original thinking scores higher than implementing a feature we listed. We mean that.</p>
+    <div class="score-card">
+      <div class="score-n" style="color:var(--orange)">15</div>
+      <div class="score-l">How You Think</div>
     </div>
   </div>
-</section>
 
-<!-- MINDSET QUESTIONS -->
-<section class="section" style="padding-top:2rem">
-  <div class="container">
-    <p class="sep" style="margin-top:0"></p>
-    <p class="sec-tag" style="color:var(--java)">// Mindset Questions</p>
-    <h2 class="sec-title">Answer These in Your README</h2>
-    <p class="sec-sub">We read these before we read your code. No right answers — we're evaluating how you think, not what you know.</p>
-    <div class="mq-list">
-      <div class="mq">
-        <div class="mq-num">// Q1</div>
-        <div class="mq-text">The scheduler runs every 5 minutes. What could go wrong if the server restarts in the middle of a scheduled run? How would you make sure reminders aren't missed or sent twice?</div>
+  <div class="criteria">
+    <div class="cr">
+      <div class="cr-left">
+        <div class="cr-title">All 5 Tasks Implemented & Functional</div>
+        <div class="cr-desc">Endpoints work, data persists, edge cases handled</div>
       </div>
-      <div class="mq">
-        <div class="mq-num">// Q2</div>
-        <div class="mq-text">AWS Textract sometimes misreads handwritten prescriptions. What is your strategy for handling low-confidence extractions, and how would you let the user correct the result?</div>
+      <div class="cr-pts">40</div>
+    </div>
+    <div class="cr">
+      <div class="cr-left">
+        <div class="cr-title">Tests Pass</div>
+        <div class="cr-desc">Unit + integration + sad path coverage</div>
       </div>
-      <div class="mq">
-        <div class="mq-num">// Q3</div>
-        <div class="mq-text">A patient's FCM token becomes invalid (they uninstalled the app). Your notification fails silently. How do you detect this and what do you do about it?</div>
+      <div class="cr-pts">20</div>
+    </div>
+    <div class="cr">
+      <div class="cr-left">
+        <div class="cr-title">Code Quality & Architecture</div>
+        <div class="cr-desc">Clean layering, no God classes, meaningful naming, no code smells</div>
       </div>
-      <div class="mq">
-        <div class="mq-num">// Q4</div>
-        <div class="mq-text">Prescription data is highly sensitive. List three specific security measures you implemented and explain why each one matters in a healthcare context.</div>
+      <div class="cr-pts">15</div>
+    </div>
+    <div class="cr">
+      <div class="cr-left">
+        <div class="cr-title">REST Design</div>
+        <div class="cr-desc">Correct HTTP methods, status codes, consistent response structure</div>
       </div>
-      <div class="mq">
-        <div class="mq-num">// Q5</div>
-        <div class="mq-text">Your system currently has 100 patients. What would need to change in your database design or backend to handle 10,000 patients reliably?</div>
+      <div class="cr-pts">10</div>
+    </div>
+    <div class="cr">
+      <div class="cr-left">
+        <div class="cr-title">README & Mindset Questions</div>
+        <div class="cr-desc">We're hiring a thinker, not a typist</div>
+      </div>
+      <div class="cr-pts">15</div>
+    </div>
+    <div class="cr" style="border-color:rgba(248,113,113,0.2)">
+      <div class="cr-left">
+        <div class="cr-title" style="color:var(--red)">Bonus Challenges</div>
+        <div class="cr-desc">JWT, Audit Trail, Docker, Swagger</div>
+      </div>
+      <div class="cr-pts" style="color:var(--red)">+20</div>
+    </div>
+  </div>
+
+  <!-- SUBMISSION -->
+  <div class="sep"></div>
+  <div class="sec-tag">// 06 · Submission</div>
+  <h2>How to Submit</h2>
+
+  <div class="submit-steps">
+    <div class="ss">
+      <div class="ss-dot">01</div>
+      <div>
+        <div class="ss-title">Push to GitHub</div>
+        <div class="ss-desc">Public repository. Clean commit history — we read commits. Don't squash everything into one. Each task should have its own commit(s).</div>
+      </div>
+    </div>
+    <div class="ss">
+      <div class="ss-dot">02</div>
+      <div>
+        <div class="ss-title">README.md in Root</div>
+        <div class="ss-desc">Setup instructions, how to run, all 5 mindset question answers, any assumptions you made. Keep it honest — not a marketing document.</div>
+      </div>
+    </div>
+    <div class="ss">
+      <div class="ss-dot">03</div>
+      <div>
+        <div class="ss-title">Email to careers@tekravio.com</div>
+        <div class="ss-desc">Subject: <code style="font-family:'Fira Code',monospace;color:#7ba7ff;font-size:12px">Java Intern Assignment — [Your Name]</code><br>Body: GitHub link + one paragraph about what you built and what you'd do differently.</div>
+      </div>
+    </div>
+    <div class="ss">
+      <div class="ss-dot">04</div>
+      <div>
+        <div class="ss-title">Deadline: 2 Days from Receipt</div>
+        <div class="ss-desc">Late submissions are not reviewed. If something comes up, email us before the deadline — not after.</div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- EVALUATION -->
-<section class="section" style="padding-top:2rem">
-  <div class="container">
-    <p class="sep" style="margin-top:0"></p>
-    <p class="sec-tag" style="color:var(--java)">// Evaluation</p>
-    <h2 class="sec-title">How We Score</h2>
-    <table class="eval-table">
-      <thead>
-        <tr>
-          <th>Criteria</th>
-          <th>Marks</th>
-          <th>What We Look For</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Auth + Patient Management</td><td><span class="score-badge">15</span></td><td>JWT works, roles enforced, validation correct</td></tr>
-        <tr><td>S3 Upload + Textract OCR</td><td><span class="score-badge">20</span></td><td>Real AWS calls, structured extraction, error handling</td></tr>
-        <tr><td>Scheduler + Reminder Engine</td><td><span class="score-badge">20</span></td><td>Reliable scheduling, snooze, adherence tracking</td></tr>
-        <tr><td>FCM Push Notifications</td><td><span class="score-badge">15</span></td><td>Messages delivered, retry logic, notification log</td></tr>
-        <tr><td>Diet Reminder Module</td><td><span class="score-badge">15</span></td><td>Complete CRUD, integrated into scheduler</td></tr>
-        <tr><td>Flutter App / React Dashboard</td><td><span class="score-badge">15</span></td><td>Functional, FCM receiving, prescription upload</td></tr>
-        <tr><td>Code Quality & Architecture</td><td><span class="score-badge">+10</span></td><td>Clean layering, proper DTOs, no anti-patterns</td></tr>
-        <tr><td>Bonus Features (any 1–2)</td><td><span class="score-badge">+20</span></td><td>Well implemented, explained clearly in README</td></tr>
-      </tbody>
-    </table>
+  <div class="sep"></div>
+
+  <!-- FINAL NOTE -->
+  <div class="callout blue">
+    <div class="callout-head">// From Uday · Founder, Tekravio</div>
+    <p>We don't care if your code is perfect. We care if you <strong>thought about it</strong>. We hire people who take ownership — of their code, their decisions, and their mistakes. The README questions matter as much as the code. A brilliant implementation with a lazy README tells us exactly who you are. So does a clean, humble submission that explains every tradeoff honestly.</p>
+    <p style="margin-top:8px;margin-bottom:0"><strong>Build something you're proud of. That's the only brief that matters.</strong></p>
   </div>
-</section>
 
-<!-- SUBMISSION -->
-<section class="section" style="padding-top:2rem;padding-bottom:64px">
-  <div class="container">
-    <p class="sep" style="margin-top:0"></p>
-    <p class="sec-tag" style="color:var(--java)">// Submission</p>
-    <h2 class="sec-title">How to Submit</h2>
-    <div class="submit-section">
-      <div class="submit-steps">
-        <div class="ss">
-          <div class="ss-dot">01</div>
-          <div>
-            <div class="ss-title">Push to GitHub — Public Repo</div>
-            <div class="ss-desc">Clean folder structure: <code>backend/</code>, <code>mobile/</code> (if applicable), <code>docs/</code>. No compiled binaries. <code>.gitignore</code> must exclude <code>application.properties</code> with real credentials.</div>
-          </div>
-        </div>
-        <div class="ss">
-          <div class="ss-dot">02</div>
-          <div>
-            <div class="ss-title">README.md — Required</div>
-            <div class="ss-desc">Architecture diagram (even ASCII is fine), setup instructions, environment variables list, Postman collection link or exported JSON, all 5 mindset question answers, features you added and why.</div>
-          </div>
-        </div>
-        <div class="ss">
-          <div class="ss-dot">03</div>
-          <div>
-            <div class="ss-title">Postman Collection</div>
-            <div class="ss-desc">Export your full Postman collection as JSON and include it in <code>docs/</code>. Every API endpoint must be present with sample request/response. We run your APIs directly.</div>
-          </div>
-        </div>
-        <div class="ss">
-          <div class="ss-dot">04</div>
-          <div>
-            <div class="ss-title">Email to careers@tekravio.com</div>
-            <div class="ss-desc">Subject: <code>Java Assignment — [Your Name]</code><br>Include GitHub link + one paragraph on the hardest problem you solved and how.</div>
-          </div>
-        </div>
-        <div class="ss">
-          <div class="ss-dot">05</div>
-          <div>
-            <div class="ss-title">Deadline: 3 Days from Receipt</div>
-            <div class="ss-desc">Late submissions are not reviewed. A working subset delivered on time beats a complete submission delivered late.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout orange" style="margin-top:1.5rem">
-      <div class="callout-head">// From Uday · Founder, Tekravio</div>
-      <p>At 2 years of experience, we don't expect perfection. We expect <strong>solid fundamentals, clean thinking, and genuine effort</strong>. Show us you understand why each piece of the architecture exists — not just that you copied a tutorial. The README matters as much as the code. Explain your decisions. Tell us what you would do differently with more time.</p>
-    </div>
+  <div style="margin-top:40px;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div style="font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)">// Tekravio Academy · careers@tekravio.com · tekravio.com</div>
+    <div style="font-family:'Fira Code',monospace;font-size:11px;color:var(--muted)">© 2026 Tekravio · Build. Train. Deliver.</div>
   </div>
-</section>
 
-</main>
-
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-logo">Tekr<span>avio</span></div>
-      <div>careers@tekravio.com · tekravio.com</div>
-      <div>© 2026 Tekravio Private Limited · Build. Train. Deliver.</div>
-    </div>
-  </div>
-</footer>
-
+</div>
 </body>
 </html>
