@@ -509,6 +509,48 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 }
 .shake{animation:shake .35s ease;}
 
+
+/* ── OPTGROUP STYLING ── */
+optgroup{font-weight:700;color:var(--muted);font-size:.8rem}
+optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
+
+/* ── ANDROID / iOS SPECIFIC FORM FIXES ── */
+@media(max-width:768px){
+  /* Prevent double-tap zoom on form elements */
+  .field-input,.field-select,.field-textarea{
+    font-size:16px !important;
+    -webkit-user-select:text;
+    user-select:text;
+  }
+  /* Better touch scrolling */
+  .form-section{-webkit-overflow-scrolling:touch}
+  /* Fix select arrow on Android */
+  .field-select{
+    background-size:12px;
+    padding-right:36px;
+  }
+  /* Bigger resume upload on mobile */
+  .file-upload{
+    flex-direction:row;
+    align-items:center;
+    padding:1rem;
+    gap:.875rem;
+  }
+  /* Form grid always 1 col on mobile */
+  .form-grid{grid-template-columns:1fr !important}
+  /* Submit button full width, easy tap */
+  .submit-btn{
+    min-height:60px;
+    font-size:1rem;
+    letter-spacing:.02em;
+  }
+  /* Field groups more spaced */
+  .form-grid > .field-group{margin-bottom:.25rem}
+}
+/* iPhone safe area for submit button */
+@supports(padding-bottom:env(safe-area-inset-bottom)){
+  .submit-area{padding-bottom:env(safe-area-inset-bottom)}
+}
 </style>
 </head>
 <body>
@@ -595,48 +637,6 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
   </div>
 </section>
 
-<!-- ── WHY TEKRAVIO ── -->
-<section class="section" id="why" aria-label="Why Tekravio">
-  <div class="container">
-    <div class="sec-header">
-      <p class="tag reveal">// Why Join Us</p>
-      <h2 class="sec-title reveal">What you actually get<br>as a Tekravio intern</h2>
-      <p class="sec-sub reveal">Not promises. Not perks decks. Real things that matter for your career.</p>
-    </div>
-    <div class="perks-grid">
-      <div class="perk-card reveal">
-        <span class="perk-icon">💻</span>
-        <h3 class="perk-title">Real Enterprise Projects</h3>
-        <p class="perk-desc">Not dummy assignments or internal tools with no impact. You work on <strong>live projects for real clients</strong> — the kind that show up on your GitHub and mean something in an interview.</p>
-      </div>
-      <div class="perk-card reveal reveal-delay-1">
-        <span class="perk-icon">🧑‍🏫</span>
-        <h3 class="perk-title">Senior Mentorship Daily</h3>
-        <p class="perk-desc">Every intern gets a senior mentor. <strong>Ex-Big 4, real delivery experience.</strong> Daily async updates, fortnightly code reviews, and someone who's genuinely invested in your growth.</p>
-      </div>
-      <div class="perk-card reveal reveal-delay-2">
-        <span class="perk-icon">🌍</span>
-        <h3 class="perk-title">Remote-First Flexibility</h3>
-        <p class="perk-desc">Work from anywhere. Core hours: 10 AM–6 PM IST. <strong>No micromanagement.</strong> We measure output, not hours logged. Your results matter. Your location doesn't.</p>
-      </div>
-      <div class="perk-card reveal">
-        <span class="perk-icon">🚀</span>
-        <h3 class="perk-title">PPO for Top Performers</h3>
-        <p class="perk-desc">Score 75+ in your final evaluation and you get a <strong>Pre-Placement Offer</strong>. Score 90+ and we fast-track you to a Senior Intern track. Real path to a full-time role — earned, not gifted.</p>
-      </div>
-      <div class="perk-card reveal reveal-delay-1">
-        <span class="perk-icon">📜</span>
-        <h3 class="perk-title">Verified Certificate</h3>
-        <p class="perk-desc">Official Tekravio completion certificate signed by Uday. Includes your <strong>performance rating tier</strong>. Interns scoring 80+ also receive a LinkedIn recommendation from the Founder directly.</p>
-      </div>
-      <div class="perk-card reveal reveal-delay-2">
-        <span class="perk-icon">⚡</span>
-        <h3 class="perk-title">Sprint-Based Learning</h3>
-        <p class="perk-desc">You learn by building, not watching. <strong>2-week sprints, real deliverables,</strong> live demos at the end of every cycle. By month 3 you will have shipped something real.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <!-- ── FULL-TIME ROLES ── -->
@@ -981,11 +981,19 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
               <label class="field-label" for="stack">Applying For <span class="field-req">*</span></label>
               <select class="field-select" id="stack" required>
                 <option value="" disabled selected>Select a role</option>
-                <option value="java">☕ Java — Backend Intern</option>
-                <option value="react">⚛️ React — Frontend Intern</option>
-                <option value="python">🐍 Python — Backend / Data Intern</option>
-                <option value="node">🟢 Node.js — Backend Intern</option>
-                <option value="ai">🤖 AI Research — LLM Intern</option>
+                <optgroup label="── Full-Time Roles ──">
+                  <option value="java-fullstack">☕ Java Full Stack Developer (React) — 5–7 yrs</option>
+                  <option value="data-analyst">🐍 Data Analyst (Python) — 5–7 yrs</option>
+                  <option value="qa-automation">🧪 QA Automation Engineer (Java) — 5–8 yrs</option>
+                  <option value="sap-mm">⚙️ SAP MM Consultant — 6–10 yrs</option>
+                </optgroup>
+                <optgroup label="── Internships ──">
+                  <option value="java">☕ Java — Backend Intern</option>
+                  <option value="react">⚛️ React — Frontend Intern</option>
+                  <option value="python">🐍 Python — Backend / Data Intern</option>
+                  <option value="node">🟢 Node.js — Backend Intern</option>
+                  <option value="ai">🤖 AI Research — LLM Intern</option>
+                </optgroup>
               </select>
             </div>
             <div class="field-group">
@@ -997,8 +1005,8 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
           <!-- Row 4: GitHub + LinkedIn -->
           <div class="form-grid" style="margin-bottom:1.25rem">
             <div class="field-group" id="fg-github">
-              <label class="field-label" for="github">GitHub Profile <span class="field-req">*</span></label>
-              <input class="field-input" type="url" id="github" placeholder="https://github.com/yourname" required>
+              <label class="field-label" for="github">GitHub Profile</label>
+              <input class="field-input" type="url" id="github" placeholder="https://github.com/yourname">
               <span class="field-error" id="err-github"></span>
               <p class="field-hint">This is the most important field. An active GitHub says more than any resume.</p>
             </div>
@@ -1052,12 +1060,13 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
         <!-- Success state -->
         <div class="success-panel" id="successPanel">
-          <div class="success-icon">✅</div>
-          <h3 class="success-title">Application Received.</h3>
+          <div class="success-icon">📧</div>
+          <h3 class="success-title">Check Your Email App!</h3>
           <p class="success-desc">
-            Thank you for applying to Tekravio Academy.<br><br>
-            Uday will personally review your application and GitHub profile.
-            <strong>You'll hear back within 24 hours</strong> — whether we're moving forward or not.<br><br></p>
+            Your application details are pre-filled in your email.<br><br>
+            <strong>Attach your resume and tap Send</strong> — it goes straight to hr@tekravio.com.<br><br>
+            We respond to every application within 24 hours.
+          </p>
         </div>
 
       </div>
@@ -1083,16 +1092,14 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 </footer>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2USJCWwyFAOaeS9GlJbK5_pNtUwabTP2s2fBdnKaBZFea4dqBnsRksItqTx6OCgXDeA/exec";
-
-// ── Header scroll ────────────────────────────────────────────────
+// ── Header scroll ────────────────────────────────────────────
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
   header.style.background = window.scrollY > 40
     ? 'rgba(4,6,14,0.96)' : 'rgba(4,6,14,0.92)';
-}, { passive:true });
+}, { passive: true });
 
-// ── Mobile nav ───────────────────────────────────────────────────
+// ── Mobile nav ───────────────────────────────────────────────
 function toggleMenu() {
   const nav = document.getElementById('mobileNav');
   const btn = document.getElementById('hamburger');
@@ -1101,13 +1108,13 @@ function toggleMenu() {
   document.body.style.overflow = open ? 'hidden' : '';
 }
 
-// ── Scroll reveal ────────────────────────────────────────────────
+// ── Scroll reveal ────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold:0.1, rootMargin:'0px 0px -32px 0px' });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// ── File selected ────────────────────────────────────────────────
+// ── File selected ────────────────────────────────────────────
 function fileSelected(input) {
   const label = document.getElementById('fileSelectedText');
   if (input.files && input.files[0]) {
@@ -1116,7 +1123,7 @@ function fileSelected(input) {
   }
 }
 
-// ── Character counter ────────────────────────────────────────────
+// ── Character counter ────────────────────────────────────────
 function updateCount(el, counterId, max) {
   const remaining = max - el.value.length;
   const counter = document.getElementById(counterId);
@@ -1125,7 +1132,7 @@ function updateCount(el, counterId, max) {
     (remaining < 40 ? ' danger' : remaining < 80 ? ' warn' : '');
 }
 
-// ── Per-field validation ─────────────────────────────────────────
+// ── Per-field validation ─────────────────────────────────────
 function setError(fieldId, message) {
   const input = document.getElementById(fieldId);
   const err   = document.getElementById('err-' + fieldId);
@@ -1153,93 +1160,102 @@ function clearAll() {
 }
 
 // Live blur validation
-const liveFields = {
-  fname:  v => !v ? 'First name is required' : '',
-  email:  v => !v ? 'Email is required' :
-               !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Enter a valid email address' : '',
-  github: v => !v ? 'GitHub profile is required' :
-               !v.includes('github.com') ? 'Enter your full GitHub URL (https://github.com/…)' : ''
-};
-Object.keys(liveFields).forEach(id => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.addEventListener('blur', () => {
-    const msg = liveFields[id](el.value.trim());
-    msg ? setError(id, msg) : clearError(id);
-  });
-  el.addEventListener('input', () => {
-    if (el.classList.contains('is-error') && el.value.trim()) {
-      const msg = liveFields[id](el.value.trim());
-      if (!msg) clearError(id);
-    }
-  });
+document.getElementById('email').addEventListener('blur', function() {
+  if (!this.value.trim()) setError('email', 'Email is required');
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim()))
+    setError('email', 'Enter a valid email address');
+  else clearError('email');
+});
+document.getElementById('email').addEventListener('input', function() {
+  if (this.classList.contains('is-error') && this.value.trim()) clearError('email');
+});
+document.getElementById('fname').addEventListener('blur', function() {
+  if (!this.value.trim()) setError('fname', 'First name is required');
+  else clearError('fname');
 });
 
-// ── Form submit ──────────────────────────────────────────────────
+// ── Form submit — mailto to hr@tekravio.com ──────────────────
 document.getElementById('applyForm').addEventListener('submit', function(e) {
   e.preventDefault();
   clearAll();
 
   const fname  = document.getElementById('fname').value.trim();
+  const lname  = document.getElementById('lname').value.trim();
   const email  = document.getElementById('email').value.trim();
-  const stack  = document.getElementById('stack').value;
-  const github = document.getElementById('github').value.trim();
-  const built  = document.getElementById('built').value.trim();
-  const why    = document.getElementById('why').value.trim();
-  const resume = document.getElementById('resume').files[0];
+  const phone  = document.getElementById('phone').value.trim();
+  const stack  = document.getElementById('stack');
+  const stackVal = stack.value;
+  const stackTxt = stack.options[stack.selectedIndex]?.text || stackVal;
+  const college  = document.getElementById('college').value.trim();
+  const github   = document.getElementById('github').value.trim();
+  const linkedin = document.getElementById('linkedin').value.trim();
+  const built    = document.getElementById('built').value.trim();
+  const why      = document.getElementById('why').value.trim();
+  const resume   = document.getElementById('resume').files[0];
 
   let hasError = false;
-
-  if (!fname)  { setError('fname',  'First name is required'); hasError = true; }
-  if (!email)  { setError('email',  'Email is required'); hasError = true; }
+  if (!fname)  { setError('fname', 'First name is required'); hasError = true; }
+  if (!email)  { setError('email', 'Email is required'); hasError = true; }
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     setError('email', 'Enter a valid email address'); hasError = true; }
-  if (!stack)  { hasError = true; }
-  if (!github) { setError('github', 'GitHub profile is required'); hasError = true; }
-  else if (!github.includes('github.com')) {
-    setError('github', 'Enter your full GitHub URL'); hasError = true; }
-  if (built.length < 20) { hasError = true; }
-  if (why.length   < 20) { hasError = true; }
+  if (!stackVal) { hasError = true; }
+  if (built.length < 10) { hasError = true; }
+  if (why.length   < 10) { hasError = true; }
   if (!resume)           { hasError = true; }
 
   if (hasError) {
     const banner = document.getElementById('formErrorBanner');
-    banner.textContent = 'Please fill in all required fields before submitting.';
+    banner.textContent = 'Please fill in all required fields and upload your resume.';
     banner.style.display = 'block';
-    banner.scrollIntoView({ behavior:'smooth', block:'center' });
+    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
     const btn = document.getElementById('submitBtn');
     btn.classList.add('shake');
     setTimeout(() => btn.classList.remove('shake'), 400);
     return;
   }
 
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span>Submitting…</span>';
+  // Build email body
+  const subject = encodeURIComponent(`${stackTxt} — ${fname} ${lname}`);
+  const body = encodeURIComponent(
+`Hi Tekravio Team,
 
-  const payload = {
-    type: 'careers_application',
-    firstName:  fname,
-    lastName:   document.getElementById('lname').value.trim(),
-    email, stack,
-    phone:      document.getElementById('phone').value.trim(),
-    college:    document.getElementById('college').value.trim(),
-    github,
-    linkedin:   document.getElementById('linkedin').value.trim(),
-    built, why,
-    resumeName: resume ? resume.name : '',
-    source:     'tekravio.com/careers'
-  };
+I am applying for the following role at Tekravio.
 
-  fetch(SCRIPT_URL, {
-    method:'POST', mode:'no-cors',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(payload)
-  }).catch(() => {});
+ROLE: ${stackTxt}
 
-  document.getElementById('applyForm').style.display = 'none';
-  document.getElementById('successPanel').style.display = 'block';
-  document.getElementById('successPanel').scrollIntoView({ behavior:'smooth', block:'center' });
+PERSONAL DETAILS
+Name: ${fname} ${lname}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+College / Institution: ${college || 'Not provided'}
+
+LINKS
+GitHub: ${github || 'Not provided'}
+LinkedIn: ${linkedin || 'Not provided'}
+
+WHAT I HAVE BUILT
+${built}
+
+WHY TEKRAVIO
+${why}
+
+---
+Please find my resume attached to this email.
+
+Regards,
+${fname} ${lname}`
+  );
+
+  // Open mail client
+  window.location.href = `mailto:hr@tekravio.com?subject=${subject}&body=${body}`;
+
+  // Show success after short delay (give mailto time to open)
+  setTimeout(() => {
+    document.getElementById('applyForm').style.display = 'none';
+    const sp = document.getElementById('successPanel');
+    sp.style.display = 'block';
+    sp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 800);
 });
 </script>
 
