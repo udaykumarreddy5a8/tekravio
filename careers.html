@@ -1175,6 +1175,38 @@ document.getElementById('fname').addEventListener('blur', function() {
   else clearError('fname');
 });
 
+// Live validation on stack select
+document.getElementById('stack').addEventListener('change', function() {
+  if (this.value) this.classList.remove('is-error');
+});
+
+// Live char count visual feedback on textareas
+document.getElementById('built').addEventListener('blur', function() {
+  if (this.value.trim().length < 10) {
+    this.classList.add('is-error');
+  } else {
+    this.classList.remove('is-error');
+    this.classList.add('is-valid');
+  }
+});
+document.getElementById('why').addEventListener('blur', function() {
+  if (this.value.trim().length < 10) {
+    this.classList.add('is-error');
+  } else {
+    this.classList.remove('is-error');
+    this.classList.add('is-valid');
+  }
+});
+
+// Resume visual feedback
+document.getElementById('resume').addEventListener('change', function() {
+  const label = document.querySelector('.file-upload');
+  if (this.files && this.files[0]) {
+    label.style.borderColor = 'rgba(0,201,167,0.5)';
+    label.style.background = 'rgba(0,201,167,0.03)';
+  }
+});
+
 // ── Form submit — mailto to hr@tekravio.com ──────────────────
 document.getElementById('applyForm').addEventListener('submit', function(e) {
   e.preventDefault();
