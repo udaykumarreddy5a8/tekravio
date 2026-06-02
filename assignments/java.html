@@ -231,7 +231,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
 <!-- HEADER -->
 <header class="header">
   <div class="logo">Tekr<span>avio</span></div>
-  <div class="header-badge">Java Assignment · Healthcare</div>
+  <div class="header-badge">Java Assignment · 2 Yrs Exp</div>
 </header>
 
 <main>
@@ -248,13 +248,14 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
       <span class="outline">System.</span>
     </h1>
     <p class="hero-desc">
-      Build a production-grade backend that helps patients take medicines and follow diet plans on time.
-      <strong>Spring Boot + PostgreSQL + AWS + Firebase + Flutter.</strong>
-      Real architecture. Real cloud services. Real impact.
+      Build a backend that helps patients take medicines and follow diet plans on time.
+      <strong>Spring Boot + PostgreSQL + AWS + Firebase.</strong>
+      Designed for someone with 2 years of Java experience — solid fundamentals expected, cloud integration is the learning edge.
     </p>
 
     <div class="meta-row">
       <div class="meta-pill"><span class="meta-icon">⏱️</span><div><div class="meta-label">Deadline</div><div class="meta-val">3 Days</div></div></div>
+      <div class="meta-pill"><span class="meta-icon">👤</span><div><div class="meta-label">Target Profile</div><div class="meta-val">2 Years Experience</div></div></div>
       <div class="meta-pill"><span class="meta-icon">☕</span><div><div class="meta-label">Stack</div><div class="meta-val">Spring Boot · PostgreSQL · AWS · FCM</div></div></div>
       <div class="meta-pill"><span class="meta-icon">📊</span><div><div class="meta-label">Total Marks</div><div class="meta-val">100 + 30 Bonus</div></div></div>
       <div class="meta-pill"><span class="meta-icon">📧</span><div><div class="meta-label">Submit To</div><div class="meta-val">careers@tekravio.com</div></div></div>
@@ -265,7 +266,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
         <div class="context-dot"></div>
         <div class="context-label">// Project Context</div>
       </div>
-      <div class="context-body">
+      <div class="context-body"><strong>Note for 2-year experienced candidates:</strong> You are not expected to deploy to AWS ECS/EKS or build microservices for this assignment. Focus on getting the core Spring Boot backend, S3 integration, Textract, and FCM working cleanly. Architecture decisions matter more than completeness at every edge case.<br><br>
         Patients or admins upload <strong>prescription images</strong>, which are stored in <strong>AWS S3</strong> and processed using <strong>AWS Textract</strong> to extract medicine details, dosage, and timings. The backend system <strong>schedules reminders</strong> and sends push notifications through <strong>Firebase Cloud Messaging (FCM)</strong> and optionally <strong>WhatsApp reminders</strong>. The platform supports recurring medicine alerts, diet reminders, prescription management, and patient tracking.<br><br>
         Built using <strong>Spring Boot, PostgreSQL, AWS services, and Flutter</strong>, with a scalable architecture that can later evolve into a <strong>microservices-based healthcare platform deployed on AWS ECS/EKS</strong>.
       </div>
@@ -330,7 +331,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
           <div class="task-num">01</div>
           <div>
             <div class="task-title">Auth, Patient & Admin Management</div>
-            <div class="task-pts">// 15 marks · Foundation layer</div>
+            <div class="task-pts">// 15 marks · JWT + Role basics</div>
           </div>
         </div>
         <div class="task-body">
@@ -367,7 +368,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
           <div class="task-num">02</div>
           <div>
             <div class="task-title">Prescription Upload — S3 + AWS Textract</div>
-            <div class="task-pts">// 20 marks · AWS integration</div>
+            <div class="task-pts">// 20 marks · AWS S3 + Textract integration</div>
           </div>
         </div>
         <div class="task-body">
@@ -375,8 +376,8 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
           <div class="req-list">
             <div class="req"><strong>File upload API</strong> — accept image (JPG/PNG/PDF), validate size ≤ 10MB and type, upload to S3 with structured key: <code>prescriptions/{patientId}/{uuid}.jpg</code></div>
             <div class="req"><strong>AWS Textract integration</strong> — call Textract Detect Document Text API, parse response blocks to extract medicine name, dosage, frequency, duration</div>
-            <div class="req"><strong>Prescription entity</strong> — store S3 URL, Textract raw response (JSON), extracted medicine list, upload timestamp, status (PROCESSING / DONE / FAILED)</div>
-            <div class="req"><strong>Error handling</strong> — what happens if Textract can't extract data? Graceful fallback with manual entry option</div>
+            <div class="req"><strong>Prescription entity</strong> — store S3 URL, extracted medicine list (even if manually entered as fallback), upload timestamp, status (PENDING / DONE / FAILED)</div>
+            <div class="req"><strong>Error handling</strong> — if Textract extraction fails or confidence is low, return a clear error and allow manual medicine entry as fallback</div>
             <div class="req"><strong>Prescription history API</strong> — list all prescriptions for a patient with pagination, filter by date range</div>
           </div>
         </div>
@@ -395,11 +396,11 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
           <p class="task-desc">Build the scheduling engine that drives the entire reminder system. This is the heart of the application — it must be reliable, configurable, and handle edge cases correctly.</p>
           <div class="req-list">
             <div class="req"><strong>Medicine schedule model</strong> — medicine name, dosage, frequency (ONCE_DAILY / TWICE_DAILY / THRICE_DAILY / CUSTOM), time slots, start date, end date, active flag</div>
-            <div class="req"><strong>Spring Scheduler</strong> — poll every minute for due reminders, fire notifications for matching schedules, log every notification attempt with status</div>
+            <div class="req"><strong>Spring Scheduler</strong> — poll every 5 minutes for due reminders, fire FCM notifications, log attempt status in reminder_log table</div>
             <div class="req"><strong>Recurring schedule support</strong> — daily, weekly, custom interval in hours</div>
             <div class="req"><strong>Snooze API</strong> — patient can snooze a reminder by 10/20/30 minutes, system reschedules</div>
             <div class="req"><strong>Taken / Skipped API</strong> — patient marks a reminder as taken or skipped, tracked in reminder log table</div>
-            <div class="req"><strong>Adherence calculation</strong> — % of medicines taken on time per patient for the last 7/30 days</div>
+            <div class="req"><strong>Adherence calculation</strong> — % of reminders marked as taken vs total for the last 7 days</div>
           </div>
         </div>
       </div>
@@ -419,7 +420,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
             <div class="req"><strong>FCM service</strong> — initialise Firebase Admin SDK, build and send FCM message with title, body, and data payload (medicine name, schedule ID, action buttons)</div>
             <div class="req"><strong>Notification payload</strong> — include <code>scheduleId</code>, <code>action</code> (TAKE / SNOOZE / SKIP), <code>patientId</code> in FCM data map</div>
             <div class="req"><strong>Notification log table</strong> — every FCM call logged: patientId, scheduleId, sent timestamp, FCM response, success/failure</div>
-            <div class="req"><strong>Retry on failure</strong> — if FCM returns a failure, retry up to 3 times with exponential backoff</div>
+            <div class="req"><strong>Retry on failure</strong> — if FCM call fails, retry once after 60 seconds. Log final status.</div>
             <div class="req"><strong>WhatsApp fallback (optional)</strong> — if patient has no FCM token, send WhatsApp message via Twilio or WATI API</div>
           </div>
           <div class="callout orange">
@@ -456,11 +457,11 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
           <div class="task-num">06</div>
           <div>
             <div class="task-title">Flutter App — Patient Interface</div>
-            <div class="task-pts">// 15 marks · Mobile layer</div>
+            <div class="task-pts">// 15 marks · Frontend (Flutter OR React web)</div>
           </div>
         </div>
         <div class="task-body">
-          <p class="task-desc">Build the patient-facing Flutter mobile application. It does not need to be production-polished — but it must be functional, integrated with your backend, and able to receive FCM notifications.</p>
+          <p class="task-desc">Build a simple frontend — either a Flutter app OR a React/HTML web interface. It should demonstrate your backend working end-to-end. Functional over polished.</p>
           <div class="req-list">
             <div class="req"><strong>Login screen</strong> — calls your Spring Boot auth API, stores JWT in secure storage</div>
             <div class="req"><strong>Dashboard screen</strong> — today's medicine schedule, upcoming reminders, adherence % for last 7 days</div>
@@ -485,7 +486,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
     <p class="sep" style="margin-top:0"></p>
     <p class="sec-tag" style="color:var(--purple)">// Think Ahead</p>
     <h2 class="sec-title">What Features Would You Add?</h2>
-    <p class="sec-sub">This is the most important section. We're not just evaluating what you built — we're evaluating how you think. Below are 12 feature ideas. <strong>Pick any 3 and implement them as bonus</strong>, or propose your own ideas in your README. There are no wrong answers.</p>
+    <p class="sec-sub">Below are 12 feature ideas. <strong>Pick any 1 or 2 and implement them as bonus.</strong> Or propose your own in the README. At 2 years experience, one well-implemented bonus feature beats three half-done ones.</p>
 
     <div class="callout yellow">
       <div class="callout-head">// What We're Looking For</div>
@@ -645,7 +646,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
     <div class="mq-list">
       <div class="mq">
         <div class="mq-num">// Q1</div>
-        <div class="mq-text">The scheduler runs every minute. What happens if two scheduler instances run simultaneously (e.g. two pods in ECS)? How would you prevent duplicate notifications from being sent?</div>
+        <div class="mq-text">The scheduler runs every 5 minutes. What could go wrong if the server restarts in the middle of a scheduled run? How would you make sure reminders aren't missed or sent twice?</div>
       </div>
       <div class="mq">
         <div class="mq-num">// Q2</div>
@@ -661,7 +662,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
       </div>
       <div class="mq">
         <div class="mq-num">// Q5</div>
-        <div class="mq-text">You're told to add 100,000 patients to the system. What breaks first in your current implementation and how would you fix it?</div>
+        <div class="mq-text">Your system currently has 100 patients. What would need to change in your database design or backend to handle 10,000 patients reliably?</div>
       </div>
     </div>
   </div>
@@ -689,7 +690,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
         <tr><td>Diet Reminder Module</td><td><span class="score-badge">15</span></td><td>Complete CRUD, integrated into scheduler</td></tr>
         <tr><td>Flutter App / React Dashboard</td><td><span class="score-badge">15</span></td><td>Functional, FCM receiving, prescription upload</td></tr>
         <tr><td>Code Quality & Architecture</td><td><span class="score-badge">+10</span></td><td>Clean layering, proper DTOs, no anti-patterns</td></tr>
-        <tr><td>Bonus Features (any 3)</td><td><span class="score-badge">+20</span></td><td>Implemented, documented, explained in README</td></tr>
+        <tr><td>Bonus Features (any 1–2)</td><td><span class="score-badge">+20</span></td><td>Well implemented, explained clearly in README</td></tr>
       </tbody>
     </table>
   </div>
@@ -743,7 +744,7 @@ footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
 
     <div class="callout orange" style="margin-top:1.5rem">
       <div class="callout-head">// From Uday · Founder, Tekravio</div>
-      <p>Healthcare is not a domain you can afford to be lazy in. A missed reminder could mean a missed dose. A security gap could expose sensitive medical data. Build this like it's going to be used by real patients — because the next version of this system might be. Show us you take that seriously. The features you choose to add will tell us everything about your engineering values.</p>
+      <p>At 2 years of experience, we don't expect perfection. We expect <strong>solid fundamentals, clean thinking, and genuine effort</strong>. Show us you understand why each piece of the architecture exists — not just that you copied a tutorial. The README matters as much as the code. Explain your decisions. Tell us what you would do differently with more time.</p>
     </div>
   </div>
 </section>
