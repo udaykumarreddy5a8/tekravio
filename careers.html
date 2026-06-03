@@ -58,61 +58,62 @@ h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;
 @media(min-width:1024px){.section{padding:96px 0}}
 
 /* ── HEADER ── */
-#header{position:fixed;top:0;left:0;right:0;z-index:100;
+
+/* ── HEADER / NAV ── */
+#header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;height:60px;
-  background:rgba(4,6,14,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);transition:background var(--transition)}
-@media(min-width:640px){#header{padding:0 32px;height:68px}}
+  padding:0 clamp(16px,4vw,48px);height:60px;
+  background:rgba(4,6,14,0.92);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:background var(--transition)}
+@media(min-width:640px){#header{height:68px}}
 @media(min-width:1024px){#header{padding:0 56px}}
 
 .logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
-@media(min-width:640px){.logo{font-size:1.4rem}}
-.logo-accent{color:var(--blue)}
+.logo-accent{color:var(--cyan)}
 
-nav[aria-label="Main navigation"]{display:flex;align-items:center;gap:.75rem}
-nav[aria-label="Main navigation"] ul.nav-links{display:none}
-nav[aria-label="Main navigation"] a.nav-cta{display:none}
+.desktop-nav{display:none;align-items:center;gap:1.5rem}
+.desktop-nav a{color:var(--muted);font-size:.875rem;font-weight:500;transition:color var(--transition)}
+.desktop-nav a:hover,.desktop-nav a.active{color:var(--ink)}
+.nav-cta-btn{background:var(--blue);color:#fff;padding:.5rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;white-space:nowrap}
+
+.hamburger{
+  display:flex;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;
+  padding:8px;min-width:44px;min-height:44px;
+  align-items:center;justify-content:center;
+  flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:var(--transition)}
+
 @media(min-width:768px){
-  nav[aria-label="Main navigation"] ul.nav-links{
-    display:flex;list-style:none;gap:1.5rem}
-  nav[aria-label="Main navigation"] ul.nav-links a{
-    color:var(--muted);font-size:.875rem;font-weight:500;
-    transition:color var(--transition)}
-  nav[aria-label="Main navigation"] ul.nav-links a:hover{color:var(--ink)}
-  nav[aria-label="Main navigation"] a.nav-cta{
-    display:inline-block;background:var(--blue);color:#fff;
-    padding:.5rem 1.25rem;border-radius:var(--radius-sm);
-    font-size:.875rem;font-weight:600;transition:opacity var(--transition)}
-  nav[aria-label="Main navigation"] a.nav-cta:hover{opacity:.9}
+  .desktop-nav{display:flex}
+  .hamburger{display:none}
 }
 
-.hamburger{display:flex;flex-direction:column;gap:5px;
-  background:none;border:none;cursor:pointer;padding:8px;
-  min-width:44px;min-height:44px;align-items:center;justify-content:center}
-.hamburger span{display:block;width:22px;height:2px;
-  background:var(--ink);border-radius:2px;transition:var(--transition)}
-@media(min-width:768px){.hamburger{display:none}}
-
-.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(4,6,14,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:1.5rem 20px;z-index:99;overflow-y:auto;flex-direction:column;gap:.5rem}
+.mobile-nav{
+  display:none;
+  position:fixed;top:60px;left:0;right:0;bottom:0;
+  background:rgba(4,6,14,0.97);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  padding:1.5rem clamp(16px,4vw,32px);
+  z-index:99;overflow-y:auto;
+  flex-direction:column;gap:.25rem}
 @media(min-width:640px){.mobile-nav{top:68px;padding:2rem 32px}}
 .mobile-nav.open{display:flex}
-.mobile-nav a{color:var(--mid);font-size:1.1rem;font-weight:500;
+.mobile-nav a{
+  color:var(--mid);font-size:1.1rem;font-weight:500;
   padding:.875rem 0;border-bottom:1px solid var(--border);
-  display:block;min-height:52px;display:flex;align-items:center}
+  min-height:52px;display:flex;align-items:center;
+  transition:color var(--transition)}
 .mobile-nav a:hover{color:var(--ink)}
-.mobile-nav .nav-cta{margin-top:1rem;text-align:center;
+.mobile-nav .mob-cta{
+  margin-top:1rem;text-align:center;
   background:var(--blue);color:#fff;padding:1rem;
-  border-radius:var(--radius-sm);font-weight:700;border-bottom:none}
+  border-radius:var(--radius-sm);font-weight:700;
+  border-bottom:none;justify-content:center}
 
-/* ── SCROLL REVEAL ── */
-.reveal{opacity:0;transform:translateY(20px);
-  transition:opacity .55s ease,transform .55s ease}
-.reveal.visible{opacity:1;transform:none}
-.reveal-delay-1{transition-delay:.08s}
-.reveal-delay-2{transition-delay:.16s}
-.reveal-delay-3{transition-delay:.24s}
-.reveal-delay-4{transition-delay:.32s}
 
 /* ── HERO ── */
 .careers-hero{padding-top:60px;min-height:auto;
@@ -563,29 +564,27 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 <!-- ── HEADER ── -->
 <header id="header">
   <a href="/" class="logo" aria-label="Tekravio Home">Tekr<span class="logo-accent">avio</span></a>
-  <nav aria-label="Main navigation">
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/#services">Services</a></li>
-      <li><a href="/#stacks">Tech Stacks</a></li>
-      <li><a href="/#how">How We Work</a></li>
-      <li><a href="/#founder">About</a></li>
-      <li><a href="/careers.html" style="color:var(--cyan)">Careers</a></li>
-    </ul>
-    <a href="#apply" class="nav-cta">Apply Now →</a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="/#stacks">Tech Stacks</a>
+    <a href="/#how">How We Work</a>
+    <a href="/#founder">About</a>
+    <a href="/careers.html" style="color:var(--cyan)">Careers</a>
   </nav>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </header>
-<nav class="mobile-nav" id="mobileNav">
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <a href="/" onclick="toggleMenu()">Home</a>
   <a href="/#services" onclick="toggleMenu()">Services</a>
   <a href="/#stacks" onclick="toggleMenu()">Tech Stacks</a>
   <a href="/#how" onclick="toggleMenu()">How We Work</a>
   <a href="/#founder" onclick="toggleMenu()">About</a>
   <a href="/careers.html" style="color:var(--cyan)" onclick="toggleMenu()">Careers ●</a>
-  <a href="#apply" class="nav-cta" onclick="toggleMenu()">Apply Now →</a>
+  <a href="#apply" class="mob-cta" onclick="toggleMenu()">Apply Now →</a>
 </nav>
 
 <main>
@@ -1110,7 +1109,7 @@ function toggleMenu() {
   const nav = document.getElementById('mobileNav');
   const btn = document.getElementById('hamburger');
   const open = nav.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
+  btn.setAttribute('aria-expanded', String(open));
   document.body.style.overflow = open ? 'hidden' : '';
 }
 
