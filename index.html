@@ -489,6 +489,7 @@ section{padding:100px 56px}
   letter-spacing:-0.01em;margin-bottom:12px;
 }
 .v-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:24px}
+.v-cta{display:inline-flex;align-items:center;gap:4px;font-family:'Fira Code',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;text-decoration:none;transition:gap .2s}.v-cta:hover{gap:8px}
 .v-tags{display:flex;flex-wrap:wrap;gap:7px}
 .v-tag{
   font-size:11px;padding:4px 12px;
@@ -1097,11 +1098,12 @@ footer{
     <p class="section-desc reveal">Training that sticks, consulting that ships, and products that multiply your team's capability — all built around your actual codebase and workflows.</p>
 
     <div class="verticals">
-      <article class="vcard vc1 reveal" aria-label="Tekravio Academy - Training">
+      <article class="vcard vc1 reveal" aria-label="Tekravio Academy - Training" onclick="window.location='/academy.html'" style="cursor:pointer">
         <span class="v-icon v-icon-1" aria-hidden="true">🎓</span>
         <div class="v-badge">Vertical 01 · Academy</div>
         <h3 class="v-name">Training</h3>
         <p class="v-desc">Stack-specific, hands-on programs built around your team's actual codebase and workflows — not a generic catalogue your engineers forget by Monday.</p>
+        <a href="/academy.html" class="v-cta" onclick="event.stopPropagation()">Learn More →</a>
         <div class="v-tags">
           <span class="v-tag">Corporate Bootcamps</span>
           <span class="v-tag">Stack-Specific Workshops</span>
@@ -1110,11 +1112,12 @@ footer{
           <span class="v-tag">SDET &amp; QA Training</span>
         </div>
       </article>
-      <article class="vcard vc2 reveal reveal-delay-1" aria-label="Tekravio Studio - Consulting">
+      <article class="vcard vc2 reveal reveal-delay-1" aria-label="Tekravio Studio - Consulting" onclick="window.location='/studio.html'" style="cursor:pointer">
         <span class="v-icon v-icon-2" aria-hidden="true">💻</span>
         <div class="v-badge">Vertical 02 · Studio</div>
         <h3 class="v-name">Consulting</h3>
         <p class="v-desc">Project delivery, architecture reviews, and team augmentation. Fixed price, sprint-based, with a senior engineer at the helm from first call to final handover.</p>
+        <a href="/studio.html" class="v-cta" onclick="event.stopPropagation()">Learn More →</a>
         <div class="v-tags">
           <span class="v-tag">Sprint-Based Development</span>
           <span class="v-tag">Tech &amp; Code Audits</span>
@@ -1123,11 +1126,12 @@ footer{
           <span class="v-tag">DevOps Transformation</span>
         </div>
       </article>
-      <article class="vcard vc3 reveal reveal-delay-2" aria-label="Tekravio Labs - Products">
+      <article class="vcard vc3 reveal reveal-delay-2" aria-label="Tekravio Labs - Products" onclick="window.location='/labs.html'" style="cursor:pointer">
         <span class="v-icon v-icon-3" aria-hidden="true">📦</span>
         <div class="v-badge">Vertical 03 · Labs</div>
         <h3 class="v-name">Products</h3>
         <p class="v-desc">Ready-to-deploy accelerator kits, automation frameworks, and SaaS tools built from real consulting IP. So your team never starts from zero again.</p>
+        <a href="/labs.html" class="v-cta" onclick="event.stopPropagation()">Learn More →</a>
         <div class="v-tags">
           <span class="v-tag">Test Automation Kits</span>
           <span class="v-tag">DevOps Pipeline Templates</span>
