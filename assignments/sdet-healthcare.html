@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio — SDET Assignment · 8 Years Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
+  --surface:#0b0f1e;--surface2:#111829;--border:rgba(255,255,255,0.07);
+  --blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;--red:#f87171;
+  --purple:#a78bfa;--yellow:#fbbf24;--green:#4ade80;
+  --qa:#f472b6;--qa-dim:rgba(244,114,182,0.1);
+  --radius:12px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;
+  font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--qa);border-radius:2px}
+a{color:var(--cyan)}
+h1,h2,h3{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-0.02em;line-height:1.1}
+code{font-family:'Fira Code',monospace;font-size:.85em;background:rgba(244,114,182,0.08);
+  border:1px solid rgba(244,114,182,0.2);color:#f9a8d4;padding:2px 7px;border-radius:4px}
+.container{max-width:900px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+.section{padding:56px 0}
+p{color:#94a3b8;margin-bottom:10px}p strong{color:var(--ink)}
+
+/* HEADER */
+.header{background:rgba(4,6,14,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+  padding:0 clamp(20px,5vw,48px);height:60px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
+.logo span{color:var(--qa)}
+.header-badge{font-family:'Fira Code',monospace;font-size:.7rem;padding:4px 12px;
+  border-radius:100px;background:var(--qa-dim);border:1px solid rgba(244,114,182,.25);
+  color:var(--qa);letter-spacing:.1em;text-transform:uppercase}
+
+/* HERO */
+.hero{padding:64px 0 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero-orb1{position:absolute;top:-120px;right:-80px;width:500px;height:500px;
+  background:radial-gradient(ellipse,rgba(244,114,182,.1) 0%,transparent 65%);pointer-events:none}
+.hero-orb2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;
+  background:radial-gradient(ellipse,rgba(59,111,245,.07) 0%,transparent 65%);pointer-events:none}
+.hero-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--qa);margin-bottom:1rem}
+.hero-title{font-size:clamp(2.25rem,6vw,4rem);font-weight:700;line-height:.92;
+  letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero-title .accent{color:var(--qa)}
+.hero-title .outline{-webkit-text-stroke:2px var(--ink);color:transparent}
+.hero-desc{font-size:1.0625rem;color:var(--muted);max-width:680px;line-height:1.75;margin-bottom:2rem}
+.hero-desc strong{color:var(--ink)}
+.meta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
+.meta-pill{display:flex;align-items:center;gap:.5rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;font-size:.8125rem}
+.meta-label{color:var(--muted);font-size:.7rem;font-family:'Fira Code',monospace;
+  letter-spacing:.08em;text-transform:uppercase}
+.meta-val{font-weight:600;color:var(--ink)}
+
+/* CONTEXT BOX */
+.context-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem}
+.context-header{padding:1rem 1.5rem;background:var(--surface2);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.875rem}
+.context-dot{width:8px;height:8px;border-radius:50%;background:var(--qa)}
+.context-label{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--qa)}
+.context-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}
+.context-body strong{color:var(--ink)}
+
+/* SECTION HEADERS */
+.sec-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;margin-bottom:.625rem}
+.sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.5rem}
+.sec-sub{font-size:.9375rem;color:var(--muted);margin-bottom:2rem;line-height:1.7}
+
+/* ARCH GRID */
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.arch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.375rem;position:relative;overflow:hidden}
+.arch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ac-api::before{background:linear-gradient(90deg,#f472b6,#ec4899)}
+.ac-perf::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+.ac-sec::before{background:linear-gradient(90deg,#f87171,#ef4444)}
+.ac-ci::before{background:linear-gradient(90deg,#4ade80,#22c55e)}
+.ac-fw::before{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
+.arch-icon{font-size:1.5rem;margin-bottom:.75rem}
+.arch-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.375rem}
+.arch-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+.arch-tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.75rem}
+.atag{font-family:'Fira Code',monospace;font-size:.65rem;padding:2px 8px;border-radius:3px;border:1px solid var(--border);color:var(--muted)}
+
+/* TASK CARDS */
+.tasks{display:flex;flex-direction:column;gap:1.25rem}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.task-header{padding:1.125rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border);background:var(--surface2)}
+.task-num{font-family:'Clash Display',sans-serif;font-size:1.75rem;font-weight:700;min-width:2.5rem;line-height:1}
+.t1 .task-num{color:var(--qa)}.t2 .task-num{color:#fbbf24}.t3 .task-num{color:#f87171}
+.t4 .task-num{color:#4ade80}.t5 .task-num{color:#a78bfa}.t6 .task-num{color:var(--cyan)}
+.task-title{font-size:1rem;font-weight:700;margin-bottom:2px}
+.task-pts{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+.task-body{padding:1.375rem 1.5rem}
+.task-desc{font-size:.9rem;color:#94a3b8;line-height:1.7;margin-bottom:1rem}
+.req-list{display:flex;flex-direction:column;gap:.5rem}
+.req{display:flex;gap:.75rem;font-size:.875rem;color:#94a3b8;align-items:flex-start;line-height:1.55}
+.req::before{content:'→';flex-shrink:0;margin-top:.125rem}
+.t1 .req::before{color:var(--qa)}.t2 .req::before{color:#fbbf24}.t3 .req::before{color:#f87171}
+.t4 .req::before{color:#4ade80}.t5 .req::before{color:#a78bfa}.t6 .req::before{color:var(--cyan)}
+.req strong{color:var(--ink)}
+
+/* CODE BLOCK */
+.code-block{background:#020408;border:1px solid rgba(244,114,182,.15);border-radius:8px;overflow:hidden;margin:1rem 0}
+.cb-header{background:var(--surface2);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.cb-file{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted)}
+.cb-lang{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--qa);background:var(--qa-dim);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:'Fira Code',monospace;font-size:.78rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--qa)}.cm{color:#3a4a6a}
+
+/* BONUS */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.25rem}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;position:relative}
+.feature-card input[type=checkbox]{position:absolute;opacity:0;width:0;height:0}
+.feature-card label{display:flex;flex-direction:column;gap:.5rem;cursor:pointer}
+.fc-check{width:20px;height:20px;border-radius:5px;border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;transition:all .2s;background:transparent;margin-bottom:.375rem}
+.feature-card input:checked ~ label .fc-check{background:var(--qa);border-color:var(--qa)}
+.feature-card input:checked ~ label .fc-title{color:var(--qa)}
+.fc-icon{font-size:1.375rem}
+.fc-title{font-family:'Clash Display',sans-serif;font-size:.9375rem;font-weight:700;color:var(--ink);transition:color .2s}
+.fc-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+.fc-difficulty{font-family:'Fira Code',monospace;font-size:.65rem;padding:2px 8px;border-radius:100px;border:1px solid;align-self:flex-start;margin-top:.25rem}
+.fd-easy{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.2);color:#4ade80}
+.fd-med{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.2);color:#fbbf24}
+.fd-hard{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.2);color:#f87171}
+
+/* EVAL TABLE */
+.eval-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-table th{padding:.75rem 1rem;text-align:left;font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface2)}
+.eval-table td{padding:.875rem 1rem;border-bottom:1px solid var(--border);color:#94a3b8;vertical-align:top}
+.eval-table tr:last-child td{border-bottom:none}
+.eval-table tr:hover td{background:rgba(255,255,255,.02)}
+.score-badge{font-family:'Clash Display',sans-serif;font-size:1.25rem;color:var(--qa)}
+
+/* SUBMIT */
+.submit-section{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:1.25rem}
+.submit-steps{display:flex;flex-direction:column;gap:0;position:relative}
+.submit-steps::before{content:'';position:absolute;left:19px;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--qa),var(--cyan));opacity:.18}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding-bottom:1.25rem;position:relative}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;font-family:'Fira Code',monospace;flex-shrink:0;position:relative;z-index:1;background:var(--qa-dim);border:1px solid rgba(244,114,182,.25);color:var(--qa)}
+.ss-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:.25rem}
+.ss-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+
+/* CALLOUT */
+.callout{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout.orange{background:rgba(255,112,67,.06);border:1px solid rgba(255,112,67,.15);border-left:3px solid var(--orange)}
+.callout.cyan{background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.15);border-left:3px solid var(--cyan)}
+.callout.yellow{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-left:3px solid var(--yellow)}
+.callout.pink{background:rgba(244,114,182,.06);border:1px solid rgba(244,114,182,.15);border-left:3px solid var(--qa)}
+.callout-head{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.callout.orange .callout-head{color:var(--orange)}.callout.cyan .callout-head{color:var(--cyan)}
+.callout.yellow .callout-head{color:var(--yellow)}.callout.pink .callout-head{color:var(--qa)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--ink)}
+
+/* MINDSET QS */
+.mq-list{display:flex;flex-direction:column;gap:.875rem;margin-top:1.25rem}
+.mq{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--qa);border-radius:0 8px 8px 0;padding:1rem 1.25rem}
+.mq-num{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--qa);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.mq-text{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+
+.sep{height:1px;background:var(--border);margin:3rem 0}
+footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:var(--muted)}
+.footer-logo{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink)}
+.footer-logo span{color:var(--qa)}
+
+@media(max-width:640px){
+  .arch-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}
+  .eval-table{font-size:.8rem}.eval-table th,.eval-table td{padding:.625rem .75rem}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Tekr<span>avio</span></div>
+  <div class="header-badge">SDET Assignment · 8 Yrs</div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb1" aria-hidden="true"></div>
+  <div class="hero-orb2" aria-hidden="true"></div>
+  <div class="container">
+    <p class="hero-tag">// Tekravio Studio · SDET Assignment · 2026</p>
+    <h1 class="hero-title">
+      <span class="accent">Quality</span><br>
+      Engineering<br>
+      <span class="outline">At Scale.</span>
+    </h1>
+    <p class="hero-desc">
+      Build a comprehensive test automation suite for the Smart Healthcare Reminder System.
+      <strong>API automation · Performance · Security · CI/CD pipeline.</strong>
+      At 8 years of experience, we expect test architecture — not just test scripts.
+    </p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span>⏱️</span><div><div class="meta-label">Deadline</div><div class="meta-val">3 Days</div></div></div>
+      <div class="meta-pill"><span>👤</span><div><div class="meta-label">Level</div><div class="meta-val">8 Years SDET Experience</div></div></div>
+      <div class="meta-pill"><span>🧪</span><div><div class="meta-label">Stack</div><div class="meta-val">Java · Selenium · RestAssured · k6 · OWASP ZAP</div></div></div>
+      <div class="meta-pill"><span>📊</span><div><div class="meta-label">Total Marks</div><div class="meta-val">100 + 30 Bonus</div></div></div>
+      <div class="meta-pill"><span>📧</span><div><div class="meta-label">Submit To</div><div class="meta-val">careers@tekravio.com</div></div></div>
+    </div>
+
+    <div class="context-box">
+      <div class="context-header">
+        <div class="context-dot"></div>
+        <div class="context-label">// System Under Test</div>
+      </div>
+      <div class="context-body">
+        <strong>The application:</strong> A Smart Healthcare Reminder System with Spring Boot backend, PostgreSQL, AWS S3 (prescription storage), AWS Textract (OCR), Firebase FCM (push notifications), and a React/Flutter frontend. It manages patient profiles, prescription uploads, medicine schedules, automated reminders, and diet tracking.<br><br>
+        <strong>Your role:</strong> You are the senior SDET joining a delivery team mid-sprint. There is no existing test suite. You must design the test architecture, build the automation framework from scratch, integrate it into the CI/CD pipeline, and establish quality gates that the team will use going forward.<br><br>
+        You will be given a <strong>Postman collection and API documentation</strong> as your starting point. The backend runs locally via Docker Compose.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" style="padding-bottom:0">
+  <div class="container">
+    <p class="sec-tag" style="color:var(--qa)">// Test Architecture</p>
+    <h2 class="sec-title">What You're Designing</h2>
+    <p class="sec-sub">Five layers of quality coverage. Every layer must be implemented and integrated.</p>
+    <div class="arch-grid">
+      <div class="arch-card ac-fw">
+        <div class="arch-icon">🏗️</div>
+        <div class="arch-title">Framework Architecture</div>
+        <div class="arch-desc">Page Object Model, test data management, config abstraction, reporting strategy — the foundation everything else sits on</div>
+        <div class="arch-tags"><span class="atag">TestNG / JUnit 5</span><span class="atag">Maven</span><span class="atag">Allure</span><span class="atag">Log4j2</span></div>
+      </div>
+      <div class="arch-card ac-api">
+        <div class="arch-icon">🔌</div>
+        <div class="arch-title">API Test Automation</div>
+        <div class="arch-desc">End-to-end API coverage using RestAssured — all CRUD operations, auth flows, edge cases, schema validation</div>
+        <div class="arch-tags"><span class="atag">RestAssured</span><span class="atag">JSON Schema</span><span class="atag">BDD / Cucumber</span><span class="atag">Pojo</span></div>
+      </div>
+      <div class="arch-card ac-perf">
+        <div class="arch-icon">⚡</div>
+        <div class="arch-title">Performance Testing</div>
+        <div class="arch-desc">Load, stress, and spike tests on the reminder scheduler and notification endpoints — identify breaking points</div>
+        <div class="arch-tags"><span class="atag">k6</span><span class="atag">JMeter</span><span class="atag">Gatling</span><span class="atag">HTML Report</span></div>
+      </div>
+      <div class="arch-card ac-sec">
+        <div class="arch-icon">🔐</div>
+        <div class="arch-title">Security Testing</div>
+        <div class="arch-desc">OWASP Top 10 checks on a healthcare API — auth bypass, SQL injection, JWT manipulation, sensitive data exposure</div>
+        <div class="arch-tags"><span class="atag">OWASP ZAP</span><span class="atag">Burp Suite</span><span class="atag">Manual probing</span></div>
+      </div>
+      <div class="arch-card ac-ci">
+        <div class="arch-icon">🔄</div>
+        <div class="arch-title">CI/CD Integration</div>
+        <div class="arch-desc">GitHub Actions pipeline — run smoke tests on every PR, regression nightly, performance weekly, fail the build on quality gate breach</div>
+        <div class="arch-tags"><span class="atag">GitHub Actions</span><span class="atag">Quality Gates</span><span class="atag">Slack Alerts</span><span class="atag">Artifacts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TASKS -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--qa)">// Core Tasks</p>
+    <h2 class="sec-title">What You Must Build</h2>
+    <p class="sec-sub">Six modules. All required. We evaluate architecture quality, not just test count.</p>
+
+    <div class="tasks">
+
+      <!-- TASK 1 -->
+      <div class="task t1">
+        <div class="task-header">
+          <div class="task-num">01</div>
+          <div>
+            <div class="task-title">Test Framework Design & Architecture</div>
+            <div class="task-pts">// 15 marks · The foundation — evaluated first</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Before writing a single test, design the framework. At 8 years, this is what separates you from a junior automation engineer. The structure must be maintainable, scalable, and onboardable by a new team member in under an hour.</p>
+          <div class="req-list">
+            <div class="req"><strong>Project structure</strong> — clear separation: <code>framework/</code> (base classes, utilities, config), <code>tests/api/</code>, <code>tests/e2e/</code>, <code>tests/performance/</code>, <code>data/</code>, <code>reports/</code></div>
+            <div class="req"><strong>Base classes</strong> — <code>BaseTest.java</code> with setup/teardown, driver init, auth token management. No repeated boilerplate in test classes.</div>
+            <div class="req"><strong>Config abstraction</strong> — environment-specific config (dev / staging / prod) loaded from <code>config.properties</code> or YAML. Zero hardcoded URLs or credentials anywhere in code.</div>
+            <div class="req"><strong>Test data management</strong> — test data loaded from external JSON/CSV files, not hardcoded in tests. Data builder pattern for complex objects (Patient, Prescription, Schedule).</div>
+            <div class="req"><strong>Reporting</strong> — Allure or ExtentReports with screenshots on failure, API request/response logged, test categorisation by severity (Smoke / Regression / E2E).</div>
+          </div>
+          <div class="code-block">
+            <div class="cb-header"><span class="cb-file">Project structure</span><span class="cb-lang">EXPECTED</span></div>
+            <pre><span class="cm">// Expected directory layout</span>
+src/
+├── main/java/
+│   └── framework/
+│       ├── base/          <span class="cm">// BaseTest, BaseApi, BasePage</span>
+│       ├── config/        <span class="cm">// ConfigLoader, Environment</span>
+│       ├── utils/         <span class="cm">// ApiUtils, DateUtils, DataBuilder</span>
+│       ├── models/        <span class="cm">// Patient, Prescription, Schedule POJOs</span>
+│       └── constants/     <span class="cm">// Endpoints, StatusCodes, TestGroups</span>
+└── test/java/
+    ├── api/               <span class="cm">// RestAssured API tests</span>
+    ├── e2e/               <span class="cm">// Selenium / Playwright E2E tests</span>
+    └── performance/       <span class="cm">// k6 scripts</span>
+resources/
+├── testdata/              <span class="cm">// JSON test data files</span>
+├── config/                <span class="cm">// dev.properties, staging.properties</span>
+└── testng.xml             <span class="cm">// Suite configurations</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 2 -->
+      <div class="task t2">
+        <div class="task-header">
+          <div class="task-num">02</div>
+          <div>
+            <div class="task-title">API Test Automation — Full Coverage</div>
+            <div class="task-pts">// 25 marks · Highest weight — this is core SDET work</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Write comprehensive API tests using RestAssured with Cucumber BDD. At this level, we expect happy path, negative cases, boundary values, schema validation, and chained test flows — not just status code assertions.</p>
+          <div class="req-list">
+            <div class="req"><strong>Auth module tests</strong> — register (valid + duplicate + invalid email), login (valid + wrong password + account disabled), token refresh (valid + expired + tampered), logout (valid + already-logged-out)</div>
+            <div class="req"><strong>Patient CRUD tests</strong> — create (valid + missing required fields + duplicate email), read (own profile + other patient's profile as Patient role = 403), update, delete (cascades to schedules?)</div>
+            <div class="req"><strong>Prescription upload tests</strong> — valid image upload + S3 URL returned, file too large (>10MB), unsupported file type, missing patient ID, Textract extraction verified in response body</div>
+            <div class="req"><strong>Reminder schedule tests</strong> — create schedule, snooze (valid timings + invalid timing), mark taken (idempotency — can you mark taken twice?), adherence calculation accuracy for edge dates</div>
+            <div class="req"><strong>Contract / schema validation</strong> — every API response validated against JSON Schema. Any schema mismatch fails the test immediately.</div>
+            <div class="req"><strong>BDD feature files</strong> — at least auth, patient, and reminder flows written as Gherkin <code>.feature</code> files with step definitions</div>
+          </div>
+          <div class="code-block">
+            <div class="cb-header"><span class="cb-file">PatientApiTests.java (sample pattern)</span><span class="cb-lang">JAVA</span></div>
+            <pre><span class="ann">@Test(groups = "regression")</span>
+<span class="ann">@Description("Patient cannot access another patient's profile")</span>
+<span class="kw">public void</span> <span class="ty">patient_cannotAccessOtherPatientProfile</span>() {
+    <span class="kw">var</span> token = AuthHelper.getPatientToken(<span class="str">"alice@test.com"</span>);
+    <span class="kw">var</span> otherPatientId = TestData.get(<span class="str">"other_patient_id"</span>);
+
+    given()
+        .header(<span class="str">"Authorization"</span>, <span class="str">"Bearer "</span> + token)
+    .when()
+        .get(<span class="str">"/api/v1/patients/"</span> + otherPatientId)
+    .then()
+        .statusCode(<span class="ty">403</span>)
+        .body(<span class="str">"error"</span>, notNullValue())
+        .body(matchesJsonSchemaInClasspath(<span class="str">"schemas/error-response.json"</span>));
+}</pre>
+          </div>
+          <div class="callout pink">
+            <div class="callout-head">// What We Look For</div>
+            <p>We count the <strong>negative test cases</strong>. Any senior SDET who writes only happy-path tests is not operating at this level. We expect at least 3 negative cases per endpoint.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 3 -->
+      <div class="task t3">
+        <div class="task-header">
+          <div class="task-num">03</div>
+          <div>
+            <div class="task-title">Performance Testing — Load, Stress & Spike</div>
+            <div class="task-pts">// 20 marks · Non-functional quality</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">This is a healthcare reminder system. If it slows down under load, reminders are delayed and patients miss doses. Performance is not optional. Design and run meaningful performance tests against the critical paths.</p>
+          <div class="req-list">
+            <div class="req"><strong>Tool choice</strong> — k6 (JavaScript-based, developer-friendly, CI-compatible) OR JMeter OR Gatling. Justify your choice in the README.</div>
+            <div class="req"><strong>Baseline test</strong> — 10 concurrent users for 5 minutes on the login + get schedule + mark taken flow. Establish baseline response times and error rate.</div>
+            <div class="req"><strong>Load test</strong> — ramp to 100 concurrent users over 5 minutes, hold for 10 minutes, ramp down. Monitor: p95 response time, error rate, throughput.</div>
+            <div class="req"><strong>Stress test</strong> — push to 500 concurrent users. Find the breaking point. Document where the system degrades and what breaks first (API timeout? DB connections? FCM rate limit?).</div>
+            <div class="req"><strong>Spike test</strong> — simulate a sudden 10x spike (10 → 100 users in 30 seconds) to simulate a viral hiring post scenario.</div>
+            <div class="req"><strong>Performance report</strong> — HTML report with p50/p95/p99 response times, throughput graph, error rate over time, and your pass/fail verdict with thresholds.</div>
+          </div>
+          <div class="callout yellow">
+            <div class="callout-head">// k6 Recommended</div>
+            <p>k6 integrates cleanly with GitHub Actions, outputs JSON results that can be parsed for quality gates, and scripts are version-controllable. <strong>Thresholds in k6:</strong> <code>http_req_duration: ['p95 &lt; 500']</code> — fail the pipeline if p95 exceeds 500ms.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 4 -->
+      <div class="task t4">
+        <div class="task-header">
+          <div class="task-num">04</div>
+          <div>
+            <div class="task-title">Security Testing — OWASP Healthcare Checks</div>
+            <div class="task-pts">// 15 marks · Non-negotiable in healthcare</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">This application handles prescription data and medical records. Security testing is mandatory — not optional, not aspirational. At 8 years experience, you are expected to know what to look for without being told every vulnerability.</p>
+          <div class="req-list">
+            <div class="req"><strong>JWT security checks</strong> — test with: expired token (should 401), tampered payload (should 401), algorithm confusion (alg:none attack), token reuse after logout</div>
+            <div class="req"><strong>Authorization tests</strong> — horizontal privilege escalation: Patient A accessing Patient B's prescriptions, schedules, reminder logs. Document every endpoint that should return 403 and verify each one.</div>
+            <div class="req"><strong>Input validation</strong> — SQL injection attempts in patient name/email fields, XSS payloads in text inputs, oversized payloads (20MB file upload), null byte injection in file names</div>
+            <div class="req"><strong>Sensitive data exposure</strong> — verify passwords are never returned in any API response, prescription S3 URLs are pre-signed with expiry (not permanent public URLs), error messages don't leak stack traces or internal paths</div>
+            <div class="req"><strong>OWASP ZAP scan</strong> — run an authenticated passive scan against the running API. Export the HTML report. Document which findings you'd raise as P1/P2/P3 defects and which are false positives.</div>
+          </div>
+          <div class="callout orange">
+            <div class="callout-head">// Document Your Findings Honestly</div>
+            <p>If you find a real vulnerability in the provided test system, <strong>document it clearly</strong> in your README with steps to reproduce. Finding real issues scores higher than a clean ZAP report with no findings. That just means you didn't look hard enough.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 5 -->
+      <div class="task t5">
+        <div class="task-header">
+          <div class="task-num">05</div>
+          <div>
+            <div class="task-title">E2E Test Suite — Critical User Journeys</div>
+            <div class="task-pts">// 15 marks · End-to-end coverage</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">Write E2E tests covering the three most critical user journeys. Use Selenium with Java or Playwright. These should test the full stack — frontend → API → database state verification.</p>
+          <div class="req-list">
+            <div class="req"><strong>Journey 1 — Prescription to Reminder:</strong> Login as patient → upload prescription image → verify Textract extraction in UI → confirm medicine schedule created → verify reminder appears in dashboard</div>
+            <div class="req"><strong>Journey 2 — Reminder Interaction:</strong> Login as patient → navigate to today's reminders → mark a reminder as taken → verify adherence % updates in dashboard → verify reminder_log entry via API call</div>
+            <div class="req"><strong>Journey 3 — Admin Oversight:</strong> Login as admin → view patient list → open a patient's prescription history → verify all uploaded prescriptions are listed with correct S3 metadata → deactivate patient → verify patient cannot log in</div>
+            <div class="req"><strong>Page Object Model</strong> — every UI interaction abstracted into page objects. Test methods contain zero raw selectors.</div>
+            <div class="req"><strong>Screenshot on failure</strong> — automatic screenshot captured and embedded in Allure report on any test failure</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 6 -->
+      <div class="task t6">
+        <div class="task-header">
+          <div class="task-num">06</div>
+          <div>
+            <div class="task-title">CI/CD Pipeline + Quality Gates</div>
+            <div class="task-pts">// 10 marks · Ship quality, not bugs</div>
+          </div>
+        </div>
+        <div class="task-body">
+          <p class="task-desc">A test suite that isn't in CI is not a test suite — it's a hobby project. Wire everything into GitHub Actions with meaningful quality gates that would actually block a bad build from shipping.</p>
+          <div class="req-list">
+            <div class="req"><strong>On every PR</strong> — run smoke API tests (auth + patient CRUD). Fail the PR if any smoke test fails. Run time must be under 3 minutes.</div>
+            <div class="req"><strong>On merge to main</strong> — run full API regression suite + E2E critical journeys. Publish Allure report as GitHub Pages artifact.</div>
+            <div class="req"><strong>Nightly scheduled run</strong> — run full regression + performance baseline. If p95 degrades more than 20% from previous baseline, send a Slack/email alert.</div>
+            <div class="req"><strong>Quality gates</strong> — define and enforce: <code>API test pass rate ≥ 95%</code>, <code>E2E pass rate ≥ 90%</code>, <code>p95 response time &lt; 500ms</code>, <code>zero P1 security findings</code>. Build fails if any gate is breached.</div>
+            <div class="req"><strong>Test parallelisation</strong> — API tests must run in parallel (TestNG parallel=methods or k6 VUs). Full regression must complete in under 8 minutes.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BONUS -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--purple)">// Think Ahead</p>
+    <h2 class="sec-title">What Would You Add?</h2>
+    <p class="sec-sub">Pick any <strong>1 or 2</strong> and implement. At 8 years experience, original thinking matters more than feature count.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card"><input type="checkbox" id="f1"><label for="f1">
+        <div class="fc-check">✓</div><div class="fc-icon">📱</div>
+        <div class="fc-title">Mobile App Testing</div>
+        <div class="fc-desc">Appium test suite for the Flutter patient app. Login, upload prescription, receive FCM notification, tap Take action. Real device or emulator.</div>
+        <span class="fc-difficulty fd-hard">Hard</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f2"><label for="f2">
+        <div class="fc-check">✓</div><div class="fc-icon">🤖</div>
+        <div class="fc-title">AI-Assisted Test Generation</div>
+        <div class="fc-desc">Use an LLM API to generate additional edge-case test scenarios from the OpenAPI spec. Show the generated tests passing or document why they failed.</div>
+        <span class="fc-difficulty fd-hard">Hard</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f3"><label for="f3">
+        <div class="fc-check">✓</div><div class="fc-icon">🔄</div>
+        <div class="fc-title">Contract Testing with Pact</div>
+        <div class="fc-desc">Consumer-driven contract tests between the Flutter frontend and Spring Boot backend using Pact. Catch API contract breaks before they reach production.</div>
+        <span class="fc-difficulty fd-hard">Hard</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f4"><label for="f4">
+        <div class="fc-check">✓</div><div class="fc-icon">🏥</div>
+        <div class="fc-title">Chaos Engineering</div>
+        <div class="fc-desc">Simulate S3 unavailable, Textract timeout, FCM rate limit exceeded. Verify the system degrades gracefully rather than crashing entirely.</div>
+        <span class="fc-difficulty fd-hard">Hard</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f5"><label for="f5">
+        <div class="fc-check">✓</div><div class="fc-icon">📊</div>
+        <div class="fc-title">Test Coverage Dashboard</div>
+        <div class="fc-desc">Build a simple HTML dashboard showing API coverage %, E2E coverage %, performance trends over the last 7 runs, security finding counts. Auto-generated from CI artifacts.</div>
+        <span class="fc-difficulty fd-med">Medium</span>
+      </label></div>
+
+      <div class="feature-card"><input type="checkbox" id="f6"><label for="f6">
+        <div class="fc-check">✓</div><div class="fc-icon">🔍</div>
+        <div class="fc-title">Accessibility Testing</div>
+        <div class="fc-desc">Run axe-core or Lighthouse against the React web dashboard. Document all WCAG 2.1 AA violations. Automate the check in CI.</div>
+        <span class="fc-difficulty fd-easy">Easy</span>
+      </label></div>
+    </div>
+  </div>
+</section>
+
+<!-- MINDSET QUESTIONS -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--qa)">// Mindset Questions</p>
+    <h2 class="sec-title">Answer These in Your README</h2>
+    <p class="sec-sub">We read these before running your tests. At senior level, thinking matters as much as code.</p>
+    <div class="mq-list">
+      <div class="mq">
+        <div class="mq-num">// Q1</div>
+        <div class="mq-text">The node-cron scheduler sends FCM reminders every 5 minutes. How would you write a reliable automated test for time-sensitive notifications without introducing real sleep/wait calls that bloat your test suite runtime?</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q2</div>
+        <div class="mq-text">AWS Textract is a paid external service you can't stub easily in tests. How would you design your test strategy to achieve meaningful prescription upload test coverage without calling Textract on every test run?</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q3</div>
+        <div class="mq-text">A developer pushes a change that makes the reminder scheduler send duplicate notifications to 300 patients. Your CI pipeline didn't catch it. Walk through exactly how you would improve the test architecture to prevent this category of regression.</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q4</div>
+        <div class="mq-text">Your performance test shows p95 = 480ms under 100 users — just within the 500ms threshold. The product manager wants to increase the user limit to 500 before the healthcare client goes live. What do you tell them and what data would you bring to that conversation?</div>
+      </div>
+      <div class="mq">
+        <div class="mq-num">// Q5</div>
+        <div class="mq-text">You've found a privilege escalation vulnerability — Patient A can read Patient B's prescription images via a direct S3 URL in the API response. The lead developer pushes back saying "it requires authentication to get the URL in the first place." How do you handle this technically and organisationally?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVALUATION -->
+<section class="section" style="padding-top:2rem">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--qa)">// Evaluation</p>
+    <h2 class="sec-title">How We Score</h2>
+    <table class="eval-table">
+      <thead><tr><th>Criteria</th><th>Marks</th><th>What We Look For</th></tr></thead>
+      <tbody>
+        <tr><td>Framework Architecture</td><td><span class="score-badge">15</span></td><td>Clean structure, data management, config abstraction, reporting</td></tr>
+        <tr><td>API Test Coverage</td><td><span class="score-badge">25</span></td><td>Happy path + negative cases + schema validation + BDD feature files</td></tr>
+        <tr><td>Performance Testing</td><td><span class="score-badge">20</span></td><td>All 4 scenarios, meaningful thresholds, HTML report</td></tr>
+        <tr><td>Security Testing</td><td><span class="score-badge">15</span></td><td>JWT, auth bypass, input validation, ZAP scan, findings documented</td></tr>
+        <tr><td>E2E Critical Journeys</td><td><span class="score-badge">15</span></td><td>3 journeys, POM, screenshot on failure</td></tr>
+        <tr><td>CI/CD Pipeline + Quality Gates</td><td><span class="score-badge">10</span></td><td>Smoke on PR, regression on merge, nightly perf, gates enforced</td></tr>
+        <tr><td>Bonus Features</td><td><span class="score-badge">+30</span></td><td>Well implemented, documented, original thinking visible</td></tr>
+      </tbody>
+    </table>
+    <div class="callout pink" style="margin-top:1rem">
+      <div class="callout-head">// Senior Level Expectation</div>
+      <p>We are not counting the number of tests. We are evaluating the <strong>quality of your test strategy</strong>. A well-architected suite with 80 tests that covers the real risk areas scores higher than 400 tests that all test the same happy path. Show us you think like a senior quality engineer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMISSION -->
+<section class="section" style="padding-top:2rem;padding-bottom:64px">
+  <div class="container">
+    <p class="sep" style="margin-top:0"></p>
+    <p class="sec-tag" style="color:var(--qa)">// Submission</p>
+    <h2 class="sec-title">How to Submit</h2>
+    <div class="submit-section">
+      <div class="submit-steps">
+        <div class="ss"><div class="ss-dot">01</div><div>
+          <div class="ss-title">Push to GitHub — Public Repo</div>
+          <div class="ss-desc">Clean repo structure. <code>.gitignore</code> excludes <code>target/</code>, <code>allure-results/</code>, <code>.env</code>. Include a <code>docker-compose.yml</code> that spins up the test environment with one command.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">02</div><div>
+          <div class="ss-title">README.md — Required (thorough)</div>
+          <div class="ss-desc">Framework design decisions and trade-offs, how to run each test type locally, CI pipeline explanation, all 5 mindset question answers, security findings summary, performance baseline numbers.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">03</div><div>
+          <div class="ss-title">Allure / ExtentReport Sample</div>
+          <div class="ss-desc">Include a sample Allure report (HTML export or GitHub Pages link). We should be able to see test categorisation, pass/fail breakdown, and at least one failure with screenshot.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">04</div><div>
+          <div class="ss-title">Performance Report</div>
+          <div class="ss-desc">Include the k6/JMeter/Gatling HTML report as a file in <code>reports/performance/</code>. Must show all 4 test scenarios with response time graphs.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">05</div><div>
+          <div class="ss-title">Email to careers@tekravio.com</div>
+          <div class="ss-desc">Subject: <code>SDET Assignment — [Your Name]</code><br>Include GitHub link + one paragraph on the most interesting quality risk you found in the system and how you tested it.</div>
+        </div></div>
+        <div class="ss"><div class="ss-dot">06</div><div>
+          <div class="ss-title">Deadline: 3 Days from Receipt</div>
+          <div class="ss-desc">Late submissions are not reviewed. A well-tested subset delivered on time beats an over-engineered submission delivered late.</div>
+        </div></div>
+      </div>
+    </div>
+    <div class="callout cyan" style="margin-top:1.5rem">
+      <div class="callout-head">// From Uday · Founder, Tekravio</div>
+      <p>At 8 years of SDET experience, we're not hiring someone to write tests. We're hiring someone to <strong>own quality</strong> across a delivery team. The way you structure your framework, the questions you ask, the risks you choose to prioritise, the findings you document — all of that tells us whether you think like a senior quality engineer or a script writer. Build this the way you would if it were going to production tomorrow.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">Tekr<span>avio</span></div>
+      <div>careers@tekravio.com · tekravio.com</div>
+      <div>© 2026 Tekravio Private Limited · Build. Train. Deliver.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
