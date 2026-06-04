@@ -9,7 +9,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-<style>
+<style>/* ── NAVIGATION ── */
+#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+  justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;
+  background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s ease}
+.logo{font-family:'Bebas Neue','Impact',sans-serif;font-size:1.25rem;letter-spacing:.08em;
+  color:#f0f2ff;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo em{font-style:normal}.logo-sub{font-size:.65rem;color:#5a6080;
+  font-family:'Fira Code',monospace;letter-spacing:.06em;font-style:normal}
+.desktop-nav{display:none;align-items:center;gap:1.5rem;list-style:none}
+.desktop-nav a{color:#8090b0;font-size:.875rem;font-weight:500;text-decoration:none;
+  transition:color .2s ease;white-space:nowrap}
+.desktop-nav a:hover,.desktop-nav a.active{color:#f0f2ff}
+.nav-cta-btn{background:#3b6ff5;color:#fff!important;padding:.5rem 1.25rem;
+  border-radius:8px;font-size:.875rem;font-weight:600;white-space:nowrap;
+  text-decoration:none;transition:opacity .2s ease;display:none}
+.nav-cta-btn:hover{opacity:.9}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:8px;min-width:44px;min-height:44px;align-items:center;
+  justify-content:center;flex-shrink:0;border-radius:6px;transition:background .2s ease}
+.hamburger:hover{background:rgba(255,255,255,.05)}
+.hamburger span{display:block;width:22px;height:2px;background:#f0f2ff;border-radius:2px;
+  transition:.2s ease}
+@media(min-width:768px){.desktop-nav{display:flex}.nav-cta-btn{display:inline-block}.hamburger{display:none}}
+.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;
+  background:rgba(4,6,14,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:1.5rem clamp(16px,4vw,32px);z-index:99;overflow-y:auto;
+  flex-direction:column;gap:.25rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{color:#8090b0;font-size:1.1rem;font-weight:500;padding:.875rem 0;
+  border-bottom:1px solid rgba(255,255,255,.07);min-height:52px;display:flex;
+  align-items:center;text-decoration:none;transition:color .2s ease}
+.mobile-nav a:hover{color:#f0f2ff}
+.mobile-nav .mob-cta{margin-top:1rem;text-align:center;background:#3b6ff5;color:#fff!important;
+  padding:1rem;border-radius:8px;font-weight:700;border-bottom:none;justify-content:center}
+/* ── END NAVIGATION ── */
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
@@ -30,27 +66,10 @@ code{font-family:'Fira Code',monospace;font-size:.85em;background:rgba(251,191,3
 p{color:#94a3b8}p strong{color:var(--ink)}
 
 /* HEADER */
-#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,48px);height:60px;background:rgba(4,6,14,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background var(--transition)}
-.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
 .logo-accent{color:#fbbf24}
-nav[aria-label="Main navigation"] ul.nav-links{display:none;list-style:none;gap:1.5rem}
-nav[aria-label="Main navigation"] ul.nav-links a{color:var(--muted);font-size:.875rem;font-weight:500;transition:color var(--transition)}
-nav[aria-label="Main navigation"] ul.nav-links a:hover,nav[aria-label="Main navigation"] ul.nav-links a.active{color:var(--ink)}
-nav[aria-label="Main navigation"] a.nav-cta{display:none;background:var(--blue);color:#fff;padding:.5rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;transition:opacity var(--transition)}
-nav[aria-label="Main navigation"] a.nav-cta:hover{opacity:.9}
 @media(min-width:768px){
-  nav[aria-label="Main navigation"] ul.nav-links{display:flex}
-  nav[aria-label="Main navigation"] a.nav-cta{display:inline-block}
-  .hamburger{display:none!important}
-}
-.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+  }
 .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:var(--transition)}
-.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(4,6,14,.97);backdrop-filter:blur(20px);padding:1.5rem 20px;z-index:99;overflow-y:auto;flex-direction:column;gap:.5rem}
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:var(--mid);font-size:1.1rem;font-weight:500;padding:.875rem 0;border-bottom:1px solid var(--border);min-height:52px;display:flex;align-items:center}
-.mobile-nav a:hover,.mobile-nav a.active{color:var(--ink)}
-.mobile-nav .nav-cta{margin-top:1rem;text-align:center;background:var(--blue);color:#fff;padding:1rem;border-radius:var(--radius-sm);font-weight:700;border-bottom:none}
-
 /* HERO */
 .hero{padding:clamp(100px,14vw,140px) 0 clamp(60px,8vw,80px);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .hero-orb1{position:absolute;top:-140px;right:-100px;width:580px;height:580px;background:radial-gradient(ellipse,rgba(0,201,167,.1) 0%,transparent 65%);pointer-events:none}
@@ -154,14 +173,37 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
   .hero-stats{gap:1.25rem}
   .services-grid{grid-template-columns:1fr}
   .process-steps{grid-template-columns:1fr}
-  .mobile-nav{top:60px}
-}
+  }
 @supports(padding-bottom:env(safe-area-inset-bottom)){
-  #header{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
-}
+  }
 </style>
 </head>
 <body>
+<header id="header">
+  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<em style="color:#fbbf24">avio</em></a>
+  <nav aria-label="Main navigation">
+    <ul class="desktop-nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/studio.html">Studio</a></li>
+      <li><a href="/academy.html" style="color:#fbbf24">Academy</a></li>
+      <li><a href="/labs.html">Labs</a></li>
+      <li><a href="/careers.html">Careers</a></li>
+    </ul>
+    <a href="/academy-contact.html" class="nav-cta-btn">Get in Touch →</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="/" onclick="toggleMenu()">Home</a>
+  <a href="/studio.html" onclick="toggleMenu()">Studio</a>
+  <a href="/academy.html" style="color:#fbbf24" onclick="toggleMenu()">Academy ●</a>
+  <a href="/labs.html" onclick="toggleMenu()">Labs</a>
+  <a href="/careers.html" onclick="toggleMenu()">Careers</a>
+  <a href="/academy-contact.html" class="mob-cta" onclick="toggleMenu()">Get in Touch →</a>
+</nav>
+
 
 <!-- HEADER -->
 <header id="header">
@@ -174,7 +216,7 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
       <li><a href="/labs.html">Labs</a></li>
       <li><a href="/careers.html">Careers</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Get in Touch →</a>
+    <a href="/academy-contact.html" class="nav-cta">Get in Touch →</a>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -188,7 +230,7 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
   <a href="/academy.html" style="color:#fbbf24" onclick="toggleMenu()">Academy ●</a>
   <a href="/labs.html" onclick="toggleMenu()">Labs</a>
   <a href="/careers.html" onclick="toggleMenu()">Careers</a>
-  <a href="#contact" class="nav-cta" onclick="toggleMenu()">Get in Touch →</a>
+  <a href="/academy-contact.html" class="nav-cta" onclick="toggleMenu()">Get in Touch →</a>
 </nav>
 
 <main>
@@ -377,23 +419,36 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 </footer>
 
 <script>
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  header.style.background = window.scrollY > 40 ? 'rgba(4,6,14,.96)' : 'rgba(4,6,14,.92)';
 }, { passive: true });
 
-function toggleMenu() {
-  const nav = document.getElementById('mobileNav');
-  const btn = document.getElementById('hamburger');
-  const open = nav.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-}
+
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script>
+function toggleMenu(){
+  const nav=document.getElementById('mobileNav');
+  const btn=document.getElementById('hamburger');
+  if(!nav||!btn)return;
+  const open=nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded',String(open));
+  document.body.style.overflow=open?'hidden':'';
+}
+window.addEventListener('resize',function(){
+  if(window.innerWidth>=768){
+    const nav=document.getElementById('mobileNav');
+    const btn=document.getElementById('hamburger');
+    if(nav)nav.classList.remove('open');
+    if(btn)btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }
+});
+const __hdr=document.getElementById('header');
+if(__hdr)window.addEventListener('scroll',function(){
+  __hdr.style.background=window.scrollY>40?'rgba(4,6,14,.97)':'rgba(4,6,14,.94)';
+},{passive:true});</script>
 </body>
 </html>
