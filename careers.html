@@ -18,6 +18,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── GLOBAL FIXES ── */
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
+*,:after,:before{box-sizing:border-box}
+/* Scroll offset for fixed header on all anchor targets */
+[id]{scroll-margin-top:72px}
+/* Touch targets */
+button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
+/* Prevent horizontal overflow from any child */
+.container{max-width:1060px;margin:0 auto;padding:0 clamp(16px,5vw,56px);width:100%}
+/* Input font-size ≥16px prevents iOS zoom */
+input,select,textarea{font-size:16px!important}
+/* ── END GLOBAL FIXES ── */
+
+
 /* ═══════════════════════════════════════════════════
    TEKRAVIO CAREERS — MOBILE-FIRST CSS
    Breakpoints: base=mobile, 640px=sm, 1024px=lg
@@ -153,7 +168,7 @@ h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;
 .careers-hero{padding-top:60px;min-height:auto;
   position:relative;overflow:hidden}
 @media(min-width:640px){.careers-hero{padding-top:68px}}
-@media(min-width:1024px){.careers-hero{min-height:100vh;display:flex;align-items:center}}
+@media(min-width:1024px){.careers-hero{min-height:100vh;display:flex;align-items:center;padding-top:clamp(80px,12vw,120px)}}
 
 .hero-bg-grid{position:absolute;inset:0;
   background-image:linear-gradient(rgba(59,111,245,0.04) 1px,transparent 1px),
@@ -591,6 +606,13 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 @supports(padding-bottom:env(safe-area-inset-bottom)){
   .submit-area{padding-bottom:env(safe-area-inset-bottom)}
 }
+
+@media(max-width:640px){
+.manifesto{grid-template-columns:1fr!important}
+.roles-grid{grid-template-columns:1fr!important}
+}
+
+@media(max-width:480px){.manifesto{grid-template-columns:repeat(2,1fr)!important}}
 </style>
 </head>
 <body>
@@ -607,7 +629,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
       <li><a href="/careers.html" style="color:#3b6ff5">Careers</a></li>
     </ul>
     <a href="/careers.html#apply" class="nav-cta-btn">Apply Now →</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
