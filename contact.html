@@ -4,9 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tekravio — Contact</title>
+<meta name="description" content="Get in touch with Tekravio — Studio consulting, Academy training, or Labs products. Contact us today.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── GLOBAL FIXES ── */
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
+*,:after,:before{box-sizing:border-box}
+/* Scroll offset for fixed header on all anchor targets */
+[id]{scroll-margin-top:72px}
+/* Touch targets */
+button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
+/* Prevent horizontal overflow from any child */
+.container{max-width:1060px;margin:0 auto;padding:0 clamp(16px,5vw,56px);width:100%}
+/* Input font-size ≥16px prevents iOS zoom */
+input,select,textarea{font-size:16px!important}
+/* ── END GLOBAL FIXES ── */
+
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04060e;--s1:#0b0f1e;--s2:#111829;--border:rgba(255,255,255,0.07);
@@ -176,6 +192,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   padding:1rem;border-radius:8px;font-weight:700;border-bottom:none;justify-content:center}
 /* ── END NAVIGATION ── */
 
+
+@media(max-width:640px){
+.fg-row{grid-template-columns:1fr!important}
+.spec-grid{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 <body>
@@ -190,7 +211,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
       <li><a href="/careers.html">Careers</a></li>
     </ul>
     <a href="/" class="nav-cta-btn">← Home</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -213,11 +234,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 
 <!-- TABS -->
 <div class="tabs">
-<button class="tab-btn" onclick="switchTab('studio',this)" id="tab-studio">
+<button type="button" class="tab-btn" onclick="switchTab('studio',this)" id="tab-studio">
     <span class="tab-dot dot-studio"></span>
     💻 Studio
   </button>
-  <button class="tab-btn" onclick="switchTab('labs',this)" id="tab-labs">
+  <button type="button" class="tab-btn" onclick="switchTab('labs',this)" id="tab-labs">
     <span class="tab-dot dot-labs"></span>
     📦 Labs
   </button>
