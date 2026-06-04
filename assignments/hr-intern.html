@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tekravio — HR Intern Assignment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Satoshi:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--surface:#0b0f1e;--surface2:#111829;--border:rgba(255,255,255,.07);--hr:#a78bfa;--blue:#3b6ff5;--cyan:#00c9a7;--radius:12px}
+body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--hr);border-radius:2px}
+h1,h2,h3{font-family:'Clash Display',sans-serif;letter-spacing:-.02em;line-height:1.1}
+code{font-family:'Fira Code',monospace;font-size:.82em;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:#c4b5fd;padding:2px 7px;border-radius:4px}
+.container{max-width:920px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+p{color:#94a3b8}p strong{color:var(--ink)}a{color:var(--hr)}
+.header{position:sticky;top:0;z-index:100;background:rgba(4,6,14,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.2rem;font-weight:700;color:var(--ink)}.logo span{color:var(--hr)}
+.hbadge{font-family:'Fira Code',monospace;font-size:.68rem;padding:4px 12px;border-radius:100px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:var(--hr);letter-spacing:.1em;text-transform:uppercase}
+.hero{padding:64px 0 48px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.orb1{position:absolute;top:-120px;right:-80px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(167,139,250,.12) 0%,transparent 65%);pointer-events:none}
+.orb2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(59,111,245,.07) 0%,transparent 65%);pointer-events:none}
+.etag{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--hr);margin-bottom:1rem}
+.hero-title{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;line-height:.9;letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero-title .a{color:var(--ink);display:block}.hero-title .b{color:var(--hr);display:block}.hero-title .c{-webkit-text-stroke:2px var(--ink);color:transparent;display:block}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:660px;line-height:1.75;margin-bottom:2rem}
+.meta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
+.mp{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;font-size:.8rem}
+.mp-l{color:var(--muted);font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase}.mp-v{font-weight:700;color:var(--ink)}
+.ctx{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--hr)}.ctx-l{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--hr)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--ink)}
+.sep{height:1px;background:var(--border);margin:2.5rem 0}
+.sec-tag{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.625rem;color:var(--hr)}
+.sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.5rem}
+.sec-sub{font-size:.9375rem;color:var(--muted);margin-bottom:2rem;line-height:1.7}
+.tasks{display:flex;flex-direction:column;gap:1.25rem}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.task-header{padding:1.125rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border);background:var(--surface2)}
+.tnum{font-family:'Clash Display',sans-serif;font-size:1.75rem;font-weight:700;min-width:2.5rem;line-height:1}
+.t1 .tnum{color:var(--hr)}.t2 .tnum{color:#fbbf24}.t3 .tnum{color:#4ade80}.t4 .tnum{color:var(--cyan)}.t5 .tnum{color:var(--blue)}
+.ttitle{font-size:1rem;font-weight:700;margin-bottom:2px}.tpts{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.08em}
+.tbody{padding:1.375rem 1.5rem}
+.tdesc{font-size:.9rem;color:#94a3b8;line-height:1.7;margin-bottom:1rem}
+.reqs{display:flex;flex-direction:column;gap:.5rem}
+.req{display:flex;gap:.75rem;font-size:.875rem;color:#94a3b8;align-items:flex-start;line-height:1.55}
+.req::before{content:'→';flex-shrink:0;margin-top:.125rem}
+.t1 .req::before{color:var(--hr)}.t2 .req::before{color:#fbbf24}.t3 .req::before{color:#4ade80}.t4 .req::before{color:var(--cyan)}.t5 .req::before{color:var(--blue)}
+.req strong{color:var(--ink)}
+.callout{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout.purple{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.15);border-left:3px solid var(--hr)}
+.callout.yellow{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-left:3px solid #fbbf24}
+.callout.red{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-left:3px solid #f87171}
+.ch{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.callout.purple .ch{color:var(--hr)}.callout.yellow .ch{color:#fbbf24}.callout.red .ch{color:#f87171}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--ink)}
+.mq-list{display:flex;flex-direction:column;gap:.875rem;margin-top:1.25rem}
+.mq{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--hr);border-radius:0 8px 8px 0;padding:1rem 1.25rem}
+.mq-n{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--hr);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.mq-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-table th{padding:.75rem 1rem;text-align:left;font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface2)}
+.eval-table td{padding:.875rem 1rem;border-bottom:1px solid var(--border);color:#94a3b8}
+.eval-table tr:last-child td{border-bottom:none}.sc{font-family:'Clash Display',sans-serif;font-size:1.2rem;color:var(--hr)}
+.submit-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:1.25rem}
+.ss-list{display:flex;flex-direction:column;gap:0;position:relative}
+.ss-list::before{content:'';position:absolute;left:19px;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--hr),var(--cyan));opacity:.18}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding-bottom:1.25rem}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;font-family:'Fira Code',monospace;flex-shrink:0;z-index:1;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);color:var(--hr)}
+.ss-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:.25rem}.ss-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+.section{padding:48px 0}
+footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
+.fi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:var(--muted)}
+.fl{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink)}.fl span{color:var(--hr)}
+@media(max-width:640px){.eval-table{font-size:.8rem}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="logo">Tekr<span>avio</span></div>
+  <div class="hbadge">HR Intern Assignment</div>
+</header>
+<main>
+<section class="hero">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="container">
+    <p class="etag">// Tekravio · HR Internship Assignment · 2026</p>
+    <h1 class="hero-title">
+      <span class="a">Build Tekravio's</span>
+      <span class="b">Hiring Engine.</span>
+      <span class="c">From Scratch.</span>
+    </h1>
+    <p class="hero-sub">This assignment simulates the first 30 days of your role as HR Intern at Tekravio. You will design a hiring process, write job descriptions, audit a hiring pipeline, and demonstrate that you understand people — not just process.</p>
+    <div class="meta-row">
+      <div class="mp"><span>⏱️</span><div><div class="mp-l">Deadline</div><div class="mp-v">3 Days</div></div></div>
+      <div class="mp"><span>👤</span><div><div class="mp-l">Level</div><div class="mp-v">HR Intern</div></div></div>
+      <div class="mp"><span>🎯</span><div><div class="mp-l">Focus</div><div class="mp-v">Talent Acquisition · Comms · Process Design</div></div></div>
+      <div class="mp"><span>📊</span><div><div class="mp-l">Marks</div><div class="mp-v">100 + 20 Bonus</div></div></div>
+      <div class="mp"><span>📧</span><div><div class="mp-l">Submit</div><div class="mp-v">careers@tekravio.com</div></div></div>
+    </div>
+    <div class="ctx">
+      <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// Context</div></div>
+      <div class="ctx-body">
+        <strong>The situation:</strong> Tekravio is growing fast. We have 400+ applications across Java, Python, React, Node.js, SDET, and now HR. We have no dedicated HR person. Applications are being reviewed by the founder between client meetings. The process is inconsistent, response times are slow, and some great candidates may have already dropped off.<br><br>
+        <strong>Your mission:</strong> You're stepping in as HR Intern. Your job is to fix the process, create structure, and ensure every applicant gets a fair, timely, and honest experience — whether the answer is yes or no. This assignment simulates that work.<br><br>
+        <strong>What Tekravio screens for (not GPA, not college):</strong> Genuine curiosity, mindset, what they've built, why Tekravio specifically.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+<div class="sep"></div>
+<p class="sec-tag">// Core Tasks</p>
+<h2 class="sec-title">5 tasks. 100 marks. 3 days.</h2>
+<p class="sec-sub">Each task is a real piece of work you'd own as HR Intern at Tekravio. We evaluate quality of thinking, not length of output.</p>
+
+<div class="tasks">
+
+<div class="task t1">
+  <div class="task-header"><div class="tnum">01</div><div><div class="ttitle">Write 2 Job Descriptions for Open Roles</div><div class="tpts">// 20 marks</div></div></div>
+  <div class="tbody">
+    <p class="tdesc">Write two complete, publish-ready JDs for Tekravio. One for a <strong>Java Backend Intern</strong> and one for an <strong>HR Intern</strong> (yes, your own role). These will be evaluated on clarity, honesty, tone, and whether a good candidate would actually apply after reading them.</p>
+    <div class="reqs">
+      <div class="req"><strong>Tone:</strong> Direct, honest, no corporate fluff. Tekravio's voice is "we don't care about your GPA, we care about what you've built." Match it.</div>
+      <div class="req"><strong>Structure per JD:</strong> Role title, what you'll own (not "responsibilities"), what we're looking for (not "requirements"), what you get, and how to apply</div>
+      <div class="req"><strong>Java JD:</strong> Must mention Spring Boot, real enterprise projects, PPO — without sounding like a Naukri template</div>
+      <div class="req"><strong>HR JD:</strong> Must communicate what real HR ownership at a startup looks like — not filing and scheduling</div>
+      <div class="req"><strong>Each JD:</strong> 200–350 words. Not a word more.</div>
+    </div>
+    <div class="callout purple">
+      <div class="ch">// What We're Really Testing</div>
+      <p>Can you write in a voice that isn't yours? Can you understand what a company actually values and translate it into words that attract the right people? A bland JD is an immediate fail regardless of how correct it is structurally.</p>
+    </div>
+  </div>
+</div>
+
+<div class="task t2">
+  <div class="task-header"><div class="tnum">02</div><div><div class="ttitle">Application Screening — Judge 5 Real Profiles</div><div class="tpts">// 25 marks</div></div></div>
+  <div class="tbody">
+    <p class="tdesc">Below are 5 fictional applicant profiles for the Java Backend Intern role. For each, write a screening verdict (Proceed / Hold / Reject) with a 3–5 sentence honest justification. Then write the actual response email you'd send them.</p>
+    <div class="reqs">
+      <div class="req"><strong>Profile A — Riya, 3rd year CSE, CGPA 9.1, no GitHub, no personal projects, cover letter says "I am hardworking and passionate about technology"</strong></div>
+      <div class="req"><strong>Profile B — Karan, 2nd year, CGPA 6.4, GitHub with 4 personal projects, built a Spring Boot food delivery API with JWT auth, cover letter mentions a specific problem he faced while building it</strong></div>
+      <div class="req"><strong>Profile C — Sneha, final year, CGPA 7.8, internship at TCS for 6 months ("worked on Java project"), no GitHub link, generic cover letter</strong></div>
+      <div class="req"><strong>Profile D — Arjun, dropped out of college, no formal degree, 2 open-source contributions to Spring projects, built a microservices side project deployed on AWS, mentions he learned everything from documentation and building</strong></div>
+      <div class="req"><strong>Profile E — Meera, MBA student applying for Java intern "because she wants to learn coding", no technical background, well-written thoughtful cover letter about why she wants to transition</strong></div>
+    </div>
+    <div class="callout yellow">
+      <div class="ch">// Grading Note</div>
+      <p>We are checking your judgment, not looking for a "correct" answer. What matters: <strong>can you see past the surface, recognise genuine effort, and communicate rejections with kindness and honesty?</strong> The email you write to Profile A matters as much as the verdict.</p>
+    </div>
+  </div>
+</div>
+
+<div class="task t3">
+  <div class="task-header"><div class="tnum">03</div><div><div class="ttitle">Design Tekravio's End-to-End Hiring Process</div><div class="tpts">// 25 marks</div></div></div>
+  <div class="tbody">
+    <p class="tdesc">Right now Tekravio's hiring process is: get application → review it whenever → send assignment → wait → do one interview → offer. There's no structure, no SLAs, no documentation. Design the full process.</p>
+    <div class="reqs">
+      <div class="req"><strong>Stage map:</strong> Every stage from "application received" to "offer sent" — what happens, who does it, how long it takes, what the candidate experiences at each step</div>
+      <div class="req"><strong>SLAs:</strong> Define specific response time commitments. E.g. "Application acknowledged within X hours, screening verdict within Y days." Be realistic, not aspirational.</div>
+      <div class="req"><strong>Rejection communication policy:</strong> How does Tekravio tell people they didn't get through? When? What does the message say? Design the template.</div>
+      <div class="req"><strong>Assignment stage:</strong> How is the assignment shared? What instructions do candidates get? How is it tracked?</div>
+      <div class="req"><strong>Interview stage:</strong> What does the 1 interview round cover for an intern? Who conducts it? What's the format? How long?</div>
+      <div class="req"><strong>Offer stage:</strong> What does an offer communication look like? What information does it include?</div>
+    </div>
+    <p class="tdesc" style="margin-top:1rem">Present this as a document — a structured process guide someone could follow on Day 1 without any context. Diagrams/flowcharts welcome. Plain text is fine if it's clear.</p>
+  </div>
+</div>
+
+<div class="task t4">
+  <div class="task-header"><div class="tnum">04</div><div><div class="ttitle">Write 3 Candidate Communication Templates</div><div class="tpts">// 15 marks</div></div></div>
+  <div class="tbody">
+    <p class="tdesc">Tekravio's candidate communication is currently inconsistent. Write three ready-to-use email templates that match Tekravio's direct, honest, human tone.</p>
+    <div class="reqs">
+      <div class="req"><strong>Template 1 — Application received + high volume delay notice:</strong> Acknowledge the application, mention the delay honestly, set clear expectations. Based on the real situation: 400+ applications received.</div>
+      <div class="req"><strong>Template 2 — Assignment share:</strong> Candidate has passed screening. Sharing the assignment link, instructions, deadline. Warm but clear. No corporate jargon.</div>
+      <div class="req"><strong>Template 3 — Rejection after assignment review:</strong> The candidate submitted but didn't make it to the interview round. Honest, kind, specific enough to be useful. Not "we'll keep your profile on file."</div>
+    </div>
+    <div class="callout red">
+      <div class="ch">// Common Failure Mode</div>
+      <p>Most candidates write templates that sound like they were copied from a corporate HR manual. <strong>Tekravio's voice is human. If Uday wouldn't say it in a WhatsApp message, it doesn't belong in the email.</strong></p>
+    </div>
+  </div>
+</div>
+
+<div class="task t5">
+  <div class="task-header"><div class="tnum">05</div><div><div class="ttitle">Employer Branding — 1 LinkedIn Post Draft</div><div class="tpts">// 15 marks</div></div></div>
+  <div class="tbody">
+    <p class="tdesc">Write one LinkedIn post from Uday's perspective about hiring at Tekravio. Not a job advertisement. A genuine, first-person post that builds employer brand and makes the right kind of candidates want to apply.</p>
+    <div class="reqs">
+      <div class="req"><strong>Length:</strong> 200–350 words. Written as Uday, first person.</div>
+      <div class="req"><strong>Angle — pick one:</strong> (a) What Tekravio looks for in candidates that most companies miss, (b) What the hiring process looks like from the inside, (c) Why Tekravio rejects CVs with a 9+ CGPA but no GitHub</div>
+      <div class="req"><strong>Tone:</strong> Honest, direct, slightly contrarian. Not a hype post. No "excited to announce" energy.</div>
+      <div class="req"><strong>CTA:</strong> Subtle — not "apply now!!!" at the end.</div>
+      <div class="req"><strong>Hashtags:</strong> 4–6 relevant ones. Don't pad.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="sep"></div>
+<p class="sec-tag" style="color:#fbbf24">// Bonus</p>
+<h2 class="sec-title">Go Further</h2>
+<p class="sec-sub">Pick one. Only attempt if all 5 core tasks are complete.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1.25rem">
+  <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid #fbbf24;border-radius:var(--radius);padding:1.25rem">
+    <div style="font-size:1.25rem;margin-bottom:.75rem">📊</div>
+    <div style="font-family:'Clash Display',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.375rem;color:var(--ink)">Hiring Metrics Dashboard Design</div>
+    <p style="font-size:.82rem;color:var(--muted)">Design what Tekravio's hiring dashboard should track: which metrics, what targets, how to report to the founder weekly. Include a sample weekly report template.</p>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-top:2px solid #f87171;border-radius:var(--radius);padding:1.25rem">
+    <div style="font-size:1.25rem;margin-bottom:.75rem">🎨</div>
+    <div style="font-family:'Clash Display',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.375rem;color:var(--ink)">Employer Branding — Instagram Caption Series</div>
+    <p style="font-size:.82rem;color:var(--muted)">Write 3 Instagram post captions (for hiring-related posts) that match Tekravio's voice. Each for a different post type: hiring announcement, behind-the-scenes, culture post.</p>
+  </div>
+</div>
+
+<div class="sep"></div>
+<p class="sec-tag">// Mindset Questions</p>
+<h2 class="sec-title">Answer These in Your Submission Doc</h2>
+<div class="mq-list">
+  <div class="mq"><div class="mq-n">// Q1</div><div class="mq-t">You've screened 50 applications. 30 are clear rejects. 12 are maybe. 8 are strong. The founder only has time to review 5 this week. How do you decide which 5? What's your decision framework?</div></div>
+  <div class="mq"><div class="mq-n">// Q2</div><div class="mq-t">A candidate who was rejected 3 months ago emails asking for feedback. They mention they've been improving and reapplied. They're borderline on the new application. How do you handle both requests — the feedback ask and the new application?</div></div>
+  <div class="mq"><div class="mq-n">// Q3</div><div class="mq-t">Tekravio says it doesn't filter on CGPA or college name. But Uday subconsciously tends to look more favourably at candidates from known colleges. As the HR intern, how do you address this — practically, not ideally?</div></div>
+  <div class="mq"><div class="mq-n">// Q4</div><div class="mq-t">You receive an application that's technically weak but has a cover letter that shows exceptional self-awareness and a genuine story. You believe in them but can't technically justify it. Do you advance them? How do you defend that decision to the founder?</div></div>
+</div>
+
+<div class="sep"></div>
+<p class="sec-tag">// Evaluation</p>
+<h2 class="sec-title">How We Score</h2>
+<table class="eval-table">
+  <thead><tr><th>Task</th><th>Marks</th><th>What We Look For</th></tr></thead>
+  <tbody>
+    <tr><td>JD Writing (2 JDs)</td><td><span class="sc">20</span></td><td>Tone match, clarity, no fluff, correct length, makes the right person want to apply</td></tr>
+    <tr><td>Application Screening (5 profiles)</td><td><span class="sc">25</span></td><td>Sound judgment, fair reasoning, kind and honest communication in the emails</td></tr>
+    <tr><td>Hiring Process Design</td><td><span class="sc">25</span></td><td>Complete, realistic, usable on Day 1. Not theoretical — actually implementable.</td></tr>
+    <tr><td>Communication Templates (3)</td><td><span class="sc">15</span></td><td>Human tone, Tekravio voice, clear and kind. Would Uday actually send this?</td></tr>
+    <tr><td>Employer Branding — LinkedIn Post</td><td><span class="sc">15</span></td><td>Authentic first-person voice, correct length, right tone, makes right people apply</td></tr>
+    <tr><td>Mindset Questions</td><td>Unscored</td><td>Read carefully. Tell us how you think.</td></tr>
+    <tr><td>Bonus</td><td><span class="sc">+20</span></td><td>Quality over completion. One great bonus beats two mediocre ones.</td></tr>
+  </tbody>
+</table>
+
+<div class="sep"></div>
+<p class="sec-tag">// Submit</p>
+<h2 class="sec-title">How to Submit</h2>
+<div class="submit-wrap">
+  <div class="ss-list">
+    <div class="ss"><div class="ss-dot">01</div><div><div class="ss-title">One Google Doc or PDF</div><div class="ss-desc">All 5 tasks + 4 mindset questions in one document. Clearly labelled. No loose files. Name the file: <code>HR-Assignment-[YourName].pdf</code></div></div></div>
+    <div class="ss"><div class="ss-dot">02</div><div><div class="ss-title">Email to careers@tekravio.com</div><div class="ss-desc">Subject: <code>HR Intern Assignment — [Your Name]</code><br>Attach the PDF. In the email body: one paragraph on which of the 5 profiles you found hardest to judge and why.</div></div></div>
+    <div class="ss"><div class="ss-dot">03</div><div><div class="ss-title">Deadline: 3 Days from Receipt</div><div class="ss-desc">Late submissions are not reviewed. A focused, honest submission delivered on time beats a comprehensive but late one.</div></div></div>
+  </div>
+</div>
+<div class="callout purple" style="margin-top:1.5rem">
+  <div class="ch">// From Uday · Founder, Tekravio</div>
+  <p>Good HR isn't about process. It's about judgment. Can you tell the difference between someone who's genuinely curious and someone who's rehearsed their answers? Can you write a rejection that doesn't make the person feel like a number? Can you build something from nothing and make it feel human? That's what this assignment is really testing. Show us how you think — not just what you know.</p>
+</div>
+</div>
+</main>
+<footer><div class="container"><div class="fi"><div class="fl">Tekr<span>avio</span></div><div>careers@tekravio.com · tekravio.com</div><div>© 2026 Tekravio Private Limited</div></div></div></footer>
+</body>
+</html>
