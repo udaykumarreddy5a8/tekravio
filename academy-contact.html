@@ -8,7 +8,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-<style>/* ── NAVIGATION ── */
+<style>
+/* ── GLOBAL FIXES ── */
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
+*,:after,:before{box-sizing:border-box}
+/* Scroll offset for fixed header on all anchor targets */
+[id]{scroll-margin-top:72px}
+/* Touch targets */
+button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
+/* Prevent horizontal overflow from any child */
+.container{max-width:1060px;margin:0 auto;padding:0 clamp(16px,5vw,56px);width:100%}
+/* Input font-size ≥16px prevents iOS zoom */
+input,select,textarea{font-size:16px!important}
+/* ── END GLOBAL FIXES ── */
+
+/* ── NAVIGATION ── */
 #header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
   justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;
   background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -82,7 +97,7 @@ p{color:#94a3b8}p strong{color:var(--ink)}
 .hero-sub strong{color:var(--ink)}
 
 /* FORM CARD */
-.form-wrap{padding:48px 0 80px}
+.form-wrap{padding:80px 0 80px}
 .form-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .form-card-header{padding:1.5rem 2rem;background:var(--surface2);border-bottom:1px solid var(--border);
   display:flex;align-items:center;gap:.875rem}
@@ -186,7 +201,7 @@ p{color:#94a3b8}p strong{color:var(--ink)}
       <li><a href="/careers.html">Careers</a></li>
     </ul>
     <a href="/academy.html" class="nav-cta-btn">← Academy</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
