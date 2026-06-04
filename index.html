@@ -95,7 +95,22 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-<style>/* ── NAVIGATION ── */
+<style>
+/* ── GLOBAL FIXES ── */
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
+*,:after,:before{box-sizing:border-box}
+/* Scroll offset for fixed header on all anchor targets */
+[id]{scroll-margin-top:72px}
+/* Touch targets */
+button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
+/* Prevent horizontal overflow from any child */
+.container{max-width:1060px;margin:0 auto;padding:0 clamp(16px,5vw,56px);width:100%}
+/* Input font-size ≥16px prevents iOS zoom */
+input,select,textarea{font-size:16px!important}
+/* ── END GLOBAL FIXES ── */
+
+/* ── NAVIGATION ── */
 #header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
   justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;
   background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -922,6 +937,19 @@ footer{
   .stat{padding:0 16px}
   .f-stats{flex-wrap:wrap}
 }
+
+@media(max-width:640px){
+.table-header{grid-template-columns:1fr!important}
+.table-row{grid-template-columns:1fr!important}
+.verticals{grid-template-columns:1fr!important}
+.stacks-grid{grid-template-columns:1fr!important}
+.hww-grid{grid-template-columns:1fr!important}
+.contact-grid{grid-template-columns:1fr!important}
+.form-row{grid-template-columns:1fr!important}
+.footer-top{grid-template-columns:1fr!important}
+.footer-top{grid-template-columns:1fr!important}
+.stacks-grid{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 
@@ -939,7 +967,7 @@ footer{
       <li><a href="/careers.html">Careers</a></li>
     </ul>
     <a href="/contact.html" class="nav-cta-btn">Get in Touch →</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -1421,7 +1449,7 @@ footer{
     <div class="founder-grid">
       <aside class="founder-card reveal" aria-label="Founder profile">
         <div class="founder-avatar">
-          <img src="founder.jpg" alt="Udaykumar Reddy — Founder &amp; CEO, Tekravio" style="width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;border-radius:inherit">
+          <img loading="lazy" src="founder.jpg" alt="Udaykumar Reddy — Founder &amp; CEO, Tekravio" style="width:100%;height:100%;object-fit:cover;object-position:center 12%;display:block;border-radius:inherit">
         </div>
         <div class="founder-name">Udaykumar Reddy</div>
         <div class="founder-title">Founder &amp; CEO · Tekravio</div>
