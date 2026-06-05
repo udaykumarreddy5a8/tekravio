@@ -18,6 +18,46 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── NAVIGATION ── */
+#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+  justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;
+  background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s ease}
+.logo{font-family:var(--font-display,'Clash Display'),sans-serif;font-size:1.25rem;letter-spacing:.06em;
+  color:var(--ink,#f0f2ff);text-decoration:none}
+.logo em{font-style:normal}
+.logo-accent{color:var(--blue,#3b6ff5)}
+.desktop-nav{display:none;list-style:none;gap:1.5rem;align-items:center}
+.desktop-nav a{color:var(--mid,#8090b0);font-size:.875rem;font-weight:500;text-decoration:none;
+  transition:color .2s ease;white-space:nowrap}
+.desktop-nav a:hover,.desktop-nav a.active{color:var(--ink,#f0f2ff)}
+.nav-cta-btn{background:var(--blue,#3b6ff5);color:#fff!important;padding:.5rem 1.25rem;
+  border-radius:8px;font-size:.875rem;font-weight:600;text-decoration:none;
+  transition:opacity .2s ease;white-space:nowrap;display:none}
+.nav-cta-btn:hover{opacity:.88}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:8px;min-width:44px;min-height:44px;align-items:center;
+  justify-content:center;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink,#f0f2ff);
+  border-radius:2px;transition:.2s ease;pointer-events:none}
+@media(min-width:768px){
+  .desktop-nav{display:flex}
+  .nav-cta-btn{display:inline-block}
+  .hamburger{display:none}
+}
+.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;
+  background:rgba(4,6,14,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:1.5rem clamp(16px,4vw,32px);z-index:99;overflow-y:auto;
+  flex-direction:column;gap:.25rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{color:var(--mid,#8090b0);font-size:1.1rem;font-weight:500;padding:.875rem 0;
+  border-bottom:1px solid rgba(255,255,255,.07);min-height:52px;display:flex;
+  align-items:center;text-decoration:none;transition:color .2s ease}
+.mobile-nav a:hover{color:var(--ink,#f0f2ff)}
+.mobile-nav .mob-cta{margin-top:1rem;justify-content:center;background:var(--blue,#3b6ff5);
+  color:#fff!important;padding:1rem;border-radius:8px;font-weight:700;border-bottom:none}
+/* ── END NAVIGATION ── */
+
 /* ═══════════════════════════════════════════════════
    TEKRAVIO CAREERS — MOBILE-FIRST CSS
    Breakpoints: base=mobile, 640px=sm, 1024px=lg
@@ -63,59 +103,29 @@ h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;
 /* ── HEADER ── */
 
 /* ── HEADER / NAV ── */
-#header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(16px,4vw,48px);height:60px;
-  background:rgba(4,6,14,0.92);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  transition:background var(--transition)}
-@media(min-width:640px){#header{height:68px}}
-@media(min-width:1024px){#header{padding:0 56px}}
 
-.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
-.logo-accent{color:var(--cyan)}
+@media(min-width:640px){}
+@media(min-width:1024px){}
 
-.desktop-nav{display:none;align-items:center;gap:1.5rem}
-.desktop-nav a{color:var(--muted);font-size:.875rem;font-weight:500;transition:color var(--transition)}
-.desktop-nav a:hover,.desktop-nav a.active{color:var(--ink)}
-.nav-cta-btn{background:var(--blue);color:#fff;padding:.5rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;white-space:nowrap}
 
-.hamburger{
-  display:flex;flex-direction:column;gap:5px;
-  background:none;border:none;cursor:pointer;
-  padding:8px;min-width:44px;min-height:44px;
-  align-items:center;justify-content:center;
-  flex-shrink:0}
-.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:var(--transition)}
 
-@media(min-width:768px){
-  .desktop-nav{display:flex}
-  .hamburger{display:none}
-}
 
-.mobile-nav{
-  display:none;
-  position:fixed;top:60px;left:0;right:0;bottom:0;
-  background:rgba(4,6,14,0.97);backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  padding:1.5rem clamp(16px,4vw,32px);
-  z-index:99;overflow-y:auto;
-  flex-direction:column;gap:.25rem}
-@media(min-width:640px){.mobile-nav{top:68px;padding:2rem 32px}}
-.mobile-nav.open{display:flex}
-.mobile-nav a{
-  color:var(--mid);font-size:1.1rem;font-weight:500;
-  padding:.875rem 0;border-bottom:1px solid var(--border);
-  min-height:52px;display:flex;align-items:center;
-  transition:color var(--transition)}
-.mobile-nav a:hover{color:var(--ink)}
-.mobile-nav .mob-cta{
-  margin-top:1rem;text-align:center;
-  background:var(--blue);color:#fff;padding:1rem;
-  border-radius:var(--radius-sm);font-weight:700;
-  border-bottom:none;justify-content:center}
+
+
+
+
+
+
+
+
+
+
+
+@media(min-width:640px){}
+
+
+
+
 
 
 /* ── HERO ── */
@@ -439,13 +449,11 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
 /* ── SAFE AREA (iPhone notch) ── */
 @supports(padding:max(0px)){
-  #header{padding-left:max(20px,env(safe-area-inset-left));
-    padding-right:max(20px,env(safe-area-inset-right))}
+  
   .container{padding-left:max(20px,env(safe-area-inset-left));
     padding-right:max(20px,env(safe-area-inset-right))}
   @media(min-width:640px){
-    #header{padding-left:max(32px,env(safe-area-inset-left));
-      padding-right:max(32px,env(safe-area-inset-right))}
+    
     .container{padding-left:max(32px,env(safe-area-inset-left));
       padding-right:max(32px,env(safe-area-inset-right))}}
 }
@@ -566,28 +574,28 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 
 <!-- ── HEADER ── -->
 <header id="header">
-  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<span class="logo-accent">avio</span></a>
-  <nav class="desktop-nav" aria-label="Main navigation">
-    <a href="/">Home</a>
-    <a href="/#services">Services</a>
-    <a href="/#stacks">Tech Stacks</a>
-    <a href="/#how">How We Work</a>
-    <a href="/#founder">About</a>
-    <a href="/careers.html" style="color:var(--cyan)">Careers</a>
+  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<span class="logo-accent" style="color:#3b6ff5">avio</span></a>
+  <nav aria-label="Main navigation">
+    <ul class="desktop-nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/studio.html">Studio</a></li>
+      <li><a href="/academy.html">Academy</a></li>
+      <li><a href="/labs.html">Labs</a></li>
+      <li><a href="/careers.html" style="color:#3b6ff5">Careers</a></li>
+    </ul>
+    <a href="#apply" class="nav-cta-btn">Apply Now →</a>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
-  <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
 </header>
-
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <a href="/" onclick="toggleMenu()">Home</a>
-  <a href="/#services" onclick="toggleMenu()">Services</a>
-  <a href="/#stacks" onclick="toggleMenu()">Tech Stacks</a>
-  <a href="/#how" onclick="toggleMenu()">How We Work</a>
-  <a href="/#founder" onclick="toggleMenu()">About</a>
-  <a href="/careers.html" style="color:var(--cyan)" onclick="toggleMenu()">Careers ●</a>
-  <a href="#apply" class="mob-cta" onclick="toggleMenu()">Apply Now →</a>
+  <a href="/">Home</a>
+  <a href="/studio.html">Studio</a>
+  <a href="/academy.html">Academy</a>
+  <a href="/labs.html">Labs</a>
+  <a href="/careers.html" style="color:#3b6ff5">Careers ●</a>
+  <a href="#apply" class="mob-cta">Apply Now →</a>
 </nav>
 
 <main>
@@ -1328,5 +1336,41 @@ ${fname} ${lname}`
 }
 </script>
 
+
+
+<script>
+(function(){
+  var hdr=document.getElementById('header');
+  var nav=document.getElementById('mobileNav');
+  var btn=document.getElementById('hamburger');
+  if(!nav||!btn) return;
+  function toggleMenu(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',String(open));
+    document.body.style.overflow=open?'hidden':'';
+  }
+  btn.addEventListener('click',toggleMenu);
+  // close on resize to desktop
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>=768){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    }
+  });
+  // scroll header opacity
+  if(hdr) window.addEventListener('scroll',function(){
+    hdr.style.background=window.scrollY>40?'rgba(4,6,14,.98)':'rgba(4,6,14,.94)';
+  },{passive:true});
+  // close mobile nav when a link is tapped
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    });
+  });
+})();
+</script>
 </body>
 </html>
