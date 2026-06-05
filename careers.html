@@ -34,10 +34,13 @@
   --transition:0.25s cubic-bezier(0.4,0,0.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%
+  overflow-x:hidden;}
 body{background:var(--bg);color:var(--ink);
   font-family:'Satoshi',sans-serif;font-size:1rem;line-height:1.7;
-  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  overflow-x:hidden;-webkit-font-smoothing:antialiased
+  word-break:break-word;
+  overflow-wrap:break-word;}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 img{max-width:100%;height:auto}
@@ -116,7 +119,7 @@ h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;
 
 
 /* ── HERO ── */
-.careers-hero{padding-top:60px;min-height:auto;
+.careers-hero{padding-top:80px;min-height:auto;
   position:relative;overflow:hidden}
 @media(min-width:640px){.careers-hero{padding-top:68px}}
 @media(min-width:1024px){.careers-hero{min-height:100vh;display:flex;align-items:center}}
@@ -572,7 +575,7 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
     <a href="/#founder">About</a>
     <a href="/careers.html" style="color:var(--cyan)">Careers</a>
   </nav>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+  <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </header>
