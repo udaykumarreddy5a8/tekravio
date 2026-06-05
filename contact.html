@@ -4,25 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tekravio — Contact</title>
-<meta name="description" content="Get in touch with Tekravio — Studio consulting, Academy training, or Labs products. Contact us today.">
+<meta name="description" content="Contact Tekravio — Studio consulting, Academy training, or Labs enquiries. Get in touch today.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ── GLOBAL FIXES ── */
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
-*,:after,:before{box-sizing:border-box}
-/* Scroll offset for fixed header on all anchor targets */
-[id]{scroll-margin-top:72px}
-/* Touch targets */
-button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
-/* Prevent horizontal overflow from any child */
-.container{max-width:1060px;margin:0 auto;padding:0 clamp(16px,5vw,56px);width:100%}
-/* Input font-size ≥16px prevents iOS zoom */
-input,select,textarea{font-size:16px!important}
-/* ── END GLOBAL FIXES ── */
-
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04060e;--s1:#0b0f1e;--s2:#111829;--border:rgba(255,255,255,0.07);
@@ -30,7 +15,8 @@ input,select,textarea{font-size:16px!important}
   --text:#e2e8f0;--muted:#5a6080;--mid:#8090b0;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden
+  word-break:break-word;overflow-wrap:break-word;}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 
 /* ── TABS ── */
@@ -193,10 +179,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 /* ── END NAVIGATION ── */
 
 
-@media(max-width:640px){
-.fg-row{grid-template-columns:1fr!important}
-.spec-grid{grid-template-columns:1fr!important}
-}
+/* scroll offset for fixed nav */
+section[id],div[id].section{scroll-margin-top:68px}
+
+/* iOS zoom fix */
+input,select,textarea,.field-input,.field-select,.field-textarea{font-size:16px}
 </style>
 </head>
 <body>
