@@ -125,7 +125,8 @@
   --transition:0.25s cubic-bezier(0.4,0,0.2,1);
 }
 
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased
+  overflow-x:hidden;}
 body{
   background:var(--bg);
   color:var(--ink);
@@ -133,7 +134,8 @@ body{
   font-size:15px;
   line-height:1.7;
   overflow-x:hidden;
-}
+  word-break:break-word;
+  overflow-wrap:break-word;}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
@@ -234,7 +236,7 @@ nav{display:flex;align-items:center;gap:8px}
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   text-align:center;
-  padding:120px 24px 80px;
+  padding:88px 24px 60px;
   position:relative;overflow:hidden;
 }
 .hero-grid{
@@ -395,7 +397,9 @@ nav{display:flex;align-items:center;gap:8px}
 
 /* ═══ SECTIONS ═══ */
 section{padding:100px 56px}
-.container{max-width:1100px;margin:0 auto}
+.container{max-width:1100px;margin:0 auto
+  padding-left:clamp(16px,5vw,56px);
+  padding-right:clamp(16px,5vw,56px);}
 .section-tag{
   font-family:'Fira Code',monospace;
   font-size:11px;letter-spacing:0.18em;
@@ -949,7 +953,7 @@ footer{
       <li><a href="/careers.html" style="color:var(--cyan)">Careers</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get in Touch →</a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
