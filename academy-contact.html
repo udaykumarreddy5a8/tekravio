@@ -8,43 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-<style>/* ── NAVIGATION ── */
-#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
-  justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;
-  background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s ease}
-.logo{font-family:'Bebas Neue','Impact',sans-serif;font-size:1.25rem;letter-spacing:.08em;
-  color:#f0f2ff;text-decoration:none;display:flex;align-items:center;gap:8px}
-.logo em{font-style:normal}.logo-sub{font-size:.65rem;color:#5a6080;
-  font-family:'Fira Code',monospace;letter-spacing:.06em;font-style:normal}
-.desktop-nav{display:none;align-items:center;gap:1.5rem;list-style:none}
-.desktop-nav a{color:#8090b0;font-size:.875rem;font-weight:500;text-decoration:none;
-  transition:color .2s ease;white-space:nowrap}
-.desktop-nav a:hover,.desktop-nav a.active{color:#f0f2ff}
-.nav-cta-btn{background:#3b6ff5;color:#fff!important;padding:.5rem 1.25rem;
-  border-radius:8px;font-size:.875rem;font-weight:600;white-space:nowrap;
-  text-decoration:none;transition:opacity .2s ease;display:none}
-.nav-cta-btn:hover{opacity:.9}
-.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;
-  cursor:pointer;padding:8px;min-width:44px;min-height:44px;align-items:center;
-  justify-content:center;flex-shrink:0;border-radius:6px;transition:background .2s ease}
-.hamburger:hover{background:rgba(255,255,255,.05)}
-.hamburger span{display:block;width:22px;height:2px;background:#f0f2ff;border-radius:2px;
-  transition:.2s ease}
-@media(min-width:768px){.desktop-nav{display:flex}.nav-cta-btn{display:inline-block}.hamburger{display:none}}
-.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;
-  background:rgba(4,6,14,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  padding:1.5rem clamp(16px,4vw,32px);z-index:99;overflow-y:auto;
-  flex-direction:column;gap:.25rem}
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:#8090b0;font-size:1.1rem;font-weight:500;padding:.875rem 0;
-  border-bottom:1px solid rgba(255,255,255,.07);min-height:52px;display:flex;
-  align-items:center;text-decoration:none;transition:color .2s ease}
-.mobile-nav a:hover{color:#f0f2ff}
-.mobile-nav .mob-cta{margin-top:1rem;text-align:center;background:#3b6ff5;color:#fff!important;
-  padding:1rem;border-radius:8px;font-weight:700;border-bottom:none;justify-content:center}
-/* ── END NAVIGATION ── */
-
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
@@ -53,14 +17,18 @@
   --blue:#3b6ff5;--radius:12px;--radius-sm:8px;--transition:.2s ease;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh
-  word-break:break-word;overflow-wrap:break-word;}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
 a{color:var(--accent);text-decoration:none}
 p{color:#94a3b8}p strong{color:var(--ink)}
 .container{max-width:720px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
 
 /* HEADER */
+#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,4vw,48px);height:60px;
+  background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.08em;color:var(--ink)}
 .logo em{color:var(--accent);font-style:normal}
 .logo-sub{font-size:.7rem;color:var(--muted);font-family:'Fira Code',monospace;letter-spacing:.06em;margin-left:8px}
 .header-back{font-size:.8rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;transition:color var(--transition)}
@@ -173,40 +141,9 @@ p{color:#94a3b8}p strong{color:var(--ink)}
   .form-body{padding:1.25rem}
   .success-state{padding:2rem 1.25rem}
 }
-
-/* scroll offset for fixed nav */
-section[id],div[id].section{scroll-margin-top:68px}
-
-/* iOS zoom fix */
-input,select,textarea,.field-input,.field-select,.field-textarea{font-size:16px}
 </style>
 </head>
 <body>
-<header id="header">
-  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<em style="color:#fbbf24">avio</em></a>
-  <nav aria-label="Main navigation">
-    <ul class="desktop-nav">
-      <li><a href="/">Home</a></li>
-      <li><a href="/studio.html">Studio</a></li>
-      <li><a href="/academy.html" style="color:#fbbf24">Academy</a></li>
-      <li><a href="/labs.html">Labs</a></li>
-      <li><a href="/careers.html">Careers</a></li>
-    </ul>
-    <a href="/academy.html" class="nav-cta-btn">← Academy</a>
-    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-</header>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <a href="/" onclick="toggleMenu()">Home</a>
-  <a href="/studio.html" onclick="toggleMenu()">Studio</a>
-  <a href="/academy.html" style="color:#fbbf24" onclick="toggleMenu()">Academy ●</a>
-  <a href="/labs.html" onclick="toggleMenu()">Labs</a>
-  <a href="/careers.html" onclick="toggleMenu()">Careers</a>
-  <a href="/academy.html" class="mob-cta" onclick="toggleMenu()">← Academy</a>
-</nav>
-
 
 <header id="header">
   <a href="/" class="logo">Tekr<em>avio</em><span class="logo-sub">// academy</span></a>
@@ -445,27 +382,5 @@ function toggleType(type) {
   companyInput.placeholder = placeholders[type] || 'Your organisation';
 }
 </script>
-<script>
-function toggleMenu(){
-  const nav=document.getElementById('mobileNav');
-  const btn=document.getElementById('hamburger');
-  if(!nav||!btn)return;
-  const open=nav.classList.toggle('open');
-  btn.setAttribute('aria-expanded',String(open));
-  document.body.style.overflow=open?'hidden':'';
-}
-window.addEventListener('resize',function(){
-  if(window.innerWidth>=768){
-    const nav=document.getElementById('mobileNav');
-    const btn=document.getElementById('hamburger');
-    if(nav)nav.classList.remove('open');
-    if(btn)btn.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  }
-});
-const __hdr=document.getElementById('header');
-if(__hdr)window.addEventListener('scroll',function(){
-  __hdr.style.background=window.scrollY>40?'rgba(4,6,14,.97)':'rgba(4,6,14,.94)';
-},{passive:true});</script>
 </body>
 </html>
