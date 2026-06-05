@@ -53,8 +53,11 @@
   --blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;
   --text:#e2e8f0;--muted:#5a6080;--mid:#8090b0;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+html{scroll-behavior:smooth
+  overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden
+  word-break:break-word;
+  overflow-wrap:break-word;}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 
 /* ── TABS ── */
@@ -75,7 +78,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── HERO ── */
-.form-hero{padding:56px 40px 40px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.form-hero{padding:72px 40px 40px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .fh-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:10px}
 .fh-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,76px);line-height:0.88;letter-spacing:0.01em;margin-bottom:12px}
 .fh-sub{font-size:15px;color:var(--muted);max-width:520px;line-height:1.75}
@@ -176,11 +179,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .f-labs .spec-dot{background:#8b5cf6}
 
 /* ── FOOTER ── */
-.form-footer{text-align:center;margin-top:28px;font-size:12px;color:var(--muted);line-height:1.7}
+.form-footer{text-align:center;margin-top:28px;font-size:12px;color:var(--muted);line-height:1.7
+  padding:2rem;}
 .form-footer a{color:inherit;text-decoration:underline}
 
 /* ── NAV ── */
-.top-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border)}
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:72px 40px;border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.08em;color:var(--text)}
 .nav-logo span{color:var(--blue)}
 .nav-back{font-size:12px;color:var(--muted);font-weight:500;text-decoration:none;display:flex;align-items:center;gap:6px}
@@ -191,6 +195,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   .form-hero{padding:36px 20px 28px}.form-body{padding:28px 20px 60px}
   .spec-grid{grid-template-columns:1fr}.top-nav{padding:16px 20px}
 }
+
+@media(max-width:480px){.form-body{padding:24px 16px 48px}.form-hero{padding:72px 16px 24px}.top-nav{padding:72px 16px 16px}}
 </style>
 </head>
 <body>
