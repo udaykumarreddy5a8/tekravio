@@ -10,6 +10,46 @@
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── NAVIGATION ── */
+#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+  justify-content:space-between;padding:0 clamp(16px,4vw,48px);height:60px;
+  background:rgba(4,6,14,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07);transition:background .2s ease}
+.logo{font-family:var(--font-display,'Clash Display'),sans-serif;font-size:1.25rem;letter-spacing:.06em;
+  color:var(--ink,#f0f2ff);text-decoration:none}
+.logo em{font-style:normal}
+.logo-accent{color:var(--blue,#3b6ff5)}
+.desktop-nav{display:none;list-style:none;gap:1.5rem;align-items:center}
+.desktop-nav a{color:var(--mid,#8090b0);font-size:.875rem;font-weight:500;text-decoration:none;
+  transition:color .2s ease;white-space:nowrap}
+.desktop-nav a:hover,.desktop-nav a.active{color:var(--ink,#f0f2ff)}
+.nav-cta-btn{background:var(--blue,#3b6ff5);color:#fff!important;padding:.5rem 1.25rem;
+  border-radius:8px;font-size:.875rem;font-weight:600;text-decoration:none;
+  transition:opacity .2s ease;white-space:nowrap;display:none}
+.nav-cta-btn:hover{opacity:.88}
+.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;
+  cursor:pointer;padding:8px;min-width:44px;min-height:44px;align-items:center;
+  justify-content:center;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink,#f0f2ff);
+  border-radius:2px;transition:.2s ease;pointer-events:none}
+@media(min-width:768px){
+  .desktop-nav{display:flex}
+  .nav-cta-btn{display:inline-block}
+  .hamburger{display:none}
+}
+.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;
+  background:rgba(4,6,14,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:1.5rem clamp(16px,4vw,32px);z-index:99;overflow-y:auto;
+  flex-direction:column;gap:.25rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{color:var(--mid,#8090b0);font-size:1.1rem;font-weight:500;padding:.875rem 0;
+  border-bottom:1px solid rgba(255,255,255,.07);min-height:52px;display:flex;
+  align-items:center;text-decoration:none;transition:color .2s ease}
+.mobile-nav a:hover{color:var(--ink,#f0f2ff)}
+.mobile-nav .mob-cta{margin-top:1rem;justify-content:center;background:var(--blue,#3b6ff5);
+  color:#fff!important;padding:1rem;border-radius:8px;font-weight:700;border-bottom:none}
+/* ── END NAVIGATION ── */
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--mid:#8090b0;
@@ -33,26 +73,26 @@ code{font-family:'Fira Code',monospace;font-size:.85em;background:rgba(0,201,167
 p{color:#94a3b8}p strong{color:var(--ink)}
 
 /* HEADER */
-#header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,48px);height:60px;background:rgba(4,6,14,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background var(--transition)}
-.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--ink)}
-.logo-accent{color:var(--cyan)}
-nav[aria-label="Main navigation"] ul.nav-links{display:none;list-style:none;gap:1.5rem}
-nav[aria-label="Main navigation"] ul.nav-links a{color:var(--muted);font-size:.875rem;font-weight:500;transition:color var(--transition)}
+
+
+
+nav[aria-label="Main navigation"] ul
+nav[aria-label="Main navigation"] ul
 nav[aria-label="Main navigation"] ul.nav-links a:hover,nav[aria-label="Main navigation"] ul.nav-links a.active{color:var(--ink)}
-nav[aria-label="Main navigation"] a.nav-cta{display:none;background:var(--blue);color:#fff;padding:.5rem 1.25rem;border-radius:var(--radius-sm);font-size:.875rem;font-weight:600;transition:opacity var(--transition)}
-nav[aria-label="Main navigation"] a.nav-cta:hover{opacity:.9}
+nav[aria-label="Main navigation"] a
+nav[aria-label="Main navigation"] a
 @media(min-width:768px){
-  nav[aria-label="Main navigation"] ul.nav-links{display:flex}
-  nav[aria-label="Main navigation"] a.nav-cta{display:inline-block}
-  .hamburger{display:none!important}
+  nav[aria-label="Main navigation"] ul
+  nav[aria-label="Main navigation"] a
+  
 }
-.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
-.hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:var(--transition)}
-.mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(4,6,14,.97);backdrop-filter:blur(20px);padding:1.5rem 20px;z-index:99;overflow-y:auto;flex-direction:column;gap:.5rem}
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:var(--mid);font-size:1.1rem;font-weight:500;padding:.875rem 0;border-bottom:1px solid var(--border);min-height:52px;display:flex;align-items:center}
+
+
+
+
+
 .mobile-nav a:hover,.mobile-nav a.active{color:var(--ink)}
-.mobile-nav .nav-cta{margin-top:1rem;text-align:center;background:var(--blue);color:#fff;padding:1rem;border-radius:var(--radius-sm);font-weight:700;border-bottom:none}
+.mobile-nav 
 
 /* HERO */
 .hero{padding:clamp(80px,12vw,120px) 0 clamp(60px,8vw,80px);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
@@ -157,10 +197,10 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
   .hero-stats{gap:1.25rem}
   .services-grid{grid-template-columns:1fr}
   .process-steps{grid-template-columns:1fr}
-  .mobile-nav{top:60px}
+  
 }
 @supports(padding-bottom:env(safe-area-inset-bottom)){
-  #header{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+  
 }
 </style>
 </head>
@@ -168,30 +208,38 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
 
 <!-- HEADER -->
 <header id="header">
-  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<span class="logo-accent">avio</span></a>
+  <a href="/" class="logo" aria-label="Tekravio Home">Tekr<span class="logo-accent" style="color:#00c9a7">avio</span></a>
   <nav aria-label="Main navigation">
-    <ul class="nav-links">
+    <ul class="desktop-nav">
       <li><a href="/">Home</a></li>
-      <li><a href="/studio.html" class="active" style="color:var(--cyan)">Studio</a></li>
+      <li><a href="/studio.html" style="color:#00c9a7">Studio</a></li>
       <li><a href="/academy.html">Academy</a></li>
       <li><a href="/labs.html">Labs</a></li>
       <li><a href="/careers.html">Careers</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Get in Touch →</a>
-    <button type="button" class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
+    <a href="/studio-contact.html" class="nav-cta-btn">Start a Project →</a>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
 </header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <a href="/">Home</a>
+  <a href="/studio.html" style="color:#00c9a7">Studio ●</a>
+  <a href="/academy.html">Academy</a>
+  <a href="/labs.html">Labs</a>
+  <a href="/careers.html">Careers</a>
+  <a href="/studio-contact.html" class="mob-cta">Start a Project →</a>
+</nav>
 
 <!-- MOBILE NAV -->
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <a href="/" onclick="toggleMenu()">Home</a>
-  <a href="/studio.html" style="color:var(--cyan)" onclick="toggleMenu()">Studio ●</a>
-  <a href="/academy.html" onclick="toggleMenu()">Academy</a>
-  <a href="/labs.html" onclick="toggleMenu()">Labs</a>
-  <a href="/careers.html" onclick="toggleMenu()">Careers</a>
-  <a href="#contact" class="nav-cta" onclick="toggleMenu()">Get in Touch →</a>
+  <a href="/">Home</a>
+  <a href="/studio.html" style="color:var(--cyan)">Studio ●</a>
+  <a href="/academy.html">Academy</a>
+  <a href="/labs.html">Labs</a>
+  <a href="/careers.html">Careers</a>
+  <a href="#contact" class="nav-cta">Get in Touch →</a>
 </nav>
 
 <main>
@@ -397,24 +445,42 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
   </div>
 </footer>
 
+
+
+
 <script>
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  header.style.background = window.scrollY > 40 ? 'rgba(4,6,14,.96)' : 'rgba(4,6,14,.92)';
-}, { passive: true });
-
-function toggleMenu() {
-  const nav = document.getElementById('mobileNav');
-  const btn = document.getElementById('hamburger');
-  const open = nav.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-}
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+(function(){
+  var hdr=document.getElementById('header');
+  var nav=document.getElementById('mobileNav');
+  var btn=document.getElementById('hamburger');
+  if(!nav||!btn) return;
+  function toggleMenu(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',String(open));
+    document.body.style.overflow=open?'hidden':'';
+  }
+  btn.addEventListener('click',toggleMenu);
+  // close on resize to desktop
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>=768){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    }
+  });
+  // scroll header opacity
+  if(hdr) window.addEventListener('scroll',function(){
+    hdr.style.background=window.scrollY>40?'rgba(4,6,14,.98)':'rgba(4,6,14,.94)';
+  },{passive:true});
+  // close mobile nav when a link is tapped
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    });
+  });
+})();
 </script>
 </body>
 </html>
