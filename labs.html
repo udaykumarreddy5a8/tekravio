@@ -20,8 +20,11 @@
   --radius:12px;--radius-sm:8px;
   --transition:.2s ease;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth
+  overflow-x:hidden;}
+body{background:var(--bg);color:var(--ink);font-family:'Satoshi',sans-serif;font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased
+  word-break:break-word;
+  overflow-wrap:break-word;}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:#a78bfa;border-radius:2px}
 a{color:#a78bfa;text-decoration:none}
 h1,h2,h3{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1}
@@ -52,7 +55,7 @@ nav[aria-label="Main navigation"] a.nav-cta:hover{opacity:.9}
 .mobile-nav .nav-cta{margin-top:1rem;text-align:center;background:var(--blue);color:#fff;padding:1rem;border-radius:var(--radius-sm);font-weight:700;border-bottom:none}
 
 /* HERO */
-.hero{padding:clamp(100px,14vw,140px) 0 clamp(60px,8vw,80px);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero{padding:clamp(80px,12vw,120px) 0 clamp(60px,8vw,80px);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .hero-orb1{position:absolute;top:-140px;right:-100px;width:580px;height:580px;background:radial-gradient(ellipse,rgba(0,201,167,.1) 0%,transparent 65%);pointer-events:none}
 .hero-orb2{position:absolute;bottom:-100px;left:-80px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(59,111,245,.07) 0%,transparent 65%);pointer-events:none}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:72px 72px;pointer-events:none}
@@ -175,7 +178,7 @@ footer{border-top:1px solid var(--border);padding:2rem 0}
       <li><a href="/careers.html">Careers</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get in Touch →</a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
