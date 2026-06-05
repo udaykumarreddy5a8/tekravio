@@ -37,8 +37,7 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);
   font-family:'Satoshi',sans-serif;font-size:1rem;line-height:1.7;
-  overflow-x:hidden;-webkit-font-smoothing:antialiased
-  word-break:break-word;overflow-wrap:break-word;}
+  overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 img{max-width:100%;height:auto}
@@ -592,11 +591,6 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
 @supports(padding-bottom:env(safe-area-inset-bottom)){
   .submit-area{padding-bottom:env(safe-area-inset-bottom)}
 }
-
-/* scroll offset for fixed nav */
-section[id],div[id].section{scroll-margin-top:68px}
-
-@media(max-width:480px){.manifesto{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -613,7 +607,7 @@ section[id],div[id].section{scroll-margin-top:68px}
       <li><a href="/careers.html" style="color:#3b6ff5">Careers</a></li>
     </ul>
     <a href="/careers.html#apply" class="nav-cta-btn">Apply Now →</a>
-    <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </nav>
