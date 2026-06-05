@@ -18,21 +18,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* ── GLOBAL FIXES ── */
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{overflow-x:hidden;word-break:break-word;overflow-wrap:break-word}
-*,:after,:before{box-sizing:border-box}
-/* Scroll offset for fixed header on all anchor targets */
-[id]{scroll-margin-top:72px}
-/* Touch targets */
-button,a,[role="button"]{-webkit-tap-highlight-color:transparent}
-/* Prevent horizontal overflow from any child */
-.container{max-width:1060px;margin:0 auto;padding:0 clamp(16px,5vw,56px);width:100%}
-/* Input font-size ≥16px prevents iOS zoom */
-input,select,textarea{font-size:16px!important}
-/* ── END GLOBAL FIXES ── */
-
-
 /* ═══════════════════════════════════════════════════
    TEKRAVIO CAREERS — MOBILE-FIRST CSS
    Breakpoints: base=mobile, 640px=sm, 1024px=lg
@@ -52,7 +37,8 @@ input,select,textarea{font-size:16px!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);
   font-family:'Satoshi',sans-serif;font-size:1rem;line-height:1.7;
-  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  overflow-x:hidden;-webkit-font-smoothing:antialiased
+  word-break:break-word;overflow-wrap:break-word;}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:2px}
 img{max-width:100%;height:auto}
@@ -168,7 +154,7 @@ h1,h2,h3,h4{font-family:'Clash Display',sans-serif;font-weight:600;
 .careers-hero{padding-top:60px;min-height:auto;
   position:relative;overflow:hidden}
 @media(min-width:640px){.careers-hero{padding-top:68px}}
-@media(min-width:1024px){.careers-hero{min-height:100vh;display:flex;align-items:center;padding-top:clamp(80px,12vw,120px)}}
+@media(min-width:1024px){.careers-hero{min-height:100vh;display:flex;align-items:center}}
 
 .hero-bg-grid{position:absolute;inset:0;
   background-image:linear-gradient(rgba(59,111,245,0.04) 1px,transparent 1px),
@@ -607,12 +593,10 @@ optgroup option{font-weight:400;color:var(--ink);font-size:.9375rem}
   .submit-area{padding-bottom:env(safe-area-inset-bottom)}
 }
 
-@media(max-width:640px){
-.manifesto{grid-template-columns:1fr!important}
-.roles-grid{grid-template-columns:1fr!important}
-}
+/* scroll offset for fixed nav */
+section[id],div[id].section{scroll-margin-top:68px}
 
-@media(max-width:480px){.manifesto{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:480px){.manifesto{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
