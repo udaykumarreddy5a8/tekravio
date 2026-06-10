@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Intern Assignment — Claude Deep Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04060e;--surface:#0b0f1e;--surface2:#111829;
+  --border:rgba(255,255,255,0.07);
+  --blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;
+  --purple:#8b5cf6;--yellow:#fbbf24;--red:#f87171;--green:#4ade80;
+  --text:#e2e8f0;--muted:#5a6080;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--purple);border-radius:2px}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,80px) 60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'';position:absolute;top:-120px;right:-80px;width:600px;height:600px;background:radial-gradient(ellipse,rgba(139,92,246,.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-40px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(59,111,245,.08) 0%,transparent 65%);pointer-events:none}
+.hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;letter-spacing:.06em;color:var(--text)}
+.logo span{color:var(--purple)}
+.badge{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--purple);border:1px solid rgba(139,92,246,.3);padding:6px 14px;border-radius:4px}
+.hero-tag{font-family:'Fira Code',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:1.25rem}
+h1{font-family:'Clash Display',sans-serif;font-size:clamp(2.4rem,7vw,5rem);font-weight:700;line-height:1.0;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero-sub{font-size:clamp(.95rem,2vw,1.1rem);color:var(--muted);max-width:700px;line-height:1.75;margin-bottom:2.5rem}
+.meta-row{display:flex;flex-wrap:wrap;gap:1rem}
+.meta-pill{display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.75rem 1.25rem}
+.mi{font-size:1.3rem}
+.ml{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mv{font-size:.9rem;font-weight:600;color:var(--text);margin-top:2px}
+
+/* ── CONTAINER ── */
+.container{max-width:900px;margin:0 auto;padding:clamp(40px,8vw,80px) clamp(20px,6vw,56px)}
+
+/* ── SEC TAG ── */
+.sec-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem}
+h2{font-family:'Clash Display',sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+p{color:var(--muted);margin-bottom:1rem}
+.sep{height:1px;background:var(--border);margin:3rem 0}
+
+/* ── CALLOUT ── */
+.callout{border:1px solid;border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem}
+.callout.purple{border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.05)}
+.callout.yellow{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.04)}
+.callout.cyan{border-color:rgba(0,201,167,.25);background:rgba(0,201,167,.04)}
+.callout.orange{border-color:rgba(255,112,67,.25);background:rgba(255,112,67,.04)}
+.callout-head{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem}
+.callout.purple .callout-head{color:var(--purple)}
+.callout.yellow .callout-head{color:var(--yellow)}
+.callout.cyan .callout-head{color:var(--cyan)}
+.callout.orange .callout-head{color:var(--orange)}
+
+/* ── TASKS ── */
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.task-header{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer}
+.task-num{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.1em;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.task.t1 .task-num{background:rgba(139,92,246,.15);color:var(--purple)}
+.task.t2 .task-num{background:rgba(0,201,167,.12);color:var(--cyan)}
+.task.t3 .task-num{background:rgba(251,191,36,.12);color:var(--yellow)}
+.task.t4 .task-num{background:rgba(255,112,67,.12);color:var(--orange)}
+.task.t5 .task-num{background:rgba(74,222,128,.12);color:var(--green)}
+.task.t6 .task-num{background:rgba(59,111,245,.12);color:var(--blue)}
+.task.t7 .task-num{background:rgba(139,92,246,.15);color:var(--purple)}
+.task-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:600;color:var(--text);line-height:1.2}
+.task-pts{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);margin-top:.2rem}
+.task-body{border-top:1px solid var(--border);padding:1.5rem;background:var(--surface2)}
+.task-desc{font-size:.9375rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.7}
+.req-list{display:flex;flex-direction:column;gap:.6rem}
+.req{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--muted);line-height:1.55}
+.req-check{width:18px;height:18px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;margin-top:2px}
+.task.t1 .req-check{background:rgba(139,92,246,.2);color:var(--purple)}
+.task.t2 .req-check{background:rgba(0,201,167,.15);color:var(--cyan)}
+.task.t3 .req-check{background:rgba(251,191,36,.15);color:var(--yellow)}
+.task.t4 .req-check{background:rgba(255,112,67,.15);color:var(--orange)}
+.task.t5 .req-check{background:rgba(74,222,128,.15);color:var(--green)}
+.task.t6 .req-check{background:rgba(59,111,245,.15);color:var(--blue)}
+.task.t7 .req-check{background:rgba(139,92,246,.2);color:var(--purple)}
+.req strong{color:var(--text)}
+
+/* ── SUB-SECTION inside task ── */
+.task-sub{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.task-sub-title{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.75rem}
+.task.t1 .task-sub-title{color:var(--purple)}
+.task.t2 .task-sub-title{color:var(--cyan)}
+.task.t3 .task-sub-title{color:var(--yellow)}
+.task.t4 .task-sub-title{color:var(--orange)}
+.task.t5 .task-sub-title{color:var(--green)}
+.task.t6 .task-sub-title{color:var(--blue)}
+.task.t7 .task-sub-title{color:var(--purple)}
+
+/* ── MODEL TIER PILLS ── */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.625rem;margin-top:.75rem}
+.tier-pill{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.625rem 1rem;font-size:.875rem;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.tier-pill span{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--muted)}
+
+/* ── SCORE ── */
+.score-grid{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+.score-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.75rem;text-align:center;flex:1;min-width:130px}
+.score-n{font-family:'Clash Display',sans-serif;font-size:2.6rem;font-weight:700;line-height:1;margin-bottom:.25rem}
+.score-l{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.criteria{display:flex;flex-direction:column;gap:.75rem}
+.cr{display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.875rem 1.25rem}
+.cr-title{font-weight:600;font-size:.9375rem;margin-bottom:.2rem}
+.cr-desc{font-size:.825rem;color:var(--muted)}
+.cr-pts{font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;color:var(--purple);flex-shrink:0}
+
+/* ── CODE BLOCK ── */
+.code-block{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;font-family:'Fira Code',monospace;font-size:.8125rem;color:var(--cyan);line-height:1.7;overflow-x:auto;margin-top:.75rem}
+
+/* ── BONUS ── */
+.bonus-box{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem}
+.bonus-title{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:.75rem}
+.bonus-items{display:flex;flex-direction:column;gap:.5rem}
+.bonus-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--muted)}
+.bonus-item::before{content:'✦';color:var(--yellow);flex-shrink:0;margin-top:2px;font-size:.7rem}
+
+/* ── SUBMIT ── */
+.submit-box{background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(59,111,245,.08));border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:2rem;text-align:center;margin-top:1.5rem}
+.submit-cta{font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.submit-email{font-family:'Fira Code',monospace;font-size:.9rem;color:var(--purple);margin-bottom:.5rem}
+.submit-note{font-size:.85rem;color:var(--muted)}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--border);padding:2rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:'Clash Display',sans-serif;font-size:.95rem;letter-spacing:.06em}
+.footer-brand span{color:var(--purple)}
+.footer-note{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);text-align:right}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .tier-grid{grid-template-columns:1fr 1fr}
+  .score-grid{flex-direction:column}
+  .criteria .cr{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .hero-top{flex-direction:column;align-items:flex-start;gap:.75rem}
+  .meta-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="logo">Tekr<span>avio</span> <span style="font-size:13px;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="badge">// AI Intern Assignment · 2026</div>
+  </div>
+
+  <div class="hero-tag">// Assignment · Claude Research · AI Product Intelligence</div>
+
+  <h1>Don't Just Use Claude.<br>
+    <span style="color:var(--purple)">Dissect</span> It.<br>
+    <span style="-webkit-text-stroke:1.5px var(--text);color:transparent">Document It.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Every serious AI team needs someone who understands not just that Claude exists, but <em>how</em> it works, <em>why</em> Anthropic built it differently, and what <em>each model tier</em> actually unlocks. Your job: produce a research document so thorough that any Tekravio engineer or client could read it and immediately know which Claude to use, why, and how.
+  </p>
+
+  <div class="meta-row">
+    <div class="meta-pill"><span class="mi">⏱️</span><div><div class="ml">Deadline</div><div class="mv">5 Days</div></div></div>
+    <div class="meta-pill"><span class="mi">🧠</span><div><div class="ml">Focus</div><div class="mv">Claude Deep-Dive Research</div></div></div>
+    <div class="meta-pill"><span class="mi">📊</span><div><div class="ml">Total Marks</div><div class="mv">100 + 30 Bonus</div></div></div>
+    <div class="meta-pill"><span class="mi">📧</span><div><div class="ml">Submit To</div><div class="mv">careers@tekravio.com</div></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ BODY ═══════════════════════ -->
+<div class="container">
+
+  <div class="sec-tag">// 01 · The Brief</div>
+  <h2>What You're Researching</h2>
+  <p>
+    Claude is Anthropic's flagship AI assistant — and it is fundamentally different from GPT, Gemini, and every other LLM in the market. Not just in capability, but in design philosophy, safety architecture, model family structure, and how it handles nuance. Understanding that difference is not optional for anyone working in AI at Tekravio.
+  </p>
+  <p>
+    You will research Claude end-to-end: its philosophy, every model in its current family, every key feature, how each feature actually works under the hood (in plain English), and where Claude genuinely beats the competition — and where it doesn't. Be honest. We respect honesty over hype.
+  </p>
+
+  <div class="callout purple">
+    <div class="callout-head">// The Golden Standard</div>
+    Your final document should be readable by a non-technical Tekravio client and a senior engineer simultaneously. That means: clear language, no unnecessary jargon, honest comparisons, and specific enough detail that an engineer could actually act on it.
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ═══ TASKS ═══ -->
+  <div class="sec-tag">// 02 · The Tasks</div>
+  <h2>Seven Research Modules</h2>
+  <p style="margin-bottom:2rem">Each module is a standalone deliverable. All seven combined form your final research document.</p>
+
+  <div class="tasks">
+
+    <!-- TASK 1 -->
+    <div class="task t1">
+      <div class="task-header">
+        <div class="task-num">01</div>
+        <div>
+          <div class="task-title">Anthropic's Philosophy — Why Claude Is Built Different</div>
+          <div class="task-pts">// 12 marks · The foundation</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Before you understand Claude, you must understand Anthropic. This section is about the <em>why</em> — the belief system that shapes every decision in Claude's design. Most people skip this. Don't.
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✦</div><div><strong>Constitutional AI (CAI):</strong> What is it, how does it work, and why did Anthropic invent it? Explain the self-critique loop in plain terms — how Claude is trained to evaluate its own responses against a "constitution" of principles.</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>Anthropic's mission:</strong> "The responsible development and maintenance of advanced AI for the long-term benefit of humanity." What does this actually mean in practice? How does it differ from OpenAI's stated mission? Be specific, not vague.</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>Helpful · Harmless · Honest:</strong> These are Claude's three core design values. Explain each one with a concrete example of how it manifests in Claude's real behaviour — not just theory.</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>Why "safety" is a product feature, not a restriction:</strong> Anthropic argues that safe AI is more useful, not less. Document the evidence for this. Where does Claude's safety-first approach actually make it better at tasks? Where does it sometimes limit it?</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>RLHF vs CAI:</strong> How does Constitutional AI training differ from standard RLHF (used by GPT)? What does Claude learn from that no other model does? Keep it technical enough to be accurate but accessible enough to explain to a client.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 2 -->
+    <div class="task t2">
+      <div class="task-header">
+        <div class="task-num">02</div>
+        <div>
+          <div class="task-title">The Claude Model Family — Every Tier, In Detail</div>
+          <div class="task-pts">// 20 marks · The product map</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Claude is not one model — it is a family. Each tier exists for a specific reason. Document every current model in the Claude family with complete accuracy. Research and update if anything has changed since your knowledge cutoff.
+        </p>
+
+        <div class="tier-grid">
+          <div class="tier-pill">🚀 <strong>Claude Opus</strong> <span>// Frontier</span></div>
+          <div class="tier-pill">⚡ <strong>Claude Sonnet</strong> <span>// Balanced</span></div>
+          <div class="tier-pill">🔵 <strong>Claude Haiku</strong> <span>// Fast & Lean</span></div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// For EACH model, document:</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div><strong>Full model name and API string:</strong> Exact model ID as used in the Anthropic API (e.g. <code style="font-family:monospace;color:var(--cyan)">claude-opus-4-5</code>). Include all currently available versions.</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Context window:</strong> Exact token limit. What does that mean in real terms — how many pages of a document? How many lines of code? Give practical equivalents.</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Pricing:</strong> Input and output cost per million tokens. Calculate a real-world cost example: "If you process 1,000 customer support tickets averaging 500 words each, this model costs approximately $X."</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Speed benchmark:</strong> Average tokens per second or latency in real use. When does speed matter enough to choose a faster model over a smarter one?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>What it's actually best at:</strong> Not marketing language. Real use cases where this tier outperforms the others. Give 3 specific enterprise scenarios per model.</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>What it's NOT good at:</strong> Be honest. Where does this tier fall short? When should you pick a different tier or a different model entirely?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Decision guide:</strong> A single-sentence rule for when to reach for this model. "Use Haiku when ___. Use Sonnet when ___. Use Opus when ___."</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Model Comparison Table</div>
+          <p style="font-size:.875rem;color:var(--muted)">Build a clean comparison table across all models: context window, price/M tokens, speed, best use case, availability (API / Claude.ai / enterprise). This table should be copy-pasteable into a client slide.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 3 -->
+    <div class="task t3">
+      <div class="task-header">
+        <div class="task-num">03</div>
+        <div>
+          <div class="task-title">Claude's Core Capabilities — Feature-by-Feature Breakdown</div>
+          <div class="task-pts">// 24 marks · The feature deep dive</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          This is the most technical section. For every capability listed below, you must explain: what it is, how it works (technically, not just a definition), which model tiers support it, and a concrete example of it in production use.
+        </p>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Capability 1 — Long Context & Document Understanding</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>How Claude handles long documents — does it read the full context or use a retrieval mechanism? How does attention work at 200k+ tokens?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>"Needle in a haystack" performance: how well does Claude find specific facts buried in long documents compared to competitors? Cite any benchmarks available.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Real enterprise use cases: legal contract review, codebase analysis, financial report summarisation — what's actually possible and what are the limits?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Capability 2 — Code Generation & Analysis</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>Which programming languages does Claude excel in? Where does it fall short compared to GPT-4o or Gemini? Be specific with language names and task types.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Claude's approach to debugging: how does it diagnose errors differently from other models? Does it understand intent behind buggy code?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Agentic coding: Claude in tools like Cursor, Claude Code (CLI), VS Code. What is Claude Code? How does it differ from Copilot? What can it do that Copilot cannot?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>SWE-bench results: what is Claude's score on this benchmark? What does that actually mean in practice?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Capability 3 — Vision & Multimodal</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>What types of images can Claude process? Screenshots, diagrams, charts, handwriting, medical scans? What are the hard limits?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>How does Claude's visual reasoning compare to GPT-4o Vision and Gemini Pro Vision? Give a specific benchmark or documented test result.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Document processing: PDFs with mixed text and images, scanned documents, tables in images. What's possible, what breaks?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Capability 4 — Tool Use & Function Calling</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>How does Claude's tool use (function calling) work technically? How does it decide when to call a tool vs answer from its own knowledge?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Parallel tool calling: can Claude call multiple tools simultaneously? How does this compare to GPT-4o's implementation?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>MCP (Model Context Protocol): What is it? Who created it? Why does it matter for enterprise integrations? Provide 3 real MCP server use cases.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Computer use: Claude's ability to control a computer — click, type, navigate browsers. Which model tier supports this? What are the current limitations?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Capability 5 — Writing, Reasoning & Analysis</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>Extended thinking: what is it, how does it work, which models have it? How does "thinking" before responding change output quality? Compare to OpenAI's o1 reasoning model.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Claude's writing style: what makes Claude's prose distinct from other models? Is there evidence it's preferred for long-form content? Cite any evaluations.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Complex reasoning: multi-step logic, mathematical proofs, legal arguments — where does Claude perform best and where does it struggle?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Capability 6 — Memory & Personalisation</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>Projects feature: what is Claude's Projects feature? How does persistent memory work? What does it store and what does it not store?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>System prompts: how do they work, what can they configure, what are the limits? How does a system prompt on Claude differ from OpenAI's equivalent?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Custom instructions vs memory: how do these differ, when would you use each, and how do they interact?</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 4 -->
+    <div class="task t4">
+      <div class="task-header">
+        <div class="task-num">04</div>
+        <div>
+          <div class="task-title">Access Tiers — claude.ai Plans vs API vs Enterprise</div>
+          <div class="task-pts">// 15 marks · How people actually use Claude</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Claude is available in several very different ways. Each access method unlocks different capabilities, has different limits, and suits different users. Document every way to access Claude and what each unlocks.
+        </p>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// claude.ai Plans (Consumer)</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div><strong>Free tier:</strong> Which model? What usage limits? What features are excluded? What happens when you hit the limit?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Pro plan:</strong> Exact pricing, model access, usage limits vs free. What does "priority access" actually mean during peak hours?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Team plan:</strong> Pricing per seat, admin controls, what collaboration features exist, how it differs from Pro for a 10-person startup.</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Enterprise plan:</strong> What's in enterprise that isn't in Team? SSO, audit logs, data retention policies, custom fine-tuning, dedicated support. Who is this actually for?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Anthropic API (Developer / Builder)</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div><strong>API access:</strong> How does API pricing work vs claude.ai plans? When is API cheaper than Pro? When is it more expensive?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Rate limits:</strong> What are the default rate limits by tier (free, build, scale)? How do you request higher limits? What happens if you exceed them?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Batch API:</strong> What is the Batch API? How much does it save vs standard API? What's the trade-off (latency)? Give a real cost comparison.</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Data privacy on API:</strong> Does Anthropic train on API data? What's the data retention policy? How does this differ from claude.ai's privacy terms?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Third-Party Access (AWS Bedrock, Google Cloud Vertex)</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>Why would a company use Claude via AWS Bedrock instead of Anthropic directly? What does Bedrock offer that the direct API doesn't?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Availability: which Claude models are on Bedrock vs Vertex? Are they always in sync with Anthropic's latest releases?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>For a company already on AWS vs already on GCP — which route makes more sense and why?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Decision Matrix</div>
+          <p style="font-size:.875rem;color:var(--muted)">Build a decision matrix: given a user type (solo developer / 5-person startup / 100-person enterprise / fortune-500 building a product), which access method is right and why? This should be a table or flowchart, not prose.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 5 -->
+    <div class="task t5">
+      <div class="task-header">
+        <div class="task-num">05</div>
+        <div>
+          <div class="task-title">Claude vs The Competition — Honest Comparative Analysis</div>
+          <div class="task-pts">// 15 marks · The comparison</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          The most useful thing you can give Tekravio is an honest comparison — where Claude genuinely wins, where it's roughly equal, and where it loses. Hype does not help us. Accuracy does.
+        </p>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Claude vs GPT-4o (OpenAI)</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>Context window: Claude's 200k vs GPT-4o's 128k — when does the difference matter in practice?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Code generation: where does each model win? Use SWE-bench and HumanEval scores if available.</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Long-form writing quality: which produces better prose for business communications, technical writing, and creative content?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Tool use reliability: which is more consistent when using external tools and APIs?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Safety behaviour: where does GPT-4o say yes and Claude says no (and vice versa)? Is Claude more or less restrictive?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Claude vs Gemini 1.5 Pro (Google)</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>Multimodal: Gemini was built multimodal from the start. How does Claude compare on image and video understanding?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Google Workspace integration vs Claude's enterprise features — if your company runs on GSuite, does that change the decision?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Benchmark comparison: MMLU, HellaSwag, HumanEval — what do the numbers actually say?</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Claude vs Llama 3 / Open Source</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div>When would a company choose an open-source model over Claude? What does Claude offer that you simply cannot self-host?</div></div>
+            <div class="req"><div class="req-check">✦</div><div>Cost: at what usage scale does running Llama 3 locally become cheaper than Claude API? Do the actual maths.</div></div>
+          </div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Honest Verdict</div>
+          <p style="font-size:.875rem;color:var(--muted);margin-bottom:.75rem">Write a 200-word honest assessment. Where is Claude the best option today? Where is it not? What would have to change for Claude to close the gaps? This section is evaluated on honesty and reasoning quality — not on whether you conclude Claude wins everything.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 6 -->
+    <div class="task t6">
+      <div class="task-header">
+        <div class="task-num">06</div>
+        <div>
+          <div class="task-title">The Tekravio Use Case Map — Where Claude Fits in Our Work</div>
+          <div class="task-pts">// 10 marks · Applied thinking</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          This section is not research — it is applied thinking. Given everything you've learned about Claude, map it to Tekravio's three verticals. This is the section that shows us you can connect research to business reality.
+        </p>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// For each vertical, answer:</div>
+          <div class="req-list">
+            <div class="req"><div class="req-check">✦</div><div><strong>Tekravio Studio (Client Consulting):</strong> Which Claude model and feature set would you recommend integrating into client project delivery? Be specific — is it code review, documentation generation, sprint planning assistance, test generation? Which tier, which access method, why?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Tekravio Academy (Training):</strong> How could Claude improve the learning experience for Academy students? Mentor simulation? Code review automation? Assignment evaluation? What's the right model tier and access level?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Tekravio Labs (Products):</strong> If Tekravio Labs were building a new AI-powered product, which Claude capabilities are most relevant? Which features would you build on top of?</div></div>
+            <div class="req"><div class="req-check">✦</div><div><strong>Cost estimate:</strong> For each vertical, estimate the monthly Claude API cost for a realistic usage scenario. Show your working.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 7 -->
+    <div class="task t7">
+      <div class="task-header">
+        <div class="task-num">07</div>
+        <div>
+          <div class="task-title">Prompt Engineering for Claude — A Practical Reference</div>
+          <div class="task-pts">// 4 marks · The practitioner's guide</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Claude behaves differently from GPT depending on how you prompt it. Document the practical prompt engineering techniques that work specifically for Claude — not generic prompting advice.
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-check">✦</div><div><strong>Claude's XML preference:</strong> Claude is trained to respond well to XML-tagged prompts. Show a before/after example demonstrating how XML tags improve response structure and consistency.</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>System prompt best practices:</strong> Document 5 specific things that belong in a system prompt for Claude vs things that should be in the user turn. Give concrete examples for each.</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>Role prompting vs instruction prompting:</strong> When does telling Claude "you are a senior Java engineer" work better than "review this code for bugs"? Test and document with a real example.</div></div>
+          <div class="req"><div class="req-check">✦</div><div><strong>Thinking tokens:</strong> How do you activate extended thinking? What kinds of tasks benefit most from thinking mode? Write a prompt that uses thinking effectively and explain why.</div></div>
+        </div>
+
+        <div class="task-sub">
+          <div class="task-sub-title">// Deliverable</div>
+          <p style="font-size:.875rem;color:var(--muted)">A one-page "Prompt Cheat Sheet for Claude" that the Tekravio team could pin to their wall or bookmark. Should include: the 5 most important Claude-specific prompting rules, with one-line examples for each.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tasks -->
+
+  <div class="sep"></div>
+
+  <!-- ═══ BONUS ═══ -->
+  <div class="sec-tag">// 03 · Bonus Tasks</div>
+  <h2>Go Further — 30 Bonus Marks</h2>
+
+  <div class="bonus-box">
+    <div class="bonus-title">// Bonus Opportunities</div>
+    <div class="bonus-items">
+      <div class="bonus-item"><strong>+10 marks — Live Demo:</strong> Build a small working prototype using the Claude API. A working chatbot, a document summariser, a code reviewer — anything that actually calls Claude. Include the source code and a Loom walkthrough (3 min max). We want to see you build, not just research.</div>
+      <div class="bonus-item"><strong>+8 marks — Claude Benchmark Deep Dive:</strong> Go beyond the headline numbers. Find and analyse 3 specific benchmarks where Claude ranks — GPQA, MATH, SWE-bench, BBH, or similar. Explain what each benchmark actually measures, what Claude's score means, and what it doesn't tell you.</div>
+      <div class="bonus-item"><strong>+7 marks — The Future of Claude:</strong> Based on Anthropic's research papers, blog posts, and Claude's current trajectory — what do you predict Claude will be able to do in 12 months that it cannot do today? Support your prediction with evidence, not speculation.</div>
+      <div class="bonus-item"><strong>+5 marks — Slide Deck:</strong> Turn your research into a 10-slide presentation that Uday could present to a Tekravio enterprise client asking "which AI should we use?" No fluff — every slide must justify its existence.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ═══ FORMAT ═══ -->
+  <div class="sec-tag">// 04 · Format Requirements</div>
+  <h2>How to Structure Your Submission</h2>
+
+  <div class="callout cyan">
+    <div class="callout-head">// Required Deliverables</div>
+    <div class="req-list" style="margin-top:.5rem">
+      <div class="req"><div class="req-check" style="background:rgba(0,201,167,.15);color:var(--cyan)">✦</div><div><strong>README.md</strong> — Your primary research document. Structured with clear H2/H3 headers. Each task is its own section. Minimum 3,000 words. Tables and comparison charts where relevant.</div></div>
+      <div class="req"><div class="req-check" style="background:rgba(0,201,167,.15);color:var(--cyan)">✦</div><div><strong>GitHub repo</strong> — All deliverables in a single public GitHub repository named <code style="font-family:monospace;color:var(--cyan)">claude-research-[your-name]</code>. Clean commit history — we check it.</div></div>
+      <div class="req"><div class="req-check" style="background:rgba(0,201,167,.15);color:var(--cyan)">✦</div><div><strong>Model comparison table</strong> — As a separate <code style="font-family:monospace;color:var(--cyan)">comparison.md</code> file or embedded in README. Must include all current Claude models.</div></div>
+      <div class="req"><div class="req-check" style="background:rgba(0,201,167,.15);color:var(--cyan)">✦</div><div><strong>Use case map</strong> — Task 6 output. Can be a table, a diagram, or a structured section — but must be its own clearly labelled deliverable.</div></div>
+      <div class="req"><div class="req-check" style="background:rgba(0,201,167,.15);color:var(--cyan)">✦</div><div><strong>Prompt cheat sheet</strong> — Task 7 output. Should be printable / screenshot-able as a standalone reference.</div></div>
+      <div class="req"><div class="req-check" style="background:rgba(0,201,167,.15);color:var(--cyan)">✦</div><div><strong>Sources list</strong> — Every claim requires a source. Include a <code style="font-family:monospace;color:var(--cyan)">sources.md</code> with all references. Anthropic docs, research papers, pricing pages, benchmarks — all cited.</div></div>
+    </div>
+  </div>
+
+  <div class="callout orange" style="margin-top:1.5rem">
+    <div class="callout-head">// What We Don't Accept</div>
+    <div style="font-size:.9rem;color:var(--muted);line-height:1.7">
+      ✗ &nbsp;Generic AI summaries that could apply to any model<br>
+      ✗ &nbsp;Uncited claims about performance or pricing<br>
+      ✗ &nbsp;Research that's obviously just one ChatGPT prompt away<br>
+      ✗ &nbsp;Outdated model information (check Anthropic's docs before submitting)<br>
+      ✗ &nbsp;Vague use cases like "Claude can help with coding" — be specific<br>
+      ✗ &nbsp;Hype-only conclusions — honest analysis outscores flattery every time
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ═══ EVALUATION ═══ -->
+  <div class="sec-tag">// 05 · How We Evaluate</div>
+  <h2>Scoring Criteria</h2>
+
+  <div class="score-grid">
+    <div class="score-card"><div class="score-n" style="color:var(--purple)">40</div><div class="score-l">Accuracy & Depth</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--cyan)">30</div><div class="score-l">Clarity & Usability</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--orange)">20</div><div class="score-l">Applied Thinking</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--yellow)">10</div><div class="score-l">Honesty & Nuance</div></div>
+  </div>
+
+  <div class="criteria">
+    <div class="cr"><div><div class="cr-title">Technical Accuracy</div><div class="cr-desc">All model specs, pricing, and feature claims are verifiably correct at time of submission</div></div><div class="cr-pts">20</div></div>
+    <div class="cr"><div><div class="cr-title">Feature Depth</div><div class="cr-desc">Each capability explained with mechanism, not just definition. "How it works" answers are rewarded</div></div><div class="cr-pts">20</div></div>
+    <div class="cr"><div><div class="cr-title">Document Readability</div><div class="cr-desc">A non-technical stakeholder can read it and make decisions. A senior engineer finds it accurate and useful</div></div><div class="cr-pts">15</div></div>
+    <div class="cr"><div><div class="cr-title">Comparison Quality</div><div class="cr-desc">Comparisons are evidence-based, specific, and honest about where Claude loses as well as where it wins</div></div><div class="cr-pts">15</div></div>
+    <div class="cr"><div><div class="cr-title">Tekravio Application</div><div class="cr-desc">Task 6 shows genuine thinking about Tekravio's specific context — not generic AI adoption advice</div></div><div class="cr-pts">10</div></div>
+    <div class="cr"><div><div class="cr-title">Sources & Rigour</div><div class="cr-desc">Every important claim is sourced. Anthropic documentation consulted directly, not summarised at second-hand</div></div><div class="cr-pts">10</div></div>
+    <div class="cr"><div><div class="cr-title">Prompt Cheat Sheet</div><div class="cr-desc">The cheat sheet is genuinely useful — the kind of thing you'd actually keep open while working</div></div><div class="cr-pts">10</div></div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ═══ RESOURCES ═══ -->
+  <div class="sec-tag">// 06 · Where to Start</div>
+  <h2>Research Starting Points</h2>
+  <p>These are starting points — not a reading list. Go deeper. Find primary sources. Anthropic publishes extensively.</p>
+
+  <div class="code-block">docs.anthropic.com                     // Official API documentation
+anthropic.com/claude                   // Product overview and model family
+anthropic.com/research                 // Technical papers and research
+support.anthropic.com                  // Pricing, limits, enterprise plans
+anthropic.com/news                     // Latest model releases and announcements
+github.com/anthropics                  // Open source tools and SDKs
+claude.ai                              // Use it — the interface teaches you a lot
+anthropic.com/news/claude-s-constitution  // Constitutional AI deep dive</div>
+
+  <div class="callout yellow" style="margin-top:1.5rem">
+    <div class="callout-head">// One Important Note</div>
+    Claude's model lineup and pricing change frequently. Always check the live Anthropic documentation before finalising your submission. If something in your research is outdated, it will cost you marks — even if it was accurate when you started.
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ═══ SUBMIT ═══ -->
+  <div class="sec-tag">// 07 · Submission</div>
+  <h2>How to Submit</h2>
+  <p>Share your GitHub repo link via email. Include your name, the subject line below, and a two-sentence summary of your most interesting finding.</p>
+
+  <div class="code-block">Subject: AI Intern Assignment — Claude Research — [Your Name]
+Body:    GitHub: [your repo link]
+         Most interesting finding: [2 sentences]</div>
+
+  <div class="submit-box" style="margin-top:1.5rem">
+    <div class="submit-cta">Ready? Send your work.</div>
+    <div class="submit-email">careers@tekravio.com</div>
+    <div class="submit-note">Deadline: 5 days from the date you receive this assignment. Late submissions lose 10 marks per day. We read every submission personally.</div>
+  </div>
+
+</div><!-- /container -->
+
+<footer class="footer">
+  <div class="footer-brand">Tekr<span>avio</span> Academy</div>
+  <div class="footer-note">AI Intern Assignment · Claude Research Deep Dive · 2026<br>tekravio.com/careers.html</div>
+</footer>
+
+</body>
+</html>
