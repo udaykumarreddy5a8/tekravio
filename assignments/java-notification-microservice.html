@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Java Experienced Assignment — Notification Microservice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--ink:#f0f2ff;--muted:#5a6080;--surface:#0b0f1e;--surface2:#111829;--border:rgba(255,255,255,.07);--blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;--yellow:#fbbf24;--green:#4ade80;--red:#f87171;--purple:#a78bfa;--java:#fb923c;--radius:12px;--transition:.2s ease}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--java);border-radius:2px}
+h1,h2,h3{font-family:'Clash Display',sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+code{font-family:'Fira Code',monospace;font-size:.82em;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.2);color:#fcd34d;padding:2px 7px;border-radius:4px}
+.container{max-width:920px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+p{color:#94a3b8}p strong{color:var(--ink)}
+.header{position:sticky;top:0;z-index:100;background:rgba(4,6,14,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.2rem;font-weight:700;color:var(--ink)}.logo span{color:var(--java)}
+.hbadge{font-family:'Fira Code',monospace;font-size:.68rem;padding:4px 12px;border-radius:100px;background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.25);color:var(--java);letter-spacing:.1em;text-transform:uppercase}
+.hero{padding:64px 0 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.orb1{position:absolute;top:-120px;right:-80px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(251,146,60,.12) 0%,transparent 65%);pointer-events:none}
+.orb2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(59,111,245,.07) 0%,transparent 65%);pointer-events:none}
+.etag{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--java);margin-bottom:1rem}
+.hero-title{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;line-height:.9;letter-spacing:-.03em;margin-bottom:1.25rem}
+.hero-title .a{color:var(--ink);display:block}.hero-title .b{color:var(--java);display:block}.hero-title .c{-webkit-text-stroke:2px var(--ink);color:transparent;display:block}
+.hero-sub{font-size:1.0625rem;color:var(--muted);max-width:660px;line-height:1.75;margin-bottom:2rem}.hero-sub strong{color:var(--ink)}
+.meta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
+.mp{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem 1rem;font-size:.8rem}
+.mp-l{color:var(--muted);font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase}.mp-v{font-weight:700;color:var(--ink)}
+.ctx{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--java)}
+.ctx-l{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--java)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--ink)}
+.sep{height:1px;background:var(--border);margin:2.5rem 0}
+.sec-tag{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.625rem;color:var(--java)}
+.sec-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.5rem}
+.sec-sub{font-size:.9375rem;color:var(--muted);margin-bottom:2rem;line-height:1.7}
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:2rem}
+.ac{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.375rem;position:relative;overflow:hidden}
+.ac::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ac-kafka::before{background:linear-gradient(90deg,#fb923c,#f97316)}.ac-spring::before{background:linear-gradient(90deg,#4ade80,#22c55e)}
+.ac-redis::before{background:linear-gradient(90deg,#f87171,#ef4444)}.ac-aws::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+.ac-sec::before{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}.ac-test::before{background:linear-gradient(90deg,#38bdf8,#0ea5e9)}
+.ac-notif::before{background:linear-gradient(90deg,#00c9a7,#0ea5e9)}.ac-db::before{background:linear-gradient(90deg,#fb923c,#a78bfa)}
+.ac-icon{font-size:1.5rem;margin-bottom:.75rem}.ac-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.375rem}
+.ac-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+.ac-tags{display:flex;flex-wrap:wrap;gap:.375rem;margin-top:.75rem}
+.atag{font-family:'Fira Code',monospace;font-size:.62rem;padding:2px 7px;border-radius:3px;border:1px solid var(--border);color:var(--muted)}
+.tasks{display:flex;flex-direction:column;gap:1.25rem}
+.task{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.task-header{padding:1.125rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border);background:var(--surface2)}
+.tnum{font-family:'Clash Display',sans-serif;font-size:1.75rem;font-weight:700;min-width:2.5rem;line-height:1}
+.t1 .tnum{color:var(--java)}.t2 .tnum{color:#fbbf24}.t3 .tnum{color:#f87171}.t4 .tnum{color:#4ade80}.t5 .tnum{color:#a78bfa}.t6 .tnum{color:var(--cyan)}.t7 .tnum{color:var(--java)}
+.ttitle{font-size:1rem;font-weight:700;margin-bottom:2px}.tpts{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.08em}
+.tbody{padding:1.375rem 1.5rem}
+.tdesc{font-size:.9rem;color:#94a3b8;line-height:1.7;margin-bottom:1rem}
+.reqs{display:flex;flex-direction:column;gap:.5rem}
+.req{display:flex;gap:.75rem;font-size:.875rem;color:#94a3b8;align-items:flex-start;line-height:1.55}
+.req::before{content:'→';flex-shrink:0;margin-top:.125rem}
+.t1 .req::before{color:var(--java)}.t2 .req::before{color:#fbbf24}.t3 .req::before{color:#f87171}.t4 .req::before{color:#4ade80}.t5 .req::before{color:#a78bfa}.t6 .req::before{color:var(--cyan)}.t7 .req::before{color:var(--java)}
+.req strong{color:var(--ink)}
+.codeblock{background:#020408;border:1px solid rgba(251,146,60,.15);border-radius:8px;overflow:hidden;margin:1rem 0}
+.cb-h{background:var(--surface2);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.cb-f{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--muted)}.cb-l{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--java);background:rgba(251,146,60,.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:'Fira Code',monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--java)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout.orange{background:rgba(255,112,67,.06);border:1px solid rgba(255,112,67,.15);border-left:3px solid var(--orange)}
+.callout.red{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-left:3px solid var(--red)}
+.callout.yellow{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-left:3px solid var(--yellow)}
+.callout.cyan{background:rgba(0,201,167,.06);border:1px solid rgba(0,201,167,.15);border-left:3px solid var(--cyan)}
+.ch{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.callout.orange .ch{color:var(--orange)}.callout.red .ch{color:var(--red)}.callout.yellow .ch{color:var(--yellow)}.callout.cyan .ch{color:var(--cyan)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--ink)}
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:1.25rem}
+.bc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem}
+.bc-icon{font-size:1.25rem}.bc-title{font-family:'Clash Display',sans-serif;font-size:.9rem;font-weight:700;color:var(--ink);margin:.375rem 0}.bc-desc{font-size:.78rem;color:var(--muted);line-height:1.55}
+.diff{font-family:'Fira Code',monospace;font-size:.62rem;padding:2px 8px;border-radius:100px;border:1px solid;align-self:flex-start;margin-top:.25rem}
+.d-hard{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.2);color:#f87171}.d-expert{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.2);color:#a78bfa}
+.eval-table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-table th{padding:.75rem 1rem;text-align:left;font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface2)}
+.eval-table td{padding:.875rem 1rem;border-bottom:1px solid var(--border);color:#94a3b8;vertical-align:top}
+.eval-table tr:last-child td{border-bottom:none}.eval-table tr:hover td{background:rgba(255,255,255,.02)}
+.sc{font-family:'Clash Display',sans-serif;font-size:1.2rem;color:var(--java)}
+.submit-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-top:1.25rem}
+.ss-list{display:flex;flex-direction:column;gap:0;position:relative}
+.ss-list::before{content:'';position:absolute;left:19px;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--java),var(--cyan));opacity:.18}
+.ss{display:grid;grid-template-columns:40px 1fr;gap:1rem;padding-bottom:1.25rem}
+.ss:last-child{padding-bottom:0}
+.ss-dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:700;font-family:'Fira Code',monospace;flex-shrink:0;z-index:1;background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.25);color:var(--java)}
+.ss-title{font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:.25rem}.ss-desc{font-size:.8125rem;color:var(--muted);line-height:1.6}
+footer{border-top:1px solid var(--border);padding:1.75rem 0;margin-top:2rem}
+.fi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:var(--muted)}
+.fl{font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink)}.fl span{color:var(--java)}
+.section{padding:48px 0}
+/* arch diagram */
+.arch-diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:2rem;overflow-x:auto}
+.arch-flow{display:flex;flex-direction:column;align-items:center;gap:0;font-family:'Fira Code',monospace;font-size:.75rem}
+.af-row{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%}
+.af-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.5rem 1.25rem;color:var(--ink);text-align:center;white-space:nowrap;font-size:.7rem}
+.af-box.java{border-color:rgba(251,146,60,.35);color:var(--java)}
+.af-box.kafka{border-color:rgba(251,191,36,.35);color:var(--yellow)}
+.af-box.db{border-color:rgba(167,139,250,.35);color:var(--purple)}
+.af-box.channel{border-color:rgba(0,201,167,.35);color:var(--cyan);font-size:.65rem}
+.af-arrow{color:var(--muted);font-size:.8rem}
+.af-down{display:flex;flex-direction:column;align-items:center;gap:0;color:var(--muted);font-size:.7rem;line-height:1.4}
+.channel-row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.25rem}
+/* sub-req-group */
+.sub-group{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.sub-group-title{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem}
+.t1 .sub-group-title{color:var(--java)}.t2 .sub-group-title{color:#fbbf24}.t3 .sub-group-title{color:#f87171}
+.t4 .sub-group-title{color:#4ade80}.t5 .sub-group-title{color:#a78bfa}.t6 .sub-group-title{color:var(--cyan)}.t7 .sub-group-title{color:var(--java)}
+@media(max-width:640px){.arch-grid{grid-template-columns:1fr}.bonus-grid{grid-template-columns:1fr}.af-row{flex-wrap:wrap}.channel-row{gap:.375rem}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Tekr<span>avio</span></div>
+  <div class="hbadge">Java · Experienced</div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="container">
+    <p class="etag">// Tekravio Studio · Java Assignment · Senior Engineer</p>
+    <h1 class="hero-title">
+      <span class="a">Notification</span>
+      <span class="b">Microservice.</span>
+      <span class="c">Production Grade.</span>
+    </h1>
+    <p class="hero-sub">
+      Design and build a <strong>channel-agnostic Notification Microservice</strong> using Java 17+ and Spring Boot 3.x. Email, SMS, WhatsApp, Push — one service that handles all channels asynchronously, reliably, and at scale. This is not a tutorial project. We want to see the decisions a senior engineer makes.
+    </p>
+
+    <div class="meta-row">
+      <div class="mp"><div class="mp-l">Role</div><div class="mp-v">Senior Java Engineer</div></div>
+      <div class="mp"><div class="mp-l">Deadline</div><div class="mp-v">7 Days</div></div>
+      <div class="mp"><div class="mp-l">Total Marks</div><div class="mp-v">100 + 30 Bonus</div></div>
+      <div class="mp"><div class="mp-l">Submit To</div><div class="mp-v">careers@tekravio.com</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section">
+<div class="container">
+
+  <!-- CONTEXT -->
+  <div class="ctx">
+    <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Objective</div></div>
+    <div class="ctx-body">
+      Build a <strong>standalone, reusable Notification Microservice</strong> that any application or business domain can integrate with. The service exposes REST APIs to submit notifications, tracks their status through the full lifecycle (PENDING → SENT / FAILED), and processes them asynchronously via Kafka. Supported channels: <strong>Email, SMS, WhatsApp, and Push Notifications</strong>.
+      <br><br>
+      We evaluate this on three things: <strong>clean architecture</strong> (can we drop in a new channel in under 30 minutes?), <strong>fault tolerance</strong> (what happens when SendGrid is down?), and <strong>production readiness</strong> (can this run in a real Kubernetes cluster tomorrow?). Every design decision you make will be discussed in the review call.
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE OVERVIEW -->
+  <div class="sec-tag">// 01 · Architecture</div>
+  <div class="sec-title">Suggested System Design</div>
+  <p class="sec-sub">You are not required to follow this exactly — but any deviation must be justified in your README. A better design with a clear explanation beats a perfect copy of this one.</p>
+
+  <div class="arch-diagram">
+    <div class="arch-flow">
+      <div class="af-row">
+        <div class="af-box java">Client Applications</div>
+        <div class="af-arrow">·····</div>
+        <div class="af-box java">API Gateway</div>
+      </div>
+      <div style="height:.75rem;width:1px;background:rgba(251,146,60,.3);margin:.25rem auto"></div>
+      <div class="af-box java" style="padding:.625rem 3rem">Notification Service (Spring Boot)</div>
+      <div style="height:.75rem;width:1px;background:rgba(251,191,36,.3);margin:.25rem auto"></div>
+      <div class="af-box kafka">Kafka Producer → Topic: notifications.{channel}</div>
+      <div style="height:.75rem;width:1px;background:rgba(251,191,36,.3);margin:.25rem auto"></div>
+      <div class="af-box kafka">Kafka Consumers (per channel, parallelised)</div>
+      <div style="height:.75rem;width:1px;background:rgba(0,201,167,.3);margin:.25rem auto"></div>
+      <div class="channel-row">
+        <div class="af-box channel">📧 Email Adapter<br>SendGrid / SES</div>
+        <div class="af-box channel">💬 SMS Adapter<br>Twilio / SNS</div>
+        <div class="af-box channel">📱 WhatsApp Adapter<br>Meta / Twilio</div>
+        <div class="af-box channel">🔔 Push Adapter<br>Firebase FCM</div>
+      </div>
+      <div style="height:.75rem;width:1px;background:rgba(167,139,250,.3);margin:.25rem auto"></div>
+      <div class="af-row">
+        <div class="af-box db">PostgreSQL<br><span style="font-size:.6rem;color:var(--muted)">notifications + templates + status</span></div>
+        <div class="af-arrow" style="margin:0 1rem">+</div>
+        <div class="af-box db">Redis<br><span style="font-size:.6rem;color:var(--muted)">template cache</span></div>
+        <div class="af-arrow" style="margin:0 1rem">+</div>
+        <div class="af-box db">Dead Letter Queue<br><span style="font-size:.6rem;color:var(--muted)">notifications.dlq</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arch-grid">
+    <div class="ac ac-spring">
+      <div class="ac-icon">☕</div>
+      <div class="ac-title">Spring Boot Core</div>
+      <div class="ac-desc">Web, Data JPA, Security, Validation, Actuator. REST layer, service layer, repository layer — cleanly separated.</div>
+      <div class="ac-tags"><span class="atag">Java 17+</span><span class="atag">Spring Boot 3.x</span><span class="atag">Spring Security</span></div>
+    </div>
+    <div class="ac ac-kafka">
+      <div class="ac-icon">⚡</div>
+      <div class="ac-title">Kafka Async Processing</div>
+      <div class="ac-desc">Producer publishes to channel-specific topics. Consumers per channel. DLQ for persistent failures. Exactly-once semantics where possible.</div>
+      <div class="ac-tags"><span class="atag">Kafka</span><span class="atag">KafkaTemplate</span><span class="atag">@KafkaListener</span></div>
+    </div>
+    <div class="ac ac-notif">
+      <div class="ac-icon">🔌</div>
+      <div class="ac-title">Channel Adapters</div>
+      <div class="ac-desc">Strategy pattern. Each adapter implements a common <code>NotificationSender</code> interface. New channel = new class, zero changes to core.</div>
+      <div class="ac-tags"><span class="atag">Strategy Pattern</span><span class="atag">SendGrid</span><span class="atag">Twilio</span><span class="atag">FCM</span></div>
+    </div>
+    <div class="ac ac-db">
+      <div class="ac-icon">🗄️</div>
+      <div class="ac-title">Database + Cache</div>
+      <div class="ac-desc">PostgreSQL for durable notification + template storage. Redis for template caching. Flyway for schema migrations.</div>
+      <div class="ac-tags"><span class="atag">PostgreSQL</span><span class="atag">Redis</span><span class="atag">Flyway</span><span class="atag">JPA</span></div>
+    </div>
+    <div class="ac ac-sec">
+      <div class="ac-icon">🔐</div>
+      <div class="ac-title">Security</div>
+      <div class="ac-desc">JWT authentication on all endpoints. Role-based access (ADMIN can manage templates, SERVICE can submit notifications). Encrypt recipient PII at rest.</div>
+      <div class="ac-tags"><span class="atag">JWT</span><span class="atag">Spring Security</span><span class="atag">AES encryption</span></div>
+    </div>
+    <div class="ac ac-test">
+      <div class="ac-icon">🧪</div>
+      <div class="ac-title">Testing + Observability</div>
+      <div class="ac-desc">JUnit 5, Testcontainers for Postgres + Kafka. Actuator health endpoints. Prometheus metrics. Grafana dashboard. ELK-ready structured logging.</div>
+      <div class="ac-tags"><span class="atag">JUnit 5</span><span class="atag">Testcontainers</span><span class="atag">Prometheus</span><span class="atag">Actuator</span></div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- TASKS -->
+  <div class="sec-tag">// 02 · The Tasks</div>
+  <div class="sec-title">Seven Deliverable Modules</div>
+  <p class="sec-sub">Each module is a graded deliverable. Marks are for correctness, design quality, and production-readiness — not line count.</p>
+
+  <div class="tasks">
+
+    <!-- TASK 1 — Domain Model & API Design -->
+    <div class="task t1">
+      <div class="task-header">
+        <div class="tnum">01</div>
+        <div>
+          <div class="ttitle">Domain Model, REST API & OpenAPI Documentation</div>
+          <div class="tpts">// 18 marks · The contract everything is built on</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          The API contract and domain model are the foundation. A wrong decision here propagates to every layer. Design it carefully — then defend every choice in your README.
+        </p>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Notification Request Model</div>
+          <p class="tdesc" style="margin-bottom:.75rem">Design the generic <code>NotificationRequest</code> DTO. It must work across all channels without being channel-specific. Every field must have validation annotations.</p>
+          <div class="codeblock">
+            <div class="cb-h"><span class="cb-f">NotificationRequest.java</span><span class="cb-l">DTO</span></div>
+            <pre><span class="ann">@NotNull</span> <span class="ty">String</span> notificationId;       <span class="cm">// UUID, idempotency key</span>
+<span class="ann">@NotBlank</span> <span class="ty">String</span> recipientId;          <span class="cm">// user/device identifier</span>
+<span class="ty">RecipientDetails</span> recipient;            <span class="cm">// email, phone, deviceToken, etc</span>
+<span class="ann">@NotNull</span> <span class="ty">ChannelType</span> channel;          <span class="cm">// EMAIL | SMS | WHATSAPP | PUSH</span>
+<span class="ty">String</span> subject;                        <span class="cm">// optional, email only</span>
+<span class="ann">@NotBlank</span> <span class="ty">String</span> messageContent;       <span class="cm">// or templateId + variables</span>
+<span class="ty">String</span> templateId;                     <span class="cm">// optional — overrides messageContent</span>
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">String</span>&gt; templateVariables; <span class="cm">// {{name}}, {{orderId}}</span>
+<span class="ann">@NotNull</span> <span class="ty">Priority</span> priority;            <span class="cm">// HIGH | MEDIUM | LOW</span>
+<span class="ty">Map</span>&lt;<span class="ty">String</span>, <span class="ty">Object</span>&gt; metadata;         <span class="cm">// arbitrary context</span>
+<span class="ty">Instant</span> scheduledAt;                   <span class="cm">// null = send immediately</span></pre>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// REST Endpoints — Implement All Four</div>
+          <div class="reqs">
+            <div class="req"><strong>POST /api/v1/notifications</strong> — Submit a notification. Returns 202 Accepted with a notificationId. Must be idempotent — re-submitting the same notificationId must not create a duplicate.</div>
+            <div class="req"><strong>GET /api/v1/notifications/{id}/status</strong> — Return current status, channel, timestamps (submitted, processed, delivered/failed), and retry count.</div>
+            <div class="req"><strong>POST /api/v1/notifications/{id}/retry</strong> — Manually trigger a retry for a FAILED notification. Should not be callable on SENT notifications. Returns 409 if already sent.</div>
+            <div class="req"><strong>GET /api/v1/notifications/history</strong> — Paginated notification history with filters: recipientId, channel, status, dateRange. Sorted by createdAt desc. Page size max 100.</div>
+            <div class="req"><strong>OpenAPI / Swagger:</strong> Full Swagger UI accessible at <code>/swagger-ui.html</code>. Every endpoint, request body, response, and error code must be documented. No undocumented endpoints.</div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Status Lifecycle</div>
+          <div class="reqs">
+            <div class="req">Implement the full status state machine: <strong>PENDING → PROCESSING → SENT</strong> (terminal), <strong>PENDING → PROCESSING → FAILED → RETRYING → SENT</strong> or <strong>FAILED</strong> (terminal after max retries). Invalid transitions (e.g. SENT → RETRYING) must throw an exception, not silently fail.</div>
+            <div class="req">Every status change must be timestamped and persisted. The audit trail is non-negotiable.</div>
+          </div>
+        </div>
+
+        <div class="callout yellow">
+          <div class="ch">// Senior Signal</div>
+          <p>Idempotency on the POST endpoint is what separates a senior engineer's API from a junior one. A network retry should not send the same customer a duplicate order confirmation. Your README should explain your idempotency strategy and where it could still fail.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 2 — Channel Adapters -->
+    <div class="task t2">
+      <div class="task-header">
+        <div class="tnum">02</div>
+        <div>
+          <div class="ttitle">Channel Adapters — Strategy Pattern Implementation</div>
+          <div class="tpts">// 20 marks · The extensibility test</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          This is the core extensibility challenge. We will evaluate: can we add a new channel (say, Slack) in 30 minutes by adding one class without touching existing code? If the answer is yes, you've passed this task.
+        </p>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// NotificationSender Interface</div>
+          <div class="codeblock">
+            <div class="cb-h"><span class="cb-f">NotificationSender.java</span><span class="cb-l">Interface</span></div>
+            <pre><span class="kw">public interface</span> <span class="ty">NotificationSender</span> {
+    <span class="ty">ChannelType</span> <span class="kw">supports</span>();
+    <span class="ty">NotificationResult</span> send(<span class="ty">NotificationMessage</span> message);
+    <span class="kw">default</span> <span class="ty">boolean</span> canHandle(<span class="ty">ChannelType</span> type) {
+        <span class="kw">return</span> supports().equals(type);
+    }
+}</pre>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Implement All Four Adapters</div>
+          <div class="reqs">
+            <div class="req"><strong>EmailAdapter:</strong> Integrate with SendGrid or AWS SES. Support HTML and plain text. Handle bounces and delivery failures distinctly — a bounce should not trigger the same retry logic as a transient failure.</div>
+            <div class="req"><strong>SmsAdapter:</strong> Twilio or AWS SNS. Validate phone number format before dispatch. Handle international numbers. Rate limit awareness — if Twilio returns 429, back off.</div>
+            <div class="req"><strong>WhatsAppAdapter:</strong> Meta WhatsApp Business API or Twilio for WhatsApp. Support template messages (required for outbound on Meta). Mock-able for local development without a Meta account.</div>
+            <div class="req"><strong>PushNotificationAdapter:</strong> Firebase Cloud Messaging. Support both single-device (token) and topic-based notifications. Handle expired/invalid tokens gracefully — remove them from the system, not just log and continue.</div>
+            <div class="req"><strong>NotificationSenderFactory:</strong> A <code>@Component</code> that injects all <code>NotificationSender</code> implementations and returns the correct one by channel type. New adapters must auto-register without any factory code change.</div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Provider Fallback</div>
+          <div class="reqs">
+            <div class="req">For Email: if SendGrid fails with a 5xx, fall back to AWS SES automatically. The caller should not know which provider was used. Document the fallback strategy in your README — when does it trigger, how many times, what's the circuit breaker threshold?</div>
+            <div class="req">Implement a <code>MockNotificationSender</code> that activates when a Spring profile <code>local</code> is active. It logs the notification and returns success without calling any external provider. This is mandatory — reviewers run the project locally.</div>
+          </div>
+        </div>
+
+        <div class="callout orange">
+          <div class="ch">// What We're Actually Evaluating</div>
+          <p>We will add a <code>SlackAdapter</code> class during the code review and see how long it takes to wire up. If it requires changes to more than one existing class, it's not extensible enough. Open/Closed Principle — this task is entirely about that.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 3 — Kafka Pipeline -->
+    <div class="task t3">
+      <div class="task-header">
+        <div class="tnum">03</div>
+        <div>
+          <div class="ttitle">Kafka-Based Async Pipeline & Dead Letter Queue</div>
+          <div class="tpts">// 20 marks · The reliability test</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          Every notification goes through Kafka. No direct-to-provider calls from the REST layer. The REST API accepts the request and publishes to Kafka within 500ms. Everything after that is asynchronous.
+        </p>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Topic Design</div>
+          <div class="reqs">
+            <div class="req"><strong>Channel-specific topics:</strong> <code>notifications.email</code>, <code>notifications.sms</code>, <code>notifications.whatsapp</code>, <code>notifications.push</code>. Justify your partition count in the README — how many parallel consumers do you expect per channel?</div>
+            <div class="req"><strong>Priority routing:</strong> HIGH priority notifications should not be blocked by a queue of LOW priority ones. Design a topic or partition strategy that ensures HIGH priority messages are processed first. Explain trade-offs in your README.</div>
+            <div class="req"><strong>Dead Letter Queue:</strong> After <code>max.retry.attempts</code> failures on a channel topic, messages go to <code>notifications.{channel}.dlq</code>. The DLQ must be monitored — an Actuator endpoint should expose DLQ depth as a metric.</div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Consumers</div>
+          <div class="reqs">
+            <div class="req"><strong>One consumer per channel</strong> using <code>@KafkaListener</code> with a <code>@KafkaHandler</code>. Consumers are independently scalable — email volume may be 10x SMS volume.</div>
+            <div class="req"><strong>Concurrent consumers:</strong> Configure <code>concurrency</code> on each listener. Email listener: concurrency=3. SMS: concurrency=2. Push: concurrency=5. These should be externalised in <code>application.yml</code>.</div>
+            <div class="req"><strong>Consumer error handling:</strong> Use Spring Kafka's <code>DefaultErrorHandler</code> with a <code>DeadLetterPublishingRecoverer</code>. A deserialization failure must go to DLQ immediately — not retried. A provider failure should be retried.</div>
+            <div class="req"><strong>Message ordering:</strong> Explain in your README whether ordering matters for notifications and how your Kafka design handles (or intentionally ignores) ordering guarantees.</div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-group-title">// Retry with Exponential Backoff</div>
+          <div class="reqs">
+            <div class="req">Configurable retry count (default: 3) and initial delay (default: 1s), with exponential backoff (multiplier: 2). After max retries, route to DLQ and mark notification as FAILED.</div>
+            <div class="req">Retries for transient errors (5xx, timeout) must be distinguishable from permanent failures (invalid email, invalid phone). Permanent failures must go to DLQ immediately — no retries.</div>
+          </div>
+        </div>
+
+        <div class="codeblock">
+          <div class="cb-h"><span class="cb-f">application.yml — Kafka config sample</span><span class="cb-l">Config</span></div>
+          <pre>tekravio:
+  notification:
+    retry:
+      max-attempts: <span class="nu">3</span>
+      initial-interval: <span class="nu">1000</span>
+      multiplier: <span class="nu">2.0</span>
+      max-interval: <span class="nu">30000</span>
+    kafka:
+      topics:
+        email: notifications.email
+        sms: notifications.sms
+        whatsapp: notifications.whatsapp
+        push: notifications.push
+        dlq-suffix: .dlq
+      consumers:
+        email-concurrency: <span class="nu">3</span>
+        push-concurrency: <span class="nu">5</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 4 — Template Engine -->
+    <div class="task t4">
+      <div class="task-header">
+        <div class="tnum">04</div>
+        <div>
+          <div class="ttitle">Template Management Engine</div>
+          <div class="tpts">// 15 marks · Dynamic content at scale</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          Hard-coded messages don't scale. Build a template management system that supports dynamic placeholders, template versioning, and multi-channel templates — all backed by the DB and cached in Redis.
+        </p>
+
+        <div class="reqs">
+          <div class="req"><strong>Template CRUD APIs:</strong> <code>POST /api/v1/templates</code>, <code>GET /api/v1/templates/{id}</code>, <code>PUT /api/v1/templates/{id}</code>, <code>DELETE /api/v1/templates/{id}</code>. ADMIN role only for create/update/delete.</div>
+          <div class="req"><strong>Dynamic placeholders:</strong> Support Mustache-style <code>{{variableName}}</code> syntax. At send time, resolve variables from <code>NotificationRequest.templateVariables</code>. Fail clearly (not silently) if a required variable is missing — return a 400 with the missing variable names.</div>
+          <div class="req"><strong>Template versioning:</strong> Each template has a version number. <code>PUT /api/v1/templates/{id}</code> creates a new version, it does not overwrite. The request can specify a version — default is latest. Previous versions are readable but not sendable unless explicitly specified.</div>
+          <div class="req"><strong>Channel-aware templates:</strong> A template can have variants per channel. The <code>ORDER_SHIPPED</code> template has an email variant (HTML, subject), an SMS variant (160 char limit warning), and a push variant (title + body). One templateId, multiple channel outputs.</div>
+          <div class="req"><strong>Redis caching:</strong> Templates are cached in Redis with a 10-minute TTL. Cache is invalidated on template update. Cache key: <code>template:{id}:v{version}</code>. Implement with Spring Cache <code>@Cacheable</code> and <code>@CacheEvict</code>.</div>
+          <div class="req"><strong>Preview endpoint:</strong> <code>POST /api/v1/templates/{id}/preview</code> — accepts <code>templateVariables</code> and returns the rendered message for each channel without sending. Essential for debugging.</div>
+        </div>
+
+        <div class="codeblock">
+          <div class="cb-h"><span class="cb-f">Example Template — ORDER_SHIPPED</span><span class="cb-l">Mustache</span></div>
+          <pre><span class="cm">// Email variant</span>
+Subject: <span class="str">Your order {{orderId}} is on its way!</span>
+Body (HTML):
+&lt;h2&gt;<span class="str">Hi {{customerName}},</span>&lt;/h2&gt;
+&lt;p&gt;<span class="str">Your order &lt;strong&gt;{{orderId}}&lt;/strong&gt; has been shipped via {{courier}}.</span>&lt;/p&gt;
+&lt;p&gt;<span class="str">Expected delivery: &lt;strong&gt;{{deliveryDate}}&lt;/strong&gt;&lt;/p&gt;
+
+<span class="cm">// SMS variant (≤160 chars)</span>
+<span class="str">Hi {{customerName}}, order {{orderId}} shipped via {{courier}}. Delivery: {{deliveryDate}}</span>
+
+<span class="cm">// Push variant</span>
+Title: <span class="str">Order Shipped!</span>
+Body: <span class="str">{{orderId}} is on its way. Expected: {{deliveryDate}}</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 5 — Security -->
+    <div class="task t5">
+      <div class="task-header">
+        <div class="tnum">05</div>
+        <div>
+          <div class="ttitle">Security — JWT Auth, Roles & PII Encryption</div>
+          <div class="tpts">// 12 marks · Production cannot ship without this</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          A notification service handles recipient phone numbers, email addresses, and device tokens — all PII. Security is not optional, it's a gate condition. If this task is incomplete, the submission fails regardless of other scores.
+        </p>
+
+        <div class="reqs">
+          <div class="req"><strong>JWT authentication:</strong> All endpoints except <code>/actuator/health</code> and <code>/swagger-ui.html</code> require a valid JWT. Implement <code>JwtAuthenticationFilter</code> using Spring Security. Token expiry: configurable, default 1 hour. Provide a <code>POST /api/v1/auth/token</code> endpoint for obtaining tokens in tests.</div>
+          <div class="req"><strong>Role-based access control:</strong> Two roles: <code>SERVICE</code> (can submit notifications, check status, view history) and <code>ADMIN</code> (all SERVICE permissions + template management + retry any notification + DLQ inspection). Use Spring Security's <code>@PreAuthorize</code> annotations on service methods — not just controller layer.</div>
+          <div class="req"><strong>PII encryption at rest:</strong> Recipient email, phone number, and device token must be encrypted in the database using AES-256. Decryption happens only within the adapter before dispatch. The database administrator seeing raw DB rows must not see plaintext PII. Implement as a JPA <code>AttributeConverter</code>.</div>
+          <div class="req"><strong>Input validation:</strong> Email format validation, phone number format (E.164), device token length constraints. Validate at the DTO layer with Bean Validation. Return 400 with field-level error messages — never a 500 from an invalid input.</div>
+          <div class="req"><strong>Rate limiting:</strong> Implement per-client rate limiting using a token bucket algorithm. Max 100 notifications per minute per JWT client. Return 429 with <code>Retry-After</code> header when exceeded. Use Redis for distributed rate limit state.</div>
+        </div>
+
+        <div class="callout red">
+          <div class="ch">// Hard Gate</div>
+          <p><strong>If we can call <code>POST /api/v1/notifications</code> without a JWT and it returns 200, this task scores 0.</strong> Security failures in a production microservice are not "partial credit" situations.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 6 — Testing -->
+    <div class="task t6">
+      <div class="task-header">
+        <div class="tnum">06</div>
+        <div>
+          <div class="ttitle">Testing — Unit, Integration & Contract Tests</div>
+          <div class="tpts">// 10 marks · Untested code is unfinished code</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          We look at test quality, not test quantity. 10 well-thought-out tests that cover real edge cases score higher than 100 tests that only verify the happy path.
+        </p>
+
+        <div class="reqs">
+          <div class="req"><strong>Unit tests with Mockito:</strong> All service layer classes must have unit tests. Mock all dependencies. Cover: successful send, channel adapter failure, retry trigger, max retries exceeded, idempotency (duplicate notificationId rejected), template variable missing, invalid channel type. Minimum 80% line coverage on <code>service</code> and <code>domain</code> packages — enforced by JaCoCo Maven plugin (build fails below threshold).</div>
+          <div class="req"><strong>Integration tests with Testcontainers:</strong> At least 3 full-stack integration tests using Testcontainers (PostgreSQL + Kafka). Test the complete flow: HTTP request → Kafka publish → Consumer → Adapter (mocked external) → Status update → GET status returns SENT. These must pass in CI without any local setup beyond Docker.</div>
+          <div class="req"><strong>Kafka consumer tests:</strong> Test the retry + DLQ flow end-to-end: inject a failing <code>NotificationSender</code>, verify retries exhaust, verify message lands in DLQ topic, verify notification status becomes FAILED.</div>
+          <div class="req"><strong>Template engine tests:</strong> Test Mustache rendering: happy path, missing variable (expect exception), empty variable map, special characters in variables (SQL injection attempt via template variable must not reach the DB as executable SQL).</div>
+          <div class="req"><strong>Security tests:</strong> Test that unauthenticated requests return 401, ROLE_SERVICE cannot access template management endpoints (expect 403), ROLE_ADMIN can. These tests must actually start the security context — not just mock it away.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 7 — DevOps -->
+    <div class="task t7">
+      <div class="task-header">
+        <div class="tnum">07</div>
+        <div>
+          <div class="ttitle">Docker, Observability & README</div>
+          <div class="tpts">// 5 marks · Can we actually run this?</div>
+        </div>
+      </div>
+      <div class="tbody">
+        <p class="tdesc">
+          A microservice that requires 45 minutes of tribal knowledge to run is not production-ready. One command. Everything up. That's the standard.
+        </p>
+        <div class="reqs">
+          <div class="req"><strong>Dockerfile:</strong> Multi-stage build. Stage 1: Maven build. Stage 2: JRE 17 slim image. Final image must be under 300MB. Health check instruction in Dockerfile.</div>
+          <div class="req"><strong>docker-compose.yml:</strong> Brings up the full stack: notification-service, PostgreSQL, Kafka (with Zookeeper or KRaft), Redis, and optionally Kafka UI. <code>docker-compose up</code> must result in a working service at <code>http://localhost:8080</code> within 60 seconds. No manual setup steps.</div>
+          <div class="req"><strong>Spring Boot Actuator + Prometheus:</strong> <code>/actuator/health</code> returns aggregate health (DB, Kafka, Redis). Custom metrics: <code>notifications.sent.total{channel}</code>, <code>notifications.failed.total{channel}</code>, <code>notifications.dlq.depth{channel}</code>. These must appear in Prometheus format at <code>/actuator/prometheus</code>.</div>
+          <div class="req"><strong>README.md:</strong> Contains: prerequisites, how to run locally (one command), how to obtain a JWT for testing, API examples with curl, environment variables reference, architecture diagram (text or image), and your design decisions section — at least 3 meaningful choices you made and why.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tasks -->
+
+  <div class="sep"></div>
+
+  <!-- DATABASE SCHEMA -->
+  <div class="sec-tag">// 03 · Database Design</div>
+  <div class="sec-title">Schema Requirements</div>
+  <p class="sec-sub">Design this schema yourself. The entities below are the minimum — you may add tables as needed. Use Flyway for migrations. Every migration file must be idempotent.</p>
+
+  <div class="codeblock">
+    <div class="cb-h"><span class="cb-f">Core Entities</span><span class="cb-l">PostgreSQL</span></div>
+    <pre><span class="cm">-- notifications: core notification record</span>
+notifications (
+  id UUID PRIMARY KEY,
+  recipient_id VARCHAR(255),
+  channel ENUM('EMAIL','SMS','WHATSAPP','PUSH'),
+  status ENUM('PENDING','PROCESSING','SENT','FAILED','RETRYING'),
+  priority ENUM('HIGH','MEDIUM','LOW'),
+  template_id UUID NULLABLE,
+  message_content TEXT <span class="cm">-- encrypted PII removed to recipient table</span>
+  retry_count INT DEFAULT 0,
+  max_retries INT DEFAULT 3,
+  sent_at TIMESTAMP,
+  failed_at TIMESTAMP,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+)
+
+<span class="cm">-- recipients: PII stored separately, all columns AES-256 encrypted</span>
+notification_recipients (
+  id UUID PRIMARY KEY,
+  notification_id UUID REFERENCES notifications(id),
+  email_encrypted VARCHAR(512),
+  phone_encrypted VARCHAR(256),
+  device_token_encrypted VARCHAR(512)
+)
+
+<span class="cm">-- templates + versioning</span>
+notification_templates (
+  id UUID, version INT,
+  name VARCHAR(255), channel ChannelType,
+  subject_template TEXT, body_template TEXT,
+  is_active BOOLEAN, created_by VARCHAR,
+  created_at TIMESTAMP,
+  PRIMARY KEY (id, version)
+)
+
+<span class="cm">-- audit trail: immutable log of every status change</span>
+notification_audit (
+  id UUID PRIMARY KEY,
+  notification_id UUID,
+  from_status VARCHAR, to_status VARCHAR,
+  reason TEXT, created_at TIMESTAMP
+)</pre>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- EVALUATION TABLE -->
+  <div class="sec-tag">// 04 · How We Evaluate</div>
+  <div class="sec-title">Scoring Rubric</div>
+
+  <table class="eval-table">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>Marks</th>
+        <th>Key Criteria</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Domain Model &amp; REST API</td>
+        <td><span class="sc">18</span></td>
+        <td>Idempotency, status state machine correctness, Swagger completeness, validation on all inputs</td>
+      </tr>
+      <tr>
+        <td>Channel Adapters</td>
+        <td><span class="sc">20</span></td>
+        <td>Strategy pattern purity — can we add Slack in 30 min? Factory auto-discovery, mock adapter, provider fallback</td>
+      </tr>
+      <tr>
+        <td>Kafka Pipeline</td>
+        <td><span class="sc">20</span></td>
+        <td>Topic design, DLQ implementation, retry with exponential backoff, transient vs permanent error distinction</td>
+      </tr>
+      <tr>
+        <td>Template Engine</td>
+        <td><span class="sc">15</span></td>
+        <td>Versioning, multi-channel variants, Redis caching with eviction, clear missing-variable errors</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td><span class="sc">12</span></td>
+        <td>JWT on all endpoints, role enforcement at service layer, PII encrypted in DB, rate limiting</td>
+      </tr>
+      <tr>
+        <td>Testing</td>
+        <td><span class="sc">10</span></td>
+        <td>Coverage threshold enforced, Testcontainers integration tests, Kafka DLQ flow tested</td>
+      </tr>
+      <tr>
+        <td>Docker &amp; README</td>
+        <td><span class="sc">5</span></td>
+        <td>One-command startup, Prometheus metrics exposed, README explains design decisions</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout cyan">
+    <div class="ch">// Design Review</div>
+    <p><strong>30% of the total evaluation happens in the design review call</strong> — not the code submission. Be prepared to explain: why you chose your Kafka topic structure, how you'd handle a 10x notification spike, what breaks first in your current design, and how you'd evolve the schema to support multi-tenancy. Code that works but can't be explained doesn't pass.</p>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- BONUS -->
+  <div class="sec-tag">// 05 · Bonus Features</div>
+  <div class="sec-title">Go Further — 30 Bonus Marks</div>
+
+  <div class="bonus-grid">
+    <div class="bc">
+      <div class="bc-icon">🏢</div>
+      <div class="bc-title">Multi-Tenancy Support</div>
+      <div class="bc-desc">Each tenant (client application) has isolated templates, notification history, and rate limits. Schema-per-tenant or row-level tenant isolation — justify your choice.</div>
+      <div class="diff d-hard">+10 marks</div>
+    </div>
+    <div class="bc">
+      <div class="bc-icon">⏰</div>
+      <div class="bc-title">Notification Scheduling</div>
+      <div class="bc-desc">Send a notification at a future <code>scheduledAt</code> time. Built on Quartz Scheduler or Spring's <code>@Scheduled</code> with a persistent job store. Surviving a service restart is required.</div>
+      <div class="diff d-hard">+8 marks</div>
+    </div>
+    <div class="bc">
+      <div class="bc-icon">⚙️</div>
+      <div class="bc-title">User Preferences API</div>
+      <div class="bc-desc"><code>POST /api/v1/users/{id}/preferences</code> — a user can opt out of specific channels or notification types. The service must honour these preferences before dispatching.</div>
+      <div class="diff d-hard">+7 marks</div>
+    </div>
+    <div class="bc">
+      <div class="bc-icon">📊</div>
+      <div class="bc-title">Analytics Dashboard</div>
+      <div class="bc-desc">Grafana dashboard (provisioned via JSON, not manual setup) showing: send rate by channel, failure rate, DLQ depth, retry rate, p99 processing latency — all from Prometheus metrics.</div>
+      <div class="diff d-expert">+5 marks</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- MANDATORY QUESTIONS -->
+  <div class="sec-tag">// 06 · Design Questions</div>
+  <div class="sec-title">Answer These in Your README</div>
+  <p class="sec-sub">Short answers are fine. Vague answers score 0. We will ask follow-up questions on every answer in the review call.</p>
+
+  <div class="mq-list" id="mq-list" style="display:flex;flex-direction:column;gap:.875rem;margin-top:1.25rem">
+    <div class="mq" style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--java);border-radius:0 8px 8px 0;padding:1rem 1.25rem">
+      <div class="mq-n" style="font-family:'Fira Code',monospace;font-size:.65rem;color:var(--java);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem">Q1</div>
+      <div class="mq-t" style="font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6">Your Kafka consumer for email crashes mid-processing after reading a message but before marking it as SENT. When it restarts, what happens to that notification? How does your design prevent double-sending? Where can it still fail?</div>
+    </div>
+    <div class="mq" style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--java);border-radius:0 8px 8px 0;padding:1rem 1.25rem">
+      <div class="mq-n" style="font-family:'Fira Code',monospace;font-size:.65rem;color:var(--java);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem">Q2</div>
+      <div class="mq-t" style="font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6">A client submits 10,000 notifications in 30 seconds. Your service is running one instance with concurrency=3 on the email consumer. Walk through what happens end-to-end. What's the first thing that breaks?</div>
+    </div>
+    <div class="mq" style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--java);border-radius:0 8px 8px 0;padding:1rem 1.25rem">
+      <div class="mq-n" style="font-family:'Fira Code',monospace;font-size:.65rem;color:var(--java);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem">Q3</div>
+      <div class="mq-t" style="font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6">SendGrid is down for 20 minutes. Describe exactly what happens in your system during those 20 minutes and the 10 minutes after it comes back. What is the customer experience? What does the DBA see in the DB?</div>
+    </div>
+    <div class="mq" style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--java);border-radius:0 8px 8px 0;padding:1rem 1.25rem">
+      <div class="mq-n" style="font-family:'Fira Code',monospace;font-size:.65rem;color:var(--java);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem">Q4</div>
+      <div class="mq-t" style="font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6">A compliance requirement arrives: all notification content (message body) must be deleted after 90 days. You have 50 million notification records. Walk through the schema changes, data migration strategy, and the scheduled job you'd write. What are the risks?</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- SUBMIT -->
+  <div class="sec-tag">// 07 · Submission</div>
+  <div class="sec-title">How to Submit</div>
+
+  <div class="submit-wrap">
+    <div class="ss-list">
+      <div class="ss">
+        <div class="ss-dot">01</div>
+        <div>
+          <div class="ss-title">GitHub Repository</div>
+          <div class="ss-desc">Public repo named <code>tekravio-notification-service</code>. Clean commit history — we look at it. No single giant commit. Feature branches merged to main.</div>
+        </div>
+      </div>
+      <div class="ss">
+        <div class="ss-dot">02</div>
+        <div>
+          <div class="ss-title">README First</div>
+          <div class="ss-desc">README must contain: one-command startup, design decisions (min 3), answers to all 4 design questions, architecture diagram, API quick-start with curl examples.</div>
+        </div>
+      </div>
+      <div class="ss">
+        <div class="ss-dot">03</div>
+        <div>
+          <div class="ss-title">Swagger UI Must Work</div>
+          <div class="ss-desc">After <code>docker-compose up</code>, <code>http://localhost:8080/swagger-ui.html</code> must load fully, show all endpoints with request/response schemas, and allow authenticated test calls.</div>
+        </div>
+      </div>
+      <div class="ss">
+        <div class="ss-dot">04</div>
+        <div>
+          <div class="ss-title">Email to Careers</div>
+          <div class="ss-desc">Subject: <code>Java Experienced — Notification Microservice — [Your Name]</code>. Body: GitHub link + a single sentence on the design decision you're most confident in.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout yellow" style="margin-top:1.5rem">
+    <div class="ch">// One Final Standard</div>
+    <p>When we pull your repo, run <code>docker-compose up</code>, hit the Swagger UI, and submit a notification — <strong>it must work the first time, without asking you anything</strong>. A submission that requires setup instructions beyond what's in the README will be returned unreviewed. We're not testing your ability to explain broken code — we're testing production-readiness.</p>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /section -->
+</main>
+
+<footer>
+  <div class="container">
+    <div class="fi">
+      <div class="fl">Tekr<span>avio</span></div>
+      <div>Java Experienced Assignment · Notification Microservice · 2026</div>
+      <div>tekravio.com/careers.html</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
