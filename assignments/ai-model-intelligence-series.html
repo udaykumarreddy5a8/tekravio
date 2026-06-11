@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — Model Intelligence Series 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);
+  --tx:#e2e8f0;--mu:#5a6080;--r:12px;
+  --oa:#10b981;--go:#4285f4;--xa:#cbd5e1;--ds:#3b82f6;
+  --mt:#0866ff;--qw:#f97316;--ms:#ff7043;--an:#8b5cf6}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:#5a6080;border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#c4b5fd;padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:960px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:#8b5cf6;font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid var(--bd);color:var(--mu);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:linear-gradient(90deg,#10b981,#4285f4,#8b5cf6);width:0%;transition:width .1s}
+/* HERO */
+.hero{padding:72px 0 48px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(139,92,246,.12) 0%,transparent 65%);pointer-events:none}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#8b5cf6;margin-bottom:1rem}
+.ht{font-size:clamp(2.2rem,6vw,4rem);line-height:.95;letter-spacing:-.03em;margin-bottom:1.25rem}
+.hs{font-size:1rem;color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2rem}
+.mrow{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem}
+.mp{display:flex;align-items:center;gap:.5rem;background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:.5rem 1rem}
+.mpl{color:var(--mu);font-family:"Fira Code",monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase}.mpv{font-weight:700;color:var(--tx)}
+/* PROVIDER GRID */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin:2rem 0}
+.pc{border:1px solid var(--bd);border-radius:var(--r);padding:1.25rem;text-decoration:none;display:block;position:relative;overflow:hidden;transition:transform .15s,border-color .2s}
+.pc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.pc:hover{transform:translateY(-2px)}
+.pc.oa::before{background:var(--oa)}.pc.go::before{background:var(--go)}.pc.xa::before{background:var(--xa)}
+.pc.ds::before{background:var(--ds)}.pc.mt::before{background:var(--mt)}.pc.qw::before{background:var(--qw)}
+.pc.ms::before{background:var(--ms)}.pc.an::before{background:var(--an)}
+.pc.oa:hover{border-color:rgba(16,185,129,.4)}.pc.go:hover{border-color:rgba(66,133,244,.4)}
+.pc.xa:hover{border-color:rgba(203,213,225,.3)}.pc.ds:hover{border-color:rgba(59,130,246,.4)}
+.pc.mt:hover{border-color:rgba(8,102,255,.4)}.pc.qw:hover{border-color:rgba(249,115,22,.4)}
+.pc.ms:hover{border-color:rgba(255,112,67,.4)}.pc.an:hover{border-color:rgba(139,92,246,.4)}
+.pci{font-size:2rem;margin-bottom:.625rem}
+.pcpv{font-family:"Fira Code",monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
+.pc.oa .pcpv{color:var(--oa)}.pc.go .pcpv{color:var(--go)}.pc.xa .pcpv{color:var(--xa)}
+.pc.ds .pcpv{color:var(--ds)}.pc.mt .pcpv{color:var(--mt)}.pc.qw .pcpv{color:var(--qw)}
+.pc.ms .pcpv{color:var(--ms)}.pc.an .pcpv{color:var(--an)}
+.pcm{font-family:"Clash Display",sans-serif;font-size:.9rem;font-weight:700;color:var(--tx);margin-bottom:.3rem;line-height:1.2}
+.pcd{font-size:.77rem;color:var(--mu);line-height:1.5}
+/* ASSIGNMENT SECTIONS */
+.asec{border-top:1px solid var(--bd);scroll-margin-top:110px}
+.ahead{padding:2.5rem 0 1.75rem}
+.abadge{display:inline-flex;align-items:center;gap:.6rem;font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;padding:5px 14px;border-radius:4px;margin-bottom:1rem}
+.atitle{font-size:clamp(1.6rem,3.5vw,2.4rem);line-height:1.1;margin-bottom:.75rem}
+.asub{font-size:.9375rem;color:var(--mu);max-width:700px;line-height:1.7;margin-bottom:1.5rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;border:1px solid}
+/* TASKS */
+.tasks{display:flex;flex-direction:column;gap:.875rem;margin-bottom:2rem}
+.task{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.th{display:flex;align-items:center;gap:.875rem;padding:1.125rem 1.5rem;cursor:pointer;user-select:none}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.tt{font-family:"Clash Display",sans-serif;font-size:.9625rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.64rem;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg)}
+.tb{border-top:1px solid var(--bd);padding:1.375rem 1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9rem;color:#94a3b8;line-height:1.7;margin-bottom:1rem}
+.rl{display:flex;flex-direction:column;gap:.5rem}
+.rq{display:flex;gap:.7rem;font-size:.875rem;color:#94a3b8;align-items:flex-start;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--mu)}
+/* PROVIDER ACCENT HELPERS */
+.oa .abadge{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--oa)}
+.oa .tn{background:rgba(16,185,129,.15);color:var(--oa)}.oa .rq::before,.oa .task.open .tch{color:var(--oa)}
+.go .abadge{background:rgba(66,133,244,.1);border:1px solid rgba(66,133,244,.25);color:var(--go)}
+.go .tn{background:rgba(66,133,244,.15);color:var(--go)}.go .rq::before,.go .task.open .tch{color:var(--go)}
+.xa .abadge{background:rgba(203,213,225,.07);border:1px solid rgba(203,213,225,.2);color:var(--xa)}
+.xa .tn{background:rgba(203,213,225,.1);color:var(--xa)}.xa .rq::before,.xa .task.open .tch{color:var(--xa)}
+.ds .abadge{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:var(--ds)}
+.ds .tn{background:rgba(59,130,246,.15);color:var(--ds)}.ds .rq::before,.ds .task.open .tch{color:var(--ds)}
+.mt .abadge{background:rgba(8,102,255,.1);border:1px solid rgba(8,102,255,.25);color:var(--mt)}
+.mt .tn{background:rgba(8,102,255,.15);color:var(--mt)}.mt .rq::before,.mt .task.open .tch{color:var(--mt)}
+.qw .abadge{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);color:var(--qw)}
+.qw .tn{background:rgba(249,115,22,.15);color:var(--qw)}.qw .rq::before,.qw .task.open .tch{color:var(--qw)}
+.ms .abadge{background:rgba(255,112,67,.1);border:1px solid rgba(255,112,67,.25);color:var(--ms)}
+.ms .tn{background:rgba(255,112,67,.15);color:var(--ms)}.ms .rq::before,.ms .task.open .tch{color:var(--ms)}
+.an .abadge{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);color:var(--an)}
+.an .tn{background:rgba(139,92,246,.15);color:var(--an)}.an .rq::before,.an .task.open .tch{color:var(--an)}
+/* CALLOUT */
+.co{border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7;border:1px solid}
+.coh{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.co p{color:#94a3b8;margin:0}.co p strong{color:var(--tx)}
+.coy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.coy .coh{color:#fbbf24}
+.coo{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.coo .coh{color:#ff7043}
+/* BONUS */
+.bx{border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1.5rem;border:1px solid rgba(251,191,36,.25);background:rgba(251,191,36,.04)}
+.bxt{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.45rem}
+.bit{display:flex;gap:.7rem;font-size:.875rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;font-size:.65rem;margin-top:3px}
+/* SUBMIT */
+.sb{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:1.5rem 2rem;margin-top:1rem;text-align:center}
+/* CODE BLOCK */
+.cb{background:#020408;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.875rem 1.125rem;font-family:"Fira Code",monospace;font-size:.74rem;line-height:1.8;color:#94a3b8;overflow-x:auto;margin:.75rem 0}
+/* MASTER SUBMIT */
+.ms-wrap{background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(139,92,246,.06));border:1px solid rgba(139,92,246,.2);border-radius:var(--r);padding:2rem;text-align:center;margin:3rem 0}
+.sep{height:1px;background:var(--bd);margin:2.5rem 0}
+footer{border-top:1px solid var(--bd);padding:1.75rem 0;margin-top:2rem}
+.fi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem;color:var(--mu)}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:#8b5cf6;font-style:normal}
+@media(max-width:640px){.pgrid{grid-template-columns:1fr 1fr}.mrow{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> Academy</div>
+  <div class="hbg">AI Research Intern &middot; Model Intelligence Series</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<section class="hero">
+<div class="wrap">
+  <p class="etag">// AI Research Intern &middot; 8 Assignments &middot; 8 Providers &middot; 2026</p>
+  <h1 class="ht">The AI Model<br><span style="color:#8b5cf6">Intelligence</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Series.</span></h1>
+  <p class="hs">Eight assignments. Eight providers. Every major model in 2025&ndash;2026 documented in depth &mdash; architecture, benchmarks, pricing, access tiers, and real enterprise use cases. Complete all eight. Build Tekravio&rsquo;s definitive AI model intelligence document.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Assignments</div><div class="mpv">8 Providers</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">800 + 240 Bonus + 50 Synthesis</div></div></div>
+    <div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">14 Days</div></div></div>
+    <div class="mp"><div><div class="mpl">Submit To</div><div class="mpv">careers@tekravio.com</div></div></div>
+  </div>
+  <div class="pgrid">
+    <a href="#oa" class="pc oa"><div class="pci">&#x1F9E0;</div><div class="pcpv">OpenAI</div><div class="pcm">GPT-5.5 Family</div><div class="pcd">Apr 2026 &middot; 1.1M ctx &middot; $5/$30</div></a>
+    <a href="#go" class="pc go"><div class="pci">&#x1F30C;</div><div class="pcpv">Google DeepMind</div><div class="pcm">Gemini 3.1 Pro</div><div class="pcd">Feb 2026 &middot; MoE &middot; ARC-AGI-2 77.1%</div></a>
+    <a href="#xa" class="pc xa"><div class="pci">&#x1F310;</div><div class="pcpv">xAI</div><div class="pcm">Grok 4.3</div><div class="pcd">Apr 2026 &middot; Colossus &middot; $1.25/$2.50</div></a>
+    <a href="#ds" class="pc ds"><div class="pci">&#x1F680;</div><div class="pcpv">DeepSeek</div><div class="pcm">V4 Pro</div><div class="pcd">Apr 2026 &middot; MIT License &middot; 680B MoE</div></a>
+    <a href="#mt" class="pc mt"><div class="pci">&#x1F916;</div><div class="pcpv">Meta AI</div><div class="pcm">Llama 4 Scout</div><div class="pcd">2026 &middot; Apache 2.0 &middot; 10M context</div></a>
+    <a href="#qw" class="pc qw"><div class="pci">&#x1F525;</div><div class="pcpv">Alibaba Qwen</div><div class="pcm">Qwen 3.x Family</div><div class="pcd">2026 &middot; 201 languages &middot; from $0.10/M</div></a>
+    <a href="#ms" class="pc ms"><div class="pci">&#x1F1EA;&#x1F1FA;</div><div class="pcpv">Mistral AI</div><div class="pcm">Devstral 2 &amp; Large 3</div><div class="pcd">2026 &middot; EU-origin &middot; GDPR-native</div></a>
+    <a href="#an" class="pc an"><div class="pci">&#x1F9F5;</div><div class="pcpv">Anthropic</div><div class="pcm">Fable 5 &amp; Mythos 5</div><div class="pcd">Jun 9 2026 &middot; $10/$50 &middot; 1M ctx</div></a>
+  </div>
+</div>
+</section>
+
+<section class="asec oa" id="oa">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F9E0; &nbsp;Assignment 01 · OpenAI</span>
+  <h2 class="atitle">GPT-5.5 &mdash; OpenAI's Smartest &amp; Most Intuitive Model</h2>
+  <p class="asub">Released April 23, 2026. GPT-5.5 is OpenAI's most capable model, built for agentic coding, computer use, knowledge work, and early scientific research. It ships in three tiers: GPT-5.5 (default), GPT-5.5 Thinking (all paid plans), and GPT-5.5 Pro (Pro/Business/Enterprise). API model string: <code>gpt-5.5</code>. On May 5 it became the default ChatGPT model as GPT-5.5 Instant, reducing hallucinated claims by 52.5% vs GPT-5.3 Instant.</p>
+  <div class="trow"><span class="tag" style="color:var(--oa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">gpt-5.5 / gpt-5.5-pro</span><span class="tag" style="color:var(--oa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">1.1M context · 128K output</span><span class="tag" style="color:var(--oa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">$5/$30 per M tokens</span><span class="tag" style="color:var(--oa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Terminal-Bench 2.0: 82.7%</span><span class="tag" style="color:var(--oa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Apr 23 2026</span><span class="tag" style="color:var(--oa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">Model Family Architecture &amp; The Three Tiers</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">GPT-5.5 is a family built on a router architecture across effort levels (xhigh → non-reasoning). Document every tier and the structural design.</p>
+      <div class="rl"><div class="rq"><strong>Three consumer tiers:</strong> GPT-5.5 default, GPT-5.5 Thinking (all paid), GPT-5.5 Pro (Pro/Business/Enterprise only). What is each designed for? Why is Pro gated to higher subscription tiers?</div><div class="rq"><strong>Router architecture:</strong> GPT-5.5 reuses the GPT-5 family router across effort levels. Explain what a router architecture means for an LLM. How does routing xhigh → non-reasoning work?</div><div class="rq"><strong>Context window &amp; long-context pricing:</strong> 1.1M context, 128K output. Prompts above 272K input tokens: 2× input + 1.5× output for the full session. Work out the cost for a 400K-token prompt at standard vs long-context rates.</div><div class="rq"><strong>Token efficiency vs GPT-5.4:</strong> OpenAI claims GPT-5.5 is more token-efficient than GPT-5.4. At what efficiency improvement does the 2× price ($5 vs $2.50) break even?</div><div class="rq"><strong>GPT-5.5 Instant as ChatGPT default:</strong> Became default on May 5, 2026. Produces 52.5% fewer hallucinated claims than GPT-5.3 Instant on medicine, law, and finance prompts. Explain how hallucination rate is measured and why 52.5% reduction matters in enterprise.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">Codex 2026 &amp; Agentic Coding</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">GPT-5.5's flagship deployment is the 2026 Codex — an agentic coding environment in CLI, IDE extensions, and web. This is not the 2021 Codex. Understand exactly what it does.</p>
+      <div class="rl"><div class="rq"><strong>What 2026 Codex actually is:</strong> An agentic coding environment, not a completion API. 400K context in Codex vs 1M in API — why the difference? What can Codex do that a standard API call cannot?</div><div class="rq"><strong>Terminal-Bench 2.0 at 82.7%:</strong> GPT-5.5 scores 82.7% vs Opus 4.7 at 69.4%, Gemini 3.1 Pro at 68.5%. What does Terminal-Bench 2.0 actually test? What does 82.7% mean in practical agentic coding terms?</div><div class="rq"><strong>Computer use in Codex:</strong> GPT-5.5 supports screen-reading computer use in Codex. Define computer use. How does it differ from function calling? Which plan tiers can access it?</div><div class="rq"><strong>Codex pricing tiers:</strong> Fast mode: 1.5× faster, 2.5× cost. Batch/Flex: 0.5× standard rate. Priority: 2.5×. For a startup running 50,000 code-review tasks/month, calculate the cheapest viable tier.</div><div class="rq"><strong>GPT-5.5 vs Cursor vs GitHub Copilot:</strong> Cursor uses Fable 5 (state-of-the-art on CursorBench). GitHub Copilot runs GPT-5.5. Document the overlap and differentiation between all three coding environments.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">Benchmarks, Knowledge Work &amp; Scientific Research</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Document the evidence behind GPT-5.5's capability claims. Be specific — name every benchmark.</p>
+      <div class="rl"><div class="rq"><strong>Full benchmark table:</strong> GPQA Diamond, MMLU, HumanEval, SWE-bench Verified, MCP Atlas, Tau2-bench telecom (original prompts only, no adjustments). For each: what it measures, GPT-5.5's score, which model currently leads.</div><div class="rq"><strong>The memorization caveat:</strong> OpenAI flags evidence of memorization on certain evals. Which benchmark? What does memorization mean for benchmark validity?</div><div class="rq"><strong>Scientific research capability:</strong> GPT-5.5 is described as supporting 'early scientific research.' What specifically has OpenAI demonstrated? Compare to Anthropic's Mythos 5 scientific capabilities — where does GPT-5.5 fall short?</div><div class="rq"><strong>Steerability:</strong> GPT-5.5 improves on GPT-5.4 for steerability. Define steerability in LLMs. Why does it matter for enterprise deployments that need consistent behaviour?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing Map, Access &amp; Cross-Model Comparison</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The full OpenAI pricing picture and head-to-head vs Claude Fable 5.</p>
+      <div class="rl"><div class="rq"><strong>Full GPT-5.x family table:</strong> GPT-5.5 ($5/$30), GPT-5.5 Pro ($30/$180), GPT-5.4 ($2.50/$15), GPT-5.4 Mini ($0.75/$4.50), GPT-5.4 Nano ($0.20/$1.25). Context window, output limit, and use case for each tier.</div><div class="rq"><strong>Subscription vs API economics:</strong> At what monthly API request volume does a $200/mo ChatGPT Pro subscription become cheaper than pure API at $5/$30?</div><div class="rq"><strong>Regional data residency:</strong> 10% uplift for data-residency endpoints. Which regions? Why would an EU enterprise pay this premium?</div><div class="rq"><strong>GPT-5.5 vs Claude Fable 5:</strong> Side-by-side: $5/$30 and 1.1M context (GPT-5.5) vs $10/$50 and 1M context (Fable 5). When is GPT-5.5 the right choice? Cite benchmarks, not preferences.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Safety Architecture &amp; Tekravio Use Case Map</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">How OpenAI's safety approach differs from Anthropic's, and where Tekravio should use GPT-5.5.</p>
+      <div class="rl"><div class="rq"><strong>GPT-5.5 safety system:</strong> The system card describes additional safeguards applied after April 24. Research what they cover. Compare architecturally to Anthropic's safety classifier + fallback system in Fable 5. Which approach is more transparent?</div><div class="rq"><strong>Tekravio Studio use cases:</strong> For each of Studio's three domains (healthcare, fintech, logistics), identify one GPT-5.5 use case that is better served by GPT-5.5 than Fable 5. Cite a specific capability or cost advantage.</div><div class="rq"><strong>Tekravio Academy:</strong> How does Codex improve the Academy training experience? What student workflow becomes possible with agentic coding that standard API access cannot deliver?</div><div class="rq"><strong>Honest verdict (150 words):</strong> Where is GPT-5.5 the right model for Tekravio? Where would you still choose Fable 5 or another model? Include a cost comparison for a specific monthly workload.</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — Live API demo:</strong> Build a multi-step agentic task using GPT-5.5. Document token usage and cost per run.</div><div class="bit"><strong>+10 marks — GPT-5.5 vs Fable 5 head-to-head:</strong> Run the same 5 prompts through both. Compare output quality, token count, cost, and which gave the more useful response.</div><div class="bit"><strong>+5 marks — Codex Fast mode:</strong> Research what technically makes Codex Fast mode 1.5× faster. What quality trade-offs does it make?</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 01 &mdash; OpenAI GPT-5.5</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--oa);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 01 OpenAI GPT-5.5 &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec go" id="go">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F30C; &nbsp;Assignment 02 · Google DeepMind</span>
+  <h2 class="atitle">Gemini 3.1 Pro &mdash; Native Multimodal Reasoning, ARC-AGI-2 Leader</h2>
+  <p class="asub">Released February 19, 2026. First '.1' increment in Google's naming history — signals a focused reasoning upgrade, not a full rebuild. Mixture-of-Experts architecture with three-tier thinking (Low / Medium / High). Five native modalities: text, images, audio (8.4 hrs), video (1 hr), code. Leads on ARC-AGI-2 (77.1%) and GPQA Diamond (94.3%). Most cost-competitive frontier model at $2/$12 per million tokens.</p>
+  <div class="trow"><span class="tag" style="color:var(--go);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">gemini-3.1-pro</span><span class="tag" style="color:var(--go);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">MoE Architecture</span><span class="tag" style="color:var(--go);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">1M context / 65K output</span><span class="tag" style="color:var(--go);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">$2/$12 per M tokens</span><span class="tag" style="color:var(--go);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">ARC-AGI-2: 77.1%</span><span class="tag" style="color:var(--go);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">Architecture: MoE, Three-Tier Thinking &amp; the .1 Naming Choice</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro is architecturally distinct from GPT and Claude. Understanding MoE and the thinking system is foundational.</p>
+      <div class="rl"><div class="rq"><strong>Why .1 not .5:</strong> Google used .5 increments for Gemini 1.5 and 2.5. The .1 signals a focused reasoning upgrade. What specifically changed between Gemini 3 Pro and 3.1 Pro? What did not change?</div><div class="rq"><strong>MoE architecture:</strong> Explain MoE in practical terms. Inference cost advantages vs a dense transformer? Trade-offs in output consistency?</div><div class="rq"><strong>Three-tier thinking system:</strong> Low (fastest, classification), Medium (balanced — new in 3.1), High (maximum depth, complex research). How does the model choose tier if not specified? When does Low save enough money that the quality trade-off is worth it?</div><div class="rq"><strong>Native multimodal from the start:</strong> Gemini was built multimodal from the ground up — text, images, audio, video, code as first-class inputs. Contrast with GPT-5.5 (no native video) and Fable 5 (text/image/PDF). What specific tasks can Gemini 3.1 Pro handle in a single call that competitors cannot?</div><div class="rq"><strong>Context window practically:</strong> 1,048,576 input tokens, 65,536 output. Can process 8.4 hrs of audio, 900-page PDFs, or 1 hr of video in one prompt. Document 3 enterprise scenarios where this multimodal + context combination creates capabilities no other model matches.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">ARC-AGI-2 at 77.1% — What It Actually Measures</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro scores 77.1% on ARC-AGI-2 — more than double Gemini 3 Pro's 31.1% three months earlier. This is the most important benchmark story of early 2026.</p>
+      <div class="rl"><div class="rq"><strong>ARC-AGI-2 explained:</strong> What is it? Who created it and why? Why can't models train their way to a high score? What does 77.1% mean practically? What is the current human baseline on this benchmark?</div><div class="rq"><strong>GPQA Diamond at 94.3%:</strong> What domain does GPQA Diamond test? Is the gap over Claude Opus 4.6 (92.8%) meaningful in practice for researchers?</div><div class="rq"><strong>MCP Atlas at 83.6%:</strong> What is MCP Atlas? Why is tool-coordination score specifically important for enterprise AI agents?</div><div class="rq"><strong>Deep Think mode:</strong> Google's extended-reasoning variant, gated to AI Ultra ($99.99+/mo). What does it add over High thinking tier? Compare to Claude Fable 5's adaptive thinking. When does the $99.99/mo premium justify itself?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">Five Modalities: Vision, Audio, Video at Scale</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Google's primary differentiator is natively multimodal. Document what Gemini 3.1 Pro can actually do across modalities.</p>
+      <div class="rl"><div class="rq"><strong>Vision capabilities:</strong> MMMU-Pro: 83.6%. SVG and 3D rendering from natural language (not found in other frontier models). OSWorld computer use: 78.4%. Document each with a concrete enterprise use case.</div><div class="rq"><strong>Audio processing:</strong> 8.4 hours of audio in one context. Meeting transcripts, medical dictation, podcast research. What is Gemini's accuracy on speech benchmarks vs OpenAI Whisper?</div><div class="rq"><strong>Video processing:</strong> 1 hour of video in one prompt. What specific workflows does this enable? Why does the 78.4% OSWorld score matter for computer-controlling agents?</div><div class="rq"><strong>Enterprise multimodal for Tekravio:</strong> For Studio's three domains (healthcare, fintech, logistics), identify one native video + context use case per domain that becomes feasible with Gemini 3.1 Pro but not with GPT-5.5 or Fable 5.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing, Context Caching &amp; Cost Efficiency</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">At $2/$12, Gemini 3.1 Pro is the cheapest frontier model. Document the full pricing picture including caching.</p>
+      <div class="rl"><div class="rq"><strong>Base vs long-context pricing:</strong> Standard: $2/$12. Over 200K tokens: $4/$18. For a legal firm sending 300K-token documents at 1,000/month, calculate the real cost at both tiers vs Claude Fable 5 ($10/$50).</div><div class="rq"><strong>Context caching (up to 75% savings):</strong> How does context caching work technically? What is cached, for how long, and what triggers cache invalidation? Give a worked example where caching changes economics dramatically.</div><div class="rq"><strong>Full Gemini 3 family table:</strong> Gemini 3.1 Pro ($2/$12), Flash-Lite (budget), Deep Think (Ultra-gated). For each: context window, modalities, pricing, recommended use case.</div><div class="rq"><strong>The 7.5× cost argument:</strong> Gemini 3.1 Pro is ~7.5× cheaper than Claude Opus 4.6 on input. When does this cost advantage justify choosing Gemini over Claude Fable 5 ($10/$50)?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Google Ecosystem Integration &amp; Tekravio Decision Framework</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro is integrated into Google's product stack. How this affects adoption decisions.</p>
+      <div class="rl"><div class="rq"><strong>Platform availability:</strong> Gemini API, Vertex AI, AI Pro/Ultra plans, NotebookLM, Google Workspace. What is Google Antigravity? For a company already on GCP, what is the cost to add Gemini 3.1 Pro?</div><div class="rq"><strong>NotebookLM and Workspace integration:</strong> What is NotebookLM? Why does it demonstrate Gemini's long-context + multimodal advantage specifically? What is the value of native Workspace integration vs API access?</div><div class="rq"><strong>The 2M context question:</strong> Some sources reference 2M tokens. As of April 2026, standard API is 1M. Document current 2M availability and the roadmap.</div><div class="rq"><strong>Tekravio decision framework:</strong> When should a Tekravio Studio client choose Gemini 3.1 Pro over GPT-5.5 and over Claude Fable 5? Three columns, specific criteria, no vague answers.</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — Multimodal live demo:</strong> Build something using at least two modalities in one Gemini call. Document token usage and cost.</div><div class="bit"><strong>+10 marks — ARC-AGI-2 task:</strong> Find a public ARC-AGI-2 problem. Run through Gemini 3.1 Pro and GPT-5.5. Compare. What did each cost?</div><div class="bit"><strong>+5 marks — Deep Think access:</strong> If accessible, document one task where High vs Deep Think produces meaningfully different output.</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 02 &mdash; Google Gemini 3.1 Pro</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--go);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 02 Google Gemini 3.1 Pro &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec xa" id="xa">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F310; &nbsp;Assignment 03 · xAI</span>
+  <h2 class="atitle">Grok 4.3 &mdash; Colossus-Trained, X-Native, Frontier Value</h2>
+  <p class="asub">Released April 30, 2026. xAI's recommended Chat API model and current Grok flagship. Trained on Colossus (~200,000 GPUs, 10× compute vs Grok 3). API model alias: <code>grok-4.3-latest</code>. Supports text, image, voice, and video. Native X/Twitter data access via server-side tools. Pricing: $1.25/$2.50 per million tokens — among the most competitive at frontier capability. 1M context via API, 2M in the X/Grok app.</p>
+  <div class="trow"><span class="tag" style="color:var(--xa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">grok-4.3-latest</span><span class="tag" style="color:var(--xa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">1M ctx (API) / 2M (App)</span><span class="tag" style="color:var(--xa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">$1.25/$2.50 per M tokens</span><span class="tag" style="color:var(--xa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Colossus ~200K GPUs</span><span class="tag" style="color:var(--xa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Apr 30 2026</span><span class="tag" style="color:var(--xa);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">Colossus &amp; What 10× Compute Actually Delivers</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4 was trained on ~200,000 GPUs with 10× the compute of Grok 3. Document what this means for capability.</p>
+      <div class="rl"><div class="rq"><strong>Colossus cluster:</strong> What GPU architecture? How does ~200K GPUs compare to OpenAI, Google, and Anthropic training clusters? What does training at this scale unlock that lower-compute training cannot?</div><div class="rq"><strong>10× compute and scaling laws:</strong> Apply Chinchilla scaling laws to predict what a 10× compute increase should yield. Does Grok 4.3's benchmarks match the theoretical prediction? Where does it over- or under-deliver?</div><div class="rq"><strong>Grok 4 vs Grok 4 Heavy vs Grok 4.3:</strong> Grok 4.3 supersedes the Grok 4.20 beta line. What changed? What is Grok 4 Heavy and who is it designed for?</div><div class="rq"><strong>Video processing:</strong> Unlike GPT-5.5, Grok 4.3 includes native video. Document input length limits, supported formats, and one specific enterprise use case.</div><div class="rq"><strong>Context window discrepancy:</strong> 1M tokens via API but 2M in the app. Why the difference? What does it mean for developers building on the API vs end-users of the Grok app?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">X/Twitter Integration &amp; Real-Time Data Access</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4.3 has a capability no other frontier model has: native access to live X/Twitter data.</p>
+      <div class="rl"><div class="rq"><strong>Server-side tools:</strong> Web search, X search, code execution, files, remote MCP. Document each: what it accesses, how it is invoked in the API, and any rate limits.</div><div class="rq"><strong>X search as enterprise data source:</strong> What does X/Twitter firehose access enable that web search cannot? Real-time sentiment, breaking news, brand monitoring, financial signals — document each use case with specific value.</div><div class="rq"><strong>vs other models' web search:</strong> GPT-5.5 has web browsing. Fable 5 has web search tool. Gemini has Google Search. How does Grok's X search differentiate from all three?</div><div class="rq"><strong>Limitations of X data:</strong> Misinformation, bot accounts, recency bias. How should a production application account for these limitations?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">SWE-bench Performance &amp; Agentic Coding</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4.3 scores 80.6% on SWE-bench Verified. Document the coding and agentic capability story.</p>
+      <div class="rl"><div class="rq"><strong>SWE-bench Verified at 80.6%:</strong> Compare to Claude Fable 5 (95% SWE-bench Verified) and GPT-5.5 (Terminal-Bench 2.0: 82.7%). Why are these different benchmarks used to measure coding? What does each actually test?</div><div class="rq"><strong>Reasoning + function calling:</strong> How does Grok 4.3's reasoning integrate with function calling and structured outputs? What is the token cost overhead of enabling reasoning for tool call decisions?</div><div class="rq"><strong>Long-chain agentic workflow:</strong> Design a concrete enterprise workflow using all of Grok 4.3's unique capabilities: X search + web search + code execution + 1M context + video processing. Which industry benefits most from this combination?</div><div class="rq"><strong>Prompt caching economics:</strong> For a customer service app with a 50K-token system prompt at 10,000 requests/day, calculate the monthly savings from Grok's prompt caching at $1.25/M input tokens.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing, MCP Support &amp; Access Paths</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4.3 at $1.25/$2.50 is among the most price-competitive frontier models. Document the full picture.</p>
+      <div class="rl"><div class="rq"><strong>4-model pricing comparison:</strong> Table: Grok 4.3 ($1.25/$2.50) vs GPT-5.5 ($5/$30) vs Gemini 3.1 Pro ($2/$12) vs Claude Fable 5 ($10/$50). At what capability level does each price point become justified?</div><div class="rq"><strong>Remote MCP support:</strong> Grok 4.3 supports remote MCP as a server-side tool — connect to any MCP-compatible service without client-side SDK changes. What does this mean for enterprise integrations? Compare to Claude's MCP implementation.</div><div class="rq"><strong>Cloud availability:</strong> Is Grok 4.3 on AWS Bedrock, Vertex AI, or Azure? For enterprise customers needing single-vendor cloud procurement, what are the current limitations?</div><div class="rq"><strong>Open-source roadmap:</strong> Elon Musk confirmed plans to open-source Grok 3 in February 2026, but the release passed without weights published. Document current status. What would open-sourcing Grok mean for the model ecosystem?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Honest Assessment &amp; Enterprise Risk</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Where Grok 4.3 is the right choice and where it is not.</p>
+      <div class="rl"><div class="rq"><strong>Best use cases:</strong> Three scenarios where Grok 4.3 is clearly the right model: real-time market sentiment (fintech), social media analytics, cost-efficient agentic coding at scale. Cite specific capabilities for each.</div><div class="rq"><strong>Where it falls short:</strong> vs Fable 5 on SWE-bench (95% vs 80.6%), vs Gemini on ARC-AGI-2 (77.1%), vs GPT-5.5 on hallucination reduction (52.5%). Three scenarios where Grok is not the right choice despite low price.</div><div class="rq"><strong>The xAI company risk:</strong> xAI is deeply tied to Elon Musk's other companies. Document enterprise risk: model availability guarantees, pricing stability, and geopolitical or regulatory exposure.</div><div class="rq"><strong>Tekravio application:</strong> Which Tekravio vertical benefits most from Grok's X data + competitive pricing combination? Build a specific product concept that would be meaningfully worse on any other model.</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — X Search live demo:</strong> Build an app using Grok 4.3's X search tool to analyse real-time data. Compare X search vs web search on the same query.</div><div class="bit"><strong>+10 marks — Colossus expansion research:</strong> Research xAI's Colossus cluster expansion plans. What does the AI community predict for Grok 5 capabilities?</div><div class="bit"><strong>+5 marks — MCP integration:</strong> Connect Grok 4.3 to a public MCP server and document the setup and a working tool call.</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 03 &mdash; xAI Grok 4.3</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--xa);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 03 xAI Grok 4.3 &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec ds" id="ds">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F680; &nbsp;Assignment 04 · DeepSeek</span>
+  <h2 class="atitle">DeepSeek V4 Pro &mdash; MIT Open-Weight Frontier, 680B MoE, 88% Inference Cost Cut</h2>
+  <p class="asub">Released April 24, 2026. DeepSeek V4 Pro disrupts intelligence-per-dollar. 680B total parameters, only 42B active per token via MoE. Multi-head Latent Attention (MLA) reduces inference costs by 88%. MIT open-source license with weights on Hugging Face. DeepSeek V3.2-Speciale won gold at IMO, IOI, and ICPC 2026. Promotional pricing: $0.435/$0.87/M (valid until May 31, 2026) → standard: $1.74/$3.48/M.</p>
+  <div class="trow"><span class="tag" style="color:var(--ds);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">MIT License</span><span class="tag" style="color:var(--ds);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">680B MoE · 42B active</span><span class="tag" style="color:var(--ds);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">MLA architecture</span><span class="tag" style="color:var(--ds);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">$1.74/$3.48 standard</span><span class="tag" style="color:var(--ds);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Hugging Face weights</span><span class="tag" style="color:var(--ds);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">MLA Architecture &amp; the 88% Inference Cost Reduction</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">DeepSeek V4 Pro's cost efficiency comes from Multi-head Latent Attention. Understanding MLA is the core of this assignment.</p>
+      <div class="rl"><div class="rq"><strong>MoE with 680B total / 42B active:</strong> How does the routing mechanism decide which experts activate for each token? What are the inference latency implications vs a dense 42B model that activates all parameters?</div><div class="rq"><strong>Multi-head Latent Attention (MLA):</strong> What is MLA technically? How does it differ from standard Multi-Head Attention (MHA) and Group-Query Attention (GQA)? What specific KV cache memory bottleneck does it address, and how does it achieve 88% inference cost reduction?</div><div class="rq"><strong>Native thinking + tool-use integration:</strong> The model can reason about which tools to call as part of its thinking chain — not as a post-hoc decision. How does this differ from GPT-5.5's function calling architecture?</div><div class="rq"><strong>V4 Pro vs R1 family:</strong> DeepSeek has V-series (general) and R-series (reasoning). R1 MATH-500: 97.3%. When should you choose R1 over V4 Pro? How does V4 Pro incorporate reasoning without being a dedicated reasoning model?</div><div class="rq"><strong>Competition performance:</strong> V3.2-Speciale won gold at IMO, IOI, and ICPC 2026. What does winning these competitions demonstrate that benchmark scores cannot capture?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">The MIT License &amp; What Open Weights Enable</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">MIT is the most permissive open-source license. Combined with frontier-adjacent performance, this is significant for the AI industry.</p>
+      <div class="rl"><div class="rq"><strong>MIT vs other open licenses:</strong> Apache 2.0 (Llama 4), Qwen's Apache 2.0, Grok's restrictive license (prohibits using weights to train other models). What does MIT specifically permit that others restrict?</div><div class="rq"><strong>Self-hosting economics:</strong> At what monthly API usage does self-hosting V4 Pro on rented GPUs become cheaper than the API at $1.74/$3.48? Document GPU hardware cost, energy, and maintenance for serving a 680B MoE model.</div><div class="rq"><strong>Fine-tuning at 680B scale:</strong> Is LoRA/QLoRA practical at this scale? What are the realistic customisation options for a 10-person engineering team?</div><div class="rq"><strong>Geopolitical considerations:</strong> DeepSeek is a Chinese company. For EU and US government customers, are there procurement restrictions even on self-hosted open weights? Document what is publicly known about regulatory guidance.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">Benchmarks &amp; the '90% of GPT-5.5' Claim</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Document the evidence. Be precise about which version, which benchmark, and which conditions the claim applies to.</p>
+      <div class="rl"><div class="rq"><strong>The 90% claim:</strong> Which benchmarks support 'V4 Pro matches 90% of GPT-5.5 quality at fraction of the cost'? Which show a larger gap? Is this about V4 Pro or V3.2? When does the remaining 10% capability gap matter and when does it not?</div><div class="rq"><strong>Production workflow benchmark:</strong> One source reports V4 Pro 'matches GPT-5.5's logic for 90% of production Python/TypeScript workflows at 3× throughput.' Document the methodology, limitations, and cost implications for a startup choosing between the two.</div><div class="rq"><strong>Full benchmark table:</strong> GPQA Diamond, MATH-500, HumanEval, SWE-bench Verified. Compare to GPT-5.5, Fable 5, and Gemini 3.1 Pro. Where does DeepSeek lead? Where does it trail significantly?</div><div class="rq"><strong>Throughput advantage:</strong> '3× the throughput vs GPT-5.5.' What does this mean technically? For which application categories (real-time vs batch) does throughput matter more than raw quality?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing: The Post-Promotional Reality</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The 75% promotional discount expired May 31, 2026. Document the current real price and how to think about DeepSeek's economics.</p>
+      <div class="rl"><div class="rq"><strong>Current live price:</strong> Launched at $0.435/$0.87 (75% promo, valid until May 31). Standard: $1.74/$3.48. As of your submission date, what is the live price? Note any changes.</div><div class="rq"><strong>Intelligence-per-dollar table:</strong> Tokens processed per dollar: DeepSeek V4 Pro vs GPT-5.5 ($5/$30) vs Fable 5 ($10/$50) vs Gemini 3.1 Pro ($2/$12). For a company spending $5,000/month on AI, how many more tokens with DeepSeek vs Fable 5?</div><div class="rq"><strong>Hybrid architecture strategy:</strong> Design a specific hybrid architecture for a Tekravio Studio client: DeepSeek for heavy batch workloads, GPT-5.5 or Fable 5 for real-time or highest-stakes tasks. Document the routing logic and cost implications.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Enterprise Risk &amp; Tekravio Decision Framework</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Where DeepSeek clearly wins, and where it absolutely cannot be used.</p>
+      <div class="rl"><div class="rq"><strong>Clear wins:</strong> Three scenarios where DeepSeek V4 Pro is the obvious choice over all alternatives. For each: specific application, benchmark evidence, cost calculation.</div><div class="rq"><strong>Cannot use cases:</strong> Build a list of Tekravio client scenarios where DeepSeek cannot be used despite its cost advantage: regulated healthcare, government contracts, EU data residency requirements. Cite the specific regulatory basis for each exclusion.</div><div class="rq"><strong>Open-weight vs API trade-off:</strong> A table comparing: (a) using the API, (b) self-hosting the weights, (c) fine-tuning the weights. Include cost, control, compliance, and maintenance as dimensions.</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — Self-hosting feasibility study:</strong> Research running DeepSeek V4 Pro on Lambda Labs, RunPod, or Together AI. Document minimum hardware, estimated cost/token, and latency vs the DeepSeek API.</div><div class="bit"><strong>+10 marks — MLA architecture paper:</strong> Find DeepSeek's published technical report on MLA. Document the key equations and explain in plain English how MLA reduces the KV cache bottleneck.</div><div class="bit"><strong>+5 marks — Competition analysis:</strong> Research what specific problems V3.2-Speciale solved at IMO/IOI/ICPC 2026. What reasoning types did they require?</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 04 &mdash; DeepSeek V4 Pro</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ds);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 04 DeepSeek V4 Pro &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec mt" id="mt">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F916; &nbsp;Assignment 05 · Meta AI</span>
+  <h2 class="atitle">Llama 4 Scout &mdash; 10 Million Tokens, Apache 2.0, Free to Self-Host</h2>
+  <p class="asub">Llama 4 Scout is the open-weight model leader in 2026: 10 million token context window (unmatched by any commercial frontier model), 2,600 tokens per second inference speed, Apache 2.0 license, and free to self-host. Meta's bet: democratise AI by making frontier-adjacent capability available to anyone with a GPU. Llama 4 also supports agentic workflows and has the largest active open-weight developer ecosystem on the planet.</p>
+  <div class="trow"><span class="tag" style="color:var(--mt);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Llama 4 Scout</span><span class="tag" style="color:var(--mt);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Apache 2.0 License</span><span class="tag" style="color:var(--mt);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">10M context window</span><span class="tag" style="color:var(--mt);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">2,600 t/s inference</span><span class="tag" style="color:var(--mt);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Free to self-host</span><span class="tag" style="color:var(--mt);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">The 10M Token Context Window — What It Actually Enables</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">10 million tokens exceeds GPT-5.5 (1.1M), Gemini 3.1 Pro (1M), and Fable 5 (1M) combined. Document what this unlocks.</p>
+      <div class="rl"><div class="rq"><strong>10M in practical terms:</strong> Convert to equivalents: pages of text, hours of audio, lines of code, number of full books. What entire workloads become single-prompt tasks that previously required chunking, summarisation, or multi-pass processing?</div><div class="rq"><strong>Attention quality at 10M:</strong> Does attention degrade across 10M tokens? Document what is known about Llama 4 Scout's recall accuracy at 1M, 5M, and 10M positions. Compare to Claude Fable 5 on long-context recall tasks.</div><div class="rq"><strong>Why commercial models cap at 1–2M:</strong> Pricing model complexity, hallucination risk at extreme lengths, inference cost, and customer use-case justification. Document each reason why no commercial provider has matched 10M yet.</div><div class="rq"><strong>Use cases only Llama 4 enables:</strong> Three scenarios genuinely requiring more than 1M tokens: full codebase analysis without chunking, year of meeting transcripts analysed together, entire legal case history in one prompt. For each, explain specifically why the task breaks at 1M tokens.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">Apache 2.0 &amp; Meta's Open-Source Strategy</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Meta gives away frontier-adjacent AI for free. Document why and what this means strategically.</p>
+      <div class="rl"><div class="rq"><strong>Apache 2.0 vs other licenses:</strong> Compare Apache 2.0 (Llama 4) vs MIT (DeepSeek V4 Pro) vs Grok's restrictive license (prohibits training other models on weights). What does Apache 2.0 enable in enterprise that CC-BY-NC would prohibit?</div><div class="rq"><strong>Meta's strategic rationale:</strong> Why give away the weights? What is Meta's commercial model if they don't charge for the model itself? How does this strategy pressure OpenAI, Anthropic, and Google?</div><div class="rq"><strong>Llama ecosystem scale:</strong> Ollama templates, vLLM integrations, HuggingFace community support. How large is the Llama developer ecosystem vs DeepSeek and Grok? What does community tooling mean for time-to-production?</div><div class="rq"><strong>Agentic capabilities in Llama 4:</strong> What agentic features are built into Llama 4? How do they compare to Fable 5's agentic capabilities and GPT-5.5's Codex integration?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">Performance: 2600 t/s &amp; Benchmark Position</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Llama 4 Scout is frontier-adjacent, not frontier. Document precisely where it stands.</p>
+      <div class="rl"><div class="rq"><strong>2,600 tokens per second:</strong> What does 2,600 t/s mean in production? Commercial models typically achieve 50–200 t/s. What application categories does 2,600 t/s unlock that are not practical with commercial APIs?</div><div class="rq"><strong>Full Llama 4 family:</strong> Research every Llama 4 variant beyond Scout. Parameter counts, capabilities, minimum hardware to run, and recommended use case. Build a selection guide for a developer choosing within the family.</div><div class="rq"><strong>Benchmark position:</strong> GPQA Diamond, MMLU, HumanEval, and SWE-bench scores for Llama 4 Scout. On which benchmarks is the gap to GPT-5.5 and Fable 5 small enough that the self-hosting cost advantage clearly wins?</div><div class="rq"><strong>The capability ceiling:</strong> What specific areas cannot match Fable 5 or GPT-5.5? Estimate how many months the open-weight frontier typically lags behind the closed-weight frontier, and whether that gap is narrowing or widening.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Self-Hosting Economics &amp; Deployment Stack</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Free weights do not mean free deployment. Document the real economics.</p>
+      <div class="rl"><div class="rq"><strong>Hardware requirements:</strong> GPU memory to run Llama 4 Scout at BF16, int8, and int4 quantisation. Minimum viable hardware for each quality level. Monthly infrastructure cost on AWS, GCP, and Lambda Labs.</div><div class="rq"><strong>Serving frameworks compared:</strong> Ollama, vLLM, HuggingFace TGI, llama.cpp. For each: ease of setup, throughput, GPU utilisation, production readiness. Which would you recommend for a Tekravio Studio client?</div><div class="rq"><strong>Break-even analysis:</strong> At what monthly request volume does self-hosting Llama 4 Scout become cheaper than Claude Fable 5 at $10/$50 per million tokens? Include hardware, energy, and 20 hrs/month engineering maintenance.</div><div class="rq"><strong>Data privacy as a hard requirement:</strong> HIPAA, GDPR, classified environments — use cases where 'data never leaves your servers' is a non-negotiable requirement. These are where open-weight models win unconditionally, regardless of cost.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Tekravio Application: When Open Wins</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Design specific Tekravio use cases where Llama 4 Scout is the right choice.</p>
+      <div class="rl"><div class="rq"><strong>Academy cost architecture:</strong> Design a Llama 4-based deployment for Academy assignment evaluation and code review. Calculate monthly cost vs Fable 5 API at the same volume. What capability trade-offs are you accepting?</div><div class="rq"><strong>Studio HIPAA client architecture:</strong> A Studio healthcare client with a hard HIPAA requirement: patient data cannot leave their infrastructure. Design the full architecture: hardware, serving stack, expected performance characteristics.</div><div class="rq"><strong>Honest limitations:</strong> Three biggest limitations of choosing Llama 4 Scout over a commercial frontier model. For each limitation, specify which application category makes it a blocking issue vs merely a trade-off.</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — Local deployment:</strong> Run Llama 4 Scout locally using Ollama or vLLM. Document setup, hardware used, throughput achieved, and quality comparison on 5 tasks vs Claude Fable 5 API.</div><div class="bit"><strong>+10 marks — 10M context experiment:</strong> Design and run an experiment specifically requiring more than 1M tokens. What does the model do at lengths no commercial model can match?</div><div class="bit"><strong>+5 marks — Fine-tuning roadmap:</strong> If fine-tuning Llama 4 Scout for a specific Tekravio domain, document training data requirements, LoRA config, and expected improvement.</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 05 &mdash; Meta Llama 4 Scout</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--mt);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 05 Meta Llama 4 Scout &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec qw" id="qw">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F525; &nbsp;Assignment 06 · Alibaba Qwen</span>
+  <h2 class="atitle">Qwen 3.x &mdash; 201 Languages, Apache 2.0, Cheapest Frontier Value</h2>
+  <p class="asub">The Qwen 3.x family from Alibaba is the most multilingual frontier model family in the world (201 languages), available under Apache 2.0, and the cheapest model in the top-10 by GPQA Diamond at $1.25/M input tokens (Qwen3.7 Max). Qwen 3 235B scores 85.7% on AIME '24. Qwen 3.6-Flash introduces Linear-Attention Context Windows for 1M tokens with near-zero latency degradation. For global applications and multilingual enterprise workloads, Qwen is a serious contender underestimated by most Western AI teams.</p>
+  <div class="trow"><span class="tag" style="color:var(--qw);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Qwen 3 235B</span><span class="tag" style="color:var(--qw);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Apache 2.0</span><span class="tag" style="color:var(--qw);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">201 Languages</span><span class="tag" style="color:var(--qw);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">AIME '24: 85.7%</span><span class="tag" style="color:var(--qw);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">$0.10–$1.25/M</span><span class="tag" style="color:var(--qw);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">The Full Qwen 3.x Family Map</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The Qwen family is large and complex. Document it completely — every model, every capability.</p>
+      <div class="rl"><div class="rq"><strong>Full family table:</strong> Qwen 3 235B, Qwen 3.5, Qwen3.7 Max, Qwen 3.6-Flash, Qwen 3 9B. For each: parameter count, context window, modalities, API pricing, Apache 2.0 availability, and recommended use case.</div><div class="rq"><strong>Qwen3.7 vs Qwen 3 235B:</strong> What changed between versions? Qwen3.7 Max is described as 'cheapest model in the top 10 by GPQA Diamond.' What is its actual GPQA score? What did the .7 increment specifically add?</div><div class="rq"><strong>Qwen 3.6-Flash and Linear Attention:</strong> Supports 1M tokens with near-zero latency degradation. Explain Linear Attention vs standard quadratic attention: the memory complexity difference, what 'near-zero latency degradation' means technically, and the quality trade-offs.</div><div class="rq"><strong>Qwen-Coder-Next:</strong> What does this coding variant add over base Qwen 3? How does it compare to Claude Fable 5 on SWE-bench Verified and to Devstral 2?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">201 Languages — The Multilingual Capability</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">No other frontier model covers 201 languages. Document this capability in depth.</p>
+      <div class="rl"><div class="rq"><strong>Quality across the spectrum:</strong> Performance for high-resource languages (English, Chinese, French, Spanish) vs low-resource (regional Indian languages, Southeast Asian, African). Where does quality measurably degrade?</div><div class="rq"><strong>Multilingual benchmarks:</strong> MMMLU and language-specific evaluation scores. Compare to Mistral Large 3 (80+ languages) and GPT-5.5's multilingual performance. Where is Qwen genuinely superior?</div><div class="rq"><strong>Enterprise multilingual use cases:</strong> Three scenarios with clear ROI: global customer support, multilingual document processing, regional market research. For each, calculate cost of Qwen 3.5 vs building a translation pipeline into a monolingual model.</div><div class="rq"><strong>Tekravio international relevance:</strong> Tekravio plans international expansion. Design a use case where Qwen 3.5's 201-language support creates a product capability Tekravio could not build with English-only models.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">Mathematical Reasoning: AIME '24 at 85.7%</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Document the evidence behind Qwen's mathematical reasoning leadership.</p>
+      <div class="rl"><div class="rq"><strong>AIME '24 at 85.7%:</strong> What is AIME? What level of mathematical problem does AIME test? How does 85.7% compare to GPT-5.5, Claude Fable 5, and DeepSeek R1 (MATH-500: 97.3%)?</div><div class="rq"><strong>Thinking mode on vs off:</strong> Qwen 3 has a switchable thinking mode. What does it add to math-heavy tasks? What is the token overhead cost? When is non-thinking mode good enough for production?</div><div class="rq"><strong>Qwen vs DeepSeek for quantitative finance:</strong> Both excel at mathematical reasoning. For a quantitative finance application, which model at which price delivers the best mix of mathematical accuracy and cost efficiency? Show your reasoning.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing: $0.10/M to $1.25/M &mdash; The Value Proposition</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The cheapest top-10 model by GPQA Diamond. Document the full pricing range.</p>
+      <div class="rl"><div class="rq"><strong>Full pricing table:</strong> Qwen 3 9B (~$0.10/M) to Qwen3.7 Max ($1.25/M). For each price point: capability trade-offs and when it makes economic sense vs a more expensive option.</div><div class="rq"><strong>Verification of the claim:</strong> List the current top-10 models by GPQA Diamond score and their input pricing. Is Qwen3.7 Max still the cheapest in that tier as of your submission date? Note any changes.</div><div class="rq"><strong>Self-hosting economics:</strong> Minimum hardware for Qwen 3 235B, monthly infrastructure cost on H100 GPUs, and break-even point vs API at $1.25/M.</div><div class="rq"><strong>Alibaba Cloud integration:</strong> For Asia-Pacific companies on Alibaba Cloud, what native integration advantages does Qwen offer that AWS/GCP customers using Claude or Gemini would not have?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Strategic Assessment: Qwen vs The Western Frontier</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Honest assessment of Qwen's position and its relevance for Tekravio.</p>
+      <div class="rl"><div class="rq"><strong>Where Qwen is genuinely better:</strong> Multilingual coverage, Mandarin Chinese specifically, math-heavy tasks. Cite benchmark evidence for each claim. Do not repeat marketing language.</div><div class="rq"><strong>Geopolitical dimension:</strong> Alibaba is a publicly listed company. Does this change the enterprise risk calculation vs DeepSeek (private lab)? For EU and US government procurement, what is the current regulatory landscape for Alibaba-origin models?</div><div class="rq"><strong>Tekravio international expansion:</strong> Which Qwen model and which specific capability enables a Tekravio product that would require a completely different model stack without Qwen? Build the specific use case and cost model.</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — Multilingual quality audit:</strong> Test Qwen 3.5 and Claude Fable 5 on the same 5 prompts in 3 non-English languages. Document quality differences and token costs.</div><div class="bit"><strong>+10 marks — AIME problem solving:</strong> 5 AIME 2024 problems through Qwen 3 235B (thinking on), Qwen 3 235B (thinking off), and Claude Fable 5. Compare correctness and token usage.</div><div class="bit"><strong>+5 marks — Linear Attention deep dive:</strong> Find the technical paper behind Qwen's Linear Attention implementation. Explain the memory complexity improvement vs standard O(n²) attention.</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 06 &mdash; Alibaba Qwen 3.x</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--qw);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 06 Alibaba Qwen 3.x &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec ms" id="ms">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F1EA;&#x1F1FA; &nbsp;Assignment 07 · Mistral AI</span>
+  <h2 class="atitle">Mistral &mdash; European Frontier, Agentic Coding, GDPR-Native</h2>
+  <p class="asub">Mistral AI is a French company building frontier models with a European-first mindset: GDPR-compliant by design, deployed on EU infrastructure, and explicitly engineered for multilingual European business. In 2026, Mistral ships Devstral 2 (agentic coding model), Mistral Small 4 (6B active parameters, lightweight), and Mistral Large 3 (80+ languages). For EU enterprises, regulated industries, and developers who need EU data residency, Mistral is often the only compliant option.</p>
+  <div class="trow"><span class="tag" style="color:var(--ms);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Devstral 2</span><span class="tag" style="color:var(--ms);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Mistral Large 3</span><span class="tag" style="color:var(--ms);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Mistral Small 4</span><span class="tag" style="color:var(--ms);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">EU-origin</span><span class="tag" style="color:var(--ms);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">GDPR-native</span><span class="tag" style="color:var(--ms);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">The Full Mistral 2026 Model Family</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Mistral ships multiple models targeting different use cases. Document the complete 2026 family.</p>
+      <div class="rl"><div class="rq"><strong>Devstral 2:</strong> What makes Devstral 2 different from a general-purpose model for coding? What specific benchmarks does it target? What agentic coding workflows is it optimised for? How does it compare to Claude Fable 5 on SWE-bench Verified?</div><div class="rq"><strong>Mistral Small 4:</strong> 6B active parameters with Devstral's agentic coding capabilities in a smaller package. Document: architecture (dense vs MoE?), total vs active parameters, hardware to run, capability level relative to full Devstral 2.</div><div class="rq"><strong>Mistral Large 3:</strong> 80+ languages. Document its target use case, benchmark performance, and pricing. For a European company needing support in 20 EU languages, compare Mistral Large 3 to Qwen 3.5 (201 languages) — which is better and why?</div><div class="rq"><strong>Full pricing table:</strong> Mistral Large 3, Devstral 2, Mistral Small 4. Context window, pricing, and recommended use case for each. Compare equivalent capability tiers at Anthropic, OpenAI, and Google.</div><div class="rq"><strong>La Plateforme vs Azure vs AWS Bedrock:</strong> Document Mistral's availability across platforms. For a company already on Azure or AWS Bedrock, document the setup process and pricing to access Mistral models through their existing cloud provider.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">GDPR, EU AI Act &amp; the Compliance Advantage</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">For Tekravio's planned European market expansion, EU compliance is non-negotiable. This is the module no US-centric AI research covers adequately.</p>
+      <div class="rl"><div class="rq"><strong>GDPR and AI model usage:</strong> Specific GDPR articles that apply to processing EU personal data with AI: Article 28 (Data Processing Agreements), Chapter V (data transfers outside EU), Article 22 (automated decision-making). How do US-based providers (OpenAI, Anthropic, Google) comply — or fail to comply — with each?</div><div class="rq"><strong>EU AI Act (in force 2025):</strong> Document the risk categories: prohibited, high-risk, limited risk, minimal risk. Where do GPT-5.5, Fable 5, and Gemini 3.1 Pro fall? What specific obligations does deploying a 'high-risk AI system' impose on the deployer?</div><div class="rq"><strong>Mistral's EU compliance claims:</strong> EU data residency options, data processing agreements, training data sourcing. Compare each specific claim to what Anthropic and OpenAI offer EU customers.</div><div class="rq"><strong>DSGVO (German GDPR enforcement):</strong> Document one real case of a German enterprise AI deployment where a regulator investigated a US AI provider. What was the outcome? What would a Mistral-based deployment have done differently?</div><div class="rq"><strong>Tekravio Germany compliance architecture:</strong> For a German healthcare client, which AI provider and model is compliant for processing patient data? Justify with specific regulatory citation.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">Devstral 2: Agentic Coding Deep Dive</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">What 'agentic coding' means technically and where Devstral 2 fits against the competition.</p>
+      <div class="rl"><div class="rq"><strong>What makes a model 'agentic coding':</strong> Define what Mistral means by agentic coding vs general-purpose coding. What specific capabilities does Devstral 2 have that a general model used for coding lacks? Tool use, multi-step planning, file system operations, failure recovery.</div><div class="rq"><strong>Devstral 2 benchmark performance:</strong> SWE-bench Verified scores and any agentic coding benchmarks. Compare to Fable 5 (95% SWE-bench) and GPT-5.5 (Terminal-Bench 2.0: 82.7%). Where does Devstral 2 close the gap specifically on coding tasks?</div><div class="rq"><strong>Mistral Small 4 local coding case:</strong> For a startup wanting a local coding assistant without cloud costs, compare Mistral Small 4 (self-hosted) to GitHub Copilot (subscription). Cost, quality, and control — which wins and in what scenario?</div><div class="rq"><strong>Academy use case:</strong> Design a coding mentor application using Devstral 2 that provides code review feedback to Academy students. What makes Devstral 2 specifically better than a general model for this use case?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Europe vs US: The Geopolitical AI Divide</div><div class="tp">// 16 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Why Europe needs its own frontier lab, and whether Mistral is delivering.</p>
+      <div class="rl"><div class="rq"><strong>Mistral's founding thesis:</strong> EU AI sovereignty. What would European AI development look like if Anthropic, OpenAI, and Google were the only options? Why do European governments and enterprises care?</div><div class="rq"><strong>Hybrid commercial model:</strong> Mistral is hybrid: open weights for small models, closed API for large. Document the revenue model and how it sustains frontier R&D while maintaining open access.</div><div class="rq"><strong>EU institutional backing:</strong> What EU funding and political support has Mistral received? Compare to US government relationships with OpenAI (contract research) and Anthropic (Project Glasswing with US government).</div><div class="rq"><strong>Honest capability gap:</strong> Is Mistral Large 3 at the same capability level as GPT-5.5 or Fable 5? Which benchmarks show the largest gap? How large is Mistral's research team relative to Anthropic's or OpenAI's?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">05</div>
+      <div><div class="tt">Tekravio EU Expansion Strategy Using Mistral</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Build specific recommendations for Tekravio's European market entry.</p>
+      <div class="rl"><div class="rq"><strong>The Germany recommendation:</strong> A German mid-sized enterprise client in any sector. Which Mistral model, on which platform (La Plateforme / Azure Frankfurt region / AWS EU-West), for which specific use case? Include the compliance argument and a cost estimate.</div><div class="rq"><strong>Hybrid Mistral + Fable 5 architecture:</strong> An EU client with mixed workloads — some GDPR-sensitive, some not. Design an architecture using Mistral for regulated data and Claude Fable 5 for everything else. Document the routing logic and monthly cost implications.</div><div class="rq"><strong>Partner pitch for a German university:</strong> Write a 200-word pitch to a German university (similar to Tekravio's institute partnership model) where Mistral AI's EU origin is a specific advantage. What does 'AI made in Europe' mean to a German academic institution?</div></div>
+    </div>
+  </div><div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — EU AI Act compliance audit:</strong> Take one existing Tekravio Studio use case and run it through the EU AI Act risk classification framework. What tier does it fall into? What specific obligations does this create for Tekravio?</div><div class="bit"><strong>+10 marks — Devstral 2 live test:</strong> Run the same SWE-bench problem through Devstral 2 and Claude Fable 5. Compare output quality, token count, and cost.</div><div class="bit"><strong>+5 marks — Multilingual comparison:</strong> Test the same prompt in 3 EU languages (German, Polish, Romanian) through Mistral Large 3 and Qwen 3.5. Which produces more accurate output?</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 07 &mdash; Mistral AI</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ms);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 07 Mistral AI &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="asec an" id="an">
+<div class="wrap">
+<div class="ahead">
+  <span class="abadge">&#x1F9F5; &nbsp;Assignment 08 · Anthropic</span>
+  <h2 class="atitle">Claude Fable 5 &amp; Mythos 5 &mdash; Mythos-Class, Safety-First Frontier</h2>
+  <p class="asub">Released June 9, 2026. Fable 5 and Mythos 5 share the same underlying weights. What separates them is entirely safeguards and access. Fable 5 is generally available with safety classifiers active. Mythos 5 is available only through Project Glasswing to approved cyberdefenders and infrastructure providers — same weights, classifiers lifted in specific areas. Both: $10/$50 per million tokens, 1M context, 128K output, adaptive thinking always-on. The full standalone assignment is at tekravio.com/assignments/ai-claude-fable-mythos.html.</p>
+  <div class="trow"><span class="tag" style="color:var(--an);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">claude-fable-5</span><span class="tag" style="color:var(--an);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">claude-mythos-5</span><span class="tag" style="color:var(--an);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">$10/$50 per M tokens</span><span class="tag" style="color:var(--an);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">1M context · 128K output</span><span class="tag" style="color:var(--an);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">Jun 9 2026</span><span class="tag" style="color:var(--an);border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)">100 marks</span></div>
+</div>
+<div class="tasks">
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">01</div>
+      <div><div class="tt">Fable 5 vs Mythos 5 — Same Weights, Different Safeguards</div><div class="tp">// 25 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The core of the Anthropic assignment. Document the distinction with complete precision.</p>
+      <div class="rl"><div class="rq"><strong>Complete specs table:</strong> Side-by-side: API model ID, context window, max output tokens, pricing (input + output), adaptive thinking status, data retention, availability, safety classifiers (on/off) for both models.</div><div class="rq"><strong>Safety classifier architecture:</strong> How classifiers work as separate AI systems intercepting before the main model responds. The three blocked domains: cybersecurity, biology/chemistry, and distillation. When Fable 5 refuses, the API returns <code>stop_reason: 'refusal'</code> as HTTP 200 — explain why this is not an error code.</div><div class="rq"><strong>Three fallback options:</strong> Server-side fallback via the <code>fallbacks</code> parameter (beta), client-side via SDK middleware (TypeScript, Python, Go, Java, C#), and manual retry. What is 'fallback credit' and how does billing work when a request falls back to Opus 4.8?</div><div class="rq"><strong>Adaptive thinking always-on:</strong> Fable 5 and Mythos 5 have adaptive thinking always enabled. What does <code>thinking.display: 'summarized'</code> vs <code>'omitted'</code> mean for production integrations? Why is raw thinking never returned?</div><div class="rq"><strong>30-day data retention (Covered Models):</strong> Both models have mandatory 30-day retention and are not available under zero data retention. What does this mean for healthcare (HIPAA), financial services, and legal enterprise customers?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">02</div>
+      <div><div class="tt">Core Capabilities — The Mythos-Class Capability Jump</div><div class="tp">// 25 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Document each capability domain with benchmark evidence, mechanism, and enterprise use case.</p>
+      <div class="rl"><div class="rq"><strong>Software engineering:</strong> Stripe's 50M-line Ruby codebase migration in one day (normally 2+ months for a full team). 95% on SWE-bench Verified. State-of-the-art on CursorBench and FrontierCode. Token efficiency vs Opus 4.8.</div><div class="rq"><strong>Vision:</strong> Pokémon FireRed completed with a vision-only harness (earlier models needed complex helper tools). Web app source code rebuilt from screenshots alone. 3D-printable model designed in a browser-based CAD editor. What does 'less scaffolding required' mean practically?</div><div class="rq"><strong>Life sciences (Mythos 5):</strong> 10× acceleration in drug design — 9 of 14 protein targets yielding strong candidates. Novel E. coli protein mechanism hypothesis corroborated by an independent lab. Autonomous genomics research spanning 138 animal species, producing a model that outperformed a published Science paper at 100× smaller size.</div><div class="rq"><strong>Memory and long-context:</strong> Slay the Spire experiment: persistent file-based memory improved Fable 5's performance 3× more than it improved Opus 4.8. Reached the game's final act 3× more often. What does this mean for enterprise agents operating over days or weeks?</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">03</div>
+      <div><div class="tt">The Master Cross-Model Comparison</div><div class="tp">// 25 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The synthesis task — only fully answerable after completing all 8 assignments.</p>
+      <div class="rl"><div class="rq"><strong>The 8-model master table:</strong> Build a single table across all providers: Claude Fable 5, GPT-5.5, Gemini 3.1 Pro, Grok 4.3, DeepSeek V4 Pro, Llama 4 Scout, Qwen3.7 Max, Devstral 2. Columns: pricing (input/output), context window, modalities, top benchmark score, license, EU-compliant (yes/no), open weights (yes/no).</div><div class="rq"><strong>Tekravio recommended model stack:</strong> Which model is the default for Studio client work? For Academy? For Labs? For cost-sensitive batch processing? Justify each choice with benchmark evidence and a cost calculation.</div><div class="rq"><strong>12-month outlook:</strong> Based on each provider's roadmap and release pace, which 3 models will matter most to Tekravio in 12 months? Support each prediction with documented evidence, not speculation.</div><div class="rq"><strong>Executive summary (200 words):</strong> A brief Uday could read in 3 minutes: the current AI model landscape, key capability gaps between providers, and Tekravio's recommended model strategy. No jargon. Decision-ready.</div></div>
+    </div>
+  </div>
+  <div class="task" onclick="this.classList.toggle('open')">
+    <div class="th">
+      <div class="tn">04</div>
+      <div><div class="tt">Anthropic API Integration Guide</div><div class="tp">// 25 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The practical production integration reference for Fable 5.</p>
+      <div class="rl"><div class="rq"><strong>Platform availability:</strong> Claude API, AWS Bedrock (which regions launched on June 9), Vertex AI, Microsoft Foundry. What is 'Claude Platform on AWS' and how does it differ from standard Bedrock access?</div><div class="rq"><strong>The June 22 subscription change:</strong> Fable 5 included free in Pro/Max/Team/Enterprise through June 22, then moves to usage credits. As of your submission date: what is the current status? What should a company on a Team plan do to prepare for the credit model?</div><div class="rq"><strong>Refusal handling code:</strong> Write a Python or TypeScript function that calls <code>claude-fable-5</code>, detects <code>stop_reason: 'refusal'</code> (HTTP 200), and retries the request against <code>claude-opus-4-8</code> with the fallback credit mechanism. Add comments explaining each step.</div><div class="rq"><strong>Master sources.md:</strong> For all 8 assignments, produce a master sources.md with every primary source used. Every significant claim across all 8 assignments must trace to a citable source: provider documentation, technical reports, model cards, or official announcements.</div></div>
+    </div>
+  </div>
+<div class="co coy" style="margin-top:1rem">
+  <div class="coh">// Full Anthropic Assignment Available</div>
+  <p>The complete Anthropic Fable 5 + Mythos 5 assignment with 8 detailed research modules and 67 individual requirements is at <strong>tekravio.com/assignments/ai-claude-fable-mythos.html</strong>. Complete that standalone assignment in full for the full 100 marks on this provider.</p>
+</div>
+<div class="bx"><div class="bxt">// Bonus Tasks</div><div class="bi"><div class="bit"><strong>+15 marks — 4-model live API comparison:</strong> Run the same 5 prompts through at least 4 of the 8 models. Document output quality, token count, cost, and time to completion for each. Include the raw data in the master repo.</div><div class="bit"><strong>+10 marks — Enterprise AI procurement guide:</strong> Write a 1,000-word guide for a Tekravio Studio client evaluating AI providers for their production stack. Cover: compliance requirements, total cost of ownership, capability fit, vendor risk, and migration difficulty. No jargon.</div><div class="bit"><strong>+5 marks — Fable 5 system card:</strong> Find Anthropic's published Fable 5 + Mythos 5 system card. Document the alignment assessment methodology, what was tested, and what they chose not to test and why.</div></div></div><div class="sb">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.375rem">Submit Assignment 08 &mdash; Anthropic Fable 5 + Mythos 5</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--an);margin-bottom:.375rem">careers@tekravio.com</div>
+  <div style="font-size:.8rem;color:var(--mu)">Subject: AI Intern &mdash; Assign 08 Anthropic Fable 5 + Mythos 5 &mdash; [Your Name] &middot; GitHub link in body</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="wrap">
+<div class="ms-wrap">
+  <h2 style="font-family:'Clash Display',sans-serif;font-size:1.5rem;margin-bottom:.625rem;color:var(--tx)">Complete All 8. Build the Master Intelligence Document.</h2>
+  <p style="color:var(--mu);max-width:620px;margin:0 auto .75rem">The final deliverable across all 8 assignments is one master GitHub repository. The README must synthesise every provider into a single decision framework: 3,000+ words, the 8-model comparison table, Tekravio's recommended model stack, and a 12-month outlook. This synthesis document is worth an additional <strong style="color:var(--tx)">50 marks</strong>.</p>
+  <div class="cb" style="display:inline-block;text-align:left;margin:.75rem auto 1rem">Subject: AI Intern &#x2014; Complete Model Intelligence Series &#x2014; [Your Name]
+Body:    Master GitHub repo: [link]
+         Assignments completed: [list which of 8]
+         Most surprising cross-model finding: [1 sentence]</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:#8b5cf6;margin-bottom:.375rem">careers@tekravio.com</div>
+  <p style="font-size:.8rem;color:var(--mu)">14-day deadline &middot; 800 marks (8 &times; 100) + 240 bonus (8 &times; 30) + 50 synthesis = <strong style="color:var(--tx)">1,090 total possible marks</strong></p>
+</div>
+</div>
+
+<footer>
+<div class="wrap">
+  <div class="fi">
+    <div class="fl">Tekr<em>avio</em> Academy</div>
+    <div>AI Research Intern &middot; Model Intelligence Series &middot; 8 Providers &middot; 2026</div>
+    <div>tekravio.com/careers.html</div>
+  </div>
+</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
