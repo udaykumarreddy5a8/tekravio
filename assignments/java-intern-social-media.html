@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Java Intern — ConnectHub — Social Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#ec4899;--ar:236,72,153}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:520px;height:520px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Java Intern · Social Media Domain</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Java Intern &middot; Domain: Social Media</div>
+  </div>
+  <p class="etag">// Assignment 05 &middot; Social Media &middot; Spring Boot 3.x &middot; Intermediate</p>
+  <h1 class="ht">ConnectHub<br><span style="color:var(--ac)">Social</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Network API.</span></h1>
+  <p class="hs">Build the backend for a social networking platform. Users follow each other, post content, and interact through likes and comments. The twist: accounts can be public or private. A private account requires a follow request &mdash; the user must approve before a follower sees their posts. Your home feed shows only posts from people you follow. Intermediate difficulty means the follow/feed logic is where most marks live.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Social Media</div></div></div>
+    <div class="mp"><div><div class="mpl">Project</div><div class="mpv">ConnectHub</div></div></div>
+    <div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Java 17 &middot; Spring Boot 3.x &middot; PostgreSQL</div></div></div>
+    <div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div>
+    <div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Tech Stack</div>
+<div class="trow">
+  <span class="tag">Java 17+</span><span class="tag">Spring Boot 3.x</span><span class="tag">Spring Data JPA</span>
+  <span class="tag">Spring Web</span><span class="tag">Spring Validation</span><span class="tag">Spring Security (JWT)</span>
+  <span class="tag">PostgreSQL</span><span class="tag">Lombok</span><span class="tag">JUnit 5 + Mockito</span>
+  <span class="tag">Swagger/OpenAPI</span><span class="tag">Docker Compose</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">ConnectHub is a social platform. Users have profiles with a <strong>public or private</strong> visibility setting. Anyone can view a public account's posts. A private account's posts are visible only to approved followers. Sending a follow request to a private account creates a PENDING request; only when the account owner approves does the requester become a follower.<br><br>
+  The <strong>home feed</strong> shows posts from all accounts the user is APPROVED-following, sorted newest first. This is a real-world query challenge: efficient pagination over a join of posts + follow relationships without loading everything into memory.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Build in order. The follow system in Module 2 gates post visibility in Module 3.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">User Profiles &amp; Authentication</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Registration, login, and profile management with JWT.</p>
+      
+      <div class="rl"><div class="rq"><strong>User entity:</strong> Fields: username (unique, 3&ndash;30 chars, alphanumeric+underscore), email (unique), passwordHash, displayName, bio (max 150 chars), avatarUrl, isPrivate (default false), isActive, createdAt. Expose a DTO without passwordHash in responses.</div><div class="rq"><strong>Registration &amp; Login:</strong> <code>POST /api/auth/register</code> &mdash; validate username and email uniqueness, hash password with BCrypt, create user. <code>POST /api/auth/login</code> &mdash; validate credentials, return JWT (valid 24h). <code>POST /api/auth/refresh</code> &mdash; accept a refresh token, return a new JWT (optional for bonus).</div><div class="rq"><strong>Profile management:</strong> <code>GET /api/users/{username}</code> &mdash; public profile: if private and viewer is not an approved follower, return limited view (username, displayName, avatarUrl, followerCount, followingCount, postCount &mdash; but NOT posts). <code>PUT /api/users/me</code> &mdash; update own profile: displayName, bio, avatarUrl, isPrivate. <code>GET /api/users/me</code> &mdash; own full profile.</div><div class="rq"><strong>Search:</strong> <code>GET /api/users/search?q=john&page=0&size=10</code> &mdash; search by username or displayName (case-insensitive, partial match). Return basic profile info. Exclude suspended/inactive users.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Keep the JWT implementation simple. Use <code>io.jsonwebtoken:jjwt</code>. A single filter class that validates the token and sets the SecurityContext is sufficient. Don't overcomplicate the security config.</p></div>
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">Follow System &amp; Connections</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The follow system handles both public (instant) and private (request-based) accounts.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">FollowService.java — follow logic</span><span class="cb-tag">Service</span></div><pre><span class="ann">@Transactional</span>
+<span class="kw">public</span> <span class="ty">FollowResponse</span> follow(<span class="ty">String</span> targetUsername) {
+    <span class="ty">User</span> target = userRepository.findByUsername(targetUsername)
+        .orElseThrow(() -> <span class="kw">new</span> <span class="ty">UserNotFoundException</span>(targetUsername));
+    <span class="ty">User</span> me = currentUser();
+
+    <span class="kw">if</span> (me.getId().equals(target.getId()))
+        <span class="kw">throw new</span> <span class="ty">CannotFollowSelfException</span>();
+
+    followRepository.findByFollowerAndFollowing(me, target).ifPresent(f -> {
+        <span class="kw">if</span> (f.getStatus() == FollowStatus.APPROVED)
+            <span class="kw">throw new</span> <span class="ty">AlreadyFollowingException</span>();
+        <span class="kw">if</span> (f.getStatus() == FollowStatus.PENDING)
+            <span class="kw">throw new</span> <span class="ty">FollowRequestAlreadySentException</span>();
+        <span class="kw">if</span> (f.getStatus() == FollowStatus.BLOCKED)
+            <span class="kw">throw new</span> <span class="ty">UserBlockedException</span>();
+    });
+
+    <span class="ty">FollowStatus</span> status = target.isPrivate()
+        ? FollowStatus.PENDING : FollowStatus.APPROVED;
+    <span class="kw">return</span> followMapper.toResponse(followRepository.save(
+        Follow.builder().follower(me).following(target).status(status).build()));
+}</pre></div>
+      <div class="rl"><div class="rq"><strong>Follow entity:</strong> Fields: followerId (User), followingId (User), status (PENDING, APPROVED, BLOCKED), createdAt, updatedAt. A user cannot follow themselves. <code>@UniqueConstraint(columnNames = {"follower_id", "following_id"})</code>.</div><div class="rq"><strong>Follow / Unfollow:</strong> <code>POST /api/follow/{username}</code> &mdash; follow a user. If target account is public: create Follow with status APPROVED immediately. If private: create Follow with status PENDING. If already following (APPROVED) or has pending request: return appropriate conflict (already following / request already sent). <code>DELETE /api/follow/{username}</code> &mdash; unfollow (delete the Follow record).</div><div class="rq"><strong>Follow request management (private accounts):</strong> <code>GET /api/follow/requests</code> &mdash; list incoming PENDING requests for the authenticated user. <code>PUT /api/follow/requests/{requestId}/approve</code> &mdash; set status APPROVED. <code>PUT /api/follow/requests/{requestId}/reject</code> &mdash; delete the request. These are only valid for private account owners.</div><div class="rq"><strong>Block:</strong> <code>POST /api/block/{username}</code> &mdash; block a user. Creates or updates a Follow record with status BLOCKED. A blocked user cannot see the blocker's posts, cannot follow the blocker, and cannot see the blocker's profile. If the blocked user was already following, that follow is removed. <code>DELETE /api/block/{username}</code> &mdash; unblock.</div><div class="rq"><strong>Follow stats:</strong> <code>GET /api/users/{username}/followers?page=&size=</code> and <code>/following</code> &mdash; paginated list. For private accounts, only the account owner can see their follower/following lists. Return followerCount and followingCount on all profile responses.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Posts &amp; Visibility Rules</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Posts with text and image URLs, visibility controlled by account type and follow status.</p>
+      
+      <div class="rl"><div class="rq"><strong>Post entity:</strong> Fields: author (User), content (text, max 2000 chars), imageUrls (stored as list/array, max 5), visibility (PUBLIC, FOLLOWERS_ONLY, PRIVATE), likeCount (denormalised int, updated on like/unlike), commentCount (denormalised int), isDeleted (soft delete), createdAt, updatedAt. Index on (author, createdAt DESC).</div><div class="rq"><strong>Create / Edit / Delete:</strong> <code>POST /api/posts</code> &mdash; authenticated users only. <code>PUT /api/posts/{id}</code> &mdash; edit own posts (content and imageUrls only). <code>DELETE /api/posts/{id}</code> &mdash; soft delete (set isDeleted=true). Soft-deleted posts return 404 on direct access, and are excluded from feeds.</div><div class="rq"><strong>Post visibility logic:</strong> <code>GET /api/posts/{id}</code> &mdash; enforce: (a) PRIVATE posts: only the author can see. (b) FOLLOWERS_ONLY posts on a private account: only APPROVED followers can see. (c) All posts on a public account with FOLLOWERS_ONLY or PUBLIC visibility: accessible to all authenticated users. Return 403 with a clear message (not 404) when access is denied.</div><div class="rq"><strong>User's post list:</strong> <code>GET /api/users/{username}/posts?page=0&size=10</code> &mdash; sorted newest first. Apply visibility rules: if viewer is not an approved follower of a private account, return 403. For public accounts, return all non-private, non-deleted posts.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Denormalise likeCount and commentCount on the Post entity for performance &mdash; increment/decrement them on like/unlike/comment. This means the count is always available without a join.</p></div>
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Feed, Likes &amp; Comments</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Home feed, engagement features, and the comment thread.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">Feed JPQL query</span><span class="cb-tag">Repository</span></div><pre><span class="ann">@Query</span>(<span class="str">"SELECT p FROM Post p "</span> +
+       <span class="str">"WHERE p.author.id IN "</span> +
+       <span class="str">"    (SELECT f.following.id FROM Follow f "</span> +
+       <span class="str">"     WHERE f.follower.id = :userId "</span> +
+       <span class="str">"     AND f.status = 'APPROVED') "</span> +
+       <span class="str">"AND p.isDeleted = false "</span> +
+       <span class="str">"AND p.visibility != 'PRIVATE' "</span> +
+       <span class="str">"ORDER BY p.createdAt DESC"</span>)
+<span class="ty">Page</span>&lt;<span class="ty">Post</span>&gt; findFeedForUser(
+    <span class="ann">@Param</span>(<span class="str">"userId"</span>) <span class="ty">UUID</span> userId,
+    <span class="ty">Pageable</span> pageable
+);</pre></div>
+      <div class="rl"><div class="rq"><strong>Home feed:</strong> <code>GET /api/feed?page=0&size=20</code> &mdash; posts from users the authenticated user APPROVED-follows, excluding soft-deleted, newest first. Build this with a JPQL query joining Post and Follow: <code>SELECT p FROM Post p WHERE p.author IN (SELECT f.following FROM Follow f WHERE f.follower = :me AND f.status = 'APPROVED') AND p.isDeleted = false ORDER BY p.createdAt DESC</code>. Paginate with Spring's <code>Pageable</code>.</div><div class="rq"><strong>Likes:</strong> <code>POST /api/posts/{id}/like</code> &mdash; like a post. Validate: cannot like own post, cannot like twice (if already liked, throw <code>AlreadyLikedException</code>). On success, increment post.likeCount atomically. <code>DELETE /api/posts/{id}/like</code> &mdash; unlike (decrement likeCount). <code>GET /api/posts/{id}/likes?page=&size=</code> &mdash; list of users who liked (basic profile only). Apply post visibility rules here too.</div><div class="rq"><strong>Comments:</strong> <code>POST /api/posts/{id}/comments</code> &mdash; add comment. Fields: content (max 500 chars), parentCommentId (null for top-level, UUID for reply). Support only 1 level of nesting (replies to top-level comments only; you cannot reply to a reply). <code>GET /api/posts/{id}/comments?page=&size=</code> &mdash; top-level comments with their direct replies embedded (not paginated separately). <code>DELETE /api/comments/{id}</code> &mdash; author or post author can delete.</div><div class="rq"><strong>Comment count:</strong> When a comment is created, increment post.commentCount. When deleted, decrement. Use <code>@Modifying @Query</code> for atomic update, not fetching the post and setting the count.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Notifications &amp; Testing</div><div class="tp">// 16 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">In-app notifications for social events and the tests that verify the access control logic.</p>
+      
+      <div class="rl"><div class="rq"><strong>Notification entity:</strong> Fields: recipientId, type (NEW_FOLLOWER, FOLLOW_REQUEST, FOLLOW_APPROVED, POST_LIKED, POST_COMMENTED), actorId (who triggered it), referenceId (postId or followId depending on type), message (pre-formatted text), isRead, createdAt. Notifications are created as side effects of follow/like/comment actions &mdash; no external queue needed for this assignment.</div><div class="rq"><strong>Notification triggers:</strong> On NEW_FOLLOWER (public account): notify the followed user. On FOLLOW_REQUEST: notify the account owner. On FOLLOW_APPROVED: notify the requester. On POST_LIKED: notify the post author (not if user likes own post). On POST_COMMENTED: notify the post author (not if author comments on own post).</div><div class="rq"><strong>Notification APIs:</strong> <code>GET /api/notifications?read=false&page=0&size=20</code> &mdash; user's own notifications, newest first. <code>PUT /api/notifications/{id}/read</code> &mdash; mark one as read. <code>PUT /api/notifications/read-all</code> &mdash; mark all as read. <code>GET /api/notifications/unread-count</code> &mdash; returns <code>{count: N}</code> (called frequently by frontend).</div><div class="rq"><strong>Unit tests:</strong> Test the follow service: (a) following a public account &rarr; status APPROVED, (b) following a private account &rarr; status PENDING, (c) following self &rarr; CannotFollowSelfException, (d) duplicate follow &rarr; AlreadyFollowingException, (e) following a user who blocked you &rarr; UserBlockedException, (f) blocked user attempts to follow the blocker after being blocked &rarr; same exception. 6 tests.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Create notifications synchronously for now (in the same transaction). Note in your README where you would use an async mechanism (Spring Events or a message queue) in a production system to avoid coupling the main operation to notification delivery.</p></div>
+    </div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">User A follows User B (private). User B approves the follow request. Now User A can see User B's posts. User B later changes their account from private to public. Does User A's follow relationship change? What about User C who had a PENDING follow request at the time of the switch?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">The home feed query does a JOIN between posts and follows tables. For a user who follows 500 people who each post 10 times per day, how many rows are potentially scanned in the feed query? What index on the Post table makes this query fast?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">You soft-delete posts (isDeleted=true) instead of hard-deleting. What are the advantages of soft delete? What happens to likes and comments on a soft-deleted post? Should they also be soft-deleted? How does your system handle GET /api/posts/{id} for a soft-deleted post?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">You store likeCount and commentCount on the Post entity to avoid slow COUNT queries. But now there's a risk: if two users like a post simultaneously, and both read likeCount=5, both increment to 6, you end up with 6 instead of 7. How do you fix this? Write the @Query that increments atomically.</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Hashtags:</strong> Support hashtags in post content (e.g., '#java #springboot'). Parse hashtags on post create/edit. Create a Hashtag entity. <code>GET /api/hashtags/{tag}/posts?page=&size=</code> returns posts with that hashtag (respecting visibility rules). <code>GET /api/hashtags/trending?limit=10</code> returns top 10 hashtags by post count in the last 24 hours.</div><div class="bit"><strong>+7 marks — Story (24h post):</strong> Users can post a Story: same fields as a Post but with an expiresAt = createdAt + 24 hours. Stories show in a separate feed endpoint: <code>GET /api/stories/feed</code> (stories from followed users that haven't expired). Stories are automatically excluded from regular feeds. A scheduled job marks them as expired.</div><div class="bit"><strong>+5 marks — Mutual follows:</strong> Add <code>GET /api/users/{username}/mutual-follows</code> &mdash; list of users who both follow the authenticated user and are followed by the authenticated user. This is the 'mutual friends' feature. Make it efficient: don't load all followers and filter in Java.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Submit your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Java Intern &mdash; ConnectHub — Social Media Domain &mdash; [Your Name]</code><br>Body: GitHub repo + one thing you found challenging</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Java Intern Assignment &middot; Social Media &mdash; ConnectHub &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
