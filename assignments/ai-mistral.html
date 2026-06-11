@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — Mistral AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#ff7043;--ar:255,112,67}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700;color:var(--tx)}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(var(--ar),.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-60px;left:-40px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(var(--ar),.06) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:720px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.08em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.cb{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qref{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qref-n{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qref-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Research Intern · Mistral AI · Devstral 2 + Large 3</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Research Intern &middot; Assignment 07</div>
+  </div>
+  <p class="etag">// Mistral AI &middot; 2026 &middot; European Frontier &middot; GDPR-Native</p>
+  <h1 class="ht">Mistral<br><span style="color:var(--ac)">Devstral 2.</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">EU-Origin.</span></h1>
+  <p class="hs">A French company building frontier models with a European-first mindset. GDPR-compliant by design, deployed on EU infrastructure, and engineered for multilingual European business. In 2026: Devstral 2 (agentic coding), Mistral Small 4 (6B active parameters), and Mistral Large 3 (80+ languages). For EU enterprises, regulated industries, and Tekravio's planned European expansion, Mistral is often the only fully compliant option.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Key Models</div><div class="mpv">Devstral 2 &middot; Large 3 &middot; Small 4</div></div></div>
+    <div class="mp"><div><div class="mpl">Origin</div><div class="mpv">France, EU</div></div></div>
+    <div class="mp"><div><div class="mpl">Compliance</div><div class="mpv">GDPR &middot; EU AI Act</div></div></div>
+    <div class="mp"><div><div class="mpl">Languages</div><div class="mpv">80+ (Large 3)</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">100 + 30 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Quick Facts</div>
+<div class="trow">
+  <span class="tag">Devstral 2 &mdash; agentic coding</span><span class="tag">Mistral Large 3 &mdash; 80+ languages</span>
+  <span class="tag">Mistral Small 4 &mdash; 6B active</span><span class="tag">EU data residency</span>
+  <span class="tag">GDPR-native design</span><span class="tag">La Plateforme</span><span class="tag">AWS Bedrock + Azure</span>
+  <span class="tag">EU AI Act compliant</span><span class="tag">Hybrid open/closed model</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Context</div></div>
+  <div class="ctx-body">Mistral AI was founded in Paris in 2023 with a founding thesis of <strong>EU AI sovereignty</strong>: Europe needs a frontier AI lab that operates under European law, stores data in Europe, and is not subject to US government data access laws (CLOUD Act). By 2026, Mistral has shipped three 2026-generation models: <strong>Devstral 2</strong> (agentic coding model), <strong>Mistral Small 4</strong> (6B active parameters for lightweight deployment), and <strong>Mistral Large 3</strong> (80+ languages for multilingual European enterprise).<br><br>
+  The <strong>EU AI Act</strong> entered into force in 2025. Understanding Mistral's position requires understanding this regulatory context &mdash; which is the focus of Module 2. For Tekravio's planned German market entry, this assignment is directly actionable.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Research Modules</div>
+<div class="sh">Five Research Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Module 2 on GDPR and EU AI Act compliance is the most important module in the entire 8-assignment series for Tekravio's European strategy. Do not rush it.</p>
+<div class="tasks">  <div class="task" id="t1">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">The Full Mistral 2026 Model Family</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Mistral ships multiple models in 2026 targeting different use cases. Build a complete, accurate family map.</p>
+      <div class="rl"><div class="rq"><strong>Devstral 2:</strong> What makes Devstral 2 different from a general-purpose model used for coding? What specific coding benchmarks does it target and what are its scores? What agentic coding workflows is it optimised for? How does it compare to Claude Fable 5 (95% SWE-bench Verified) and GPT-5.5 (Terminal-Bench 82.7%) on coding tasks?</div><div class="rq"><strong>Mistral Small 4:</strong> 6B active parameters with Devstral's agentic coding capabilities in a smaller package. Document: architecture (dense vs MoE? if MoE, what are total vs active parameters?), minimum hardware to self-host, inference speed, and capability level relative to full Devstral 2. What application is Mistral Small 4 specifically designed for?</div><div class="rq"><strong>Mistral Large 3:</strong> 80+ languages. Document its target use case, available benchmark performance, and pricing. For a European company needing customer support in 20 EU languages (including Polish, Romanian, Czech, and Hungarian), compare Mistral Large 3 to Qwen 3.5 (201 languages). Which is better for this specific use case and why?</div><div class="rq"><strong>Full pricing table:</strong> Build a complete pricing table: Mistral Large 3, Devstral 2, Mistral Small 4. Include context window, pricing per million tokens (input/output), available quantisation options, and primary recommended use case for each. Compare the equivalent capability tier at Anthropic, OpenAI, and Google.</div><div class="rq"><strong>Platform availability:</strong> Mistral is available on: La Plateforme (native), AWS Bedrock, and Azure. For a company already on AWS, document the exact steps and pricing to access Mistral models through Bedrock. For a company on Azure, same question. Is La Plateforme ever cheaper than the cloud provider route?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t2">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">GDPR, EU AI Act &amp; the Compliance Advantage</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">This is the most important module for Tekravio's European expansion. No US-centric AI research covers this adequately. Understand it completely.</p>
+      <div class="rl"><div class="rq"><strong>GDPR articles that apply to AI model usage:</strong> Document the specific GDPR articles that apply when processing EU personal data through AI models: Article 28 (Data Processing Agreements &mdash; required when a processor handles data), Chapter V (transfers outside the EU &mdash; applies when data goes to US servers), and Article 22 (automated individual decision-making &mdash; applies when AI makes consequential decisions). For each article: what obligation does it create, and how do US-based providers (OpenAI, Anthropic, Google) comply or fail to comply with it?</div><div class="rq"><strong>EU AI Act (in force 2025):</strong> The EU AI Act entered into force in 2025. Document the four risk categories: prohibited AI systems, high-risk AI systems, limited-risk systems, and minimal-risk systems. Where do GPT-5.5, Claude Fable 5, and Gemini 3.1 Pro fall when used for enterprise applications? What specific obligations does deploying a 'high-risk AI system' impose on the deployer (not the provider)?</div><div class="rq"><strong>Mistral's specific EU compliance claims:</strong> Mistral claims to be GDPR-compliant by design. Document exactly what Mistral offers vs what Anthropic and OpenAI offer EU customers: EU data residency (are data centres in the EU?), standard contractual clauses in DPAs, data processing agreement terms, and data retention policies. Compare claim by claim.</div><div class="rq"><strong>DSGVO &mdash; German GDPR enforcement:</strong> German data protection authorities (Datenschutzbehörden) are among the strictest GDPR enforcers in Europe. Research and document one real case where a German data protection authority investigated or took action against an AI provider or a company using AI to process German personal data. What was the outcome? What architectural decision would have prevented the investigation?</div><div class="rq"><strong>Tekravio Germany market compliance architecture:</strong> Tekravio is targeting the German market. For a German healthcare client (governed by DSGVO + HIPAA for US operations + German BDSG health data regulations), which AI provider is compliant for processing patient data? Build a compliance decision flowchart: given data type and country, which model provider is compliant.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>This module requires reading actual regulatory text, not summaries. Link directly to EUR-Lex for GDPR articles and the EU AI Act.</p></div>
+    </div>
+  </div>  <div class="task" id="t3">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Devstral 2: Agentic Coding Architecture Deep Dive</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">What 'agentic coding' means for Devstral 2 specifically and where it fits against Claude Fable 5 and GPT-5.5.</p>
+      <div class="rl"><div class="rq"><strong>What makes Devstral 2 specifically agentic:</strong> Define what Mistral means by 'agentic coding' vs general-purpose coding. What specific capabilities does Devstral 2 have that a general model (like Mistral Large 3 used for coding) lacks? Document: multi-step task planning, file system tool use, loop detection and recovery, and context management across a long coding session.</div><div class="rq"><strong>Devstral 2 benchmark performance:</strong> Research Devstral 2's available scores on SWE-bench Verified and any agentic coding benchmarks. How does it compare to Claude Fable 5 (95% SWE-bench) and GPT-5.5's Codex (Terminal-Bench 82.7%)? Is Devstral 2 competitive with these for coding tasks, or is it a tier below?</div><div class="rq"><strong>Mistral Small 4 for local coding assistants:</strong> Mistral Small 4 brings Devstral-level coding to a 6B active parameter model. For a startup wanting to deploy a local coding assistant without cloud costs, compare Mistral Small 4 (self-hosted, free) vs GitHub Copilot ($19/month/user) vs Claude API at $10/$50/M. For a 20-developer team: annual cost, quality, and data privacy trade-offs.</div><div class="rq"><strong>Tekravio Academy coding mentor:</strong> Design a coding review application using Devstral 2 that provides code review feedback to Academy students across 17 tech stacks. What makes Devstral 2 specifically better than Mistral Large 3 for this use case? What is the monthly cost for 500 students submitting 3 assignments/week, assuming 2,000 tokens per review?</div><div class="rq"><strong>Devstral 2 on EU infrastructure:</strong> For a German software development company that requires code reviews to stay on EU servers (their IP policy), design a Devstral 2 deployment on Mistral's La Plateforme or on AWS EU-West region. Document the setup, SLA, and cost. Compare to self-hosting Devstral 2 on a German cloud provider (OVH, Hetzner).</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t4">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">European AI Sovereignty &amp; Mistral's Commercial Model</div><div class="tp">// 16 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Why Europe needs its own frontier lab, and whether Mistral is building the right thing.</p>
+      <div class="rl"><div class="rq"><strong>EU AI sovereignty thesis:</strong> Mistral's founding thesis: Europe needs a frontier AI lab operating under European law. What would European AI development look like if Anthropic, OpenAI, and Google were the only options? Document the specific legal, economic, and strategic arguments for EU AI sovereignty.</div><div class="rq"><strong>Hybrid open/closed commercial model:</strong> Mistral is unusual: open weights for small models (Mistral 7B, Mixtral), closed API for large models (Mistral Large, Devstral 2). Document this hybrid model: why open small models? Why closed large ones? How does this generate revenue? How does it compare to Meta (fully open), Anthropic (fully closed), and DeepSeek (open at frontier scale)?</div><div class="rq"><strong>EU institutional backing and politics:</strong> Research what EU institutional support Mistral has received: EU grants, national French government investment, European Investment Bank involvement. How does this compare to US government relationships with Anthropic (Project Glasswing) and OpenAI (contract research)? Does EU institutional backing change the risk profile for enterprise customers?</div><div class="rq"><strong>Honest capability gap vs US frontier:</strong> Is Mistral Large 3 at the same capability level as Claude Fable 5 or GPT-5.5? Document the benchmark gap on: GPQA Diamond, MMLU, HumanEval, and SWE-bench (if available). How large is Mistral's engineering team vs Anthropic's or OpenAI's? Does the gap show signs of closing or widening?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t5">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Tekravio EU Expansion Strategy Using Mistral</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Build specific, actionable recommendations for Tekravio's European market entry.</p>
+      <div class="rl"><div class="rq"><strong>The Germany market recommendation:</strong> Tekravio is targeting the German market. Design a specific AI infrastructure recommendation for a German mid-sized enterprise client in financial services. Which Mistral model, on which platform (La Plateforme, Azure Frankfurt region, AWS EU-West-1), for which specific use case? Include: the compliance argument, the data processing agreement requirements, and a monthly cost estimate.</div><div class="rq"><strong>Hybrid architecture for mixed EU workloads:</strong> A European client has mixed workloads: GDPR-sensitive customer data (must stay in EU) and non-sensitive analytics (no residency requirement). Design a hybrid architecture using Mistral for EU-regulated data and Claude Fable 5 for everything else. Document the routing logic, API gateway design, and monthly cost comparison vs using Mistral for everything.</div><div class="rq"><strong>German university partnership pitch:</strong> Write a 200-word pitch to a German university (similar to Tekravio's institute partnership model) where Mistral AI's EU origin is a specific advantage. What does 'AI made in Europe, compliant with European law' mean to a German academic institution? What specific compliance benefit does Mistral offer that GPT-5.5 cannot?</div><div class="rq"><strong>Tekravio Academy EU compliance:</strong> If Tekravio opens an Academy campus in Germany, they will process student data (names, submissions, assessment results) under DSGVO. Design the AI infrastructure for the German Academy that is fully DSGVO-compliant. Which model for code review, which for assignment generation, which for student feedback?</div><div class="rq"><strong>Competitive moat analysis:</strong> Is Mistral's EU compliance position a durable competitive moat, or can OpenAI and Anthropic close the gap by opening EU data centres and signing GDPR-compliant DPAs? Research what Anthropic and OpenAI currently offer EU customers in terms of data residency. When might the EU compliance advantage disappear?</div></div>
+      
+    </div>
+  </div></div>
+<div class='sep'></div>
+<div class='stag'>// 02 &middot; Design Questions</div>
+<div class='sh'>Answer in Your README</div>
+<p style='margin-bottom:1.25rem'>Four questions. Module 2 depth required for Questions 1 and 2.</p>
+<div class="qref"><div class="qref-n">Q1</div><div class="qref-t">A German e-commerce company wants to use AI for automated customer service responses that reference purchase history, shipping addresses, and payment information. Under GDPR Article 28, they need a Data Processing Agreement. Which AI providers can provide a GDPR-compliant DPA that allows this use case? Does Claude Fable 5 qualify? Does GPT-5.5? Does Mistral Large 3 via La Plateforme? Research the current DPA terms for each.</div></div><div class="qref"><div class="qref-n">Q2</div><div class="qref-t">The EU AI Act classifies AI systems by risk. A Tekravio Studio client wants to build an AI-powered recruitment screening tool that filters CVs and ranks candidates. What risk category does this application fall into under the EU AI Act? What obligations does this create for the client? Which AI model provider best supports compliance with these obligations?</div></div><div class="qref"><div class="qref-n">Q3</div><div class="qref-t">Devstral 2 scores below Claude Fable 5 on SWE-bench Verified. A EU-based software company argues: 'We should use Devstral 2 because it keeps our code on EU servers, even if the quality is slightly lower.' How would you quantify 'slightly lower'? At what quality gap does GDPR compliance stop being worth the capability trade-off? Build the calculation for a code-review application processing 10,000 pull requests per month.</div></div><div class="qref"><div class="qref-n">Q4</div><div class="qref-t">Tekravio is planning a German university partnership. The university's legal team asks: 'Can you guarantee that student data will not leave the EU if we use your Academy platform?' Design the full compliance answer: which AI models are used, where is data processed, what DPAs are in place, and what happens if Tekravio's primary AI provider (Anthropic) moves data to US servers?</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 30 Additional Marks</div><div class="bi"><div class="bit"><strong>+15 marks — EU AI Act compliance audit:</strong> Take one Tekravio Studio use case and run it through the full EU AI Act risk classification framework. Identify the risk category, list all obligations, and design the technical and governance measures required for compliance.</div><div class="bit"><strong>+10 marks — Devstral 2 live benchmark:</strong> Run the same SWE-bench problem (find one in the public dataset) through Devstral 2 and Claude Fable 5. Compare: did both solve it? Token count? Cost? Quality of explanation?</div><div class="bit"><strong>+5 marks — Multilingual EU language test:</strong> Test Mistral Large 3 and Qwen 3.5 on the same business-writing prompt in 3 EU languages: German (formal), Polish, and Romanian. Which produces output that a native speaker would consider professional quality?</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Send your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Intern Assignment &mdash; Mistral AI &mdash; [Your Name]</code><br>Body: GitHub repo link + one sentence on your most surprising finding</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI Research Intern Assignment &middot; Mistral AI &mdash; Devstral 2 & Large 3 &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function toggle(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
