@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Java Intern — ShopNest — E-Commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#f97316;--ar:249,115,22}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:520px;height:520px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Java Intern · E-Commerce Domain</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Java Intern &middot; Domain: E-Commerce</div>
+  </div>
+  <p class="etag">// Assignment 04 &middot; E-Commerce &middot; Spring Boot 3.x &middot; Intermediate</p>
+  <h1 class="ht">ShopNest<br><span style="color:var(--ac)">Online</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Storefront.</span></h1>
+  <p class="hs">Build the backend for an e-commerce store. Products have variants (size, colour), each with its own stock level. Customers add items to cart, apply coupons, and place orders. When an order is placed, stock reduces. When an order is cancelled, stock is restored. Getting the inventory math right &mdash; especially concurrent orders &mdash; is the real challenge here.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Domain</div><div class="mpv">E-Commerce</div></div></div>
+    <div class="mp"><div><div class="mpl">Project</div><div class="mpv">ShopNest</div></div></div>
+    <div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Java 17 &middot; Spring Boot 3.x &middot; PostgreSQL</div></div></div>
+    <div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div>
+    <div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Tech Stack</div>
+<div class="trow">
+  <span class="tag">Java 17+</span><span class="tag">Spring Boot 3.x</span><span class="tag">Spring Data JPA</span>
+  <span class="tag">Spring Web</span><span class="tag">Spring Validation</span><span class="tag">Spring Security (JWT)</span>
+  <span class="tag">PostgreSQL</span><span class="tag">Lombok</span><span class="tag">BigDecimal for prices</span>
+  <span class="tag">JUnit 5 + Mockito</span><span class="tag">Swagger/OpenAPI</span><span class="tag">Docker Compose</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">ShopNest has two roles: <strong>ADMIN</strong> (manages products, inventory, coupons) and <strong>CUSTOMER</strong> (browses, carts, orders). A product like "Running Shoes" has variants: Size 8 Blue (stock: 5), Size 8 Red (stock: 3), Size 9 Blue (stock: 0). A customer adds a variant to their cart, applies a coupon for a discount, and places an order.<br><br>
+  <strong>Key challenge &mdash; inventory:</strong> when an order is placed, stock for each ordered variant must be decremented atomically. If any variant is out of stock, the entire order must fail. When an order is cancelled, stock must be restored. This must work correctly even when two customers order the last item simultaneously.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Build in order. Inventory correctness in Module 3 is the hardest part.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">Product Catalogue &amp; Inventory</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Products with variants, each variant tracked separately in inventory.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">StockService.java — atomic decrement</span><span class="cb-tag">Service</span></div><pre><span class="cm">// Called during order placement for each variant in cart</span>
+<span class="ann">@Transactional</span>
+<span class="kw">public void</span> decrementStock(<span class="ty">UUID</span> variantId, <span class="kw">int</span> quantity) {
+    <span class="kw">int</span> updated = variantRepository.decrementStock(variantId, quantity);
+    <span class="kw">if</span> (updated == <span class="nu">0</span>) {
+        <span class="kw">throw new</span> <span class="ty">InsufficientStockException</span>(
+            <span class="str">"Not enough stock for variant: "</span> + variantId);
+    }
+}
+
+<span class="cm">// In repository — uses @Lock or native query with WHERE clause</span>
+<span class="ann">@Modifying</span>
+<span class="ann">@Query</span>(<span class="str">"UPDATE ProductVariant v SET v.stockQuantity = v.stockQuantity - :qty "</span> +
+       <span class="str">"WHERE v.id = :id AND v.stockQuantity >= :qty"</span>)
+<span class="kw">int</span> decrementStock(<span class="ann">@Param</span>(<span class="str">"id"</span>) <span class="ty">UUID</span> id, <span class="ann">@Param</span>(<span class="str">"qty"</span>) <span class="kw">int</span> qty);</pre></div>
+      <div class="rl"><div class="rq"><strong>Product entity:</strong> Fields: name, description, category (CLOTHING, FOOTWEAR, ELECTRONICS, HOME, BEAUTY, OTHER), brand, basePrice (BigDecimal), imageUrls (stored as comma-separated or JSON array), isActive, createdAt. A product has many ProductVariants.</div><div class="rq"><strong>ProductVariant entity:</strong> Fields: product, variantName (e.g., 'Size 8 / Blue'), sku (unique), additionalPrice (BigDecimal, added to basePrice), stockQuantity (int, ≥ 0), weight (for shipping). The selling price = product.basePrice + variant.additionalPrice. <strong>Never allow stockQuantity to go below 0.</strong></div><div class="rq"><strong>Inventory management:</strong> <code>PUT /api/admin/variants/{id}/stock</code> &mdash; ADMIN only. Body: <code>{operation: 'ADD'|'REMOVE'|'SET', quantity}</code>. ADD increases stock. REMOVE decreases stock (throw <code>InsufficientStockException</code> if result < 0). SET directly sets to value (≥ 0 only). Every stock change creates a <code>StockAuditLog</code> entry: variantId, operation, quantityChange, reason, changedBy, changedAt.</div><div class="rq"><strong>Product APIs:</strong> <code>POST /api/admin/products</code> &mdash; create with variants. <code>GET /api/products?category=FOOTWEAR&brand=Nike&minPrice=500&maxPrice=5000&inStock=true&page=0&size=20</code> &mdash; paginated search. <code>GET /api/products/{id}</code> &mdash; product with all variants, stock status (IN_STOCK if qty > 0, LOW_STOCK if qty 1&ndash;5, OUT_OF_STOCK if qty = 0).</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">Shopping Cart</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Cart management with quantity controls and real-time price calculation.</p>
+      
+      <div class="rl"><div class="rq"><strong>Cart design:</strong> One cart per user (persisted in DB, not session). Cart has many CartItems; each CartItem has variant, quantity, addedAt. Cart is always up-to-date &mdash; it shows current prices (not the price when item was added). Add a <code>priceChangedWarning</code> flag when the current variant price differs from when the item was added.</div><div class="rq"><strong>Cart operations:</strong> <code>POST /api/cart/items</code> &mdash; add item (variantId + quantity). Validate: variant exists, is active, and quantity does not exceed available stock. If item already in cart, increment quantity (up to stock limit). <code>PUT /api/cart/items/{id}</code> &mdash; update quantity. <code>DELETE /api/cart/items/{id}</code> &mdash; remove item. <code>DELETE /api/cart</code> &mdash; clear entire cart.</div><div class="rq"><strong>Cart summary:</strong> <code>GET /api/cart</code> &mdash; return items with: variantId, variantName, productName, imageUrl, unitPrice, quantity, lineTotal (unit &times; qty), and cart-level: subtotal, appliedCoupon (if any), discountAmount, finalTotal, itemCount. Warn if any item's stock has dropped below the cart quantity since it was added.</div><div class="rq"><strong>Stock reservation warning:</strong> If a customer adds 3 units of a variant with 5 in stock, and then another customer buys 4 (leaving only 1), the first customer's cart shows quantity=3 but only 1 is available. Add a <code>availableStock</code> field per cart item so the frontend can warn the customer before checkout.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Coupon &amp; Discount Engine</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Coupons can be percentage or flat discounts with usage limits and expiry.</p>
+      
+      <div class="rl"><div class="rq"><strong>Coupon entity:</strong> Fields: code (String, unique, uppercase), type (PERCENTAGE, FLAT_AMOUNT), value (BigDecimal &mdash; 20 for 20% off, or 200 for ₹200 off), minimumOrderAmount (BigDecimal, optional), maximumDiscountAmount (BigDecimal, optional cap for % coupons), totalUsageLimit (int), usedCount (int, starts 0), validFrom (LocalDateTime), validUntil (LocalDateTime), isActive.</div><div class="rq"><strong>Apply coupon to cart:</strong> <code>POST /api/cart/coupon</code> &mdash; body: <code>{couponCode}</code>. Validate: coupon exists and isActive, not expired, minimum order amount met, usedCount < totalUsageLimit. For PERCENTAGE: discount = subtotal * value/100 (capped by maximumDiscountAmount). For FLAT: discount = min(value, subtotal). Return updated cart totals. Only one coupon per cart.</div><div class="rq"><strong>Coupon CRUD (admin):</strong> <code>POST /api/admin/coupons</code>, <code>PUT /api/admin/coupons/{id}</code>, <code>DELETE /api/admin/coupons/{id}</code>. Cannot delete a coupon that has usedCount > 0 (deactivate instead). Return usage stats: usedCount, remainingUses, revenue discounted.</div><div class="rq"><strong>Coupon validation edge cases:</strong> Test these: (a) expired coupon &rarr; COUPON_EXPIRED, (b) minimum order not met &rarr; MINIMUM_ORDER_NOT_MET with the required amount in error, (c) usage limit reached &rarr; COUPON_EXHAUSTED, (d) applying a coupon when one is already applied &rarr; replace old coupon, (e) removing a coupon: <code>DELETE /api/cart/coupon</code>.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Increment usedCount at order placement, NOT at coupon application. A user can apply and remove coupons from their cart many times. Only when they actually place an order does the coupon count as used.</p></div>
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Order Management &amp; Inventory Sync</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Order placement must atomically deduct stock. Cancellation must restore it.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">OrderService.java — atomic placement</span><span class="cb-tag">Service</span></div><pre><span class="ann">@Transactional</span>
+<span class="kw">public</span> <span class="ty">OrderResponse</span> placeOrder(<span class="ty">PlaceOrderRequest</span> req) {
+    <span class="ty">Cart</span> cart = cartService.getCartForCurrentUser();
+    <span class="kw">if</span> (cart.getItems().isEmpty()) <span class="kw">throw new</span> <span class="ty">EmptyCartException</span>();
+
+    <span class="cm">// Step 1: validate + decrement stock atomically for ALL items</span>
+    cart.getItems().forEach(item -> {
+        stockService.decrementStock(item.getVariant().getId(), item.getQuantity());
+        <span class="cm">// throws InsufficientStockException if stock < qty</span>
+        <span class="cm">// @Transactional ensures all decrements roll back on any failure</span>
+    });
+
+    <span class="ty">Order</span> order = buildOrder(cart, req.deliveryAddress());
+    orderRepository.save(order);
+    cartService.clearCart();
+    <span class="kw">return</span> orderMapper.toResponse(order);
+}</pre></div>
+      <div class="rl"><div class="rq"><strong>Order placement:</strong> <code>POST /api/orders</code> &mdash; places order from current cart. In a single <code>@Transactional</code> method: (1) snapshot cart items and prices, (2) validate all variants still have sufficient stock, (3) decrement stock for each variant using the atomic query from Module 1, (4) if any decrement returns 0 (insufficient stock), throw <code>InsufficientStockException</code> and roll back all decrements, (5) if coupon applied, increment coupon usedCount and validate it's still valid, (6) create Order + OrderItems, (7) clear cart.</div><div class="rq"><strong>Order entity:</strong> Fields: customer, status (PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED), subtotal, discountAmount, totalAmount, couponCode, deliveryAddress (embedded or separate entity), createdAt, updatedAt. OrderItem: order, variant, variantName (snapshot at order time), unitPrice (snapshot), quantity, lineTotal.</div><div class="rq"><strong>Order status transitions:</strong> Valid: PENDING→CONFIRMED, CONFIRMED→SHIPPED, SHIPPED→DELIVERED, PENDING→CANCELLED, CONFIRMED→CANCELLED. Invalid transitions throw <code>InvalidOrderStatusException</code>. <code>PUT /api/admin/orders/{id}/status</code> &mdash; ADMIN updates status. <code>PUT /api/orders/{id}/cancel</code> &mdash; CUSTOMER can cancel only own PENDING orders.</div><div class="rq"><strong>Stock restoration on cancel:</strong> When an order is CANCELLED: restore stock for each OrderItem variant. Use the same atomic update pattern. If the variant was deleted (rare), log a warning but don't fail the cancellation.</div><div class="rq"><strong>Order history:</strong> <code>GET /api/orders?status=DELIVERED&page=0&size=10</code> &mdash; customer's own orders with items. <code>GET /api/admin/orders?customerId=&status=&from=&to=</code> &mdash; admin view with pagination.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Reviews &amp; Testing</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Product reviews and the test coverage that validates the inventory logic.</p>
+      
+      <div class="rl"><div class="rq"><strong>Review system:</strong> <code>POST /api/products/{id}/reviews</code> &mdash; CUSTOMER only, must have a DELIVERED order containing this product (verify in service). Fields: rating (1&ndash;5), title, body. One review per customer per product (enforce with <code>@UniqueConstraint</code>). <code>GET /api/products/{id}/reviews?page=0&size=10</code> &mdash; paginated, newest first. Product response includes averageRating (BigDecimal, 1 decimal place) and reviewCount.</div><div class="rq"><strong>Unit tests for inventory:</strong> Test <code>OrderService.placeOrder()</code>: (a) successful order &mdash; stock decremented correctly, (b) one item out of stock &mdash; throws InsufficientStockException, entire order fails (no partial order), (c) cart is cleared after successful order, (d) cancellation restores stock, (e) cancelling a DELIVERED order throws InvalidOrderStatusException, (f) stock decrement with concurrent orders (mock the decrementStock to return 0 on second call).</div><div class="rq"><strong>Coupon unit tests:</strong> Test <code>CouponService</code>: (a) percentage coupon with maximum cap, (b) flat coupon larger than subtotal (discount = subtotal, not coupon value), (c) expired coupon, (d) used-up coupon, (e) minimum order not met.</div><div class="rq"><strong>Docker and OpenAPI:</strong> docker-compose up starts app + PostgreSQL. Swagger at /swagger-ui.html documents all endpoints with request/response examples. The cart summary and order placement endpoints must have example JSON in Swagger.</div></div>
+      
+    </div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Two customers simultaneously add the last item (stock: 1) to their carts and both click 'Place Order' at the same time. Walk through what happens in your system. Does one of them get an error? Which one? How does the database ensure only one succeeds?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">You snapshot the variant name and price at order time into the OrderItem. Why? What would go wrong if you just stored a foreign key to ProductVariant and queried it live when showing order history?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">A DELIVERED order cannot be cancelled. But a CONFIRMED order can. What real business rule is this simulating? What happens to inventory when a CONFIRMED order is cancelled vs when it was never confirmed?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">The product search API supports filtering by category, brand, price range, and in-stock status. With 1 million products in the DB, which indexes do you need? Write the specific column combinations to index.</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Wishlist:</strong> Customers can add products (not variants) to a wishlist. <code>POST /api/wishlist/{productId}</code> to add, <code>DELETE</code> to remove. <code>GET /api/wishlist</code> returns products with current prices and in-stock status. If a wishlisted product comes back in stock (any variant), flag it in the response.</div><div class="bit"><strong>+7 marks — Order address:</strong> Instead of a free-text delivery address, implement a SavedAddress entity: userId, label (HOME, WORK, OTHER), addressLine1, city, state, pincode. Users manage their saved addresses. On order placement, they provide an addressId. Copy address details into the order (not a foreign key &mdash; a snapshot).</div><div class="bit"><strong>+5 marks — Low stock alert:</strong> After each order placement, check if any ordered variant now has stock ≤ 5. If so, create a <code>LowStockAlert</code> record (variantId, currentStock, triggeredAt). ADMIN can query: <code>GET /api/admin/alerts/low-stock</code>.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Submit your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Java Intern &mdash; ShopNest — E-Commerce Domain &mdash; [Your Name]</code><br>Body: GitHub repo + one thing you found challenging</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Java Intern Assignment &middot; E-Commerce &mdash; ShopNest &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
