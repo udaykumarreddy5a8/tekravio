@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Java Intern — EduTrack — Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#3b82f6;--ar:59,130,246}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:520px;height:520px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Java Intern · Education Domain</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Java Intern &middot; Domain: Education</div>
+  </div>
+  <p class="etag">// Assignment 01 &middot; EdTech &middot; Spring Boot 3.x &middot; Intermediate</p>
+  <h1 class="ht">EduTrack<br><span style="color:var(--ac)">Learning</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Platform.</span></h1>
+  <p class="hs">Build the backend for an online learning platform. Students enroll in courses, track lesson progress, and take quizzes. Instructors create course content. This is an intermediate assignment &mdash; the business logic matters as much as the CRUD. Think about edge cases: what happens if a student retakes a failed quiz? What prevents them from marking lessons complete without watching them?</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Domain</div><div class="mpv">EdTech</div></div></div>
+    <div class="mp"><div><div class="mpl">Project</div><div class="mpv">EduTrack</div></div></div>
+    <div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Java 17 &middot; Spring Boot 3.x &middot; PostgreSQL</div></div></div>
+    <div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div>
+    <div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Tech Stack</div>
+<div class="trow">
+  <span class="tag">Java 17+</span><span class="tag">Spring Boot 3.x</span><span class="tag">Spring Data JPA</span>
+  <span class="tag">Spring Web</span><span class="tag">Spring Validation</span><span class="tag">Spring Security (JWT)</span>
+  <span class="tag">PostgreSQL</span><span class="tag">Lombok</span><span class="tag">MapStruct or manual DTOs</span>
+  <span class="tag">JUnit 5 + Mockito</span><span class="tag">Swagger/OpenAPI</span><span class="tag">Docker Compose</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">EduTrack is an online learning platform. It has two user roles: <strong>STUDENT</strong> and <strong>INSTRUCTOR</strong>. Instructors create courses with multiple modules, each containing lessons. Students enroll in courses and track their progress lesson by lesson. A course also has quizzes &mdash; multiple-choice questions with a passing score threshold.<br><br>
+  Your job is to build the REST API backend. <strong>Do not just build CRUD</strong>. Think about the real rules: a student cannot mark a lesson complete unless they are enrolled in that course; a student cannot retake a passed quiz; a student becomes eligible for a certificate only when all lessons in a course are marked complete and all required quizzes are passed.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Build them in order. Each module depends on the previous one.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">Course &amp; Content Management</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Instructors manage courses, modules, and lessons. This is the content layer — everything else depends on it.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">Course.java (entity snippet)</span><span class="cb-tag">JPA</span></div><pre><span class="ann">@Entity</span>
+<span class="ann">@Table</span>(name = <span class="str">"courses"</span>)
+<span class="ann">@Getter</span> <span class="ann">@Setter</span> <span class="ann">@Builder</span>
+<span class="kw">public class</span> <span class="ty">Course</span> {
+    <span class="ann">@Id</span> <span class="ann">@GeneratedValue</span>(strategy = GenerationType.UUID)
+    <span class="kw">private</span> <span class="ty">UUID</span> id;
+
+    <span class="ann">@NotBlank</span> <span class="ann">@Size</span>(min=5, max=100)
+    <span class="kw">private</span> <span class="ty">String</span> title;
+
+    <span class="ann">@Enumerated</span>(EnumType.STRING)
+    <span class="kw">private</span> <span class="ty">Category</span> category;
+
+    <span class="ann">@OneToMany</span>(mappedBy=<span class="str">"course"</span>, cascade=CascadeType.ALL, orphanRemoval=<span class="nu">true</span>)
+    <span class="ann">@OrderBy</span>(<span class="str">"moduleOrder ASC"</span>)
+    <span class="kw">private</span> <span class="ty">List</span>&lt;<span class="ty">CourseModule</span>&gt; modules = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;&gt;();
+    <span class="cm">// ... remaining fields</span>
+}</pre></div>
+      <div class="rl"><div class="rq"><strong>Course entity:</strong> Fields: title, description, thumbnailUrl, category (enum: PROGRAMMING, DESIGN, DATA_SCIENCE, BUSINESS, OTHER), difficulty (BEGINNER, INTERMEDIATE, ADVANCED), price (BigDecimal, 0 means free), published (boolean), createdBy (Instructor). A course has many CourseModules, ordered by <code>moduleOrder</code>.</div><div class="rq"><strong>Lesson entity:</strong> A CourseModule has many Lessons. Fields: title, contentUrl (video/PDF URL), durationMinutes, lessonOrder, type (VIDEO, ARTICLE, QUIZ). Lessons cannot be deleted if any student has marked progress on them &mdash; throw a custom <code>LessonInUseException</code>.</div><div class="rq"><strong>APIs:</strong> <code>POST /api/courses</code> &mdash; create (INSTRUCTOR only). <code>PUT /api/courses/{id}/publish</code> &mdash; publish a course (validates at least 1 module with 1 lesson exists). <code>GET /api/courses/{id}</code> &mdash; full course with modules and lessons. <code>DELETE /api/courses/{id}</code> &mdash; only if zero enrollments, else throw <code>CourseHasEnrollmentsException</code>.</div><div class="rq"><strong>Validation:</strong> Course title: 5&ndash;100 chars. Price: 0 to 99999.99. A module must have at least 1 lesson before the course can be published. Validate all of this at the service layer, not just controller.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">Enrollment &amp; Progress Tracking</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Students enroll in courses and track progress lesson by lesson. The real logic is in calculating progress percentage and determining completion.</p>
+      
+      <div class="rl"><div class="rq"><strong>Enrollment:</strong> <code>POST /api/enrollments</code> &mdash; enroll the authenticated STUDENT in a course. Prevent duplicate enrollment (throw <code>AlreadyEnrolledException</code>). A student cannot enroll in an unpublished course.</div><div class="rq"><strong>Lesson progress:</strong> <code>POST /api/progress/lessons/{lessonId}/complete</code> &mdash; mark a lesson as complete. <strong>Validate:</strong> the student must be enrolled in the course this lesson belongs to. If already marked complete, return current state (idempotent). Store: studentId, lessonId, completedAt.</div><div class="rq"><strong>Progress calculation:</strong> <code>GET /api/enrollments/{enrollmentId}/progress</code> &mdash; return: total lessons in course, completed lessons count, percentage (0&ndash;100), list of incomplete lesson IDs. Calculate in service layer, not in DB query. Cache the percentage? Not required, but note where you would.</div><div class="rq"><strong>Course completion:</strong> A student is &ldquo;course-complete&rdquo; when: (a) all lessons marked complete AND (b) all required quizzes passed. Expose <code>GET /api/enrollments/{id}/completion-status</code> returning a JSON object with <code>lessonsComplete</code>, <code>quizzesPassed</code>, <code>eligible</code> (boolean), and <code>certificateCode</code> (UUID, generated once eligible, null otherwise).</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Store completedAt timestamp on LessonProgress. This allows you to calculate 'last active date' for a student — useful for the dashboard.</p></div>
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Quiz &amp; Assessment System</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Courses have quizzes with multiple-choice questions. Quizzes have a pass threshold. Students get immediate results and limited retakes.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">QuizAttemptService.java (scoring logic)</span><span class="cb-tag">Service</span></div><pre><span class="kw">public</span> <span class="ty">AttemptResult</span> submitAttempt(<span class="ty">UUID</span> quizId, <span class="ty">List</span>&lt;<span class="ty">AnswerDto</span>&gt; answers) {
+    <span class="ty">Quiz</span> quiz = quizRepository.findById(quizId)
+        .orElseThrow(() -> <span class="kw">new</span> <span class="ty">ResourceNotFoundException</span>(<span class="str">"Quiz not found"</span>));
+    validateAttemptEligibility(quiz, currentUser());
+
+    <span class="kw">long</span> correct = answers.stream()
+        .filter(a -> isCorrectOption(a.questionId(), a.selectedOptionId()))
+        .count();
+    <span class="kw">double</span> score = (correct * 100.0) / quiz.getQuestions().size();
+    <span class="ty">AttemptStatus</span> status = score >= quiz.getPassPercentage()
+        ? AttemptStatus.PASSED : AttemptStatus.FAILED;
+
+    <span class="cm">// save attempt, update enrollment if all quizzes passed</span>
+    <span class="kw">return</span> saveAttemptAndReturn(quiz, score, status, answers);
+}</pre></div>
+      <div class="rl"><div class="rq"><strong>Quiz entity:</strong> Quiz belongs to a CourseModule (like a lesson). Fields: title, passPercentage (default 70), maxAttempts (default 3), timeoutMinutes. Quiz has many Questions; each Question has many Options (one marked correct). <strong>Do not expose which option is correct in the student-facing GET APIs.</strong></div><div class="rq"><strong>Submit quiz attempt:</strong> <code>POST /api/quizzes/{quizId}/attempts</code> &mdash; body: list of <code>{questionId, selectedOptionId}</code>. Validate: enrolled, not exceeded maxAttempts, no in-progress attempt. Calculate score in service: (correct answers / total questions) * 100. Set status to PASSED or FAILED. Return score and pass/fail.</div><div class="rq"><strong>Attempt rules:</strong> A student who has PASSED cannot retake. A student who has FAILED and not reached maxAttempts can retry. Return <code>QuizAlreadyPassedException</code> if passed. Return <code>MaxAttemptsExceededException</code> if out of retakes.</div><div class="rq"><strong>Attempt history:</strong> <code>GET /api/quizzes/{quizId}/my-attempts</code> &mdash; return all attempts for the authenticated student: attempt number, score, status, submittedAt. Sort newest first.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Search, Filter &amp; Student Dashboard</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Search courses and build the student's personal dashboard. Intermediate pagination required.</p>
+      
+      <div class="rl"><div class="rq"><strong>Course search:</strong> <code>GET /api/courses?search=java&amp;category=PROGRAMMING&amp;difficulty=INTERMEDIATE&amp;free=true&amp;page=0&amp;size=10</code>. Use Spring Data's <code>Specification</code> or a JPQL query with optional filters. Return paginated results with: title, instructor name, price, enrolled student count, average rating (placeholder for now), difficulty, category.</div><div class="rq"><strong>Student dashboard:</strong> <code>GET /api/students/me/dashboard</code> &mdash; return: (a) active enrollments with progress %, last activity date; (b) completed courses with certificate code; (c) upcoming quiz deadlines (quizzes in enrolled courses not yet attempted). No pagination needed here &mdash; return all.</div><div class="rq"><strong>Instructor dashboard:</strong> <code>GET /api/instructors/me/dashboard</code> &mdash; return: (a) total published courses, (b) total students enrolled across all courses, (c) per-course stats: enrollment count, average quiz score, completion rate %. Compute completion rate as: students with all lessons done / total enrolled.</div><div class="rq"><strong>Popular courses:</strong> <code>GET /api/courses/popular?limit=5</code> &mdash; top 5 courses by enrollment count. Simple query, no ML needed. Return as a list, not paginated.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Testing &amp; Exception Handling</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Clean APIs require clean error responses and reliable tests. This module is often rushed — don't rush it.</p>
+      
+      <div class="rl"><div class="rq"><strong>Global exception handler:</strong> Create a <code>@RestControllerAdvice</code> that handles: <code>ResourceNotFoundException</code> (404), <code>AlreadyEnrolledException</code> (409), <code>QuizAlreadyPassedException</code> (409), <code>MaxAttemptsExceededException</code> (422), <code>LessonInUseException</code> (409), <code>MethodArgumentNotValidException</code> (400 with field errors). All responses follow: <code>{status, message, timestamp, errors[]}</code>.</div><div class="rq"><strong>Unit tests:</strong> Write JUnit 5 + Mockito unit tests for <code>QuizAttemptService</code> covering: (a) successful pass, (b) successful fail, (c) attempt when already passed throws exception, (d) attempt when max retries exceeded throws exception, (e) score calculation with all wrong answers, (f) score calculation with all correct answers. 6 test cases minimum.</div><div class="rq"><strong>Integration test:</strong> Write one <code>@SpringBootTest</code> integration test for the enrollment flow: create course → publish → enroll student → complete all lessons → verify completion status returns eligible=true.</div><div class="rq"><strong>OpenAPI:</strong> All endpoints documented in Swagger. Every request/response DTO annotated with <code>@Schema</code> descriptions. Authentication requirement shown. Access at <code>/swagger-ui.html</code> after <code>docker-compose up</code>.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>For JWT auth, keep it simple: <code>@PreAuthorize('hasRole("STUDENT")')</code> on endpoints. You do not need to implement registration/login from scratch &mdash; provide a test token generator endpoint <code>POST /api/test/token?role=STUDENT</code> for reviewers to use.</p></div>
+    </div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer These in README.md</div>
+<p style="margin-bottom:1.25rem">Short answers. We ask follow-ups in the review call.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">A student completes all lessons in a course but fails the quiz 3 times (max attempts). They are now stuck — cannot get the certificate but cannot retake the quiz. How should your system handle this? Should an instructor be able to reset attempts?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">You mark a lesson complete with a POST request. If the same request is sent twice, what happens in your implementation? Is your endpoint idempotent? What HTTP status do you return on the second call?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">The quiz question entity has an 'isCorrect' field on options. What happens if an instructor accidentally marks two options as correct for the same question? Where do you validate this, and what error do you return?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">A student is enrolled in 10 courses. The dashboard API calculates progress for all 10 in a single request. What is the N+1 query problem, and how does your implementation avoid it?</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Certificate generation:</strong> When a student becomes eligible, generate a simple PDF certificate using iText or Apache PDFBox. Store the PDF URL in the enrollment record. Endpoint: <code>GET /api/enrollments/{id}/certificate</code> returns the PDF file.</div><div class="bit"><strong>+7 marks — Scheduled reminder:</strong> Use <code>@Scheduled</code> to run a daily job that identifies students who enrolled more than 7 days ago but have less than 10% progress. Log the list (don't send emails — just log). Document how you would extend this to send emails.</div><div class="bit"><strong>+5 marks — Review system:</strong> Add <code>POST /api/courses/{id}/reviews</code> for students to submit a 1-5 star rating + text review after completing a course. One review per student per course. <code>GET /api/courses/{id}</code> should include average rating.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Submit your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Java Intern &mdash; EduTrack — Education Domain &mdash; [Your Name]</code><br>Body: GitHub repo + one thing you found challenging</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Java Intern Assignment &middot; Education &mdash; EduTrack &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
