@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Java Intern — FinSmart — FinTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#10b981;--ar:16,185,129}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:520px;height:520px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Java Intern · FinTech Domain</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Java Intern &middot; Domain: FinTech</div>
+  </div>
+  <p class="etag">// Assignment 02 &middot; FinTech &middot; Spring Boot 3.x &middot; Intermediate</p>
+  <h1 class="ht">FinSmart<br><span style="color:var(--ac)">Personal</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Finance.</span></h1>
+  <p class="hs">Build the backend for a personal finance manager. Users track income and expenses across multiple accounts, set monthly budgets per category, create savings goals, and get expense reports. Finance data is sensitive &mdash; a user must never see another user's data. Every calculation must be accurate to 2 decimal places. This is where <code>BigDecimal</code> matters, not <code>double</code>.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Domain</div><div class="mpv">FinTech</div></div></div>
+    <div class="mp"><div><div class="mpl">Project</div><div class="mpv">FinSmart</div></div></div>
+    <div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Java 17 &middot; Spring Boot 3.x &middot; PostgreSQL</div></div></div>
+    <div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div>
+    <div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Tech Stack</div>
+<div class="trow">
+  <span class="tag">Java 17+</span><span class="tag">Spring Boot 3.x</span><span class="tag">Spring Data JPA</span>
+  <span class="tag">Spring Web</span><span class="tag">Spring Validation</span><span class="tag">Spring Security (JWT)</span>
+  <span class="tag">PostgreSQL</span><span class="tag">Lombok</span><span class="tag">BigDecimal for all money</span>
+  <span class="tag">JUnit 5 + Mockito</span><span class="tag">Swagger/OpenAPI</span><span class="tag">Docker Compose</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">FinSmart helps users understand their money. A user can have multiple <strong>accounts</strong> (savings, checking, credit card). They log <strong>transactions</strong> against each account: income or expense, with a category and date. They set <strong>monthly budgets</strong> per category, and the app tracks how much of each budget has been used. They can also create <strong>savings goals</strong> and make deposits toward them.<br><br>
+  <strong>Critical rule:</strong> use <code>BigDecimal</code> with <code>ROUND_HALF_UP</code> for every monetary calculation. A single floating-point rounding error in a financial app is a bug, not an edge case. Store money as <code>NUMERIC(19,4)</code> in PostgreSQL.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Build in order. Money handling matters more than feature count here.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">Account &amp; Transaction Management</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The core of the app. Users have accounts; transactions belong to accounts.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">TransactionService.java — atomic balance update</span><span class="cb-tag">Service</span></div><pre><span class="ann">@Transactional</span>
+<span class="kw">public</span> <span class="ty">TransactionDto</span> createTransaction(<span class="ty">CreateTransactionRequest</span> req) {
+    <span class="ty">Account</span> account = accountRepository.findByIdAndUser(req.accountId(), currentUser())
+        .orElseThrow(() -> <span class="kw">new</span> <span class="ty">ResourceNotFoundException</span>(<span class="str">"Account not found"</span>));
+
+    <span class="ty">Transaction</span> tx = Transaction.builder()
+        .account(account).amount(req.amount())
+        .type(req.type()).category(req.category())
+        .description(req.description()).transactionDate(req.date()).build();
+
+    <span class="cm">// update balance atomically</span>
+    <span class="kw">if</span> (req.type() == TransactionType.INCOME) {
+        account.setBalance(account.getBalance().add(req.amount()));
+    } <span class="kw">else</span> {
+        account.setBalance(account.getBalance().subtract(req.amount()));
+    }
+    transactionRepository.save(tx);
+    accountRepository.save(account);
+    <span class="kw">return</span> transactionMapper.toDto(tx);
+}</pre></div>
+      <div class="rl"><div class="rq"><strong>Account entity:</strong> Fields: name (e.g., 'HDFC Savings'), type (SAVINGS, CHECKING, CREDIT_CARD, CASH), currency (default INR), currentBalance (BigDecimal), user (owner). Balance starts at 0. Balance is <strong>computed from transactions</strong> &mdash; do not store it separately except as a cached value that gets updated on every transaction. Color-code field (hex string, optional, for UI).</div><div class="rq"><strong>Transaction entity:</strong> Fields: account, amount (BigDecimal, always positive), type (INCOME, EXPENSE), category (enum: FOOD, TRANSPORT, ENTERTAINMENT, SALARY, RENT, MEDICAL, SHOPPING, UTILITIES, OTHER), description, transactionDate (LocalDate), createdAt. A transaction belongs to exactly one account and one user.</div><div class="rq"><strong>APIs:</strong> <code>POST /api/accounts</code> &mdash; create. <code>GET /api/accounts</code> &mdash; list user's accounts with current balance. <code>POST /api/transactions</code> &mdash; create transaction and update account balance atomically (in a single <code>@Transactional</code> method). <code>PUT /api/transactions/{id}</code> &mdash; edit (recalculate balance). <code>DELETE /api/transactions/{id}</code> &mdash; delete (recalculate balance). <code>GET /api/transactions?accountId=&amp;category=&amp;from=&amp;to=&amp;page=&amp;size=</code> &mdash; paginated with filters.</div><div class="rq"><strong>Balance integrity:</strong> Account balance must always equal: SUM(INCOME transactions) - SUM(EXPENSE transactions). Write a validation method <code>validateBalanceIntegrity(UUID accountId)</code> in your service that recalculates and compares. Use this in your integration tests.</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">Budget Management</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Users set monthly spending limits per category. The app tracks usage and flags when over budget.</p>
+      
+      <div class="rl"><div class="rq"><strong>Budget entity:</strong> Fields: user, category, month (LocalDate &mdash; store as first day of month, e.g., 2026-06-01), limitAmount (BigDecimal). One budget per user per category per month. <code>@UniqueConstraint(columnNames = {"user_id", "category", "month"})</code>.</div><div class="rq"><strong>Budget usage calculation:</strong> <code>GET /api/budgets?month=2026-06</code> &mdash; return all budgets for the given month with: limitAmount, spentAmount (sum of EXPENSE transactions in that category in that month), remainingAmount, usagePercentage (0&ndash;100), status: ON_TRACK / WARNING (>80%) / OVER_BUDGET (>100%).</div><div class="rq"><strong>Budget creation:</strong> <code>POST /api/budgets</code> &mdash; create or update (upsert). If a budget for this category+month already exists, update the limitAmount. Return the existing budget if no change.</div><div class="rq"><strong>Budget vs actual report:</strong> <code>GET /api/budgets/summary?month=2026-06</code> &mdash; return total budgeted vs total spent for that month, plus a list of all budget items with status. Include categories that have spending but no budget set (show as &ldquo;No budget&rdquo;). Sort: OVER_BUDGET first, then WARNING, then ON_TRACK, then no-budget.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Use <code>@Query</code> in your repository to sum transactions by category and month in one DB call, not a loop in Java.</p></div>
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Savings Goals</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Users create savings goals and deposit money toward them over time.</p>
+      <div class="codeblock"><div class="cb-h"><span class="cb-f">Goal projected date calculation</span><span class="cb-tag">Logic</span></div><pre><span class="cm">// Calculate average daily deposit rate (last 30 days)</span>
+<span class="ty">BigDecimal</span> recentDeposits = goalDepositRepository
+    .sumDepositsSince(goalId, LocalDate.now().minusDays(<span class="nu">30</span>));
+<span class="kw">if</span> (recentDeposits.compareTo(<span class="ty">BigDecimal</span>.ZERO) == <span class="nu">0</span>) <span class="kw">return</span> <span class="nu">null</span>;
+
+<span class="ty">BigDecimal</span> dailyRate = recentDeposits.divide(
+    <span class="kw">new</span> <span class="ty">BigDecimal</span>(<span class="str">"30"</span>), <span class="nu">4</span>, RoundingMode.HALF_UP);
+<span class="ty">BigDecimal</span> remaining = goal.getTargetAmount().subtract(goal.getCurrentAmount());
+<span class="kw">long</span> daysNeeded = remaining.divide(dailyRate, <span class="nu">0</span>, RoundingMode.CEILING).longValue();
+<span class="kw">return</span> LocalDate.now().plusDays(daysNeeded);</pre></div>
+      <div class="rl"><div class="rq"><strong>Goal entity:</strong> Fields: name, targetAmount, currentAmount (BigDecimal, starts at 0), targetDate (LocalDate), status (ACTIVE, ACHIEVED, ABANDONED), createdAt, user. When currentAmount >= targetAmount, auto-set status to ACHIEVED.</div><div class="rq"><strong>Goal deposit:</strong> <code>POST /api/goals/{id}/deposit</code> &mdash; body: <code>{amount, note}</code>. Deduct amount from a specified account (user provides accountId in request). Increment goal's currentAmount. Store as a GoalDeposit record: goalId, accountId, amount, depositDate, note. If after deposit currentAmount >= targetAmount, set status ACHIEVED.</div><div class="rq"><strong>Goal progress:</strong> <code>GET /api/goals/{id}</code> &mdash; return: all fields, progress percentage, amount remaining, days remaining until targetDate, projected completion date based on average deposit rate (last 30 days average deposit / day &rarr; days until full). If no deposits yet, projected date is null.</div><div class="rq"><strong>Goal list:</strong> <code>GET /api/goals?status=ACTIVE</code> &mdash; list user's goals filtered by optional status. Return progress % for each. Sort by targetDate ascending (soonest deadline first).</div></div>
+      
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Expense Analytics &amp; Reports</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">This is where the data becomes useful. Users want to understand their spending patterns.</p>
+      
+      <div class="rl"><div class="rq"><strong>Monthly summary:</strong> <code>GET /api/reports/monthly?year=2026&amp;month=6</code> &mdash; return: totalIncome, totalExpenses, netSavings (income - expenses), top 3 spending categories with amounts and % of total expenses, daily average expense, highest single expense (amount, category, description, date).</div><div class="rq"><strong>6-month trend:</strong> <code>GET /api/reports/trend?months=6</code> &mdash; last N months (default 6) of income vs expense per month. Return as a list sorted oldest-to-newest: <code>[{month: '2026-01', income: 50000, expenses: 38000, net: 12000}, ...]</code>. Compute from transactions, not stored separately.</div><div class="rq"><strong>Category breakdown:</strong> <code>GET /api/reports/categories?from=2026-01-01&amp;to=2026-06-30</code> &mdash; for the date range, return each category with total spent, % of total, transaction count, average transaction amount. Sort by total spent descending.</div><div class="rq"><strong>Cash flow by account:</strong> <code>GET /api/reports/accounts/cash-flow?month=2026-06</code> &mdash; for each account: opening balance (balance at start of month), total credits, total debits, closing balance. Verify: closing = opening + credits - debits.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Use <code>@Query</code> with aggregation in repository. Do not load all transactions into memory to calculate &mdash; let the database do the grouping and summing.</p></div>
+    </div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Recurring Transactions &amp; Testing</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Automated recurring entries and the testing strategy that proves correctness.</p>
+      
+      <div class="rl"><div class="rq"><strong>Recurring transaction entity:</strong> Fields: user, account, type, category, amount, description, frequency (DAILY, WEEKLY, MONTHLY), dayOfMonth (for MONTHLY, e.g., 1&ndash;28), nextDueDate, isActive. Example: salary of ₹50,000 credited monthly on the 1st.</div><div class="rq"><strong>Scheduled processing:</strong> Use <code>@Scheduled(cron = '0 0 8 * * ?')</code> to run every morning at 8AM. For each active recurring transaction where nextDueDate <= today: create the actual transaction, update nextDueDate (add frequency period). Wrap each in a try-catch; if one fails, log it and continue to the next.</div><div class="rq"><strong>Management APIs:</strong> <code>POST /api/recurring-transactions</code> &mdash; create. <code>PUT /api/recurring-transactions/{id}/toggle</code> &mdash; activate/deactivate. <code>GET /api/recurring-transactions</code> &mdash; list user's recurring items with nextDueDate.</div><div class="rq"><strong>Unit tests:</strong> Test <code>TransactionService</code>: (a) createTransaction INCOME increases balance, (b) createTransaction EXPENSE decreases balance, (c) delete transaction recalculates balance correctly, (d) user cannot access another user's account (throw <code>AccessDeniedException</code>), (e) budget overspend sets status to OVER_BUDGET, (f) goal currentAmount >= target sets status ACHIEVED. 6 tests minimum.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>For the scheduled job, use a service method annotated <code>@Transactional</code> per recurring transaction processing, not one big transaction for all. That way a single failure does not roll back successful ones.</p></div>
+    </div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Four questions. Write concise answers &mdash; these come up in the review call.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">A user deletes a transaction from March 2026 today (June 2026). Their account balance changes. Their March budget usage percentage also changes. Their savings goal deposit history changes. What cascading updates need to happen? How do you ensure consistency without a big monolithic delete method?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">You store account balance as a field and update it on every transaction. But what if two transactions are created at the same time (concurrent requests)? How does your code handle this? What database feature prevents a race condition on the balance field?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Why should you NEVER use `double` or `float` for monetary calculations in a financial application? Give a specific example of a calculation where `double` produces the wrong answer that `BigDecimal` gets right.</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">The 6-month trend API does a GROUP BY query on the transactions table. If a user has 50,000 transactions, is this query fast? What index would you add, and on which columns?</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Export to CSV:</strong> Implement <code>GET /api/reports/export?from=&to=&format=csv</code>. Return a CSV file of all transactions in the date range. Columns: date, account, type, category, amount, description. Use <code>application/csv</code> content type.</div><div class="bit"><strong>+7 marks — Split transaction:</strong> Allow a single expense to be split across multiple categories. E.g., a ₹5,000 grocery+medicine bill: ₹3,500 FOOD + ₹1,500 MEDICAL. Each split becomes a sub-transaction. Parent holds the total amount; children hold category-specific amounts. Total of children must equal parent amount.</div><div class="bit"><strong>+5 marks — Budget alerts:</strong> On each transaction save, check if the category's monthly budget has crossed 80% or 100%. If so, return a <code>warnings</code> field in the transaction response: <code>{"category": "FOOD", "status": "WARNING", "used": 82.5}</code>.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Submit your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Java Intern &mdash; FinSmart — FinTech Domain &mdash; [Your Name]</code><br>Body: GitHub repo + one thing you found challenging</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Java Intern Assignment &middot; FinTech &mdash; FinSmart &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
