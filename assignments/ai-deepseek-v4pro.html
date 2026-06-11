@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — DeepSeek V4 Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#3b82f6;--ar:59,130,246}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700;color:var(--tx)}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(var(--ar),.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-60px;left:-40px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(var(--ar),.06) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:720px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.08em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.cb{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qref{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qref-n{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qref-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Research Intern · DeepSeek · V4 Pro</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Research Intern &middot; Assignment 04</div>
+  </div>
+  <p class="etag">// DeepSeek &middot; Released April 24, 2026 &middot; MIT Open-Weight Frontier</p>
+  <h1 class="ht">DeepSeek<br><span style="color:var(--ac)">V4 Pro.</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Open. Efficient.</span></h1>
+  <p class="hs">680B total parameters, only 42B active per token. Multi-head Latent Attention (MLA) cuts inference costs by 88%. MIT license. Weights on Hugging Face. DeepSeek V3.2-Speciale won gold at IMO, IOI, and ICPC 2026. Promotional pricing at launch: $0.435/$0.87 per million tokens (75% discount, valid until May 31). Standard price: $1.74/$3.48. Your job: understand the architecture, the open-weight implications, and when DeepSeek V4 Pro wins against closed frontier models.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">License</div><div class="mpv">MIT Open-Source</div></div></div>
+    <div class="mp"><div><div class="mpl">Architecture</div><div class="mpv">680B MoE &middot; 42B active</div></div></div>
+    <div class="mp"><div><div class="mpl">Pricing</div><div class="mpv">$1.74 / $3.48 per M (standard)</div></div></div>
+    <div class="mp"><div><div class="mpl">Released</div><div class="mpv">April 24, 2026</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">100 + 30 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Quick Facts</div>
+<div class="trow">
+  <span class="tag">MIT License</span><span class="tag">680B total / 42B active</span><span class="tag">Multi-head Latent Attention</span>
+  <span class="tag">88% inference cost reduction</span><span class="tag">$1.74/$3.48 standard</span><span class="tag">Hugging Face weights</span>
+  <span class="tag">IMO + IOI + ICPC 2026 gold</span><span class="tag">R1: MATH-500 97.3%</span><span class="tag">Native thinking + tool use</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Context</div></div>
+  <div class="ctx-body">DeepSeek V4 Pro continues to disrupt the intelligence-per-dollar ratio of the frontier AI market. Released April 24, 2026 with a <strong>MIT open-source license</strong> and weights publicly available on Hugging Face &mdash; the most permissive licence at frontier capability. The architecture uses Mixture-of-Experts with <strong>680B total parameters</strong>, activating only <strong>42B per token</strong>, enabled by <strong>Multi-head Latent Attention (MLA)</strong> which achieves an 88% reduction in inference costs vs standard attention.<br><br>
+  The related <strong>DeepSeek V3.2-Speciale</strong> model won gold at the International Mathematical Olympiad, International Olympiad in Informatics, and International Collegiate Programming Contest 2026 &mdash; the first AI to achieve this. The R1 reasoning model achieves 97.3% on MATH-500. This is not a company that benchmarks well by accident.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Research Modules</div>
+<div class="sh">Five Research Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This assignment requires going deeper than any other in this series. The architecture is genuinely novel.</p>
+<div class="tasks">  <div class="task" id="t1">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">MLA Architecture &amp; the 88% Inference Cost Reduction</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">DeepSeek V4 Pro's cost efficiency comes from Multi-head Latent Attention. Understanding MLA is the core of this assignment — not just what it achieves, but how.</p>
+      <div class="rl"><div class="rq"><strong>MoE with 680B total / 42B active:</strong> Explain the Mixture-of-Experts architecture: how does the routing mechanism decide which of the 680B parameters to activate for a given token? What are the inference latency implications of 42B active parameters vs a dense 42B model that activates all parameters? Why does MoE at 680B not require 680B's worth of compute per token?</div><div class="rq"><strong>Multi-head Latent Attention (MLA) explained:</strong> What is MLA technically? How does it differ from standard Multi-Head Attention (MHA) and Group-Query Attention (GQA, used in Llama and GPT models)? What specific memory bottleneck in the KV cache does it address? How does it achieve 88% inference cost reduction? Explain the key equations in plain English.</div><div class="rq"><strong>Native thinking integrated with tool use:</strong> V4 Pro integrates reasoning with tool-use decisions &mdash; the model can reason about which tools to call and what arguments to pass as part of its thinking chain, not as a post-hoc decision. How does this differ architecturally from GPT-5.5's function calling? What quality improvement does integrated reasoning produce for multi-step tool-use tasks?</div><div class="rq"><strong>V4 Pro vs R1 vs R2:</strong> DeepSeek has V-series (general purpose) and R-series (dedicated reasoning) models. R1 achieves 97.3% on MATH-500. How does V4 Pro incorporate reasoning without being a pure reasoning model? When should you choose R1 over V4 Pro, and when is V4 Pro sufficient?</div><div class="rq"><strong>V3.2-Speciale competition performance:</strong> DeepSeek V3.2-Speciale won gold at IMO, IOI, and ICPC 2026. These are not benchmarks &mdash; they are live competitions with novel problems. What does winning these competitions demonstrate that benchmark scores cannot capture? What types of reasoning did the IMO, IOI, and ICPC 2026 problems specifically require?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t2">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">The MIT License &amp; What Open Weights Actually Enable</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">MIT is the most permissive open-source license available. Combined with frontier-adjacent performance, document what this means for developers, enterprises, and the AI industry.</p>
+      <div class="rl"><div class="rq"><strong>MIT vs other open licenses:</strong> Compare Apache 2.0 (Llama 4 Scout, Qwen 3.x) vs MIT (DeepSeek V4 Pro) vs DeepSeek's own prior restrictive license vs Grok's license (prohibits using weights to train other models). What specific enterprise use case does MIT permit that Apache 2.0 also permits? What does MIT allow that Grok's license prohibits?</div><div class="rq"><strong>Self-hosting economics (full calculation):</strong> At what monthly API usage volume does self-hosting V4 Pro on rented H100 GPUs become cheaper than the API at $1.74/$3.48 (standard price)? Document: minimum GPU memory required for a 680B MoE model at BF16/int8/int4, number of GPUs needed, monthly rental cost on Lambda Labs / RunPod / AWS p5 instances, and energy cost. Show the break-even calculation.</div><div class="rq"><strong>Fine-tuning feasibility:</strong> With MIT weights, developers can fine-tune V4 Pro. Document the computational requirements for fine-tuning a 680B MoE model. Is full-parameter fine-tuning practical? Is LoRA/QLoRA practical at this parameter scale? What are the realistic customisation options for a 10-person engineering team?</div><div class="rq"><strong>Geopolitical procurement considerations:</strong> DeepSeek is a Chinese company. For EU enterprise customers, what is the current regulatory guidance on using Chinese AI models (whether via API or self-hosted open weights)? For US government contractors, what restrictions apply? Does using MIT weights rather than an API change the risk calculation?</div><div class="rq"><strong>Impact on the AI industry:</strong> The MIT license on a frontier-adjacent model is a significant event. Document how other AI labs have responded to DeepSeek's open-weight releases. What does the availability of competitive open weights do to the pricing leverage of closed-weight providers like Anthropic, OpenAI, and Google?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t3">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Benchmarks &amp; the Intelligence-Per-Dollar Claim</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Document the evidence precisely. Every benchmark claim must be verified against primary sources.</p>
+      <div class="rl"><div class="rq"><strong>The '90% of GPT-5.5' claim:</strong> One source reports V4 Pro 'matches GPT-5.5's logic for 90% of production Python/TypeScript workflows while running at 3× the throughput.' Investigate this claim: which benchmark or test produced it? Is it about V4 Pro or V3.2? What conditions does the 10% gap appear in, and when does it not matter?</div><div class="rq"><strong>Full benchmark table:</strong> Build a table with V4 Pro's verified scores on: GPQA Diamond, MATH-500 (for R1 if V4 Pro is unavailable), HumanEval, SWE-bench Verified (if available). Compare each score to GPT-5.5, Claude Fable 5, and Gemini 3.1 Pro. Where does DeepSeek lead? Where does it trail significantly?</div><div class="rq"><strong>Throughput advantage at 3×:</strong> 3× the throughput vs GPT-5.5 is claimed. Explain what this means technically: is it tokens/second, requests/second, or something else? For which application categories (real-time vs batch processing, short vs long contexts) does throughput advantage matter more than raw quality?</div><div class="rq"><strong>Competition results as capability evidence:</strong> V3.2-Speciale won IMO, IOI, and ICPC 2026. These competitions test novel problem-solving, not memorized solutions. What do these results tell you about DeepSeek's mathematical and algorithmic reasoning capabilities that benchmark scores on MATH-500 cannot?</div><div class="rq"><strong>The 51.51 ARC-AGI score:</strong> DeepSeek V4 Pro reportedly scored 51.51 on a benchmark (noted in sources). Research which benchmark this refers to. Compare to Gemini 3.1 Pro's ARC-AGI-2 score of 77.1%. What does the gap tell you about DeepSeek's reasoning architecture vs Gemini's MoE approach?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t4">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing: The Post-Promotional Reality &amp; Hybrid Strategy</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The 75% promotional discount expired May 31, 2026. Document the real pricing and the optimal deployment strategy.</p>
+      <div class="rl"><div class="rq"><strong>Current live price:</strong> V4 Pro launched at $0.435/$0.87 (75% promotional discount, valid until May 31, 2026). Standard price: $1.74/$3.48. As of your submission date: what is the current live price? Has pricing changed since the promotional period ended? Note any updates.</div><div class="rq"><strong>Intelligence-per-dollar ranking:</strong> For each of these models, calculate how many input tokens you can buy for $1,000: DeepSeek V4 Pro ($1.74/M standard), GPT-5.5 ($5/M), Claude Fable 5 ($10/M), Gemini 3.1 Pro ($2/M), Grok 4.3 ($1.25/M). Build a ranked table. For a company spending $5,000/month on AI APIs, what is the token volume difference between DeepSeek and Fable 5?</div><div class="rq"><strong>Hybrid architecture design:</strong> The recommended strategy for cost-sensitive deployments: use DeepSeek V4 Pro for heavy batch workloads and Claude Fable 5 or GPT-5.5 for real-time or highest-stakes tasks. Design a specific hybrid architecture for a Tekravio Studio client in fintech: which tasks go to DeepSeek, which to Fable 5, and what is the routing logic? Calculate the monthly cost savings vs using Fable 5 for everything.</div><div class="rq"><strong>Promotional period exploitation:</strong> DeepSeek offered a 75% discount until May 31, 2026. For a company with predictable AI workloads, what is the optimal strategy during promotional pricing windows? How should they have batched offline work during the promotional period? What architectural decisions allow batching of latency-tolerant tasks?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t5">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Enterprise Risk &amp; Tekravio Decision Framework</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Where DeepSeek V4 Pro clearly wins, and where it absolutely cannot be used.</p>
+      <div class="rl"><div class="rq"><strong>Clear wins (3 scenarios):</strong> Three specific scenarios where DeepSeek V4 Pro is the obvious choice: (a) a cost-sensitive startup processing large volumes of code generation requests, (b) a company that needs to self-host for data privacy reasons, (c) a researcher who needs to fine-tune the model for a specialised domain. For each: cite the specific capability or cost calculation that makes DeepSeek the right choice.</div><div class="rq"><strong>Cannot use cases:</strong> Build a specific list of Tekravio client scenarios where DeepSeek V4 Pro cannot be used despite its cost advantage. Categorise by: regulated industry restrictions (HIPAA, financial services audit trails), government contract requirements (FedRAMP, US government restrictions on Chinese AI), and EU data residency requirements. Cite the specific regulatory basis for each exclusion.</div><div class="rq"><strong>Open-weight vs API vs self-hosted fine-tuned:</strong> A Tekravio Studio client is evaluating three options: (a) use DeepSeek API, (b) self-host the MIT weights, (c) fine-tune the MIT weights on their proprietary data. Build a decision matrix with dimensions: cost, control, compliance, maintenance effort, performance. Which option is best for which company profile?</div><div class="rq"><strong>Honest competitive assessment (200 words):</strong> Where is DeepSeek V4 Pro the right model? Where is it not? What would need to change for DeepSeek to be Tekravio's default model across all workloads? Include specific benchmark gaps to close.</div></div>
+      
+    </div>
+  </div></div>
+<div class='sep'></div>
+<div class='stag'>// 02 &middot; Design Questions</div>
+<div class='sh'>Answer in Your README</div>
+<p style='margin-bottom:1.25rem'>Four questions requiring precise, sourced answers.</p>
+<div class="qref"><div class="qref-n">Q1</div><div class="qref-t">A Tekravio Studio client processes 2 million API requests per month for a document summarisation workload. Average: 800 input tokens, 200 output tokens. Calculate the monthly cost on DeepSeek V4 Pro ($1.74/$3.48) vs Claude Fable 5 ($10/$50). What is the annual saving? At what point would the quality gap make Fable 5 worth the price difference?</div></div><div class="qref"><div class="qref-n">Q2</div><div class="qref-t">DeepSeek V4 Pro uses MIT license with weights on Hugging Face. A European healthcare startup wants to process patient notes using DeepSeek. They argue that self-hosting the weights means no data leaves their servers, making it GDPR-compliant. Is this argument correct? What GDPR obligations still apply even when self-hosting an open-weight model?</div></div><div class="qref"><div class="qref-n">Q3</div><div class="qref-t">The Multi-head Latent Attention mechanism reduces inference costs by 88%. If a company is currently paying $10,000/month to run a self-hosted dense 70B model, and they switch to V4 Pro's architecture (even at larger scale), what is the theoretical cost reduction? What hardware constraints make this calculation more complex in practice?</div></div><div class="qref"><div class="qref-n">Q4</div><div class="qref-t">V3.2-Speciale won IMO, IOI, and ICPC 2026. These competitions require novel problem-solving, not benchmark memorization. Does this mean DeepSeek's reasoning model is better than Claude Fable 5 for mathematical and algorithmic tasks in enterprise settings? Design a test to verify this claim with a real business application.</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 30 Additional Marks</div><div class="bi"><div class="bit"><strong>+15 marks — Self-hosting feasibility study:</strong> Research what it actually costs to run DeepSeek V4 Pro on rented GPU infrastructure (Lambda Labs, RunPod, Together AI). Document minimum viable hardware, estimated cost per token, and latency characteristics vs the DeepSeek API. Show break-even analysis vs API at $1.74/$3.48.</div><div class="bit"><strong>+10 marks — MLA architecture deep dive:</strong> Find DeepSeek's published technical report on Multi-head Latent Attention. Document the key equations and explain in plain English how MLA reduces the KV cache memory bottleneck. What is the memory saving at 1K, 10K, and 100K token contexts?</div><div class="bit"><strong>+5 marks — Competition problem analysis:</strong> Research what specific problems V3.2-Speciale solved at IMO/IOI/ICPC 2026. What categories of reasoning did they require? How would you design a production AI application that benefits from this level of mathematical and algorithmic reasoning?</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Send your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Intern Assignment &mdash; DeepSeek V4 Pro &mdash; [Your Name]</code><br>Body: GitHub repo link + one sentence on your most surprising finding</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI Research Intern Assignment &middot; DeepSeek &mdash; V4 Pro &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function toggle(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
