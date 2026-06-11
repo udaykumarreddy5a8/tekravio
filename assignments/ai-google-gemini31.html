@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — Google Gemini 3.1 Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#4285f4;--ar:66,133,244}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700;color:var(--tx)}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(var(--ar),.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-60px;left:-40px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(var(--ar),.06) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:720px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.08em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.cb{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qref{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qref-n{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qref-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Research Intern · Google · Gemini 3.1 Pro</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Research Intern &middot; Assignment 02</div>
+  </div>
+  <p class="etag">// Google DeepMind &middot; Released February 19, 2026 &middot; Multimodal Reasoning Leader</p>
+  <h1 class="ht">Gemini<br><span style="color:var(--ac)">3.1 Pro.</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Five Modalities.</span></h1>
+  <p class="hs">Google DeepMind's first '.1' increment &mdash; signalling a focused intelligence upgrade, not a full rebuild. Mixture-of-Experts architecture. Three-tier thinking. 77.1% on ARC-AGI-2 (more than double Gemini 3 Pro three months earlier). Native processing of text, images, audio (8.4 hrs), video (1 hr), and code in a single call. At $2/$12 per million tokens, it's the most cost-competitive frontier model available.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">API Model ID</div><div class="mpv">gemini-3.1-pro</div></div></div>
+    <div class="mp"><div><div class="mpl">Context Window</div><div class="mpv">1M tokens &middot; 65K output</div></div></div>
+    <div class="mp"><div><div class="mpl">Pricing</div><div class="mpv">$2 / $12 per M tokens</div></div></div>
+    <div class="mp"><div><div class="mpl">Released</div><div class="mpv">February 19, 2026</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">100 + 30 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Quick Facts</div>
+<div class="trow">
+  <span class="tag">Mixture-of-Experts</span><span class="tag">1M context / 65K output</span><span class="tag">$2/$12 per M tokens</span>
+  <span class="tag">ARC-AGI-2: 77.1%</span><span class="tag">GPQA Diamond: 94.3%</span><span class="tag">MCP Atlas: 83.6%</span>
+  <span class="tag">MMMU-Pro: 83.6%</span><span class="tag">OSWorld: 78.4%</span><span class="tag">5 native modalities</span>
+  <span class="tag">SVG + 3D rendering</span><span class="tag">Context caching: 75% savings</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Context</div></div>
+  <div class="ctx-body">Gemini 3.1 Pro arrived February 19, 2026. The <strong>.1 naming is deliberate</strong>: Google previously used .5 increments (Gemini 1.5, 2.5). The .1 signals a focused intelligence upgrade to the core reasoning system &mdash; not a sweeping architectural overhaul. The result: ARC-AGI-2 jumped from 31.1% to 77.1% in three months. GPQA Diamond reached 94.3%.<br><br>
+  The model runs a <strong>Mixture-of-Experts architecture</strong> with three thinking tiers. It processes five modalities natively in one model: text, images, audio, video, and code. It can hold 8.4 hours of audio, 900-page PDFs, or 1 hour of video in a single context. Context caching can reduce costs by up to 75%. At $2/$12 per million tokens, it undercuts Claude Fable 5 by 5&times; on input.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Research Modules</div>
+<div class="sh">Five Research Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Each module is graded on accuracy, analytical depth, and evidence quality. Modules require primary sources only.</p>
+<div class="tasks">  <div class="task" id="t1">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">Architecture: MoE, Three-Tier Thinking &amp; the .1 Naming Choice</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro's architecture is distinct from GPT and Claude. Understanding MoE and the thinking tier system is foundational for every other module.</p>
+      <div class="rl"><div class="rq"><strong>Why .1 not .5:</strong> Google used .5 increments for Gemini 1.5 and 2.5. The .1 change signals a focused reasoning upgrade. Document what specifically changed between Gemini 3 Pro and 3.1 Pro. What did not change? Why does this naming distinction matter for developers who upgraded from Gemini 3 Pro?</div><div class="rq"><strong>Mixture-of-Experts architecture:</strong> Explain MoE in practical terms: how does it route tokens to different expert sub-networks? What are the inference cost advantages over a dense transformer of equivalent total parameters? What are the trade-offs in output consistency and reproducibility across calls?</div><div class="rq"><strong>Three-tier thinking system:</strong> Low (fastest, classification), Medium (balanced &mdash; new in 3.1, code review and data analysis), High (maximum depth, complex research). How does the model decide which tier to apply if not specified? How does a developer force a specific tier via the API? When does Low tier save enough money that the quality trade-off is justified?</div><div class="rq"><strong>Native multimodal architecture:</strong> Gemini was built multimodal from the ground up &mdash; text, images, audio, video, and code as first-class inputs in one model. Contrast with GPT-5.5 (text/image, no native video) and Claude Fable 5 (text/image/PDF). What specific enterprise tasks can Gemini 3.1 Pro handle in a single API call that competitors require multiple calls or separate models for?</div><div class="rq"><strong>Context window practical implications:</strong> 1,048,576 input tokens (1M), 65,536 output. Documents it can ingest: 8.4 hours of audio, 900-page PDFs, or 1 hour of video in one prompt. Document 3 specific enterprise scenarios where this multimodal + context combination creates capabilities no other frontier model matches today.</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t2">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">ARC-AGI-2 at 77.1% &mdash; The Most Important Benchmark Story of Early 2026</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro's score on ARC-AGI-2 is the headline achievement of this model. It jumped from 31.1% (Gemini 3 Pro) to 77.1% in three months. Understand what this benchmark actually measures and what the score means.</p>
+      <div class="rl"><div class="rq"><strong>ARC-AGI-2 explained:</strong> What is ARC-AGI-2? Who created it and what was the motivation? Why is it specifically designed so that models cannot 'train their way to a high score' by memorizing patterns? What does 77.1% mean practically &mdash; which categories of problems can the model reliably solve, and which still fail? What is the current human baseline?</div><div class="rq"><strong>The 31.1% → 77.1% jump:</strong> Gemini 3 Pro scored 31.1% in November 2025. Gemini 3.1 Pro scores 77.1% in February 2026. This is more than doubling in three months. What changed architecturally or in training to produce this jump? Is this improvement expected or surprising given the .1 increment?</div><div class="rq"><strong>GPQA Diamond at 94.3%:</strong> GPQA Diamond tests graduate-level scientific knowledge in chemistry, biology, and physics. Gemini 3.1 Pro scores 94.3% vs Claude Opus 4.6 at 92.8%. Is the 1.5-point gap meaningful in practice? For a researcher designing a literature review tool, what does this difference translate to in real research quality?</div><div class="rq"><strong>MCP Atlas at 83.6%:</strong> MCP Atlas tests multi-step tool coordination and agentic workflows. What specific capabilities does 83.6% on MCP Atlas tell you about Gemini 3.1 Pro's reliability as an autonomous agent? Why is this benchmark specifically relevant for enterprise AI applications that use external tools?</div><div class="rq"><strong>Deep Think mode:</strong> Google's extended-reasoning variant, gated to AI Ultra ($99.99+/mo). What does Deep Think add over the High thinking tier? Compare to Claude Fable 5's adaptive thinking. For a biomedical research application, when does the $99.99/mo Deep Think premium justify itself over High tier?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t3">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Five Modalities: Vision, Audio &amp; Video at Enterprise Scale</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Google's primary differentiator is natively multimodal. Document what Gemini 3.1 Pro can actually do across modalities — not marketing claims, but documented capabilities.</p>
+      <div class="rl"><div class="rq"><strong>Vision capabilities:</strong> MMMU-Pro: 83.6%. Precise number extraction from detailed scientific figures. Rebuilding web application source code from screenshots alone. SVG graphics generation and native 3D code rendering from natural language descriptions &mdash; a capability not found in GPT-5.5 or Claude Fable 5. Document each with a concrete enterprise use case.</div><div class="rq"><strong>Audio understanding:</strong> 8.4 hours of audio in one context window. What specific enterprise tasks does this enable: meeting transcript analysis across an entire day, podcast research, medical dictation review? What is Gemini's reported accuracy on speech understanding benchmarks vs OpenAI Whisper?</div><div class="rq"><strong>Video processing:</strong> 1 hour of video in one prompt. What specific workflows does this unlock? Document the OSWorld computer use score (78.4%) &mdash; what is OSWorld testing, and why does 78.4% matter for agents that need to control computers or navigate web interfaces?</div><div class="rq"><strong>Enterprise multimodal use cases for Tekravio:</strong> For Studio's three domains (healthcare, fintech, logistics), identify one native multimodal use case per domain that becomes feasible with Gemini 3.1 Pro but not with GPT-5.5 or Claude Fable 5. Be specific about which modality combination creates the capability.</div><div class="rq"><strong>SVG and 3D rendering uniqueness:</strong> Gemini 3.1 Pro can generate SVG graphics and render 3D code directly from natural language descriptions. Research this capability in detail. What does it enable for product teams, designers, or prototypers? What is the quality limit &mdash; where does it break down?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t4">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing, Context Caching &amp; The Cost Efficiency Argument</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro at $2/$12 is the most cost-competitive frontier model. Document the complete pricing picture including the caching mechanism.</p>
+      <div class="rl"><div class="rq"><strong>Base pricing vs long-context pricing:</strong> Standard pricing: $2 input / $12 output per million tokens. For prompts over 200K tokens: $4 input / $18 output. For a legal services firm sending 300K-token contracts at 1,000 documents per month, calculate the exact monthly API cost on both pricing tiers. Then calculate the same workload cost on Claude Fable 5 ($10/$50) and GPT-5.5 ($5/$30).</div><div class="rq"><strong>Context caching mechanism:</strong> Gemini 3.1 Pro supports context caching with up to 75% cost reduction. Explain how context caching works technically: what exactly is cached, how long is it retained, and what triggers cache invalidation? Give a worked example for a RAG application with a 200K-token knowledge base that receives 10,000 queries per day.</div><div class="rq"><strong>Full Gemini 3 family table:</strong> Build a complete pricing table for the Gemini 3 family: Gemini 3.1 Pro ($2/$12), Gemini 3.1 Flash-Lite (budget), Gemini 3.1 Deep Think (Ultra-gated, $99.99+/mo). For each: context window, supported modalities, pricing, and recommended use case.</div><div class="rq"><strong>The 7.5&times; cost argument:</strong> Gemini 3.1 Pro input costs $2/M tokens vs Claude Opus 4.6 at $15/M tokens &mdash; roughly 7.5&times; cheaper. When does this cost advantage justify choosing Gemini 3.1 Pro over Claude Fable 5 ($10/$50)? Build the decision rule: what capability trade-offs are you accepting, and for which application types is that acceptable?</div><div class="rq"><strong>Competitor cost comparison:</strong> Build a table: Gemini 3.1 Pro ($2/$12) vs GPT-5.5 ($5/$30) vs Grok 4.3 ($1.25/$2.50) vs DeepSeek V4 Pro ($1.74/$3.48) vs Claude Fable 5 ($10/$50). For a company spending $10,000/month, which model delivers the most tokens? Which delivers the best benchmark-per-dollar?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t5">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Google Ecosystem Integration &amp; Tekravio Decision Framework</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Gemini 3.1 Pro is deeply integrated into Google's product stack. Document how this affects adoption decisions and build the Tekravio model selection guide.</p>
+      <div class="rl"><div class="rq"><strong>Platform availability:</strong> Gemini API (direct), Vertex AI (enterprise GCP), Google AI Pro ($19.99/mo) and Ultra ($99.99/mo) plans, NotebookLM, Google Workspace AI features. What is 'Google Antigravity'? For a company already on Google Cloud, what is the marginal cost and setup effort to start using Gemini 3.1 Pro in production?</div><div class="rq"><strong>NotebookLM and Google Workspace:</strong> Gemini 3.1 Pro powers NotebookLM. What is NotebookLM, and why does it specifically showcase Gemini's long-context + multimodal architecture? For an enterprise already on Google Workspace, what is the value of native Gemini integration vs direct API access?</div><div class="rq"><strong>The 2M context question:</strong> Some sources reference a 2M token context window for Gemini. As of April 2026, Gemini 3.1 Pro's standard API context is 1M. Document the current verified state: which Gemini configurations support 2M tokens, under what conditions, and what the roadmap says about full 3.1 access.</div><div class="rq"><strong>Tekravio decision framework:</strong> Build a one-page decision guide for Tekravio Studio clients: when should they choose Gemini 3.1 Pro over GPT-5.5 and over Claude Fable 5? Three columns, specific criteria, no vague answers. The framework should be specific enough that a client could use it to make a real procurement decision.</div><div class="rq"><strong>Honest competitive assessment:</strong> Gemini 3.1 Pro leads on ARC-AGI-2, GPQA Diamond, and MCP Atlas. GPT-5.5 leads on Terminal-Bench 2.0. Claude Fable 5 leads on SWE-bench Verified. Document the three areas where Gemini 3.1 Pro is NOT the best choice, and what would need to change for it to win in those areas.</div></div>
+      
+    </div>
+  </div></div>
+<div class='sep'></div>
+<div class='stag'>// 02 &middot; Design Questions</div>
+<div class='sh'>Answer in Your README</div>
+<p style='margin-bottom:1.25rem'>Precise answers with evidence. We ask follow-ups on all four.</p>
+<div class="qref"><div class="qref-n">Q1</div><div class="qref-t">A Tekravio Studio client processes 500 videos per day averaging 30 minutes each, extracting compliance violations from security footage. They currently use a chunking pipeline with GPT-5.5 (which cannot process video natively). Design the Gemini 3.1 Pro architecture for this workload. What is the monthly cost difference? What does the client gain and lose vs the GPT-5.5 pipeline?</div></div><div class="qref"><div class="qref-n">Q2</div><div class="qref-t">Gemini 3.1 Pro jumped from 31.1% to 77.1% on ARC-AGI-2 in three months. Does this pace of improvement worry you about investing in building on a model that may be superseded quickly? How do you architect an application to be model-agnostic enough to swap Gemini 3.1 Pro for 3.2 Pro when it ships?</div></div><div class="qref"><div class="qref-n">Q3</div><div class="qref-t">A legal firm wants to analyse 1,000 contracts per month, each averaging 250 pages (300K tokens). They have a fixed AI budget of $3,000/month. Which Gemini tier (standard $2/$12 vs long-context $4/$18) applies? How many contracts can they process, and what is the per-contract cost? Compare to Claude Fable 5 at the same budget.</div></div><div class="qref"><div class="qref-n">Q4</div><div class="qref-t">Gemini 3.1 Pro costs $2/M input tokens. Claude Fable 5 costs $10/M. A product manager argues: 'Just use Gemini, it's 5× cheaper.' A senior engineer pushes back: 'Fable 5 scores 95% on SWE-bench vs Gemini's lower score.' Who is right? Build the argument for each side, then give your recommendation.</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 30 Additional Marks</div><div class="bi"><div class="bit"><strong>+15 marks — Multimodal live demo:</strong> Build something using at least two of Gemini 3.1 Pro's modalities in one API call — e.g., analyse a PDF alongside an image or audio clip. Document token usage, cost, and output quality.</div><div class="bit"><strong>+10 marks — ARC-AGI-2 task recreation:</strong> Find a publicly available ARC-AGI-2 problem. Run it through Gemini 3.1 Pro (High thinking) and GPT-5.5. Compare outputs and token cost. Which model solved it? What reasoning approach did each use?</div><div class="bit"><strong>+5 marks — Context caching ROI analysis:</strong> For a RAG application with a 200K-token knowledge base at 5,000 queries/day, calculate the exact monthly savings from Gemini's context caching vs no caching. At what query volume does caching pay for itself?</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Send your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Intern Assignment &mdash; Google Gemini 3.1 Pro &mdash; [Your Name]</code><br>Body: GitHub repo link + one sentence on your most surprising finding</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI Research Intern Assignment &middot; Google DeepMind &mdash; Gemini 3.1 Pro &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function toggle(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
