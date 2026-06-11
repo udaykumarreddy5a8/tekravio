@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Intern Assignment — Claude Fable 5 &amp; Mythos 5 Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--surface:#0b0f1e;--surface2:#111829;--border:rgba(255,255,255,0.07);--blue:#3b6ff5;--cyan:#00c9a7;--orange:#ff7043;--purple:#8b5cf6;--yellow:#fbbf24;--red:#f87171;--green:#4ade80;--text:#e2e8f0;--muted:#5a6080;--fable:#00c9a7;--mythos:#8b5cf6}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--purple);border-radius:2px}
+code{font-family:'Fira Code',monospace;font-size:.82em;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#c4b5fd;padding:2px 7px;border-radius:4px}
+.container{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+p{color:var(--muted)}p strong{color:var(--text)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,80px) 60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'';position:absolute;top:-100px;right:-80px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(139,92,246,.18) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-40px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(0,201,167,.08) 0%,transparent 65%);pointer-events:none}
+.hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem}
+.logo{font-family:'Clash Display',sans-serif;font-size:1.25rem;letter-spacing:.06em;color:var(--text)}.logo span{color:var(--purple)}
+.badge{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;color:var(--purple);border:1px solid rgba(139,92,246,.3);padding:6px 14px;border-radius:4px}
+.hero-tag{font-family:'Fira Code',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:1.25rem}
+h1{font-family:'Clash Display',sans-serif;font-size:clamp(2.4rem,7vw,4.8rem);font-weight:700;line-height:1.0;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero-sub{font-size:clamp(.95rem,2vw,1.1rem);color:var(--muted);max-width:720px;line-height:1.75;margin-bottom:2.5rem}
+.meta-row{display:flex;flex-wrap:wrap;gap:1rem}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.75rem 1.25rem}
+.mi{font-size:1.3rem}.ml{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.mv{font-size:.9rem;font-weight:600;color:var(--text);margin-top:2px}
+
+/* ── MODEL HEADER PILLS ── */
+.model-duo{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.model-pill{flex:1;min-width:220px;border-radius:12px;padding:1.25rem 1.5rem;border:1px solid}
+.mp-fable{background:rgba(0,201,167,.06);border-color:rgba(0,201,167,.3)}
+.mp-mythos{background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.3)}
+.mp-name{font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.25rem}
+.mp-fable .mp-name{color:var(--fable)}.mp-mythos .mp-name{color:var(--mythos)}
+.mp-id{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em;margin-bottom:.6rem}
+.mp-tag{display:inline-block;font-family:'Fira Code',monospace;font-size:.62rem;padding:2px 8px;border-radius:3px;margin-right:.3rem;margin-bottom:.3rem}
+.mp-fable .mp-tag{background:rgba(0,201,167,.12);color:var(--fable);border:1px solid rgba(0,201,167,.2)}
+.mp-mythos .mp-tag{background:rgba(139,92,246,.12);color:var(--mythos);border:1px solid rgba(139,92,246,.2)}
+
+/* ── SECTIONS ── */
+.container{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.section{padding:clamp(40px,8vw,80px) 0}
+.sec-tag{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem}
+h2{font-family:'Clash Display',sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--border);margin:3rem 0}
+
+/* ── CALLOUT ── */
+.callout{border:1px solid;border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem}
+.callout.purple{border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.05)}
+.callout.yellow{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.04)}
+.callout.cyan{border-color:rgba(0,201,167,.25);background:rgba(0,201,167,.04)}
+.callout.orange{border-color:rgba(255,112,67,.25);background:rgba(255,112,67,.04)}
+.callout.red{border-color:rgba(248,113,113,.25);background:rgba(248,113,113,.04)}
+.callout-head{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem}
+.callout.purple .callout-head{color:var(--purple)}.callout.yellow .callout-head{color:var(--yellow)}.callout.cyan .callout-head{color:var(--cyan)}.callout.orange .callout-head{color:var(--orange)}.callout.red .callout-head{color:var(--red)}
+
+/* ── TASKS ── */
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.task-header{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none}
+.task-num{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.1em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.t1 .task-num{background:rgba(0,201,167,.15);color:var(--cyan)}
+.t2 .task-num{background:rgba(139,92,246,.15);color:var(--purple)}
+.t3 .task-num{background:rgba(251,191,36,.12);color:var(--yellow)}
+.t4 .task-num{background:rgba(255,112,67,.12);color:var(--orange)}
+.t5 .task-num{background:rgba(74,222,128,.12);color:var(--green)}
+.t6 .task-num{background:rgba(248,113,113,.12);color:var(--red)}
+.t7 .task-num{background:rgba(59,111,245,.12);color:var(--blue)}
+.t8 .task-num{background:rgba(139,92,246,.15);color:var(--purple)}
+.task-title{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:600;color:var(--text);line-height:1.2}
+.task-pts{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--muted);margin-top:.2rem}
+.task-body{border-top:1px solid var(--border);padding:1.5rem;background:var(--surface2);display:none}
+.task.open .task-body{display:block}
+.task-desc{font-size:.9375rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.7}
+.req-list{display:flex;flex-direction:column;gap:.625rem}
+.req{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--muted);line-height:1.55}
+.req-icon{width:18px;height:18px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.65rem;margin-top:2px}
+.t1 .req-icon{background:rgba(0,201,167,.2);color:var(--cyan)}.t2 .req-icon{background:rgba(139,92,246,.2);color:var(--purple)}.t3 .req-icon{background:rgba(251,191,36,.15);color:var(--yellow)}.t4 .req-icon{background:rgba(255,112,67,.15);color:var(--orange)}.t5 .req-icon{background:rgba(74,222,128,.15);color:var(--green)}.t6 .req-icon{background:rgba(248,113,113,.15);color:var(--red)}.t7 .req-icon{background:rgba(59,111,245,.15);color:var(--blue)}.t8 .req-icon{background:rgba(139,92,246,.2);color:var(--purple)}
+.req strong{color:var(--text)}
+.sub-group{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.sub-label{font-family:'Fira Code',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.75rem}
+.t1 .sub-label{color:var(--cyan)}.t2 .sub-label{color:var(--purple)}.t3 .sub-label{color:var(--yellow)}.t4 .sub-label{color:var(--orange)}.t5 .sub-label{color:var(--green)}.t6 .sub-label{color:var(--red)}.t7 .sub-label{color:var(--blue)}.t8 .sub-label{color:var(--purple)}
+
+/* ── CODE ── */
+.codeblock{background:#020408;border:1px solid rgba(139,92,246,.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--surface);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.cb-f{font-family:'Fira Code',monospace;font-size:.68rem;color:var(--muted)}.cb-l{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--purple);background:rgba(139,92,246,.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:'Fira Code',monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+
+/* ── COMPARE TABLE ── */
+.ctable{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.875rem}
+.ctable th{padding:.75rem 1rem;text-align:left;font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface)}
+.ctable td{padding:.875rem 1rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+.ctable tr:last-child td{border-bottom:none}.ctable tr:hover td{background:rgba(255,255,255,.02)}
+.ctable .hl{color:var(--text);font-weight:600}
+.fable-col{color:var(--fable)!important}.mythos-col{color:var(--mythos)!important}
+
+/* ── SCORE GRID ── */
+.score-grid{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+.score-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.75rem;text-align:center;flex:1;min-width:130px}
+.score-n{font-family:'Clash Display',sans-serif;font-size:2.6rem;font-weight:700;line-height:1;margin-bottom:.25rem}
+.score-l{font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.criteria{display:flex;flex-direction:column;gap:.75rem}
+.cr{display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.875rem 1.25rem}
+.cr-title{font-weight:600;font-size:.9375rem;margin-bottom:.2rem}.cr-desc{font-size:.825rem;color:var(--muted)}
+.cr-pts{font-family:'Clash Display',sans-serif;font-size:1.5rem;font-weight:700;color:var(--purple);flex-shrink:0}
+
+/* ── BONUS ── */
+.bonus-box{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem}
+.bonus-title{font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:.75rem}
+.bonus-items{display:flex;flex-direction:column;gap:.5rem}
+.bonus-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:var(--muted)}
+.bonus-item::before{content:'✦';color:var(--yellow);flex-shrink:0;margin-top:2px;font-size:.7rem}
+
+/* ── SUBMIT ── */
+.submit-box{background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(59,111,245,.08));border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:2rem;text-align:center;margin-top:1.5rem}
+.code-block{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;font-family:'Fira Code',monospace;font-size:.8125rem;color:var(--cyan);line-height:1.7;overflow-x:auto;margin-top:.75rem}
+
+/* ── EXPAND TOGGLE ── */
+.task-expand{width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.1rem;margin-left:auto;flex-shrink:0;transition:transform .25s}
+.task.open .task-expand{transform:rotate(180deg);color:var(--cyan)}
+
+/* ── FOOTER ── */
+.site-footer{border-top:1px solid var(--border);padding:2rem clamp(20px,6vw,56px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:'Clash Display',sans-serif;font-size:1rem;color:var(--text)}.footer-brand span{color:var(--purple)}
+.footer-note{font-family:'Fira Code',monospace;font-size:.7rem;color:var(--muted);text-align:right}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){.model-duo{flex-direction:column}.meta-row{flex-direction:column}.score-grid{flex-direction:column}.hero-top{flex-direction:column;align-items:flex-start;gap:.75rem}}
+
+/* ── PROGRESS BAR ── */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:99;background:var(--border)}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0%;transition:width .1s}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="logo">Tekr<span>avio</span> <span style="font-size:13px;color:var(--muted);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="badge">// AI Research Intern · Assignment · 2026</div>
+  </div>
+
+  <div class="hero-tag">// Just Released &middot; June 9, 2026 &middot; Mythos-Class Research</div>
+
+  <h1>Claude Fable 5<br>
+    <span style="color:var(--purple)">&amp; Mythos 5.</span><br>
+    <span style="-webkit-text-stroke:1.5px var(--text);color:transparent">Understand Them.</span>
+  </h1>
+
+  <p class="hero-sub">
+    On June 9, 2026, Anthropic launched two of the most significant AI models in the company's history. <strong>Claude Fable 5</strong> is the first Mythos-class model available for general use. <strong>Claude Mythos 5</strong> is its unrestricted counterpart, deployed to a small group of cyberdefenders and infrastructure providers through Project Glasswing. Your job is to research, document, and analyse both models in full detail &mdash; architecture, capabilities, safeguards, access tiers, pricing, and what they mean for Tekravio's work.
+  </p>
+
+  <div class="meta-row">
+    <div class="mp"><span class="mi">&#9200;&#65039;</span><div><div class="ml">Deadline</div><div class="mv">5 Days</div></div></div>
+    <div class="mp"><span class="mi">&#129504;</span><div><div class="ml">Focus</div><div class="mv">Fable 5 + Mythos 5 Deep Research</div></div></div>
+    <div class="mp"><span class="mi">&#128202;</span><div><div class="ml">Total Marks</div><div class="mv">100 + 30 Bonus</div></div></div>
+    <div class="mp"><span class="mi">&#128231;</span><div><div class="ml">Submit To</div><div class="mv">careers@tekravio.com</div></div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+<div class="container">
+<div class="section">
+
+  <!-- MODEL OVERVIEW -->
+  <div class="sec-tag">// 00 &middot; The Models at a Glance</div>
+  <h2>What Just Launched</h2>
+  <p style="margin-bottom:1.5rem">Both models launched on June 9, 2026. They share the same underlying weights &mdash; what separates them is access and safeguards.</p>
+
+  <div class="model-duo">
+    <div class="model-pill mp-fable">
+      <div class="mp-name">Claude Fable 5</div>
+      <div class="mp-id">API: <code>claude-fable-5</code></div>
+      <span class="mp-tag">Generally Available</span>
+      <span class="mp-tag">Safety Classifiers ON</span>
+      <span class="mp-tag">$10 / $50 per M tokens</span>
+      <span class="mp-tag">1M context window</span>
+      <span class="mp-tag">128k max output</span>
+      <span class="mp-tag">Adaptive Thinking</span>
+    </div>
+    <div class="model-pill mp-mythos">
+      <div class="mp-name">Claude Mythos 5</div>
+      <div class="mp-id">API: <code>claude-mythos-5</code></div>
+      <span class="mp-tag">Project Glasswing Only</span>
+      <span class="mp-tag">Safety Classifiers OFF</span>
+      <span class="mp-tag">$10 / $50 per M tokens</span>
+      <span class="mp-tag">1M context window</span>
+      <span class="mp-tag">128k max output</span>
+      <span class="mp-tag">Upgrade to Mythos Preview</span>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <div class="callout-head">// Why These Models Matter</div>
+    Mythos-class models sit <strong>above the Opus class</strong> in Anthropic's model hierarchy. Fable is from the Latin <em>fabula</em> &mdash; "that which is told" &mdash; akin to the Greek <em>mythos</em>. The naming is intentional: same capability, different safeguard story. Claude Mythos Preview launched in April 2026 through Project Glasswing and was restricted due to cybersecurity concerns. Fable 5 is the first time Mythos-class capabilities have been made publicly available, enabled by new safety classifier technology that blocks misuse while keeping the underlying power intact.
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- TASKS -->
+  <div class="sec-tag">// 01 &middot; Research Modules</div>
+  <h2>Eight Research Modules</h2>
+  <p style="margin-bottom:2rem">Each module is a standalone deliverable. All eight form your final research document. Click any module to expand it.</p>
+
+  <div class="tasks">
+
+    <!-- TASK 1 -->
+    <div class="task t1 open" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">01</div>
+        <div>
+          <div class="task-title">The Mythos Class &mdash; Understanding the New Model Tier</div>
+          <div class="task-pts">// 12 marks &middot; Foundational context</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Before documenting what these models can do, you must understand what the Mythos class <em>is</em> and why Anthropic created a new tier above Opus. This section sets the foundation for everything else.
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The model hierarchy:</strong> Map out Anthropic's full model family as it stands today &mdash; Haiku, Sonnet, Opus, and now Mythos-class (Fable + Mythos). Where does each tier sit? What is the capability gap between Opus 4.8 and Mythos-class? Explain this in a diagram or table that a non-technical client could read.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Why "Mythos-class" instead of "Opus 5"?</strong> Anthropic chose a new naming convention for this tier. Research why. What is qualitatively different about Mythos-class models that made the company decide they needed a new name &mdash; not just a version bump? What does this signal about capability thresholds?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The Fable/Mythos naming logic:</strong> Fable comes from Latin <em>fabula</em>, akin to the Greek <em>mythos</em>. Document what Anthropic said about this naming choice. What does it tell you about the relationship between the two models?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Project Glasswing:</strong> What is Project Glasswing? When did it start? Who has access? What was the original Mythos Preview model, and how does Mythos 5 relate to it? Why did Anthropic choose this controlled-release path rather than immediate general availability?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The capability threshold problem:</strong> Anthropic explicitly says Mythos-class models have "reached a threshold where they present significant risks." Document what this threshold is, why it matters, and how Anthropic's Responsible Scaling Policy (RSP) addresses it. What changed between Opus 4.8 and Mythos-class that crossed this line?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Timeline:</strong> Build a chronological timeline from Mythos Preview (April 2026) to Mythos 5 + Fable 5 (June 9, 2026). What happened in between? How did Project Glasswing evolve?</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 2 -->
+    <div class="task t2" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">02</div>
+        <div>
+          <div class="task-title">Fable 5 vs Mythos 5 &mdash; Same Weights, Different Rules</div>
+          <div class="task-pts">// 14 marks &middot; The core distinction</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Fable 5 and Mythos 5 are the same underlying model. What separates them is entirely about safeguards and access. Document this distinction with precision.
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Identical specs table:</strong> Build a complete side-by-side table of Fable 5 vs Mythos 5 across every available dimension: API model ID, context window, max output tokens, pricing (input + output per million tokens), adaptive thinking, data retention policy, availability, and safety classifiers. Make it copy-paste ready for a client slide.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The classifier difference explained:</strong> Fable 5 has safety classifiers active; Mythos 5 does not. What are these classifiers? How do they work technically? When a request triggers a Fable 5 classifier, what happens &mdash; exactly? What does the API return (hint: <code>stop_reason: "refusal"</code>)? What does the user experience look like?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Fallback mechanics:</strong> When Fable 5 refuses a request, it falls back to Claude Opus 4.8. Document the three fallback options in the API: server-side fallback (via the <code>fallbacks</code> parameter), client-side fallback (SDK middleware), and manual retry. What is "fallback credit" and how does billing work when a request falls back?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The 5% figure:</strong> Anthropic states that classifiers trigger in fewer than 5% of Fable 5 sessions on average. What does this mean in practice? For a company running 10,000 API requests/day, estimate how many fallbacks they should plan for. How should they architect their application to handle this gracefully?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Adaptive Thinking &mdash; always on:</strong> Fable 5 and Mythos 5 have adaptive thinking always enabled. What is adaptive thinking? How does it differ from the thinking mode on earlier Claude models? What does <code>thinking.display: "summarized"</code> vs <code>"omitted"</code> mean, and when would you use each in production?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Raw thinking never returned:</strong> Fable 5 and Mythos 5 never return the raw chain of thought, only a summary or empty field. Why did Anthropic make this design choice for Mythos-class models specifically? What are the implications for debugging and evaluation?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Data retention:</strong> Both models carry a 30-day data retention requirement and are classified as "Covered Models" &mdash; they are not available under zero data retention. Document what this means. Which enterprise customers would this be a blocking issue for, and what are their options?</div></div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-label">// API snippet to understand and annotate</div>
+          <div class="codeblock">
+            <div class="cb-h"><span class="cb-f">Fable 5 refusal response shape</span><span class="cb-l">JSON</span></div>
+            <pre>{
+  <span class="str">"id"</span>: <span class="str">"msg_01abc..."</span>,
+  <span class="str">"type"</span>: <span class="str">"message"</span>,
+  <span class="str">"model"</span>: <span class="str">"claude-fable-5"</span>,
+  <span class="str">"stop_reason"</span>: <span class="str">"refusal"</span>,   <span class="cm">// &lt;-- not an error, HTTP 200</span>
+  <span class="str">"refusal"</span>: {
+    <span class="str">"classifier"</span>: <span class="str">"cybersecurity"</span>,
+    <span class="str">"fallback_model"</span>: <span class="str">"claude-opus-4-8"</span>
+  },
+  <span class="str">"content"</span>: []               <span class="cm">// empty &mdash; Fable did not generate output</span>
+}
+
+<span class="cm">// With server-side fallback enabled:</span>
+{
+  <span class="str">"model"</span>: <span class="str">"claude-opus-4-8"</span>,  <span class="cm">// fallback model served the request</span>
+  <span class="str">"stop_reason"</span>: <span class="str">"end_turn"</span>,
+  <span class="str">"fallback_from"</span>: <span class="str">"claude-fable-5"</span>
+}</pre>
+          </div>
+          <p style="font-size:.875rem;color:var(--muted);margin-top:.5rem">Your task: annotate every field, explain why <code>stop_reason: "refusal"</code> returns HTTP 200 rather than 4xx, and describe how your application code should handle both the refusal case and the successful fallback case.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 3 -->
+    <div class="task t3" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">03</div>
+        <div>
+          <div class="task-title">Core Capabilities &mdash; What Fable 5 &amp; Mythos 5 Can Actually Do</div>
+          <div class="task-pts">// 22 marks &middot; The capability deep dive</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Mythos-class models represent a genuine capability jump. Document each capability domain with: what the model can now do, what benchmarks support this, and what a real enterprise use case looks like.
+        </p>
+
+        <div class="sub-group">
+          <div class="sub-label">// Capability 1 &mdash; Software Engineering &amp; Agentic Coding</div>
+          <div class="req-list">
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Stripe's Ruby migration:</strong> Anthropic reports Fable 5 compressed months of engineering into days &mdash; performing a codebase-wide migration on a 50-million-line Ruby codebase in one day that would have taken a whole team over two months by hand. Document this claim: what kind of migration was it, what does this tell you about Fable 5's long-horizon agentic coding capabilities, and what would you need to validate before trusting a model with a migration of this scale in production?</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>FrontierCode / FrontierBench scores:</strong> What is Cognition's FrontierCode evaluation? What does it test? What is Fable 5's score compared to other frontier models? What is ViBench? How does Fable 5 rank on it?</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Token efficiency:</strong> Fable 5 is described as more token-efficient than past Claude models. Explain what this means for production costs and latency. A company paying $10 per million input tokens &mdash; if Fable 5 achieves the same task in 30% fewer tokens than Opus 4.8, calculate the actual cost saving on a 1-million-request-per-month workload.</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Claude Code with Fable 5:</strong> How does Fable 5 change the Claude Code experience for developers? Document what multi-agent workflows Fable 5 enables that Opus 4.8 could not. Use the Luke Anderson (Anthropic CTO customer) quote to ground your analysis.</div></div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-label">// Capability 2 &mdash; Knowledge Work &amp; Reasoning</div>
+          <div class="req-list">
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Hebbia Finance Benchmark:</strong> What is Hebbia's Finance Benchmark? What does it test? What is Fable 5's score? What specifically improved &mdash; document-based reasoning, chart interpretation, and problem solving?</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>IMC trading analysis:</strong> IMC reports Fable 5 "aced their trading-analysis evaluations nearly across the board." Document what this means across: factual lookup, conceptual reasoning, root-cause analysis, and expected-value analysis. Why does this matter for financial services AI applications?</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Long-horizon reasoning:</strong> The Slay the Spire memory experiment &mdash; what did Anthropic test, what did they find, and what does a 3x improvement from persistent memory mean for enterprise agents operating over days or weeks? Give three real business scenarios where this matters.</div></div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-label">// Capability 3 &mdash; Vision</div>
+          <div class="req-list">
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>State-of-the-art vision:</strong> Document Fable 5's vision capabilities: precise number extraction from scientific figures, rebuilding a web app from screenshots, and the Pok&eacute;mon FireRed example (beat the game with a vision-only harness where previous models needed complex helper tools). What does "less scaffolding" mean in agentic vision tasks?</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Enterprise vision use cases:</strong> Based on what Fable 5 can do visually, document 3 specific enterprise use cases Tekravio could build for clients &mdash; with which clients (Studio's domains: healthcare, fintech, logistics) and what the actual product would look like.</div></div>
+          </div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-label">// Capability 4 &mdash; Life Sciences &amp; Scientific Research (Mythos 5 Only)</div>
+          <div class="req-list">
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Drug design at 10x speed:</strong> Anthropic reports Mythos 5 accelerated aspects of the drug design process by approximately 10x. 9 of 14 protein targets yielded strong candidates. Document: what is Mythos 5 doing (choosing binding sites, running protein design tools, recovering from failures), what is Dyno Therapeutics' role, and why does autonomous recovery from failures matter specifically in this domain?</div></div>
+            <div class="req"><div class="req-icon">&#10006;</div><div><strong>Novel scientific hypotheses:</strong> Mythos 5 is described as Anthropic's first model to "consistently produce novel, compelling scientific hypotheses." Document the blinded comparison finding (~80% preference over Opus-class), the E. coli protein mechanism example, and what the genomics research (138 animal species, 100x smaller model) demonstrates about Mythos 5's autonomous research capability.</div></div>
+          </div>
+        </div>
+
+        <div class="callout yellow">
+          <div class="callout-head">// Senior Signal</div>
+          This section requires you to go beyond listing features. For each capability, we want to know: <strong>what can you build with this that you couldn't build before?</strong> Use the benchmark data to support claims. Do not just paraphrase Anthropic's announcement.
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 4 -->
+    <div class="task t4" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">04</div>
+        <div>
+          <div class="task-title">The Safety Architecture &mdash; How Fable 5 Is Made Safe for General Use</div>
+          <div class="task-pts">// 16 marks &middot; The safeguard deep dive</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Fable 5's safety classifier system is a genuine technical innovation &mdash; not just a content policy update. Understand and document how it works, what it blocks, what it doesn't block, and why.
+        </p>
+
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>What are safety classifiers?</strong> Explain classifiers as a concept: separate AI systems that run alongside the main model, detect potential misuse (including jailbreak attempts), and intercept before the main model responds. How is this different from the in-model refusal training used in earlier Claude models? What is the architectural advantage?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The three blocked domains:</strong> Document each of the three domains covered by Fable 5's classifiers with full detail:
+            <br><br>1. <strong>Cybersecurity:</strong> Mythos-class models excel at finding and exploiting software vulnerabilities, agentic hacking (reconnaissance, lateral movement, exploitation as a complete attack chain). How do the classifiers prevent this? What is the Firefox metric referenced in Anthropic's announcement? Include the actual metric they use to demonstrate classifier effectiveness.
+            <br><br>2. <strong>Biology &amp; Chemistry:</strong> What specific bio/chem capabilities triggered the decision to classify this domain? What types of queries fall back to Opus 4.8?
+            <br><br>3. <strong>Distillation:</strong> What is model distillation in this context? Why is it a concern with Mythos-class models specifically?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Jailbreak resistance:</strong> Anthropic says internal and external red-teaming found no "universal jailbreaks" after more than 1,000 hours of testing, and that more than 95% of Fable 5 sessions run on Fable itself with no fallback. Document what this means for security. Why is jailbreak resistance specifically important for Mythos-class models (think: what's the incentive for adversarial actors)?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>False positives &mdash; the known limitation:</strong> Anthropic acknowledges the classifiers are "deliberately more conservative" and will sometimes catch harmless requests. This is a known trade-off at launch. Document: what does a false positive look like for a legitimate user? What Anthropic says about reducing false positives over time? For which professional domains (cybersecurity researchers, biology researchers) is this friction most significant?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Constitutional AI and the classifier lineage:</strong> How do Fable 5's classifiers relate to Anthropic's earlier next-generation constitutional classifier work? Document what this earlier research established and what Fable 5's classifiers add on top of it.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Alignment assessment:</strong> What did Anthropic's automated alignment assessment find about Mythos 5's level of misaligned behaviour (deception, cooperation with misuse)? How does it compare to Opus 4.8? What does it mean that alignment is "similar" even though Mythos-class is dramatically more capable?</div></div>
+        </div>
+
+        <div class="sub-group">
+          <div class="sub-label">// The Dual-Use Problem</div>
+          <div class="req-list">
+            <div class="req"><div class="req-icon">&#10006;</div><div>Write a 200-word analysis of the dual-use problem as it applies to Mythos-class models. The same query that helps a cybersecurity professional find a vulnerability could help a criminal exploit it. How does Anthropic's approach balance utility for legitimate use cases against misuse prevention? Where does the line get drawn, and who decides?</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 5 -->
+    <div class="task t5" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">05</div>
+        <div>
+          <div class="task-title">Access Tiers, Pricing &amp; Availability</div>
+          <div class="task-pts">// 12 marks &middot; The commercial picture</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          How you access Fable 5 and Mythos 5, what it costs, and what you can and cannot do under each access model. Get this exactly right &mdash; the details matter.
+        </p>
+
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Platform availability:</strong> Document exactly where Fable 5 is available: Claude API, Claude Platform on AWS, Amazon Bedrock (which regions on launch day), Vertex AI, Microsoft Foundry. Document where Mythos 5 is available and is not. What does "approved customers in Project Glasswing" mean in practice? How does a company apply?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Pricing context:</strong> Both models are priced at $10 per million input tokens and $50 per million output tokens. Anthropic says this is "less than half the price of Claude Mythos Preview." Document what Mythos Preview cost. Build a real-world cost comparison: if a developer sends 1 million requests per month, each averaging 1,000 input tokens and 500 output tokens, what is the monthly cost? Compare Fable 5 vs Opus 4.8 vs Sonnet 4.6.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Subscription access &mdash; the June 22 change:</strong> Anthropic states Fable 5 is included in Pro, Max, Team, and seat-based Enterprise plans at no extra cost through June 22, 2026, after which it moves to usage credits. Document: what does this mean for end users? Why did Anthropic make this temporary inclusion? What should a company relying on Fable 5 in their claude.ai subscription plan do to prepare?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Data retention &mdash; the 30-day rule:</strong> Fable 5 and Mythos 5 are "Covered Models" with mandatory 30-day data retention. Document what this means for enterprise customers: which industries have regulations that conflict with this (healthcare, financial services, legal)? What are the compliance implications? What alternatives do affected customers have?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Decision framework:</strong> Build a decision guide: given a user type (individual developer, 10-person startup, enterprise engineering team, government/critical infrastructure), which model (Fable 5 vs Mythos 5) is right, via which platform, and at approximately what monthly cost? Present as a clear table.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 6 -->
+    <div class="task t6" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">06</div>
+        <div>
+          <div class="task-title">Competitive Landscape &mdash; Fable 5 vs The Field</div>
+          <div class="task-pts">// 10 marks &middot; Honest comparative analysis</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          Where does Fable 5 sit in the current AI landscape? Honest analysis &mdash; where it leads, where it doesn't, and what it means for Tekravio's model selection decisions.
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Fable 5 vs GPT-5.5 (OpenAI):</strong> Research the current state of GPT-5.5. Compare on: physics research (the "36 hours vs 4 days" finding), coding benchmarks, knowledge work benchmarks. Where does Fable 5 lead? Where is GPT-5.5 ahead or comparable? Be specific with benchmark names and numbers. Do not guess &mdash; only state what is documented.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Fable 5 vs Gemini (Google DeepMind):</strong> Where does Fable 5 outperform Gemini? Where is Gemini stronger? Focus on the domains most relevant to Tekravio's work: software engineering, knowledge work, and vision.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The unique safeguard-as-differentiator:</strong> No other major AI lab has released a system quite like Fable 5 &mdash; a frontier model where safeguards intercept at the classifier layer with a graceful fallback rather than a hard refusal. Document how OpenAI and Google handle similar risks with GPT-5.5 and Gemini. Is Anthropic's approach architecturally better, or just different? Why might enterprises prefer it?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Honest verdict (200 words):</strong> Where is Fable 5 the best option today for real Tekravio use cases? Where would you still choose a different model? What would have to change for Fable 5 to be the obvious default everywhere? This section is evaluated on reasoning quality &mdash; not on whether you conclude Fable 5 wins everything.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 7 -->
+    <div class="task t7" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">07</div>
+        <div>
+          <div class="task-title">Tekravio Use Case Map &mdash; Where These Models Change Our Work</div>
+          <div class="task-pts">// 10 marks &middot; Applied thinking</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          This section tests whether you can connect research to business reality. Given what Fable 5 and Mythos 5 can now do, where should Tekravio use them &mdash; and at what cost?
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Tekravio Studio (Client Consulting):</strong> Studio works on healthcare, fintech, and logistics projects. For each domain, identify one specific use of Fable 5 that wasn't feasible with Opus 4.8 &mdash; name the capability, the task, and the client value. Which capability (agentic coding, vision, knowledge work, or long-horizon autonomy) is the most valuable unlock for Studio, and why?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Tekravio Academy (Training):</strong> Academy trains engineers on 17 tech stacks. How could Fable 5 change the training experience? Consider: automated assignment evaluation with real production feedback, mentor simulation for code review, personalised curriculum adjustment based on a student's GitHub portfolio. Which Academy use case has the highest ROI, and which model tier (Fable 5 via API) would you use?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Tekravio Labs (Products):</strong> Labs builds AI tools and accelerators. If Labs were building a new product today, which two or three Fable 5 capabilities would be the core building blocks? What product category could Tekravio Labs build that no one built before Fable 5 existed?</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Cost model:</strong> For the single highest-ROI use case across all three verticals, estimate the monthly Fable 5 API cost. Show your working: requests/day, average input tokens, average output tokens, total per month at $10/$50 per million.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>The classifier risk for Tekravio:</strong> Studio works on healthcare projects. Is there a risk that Fable 5's biology/chemistry classifiers could interfere with legitimate healthcare AI use cases? Document this specific risk and how Tekravio should mitigate it (hint: what does the fallback-to-Opus-4.8 architecture mean for these cases?).</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK 8 -->
+    <div class="task t8" onclick="toggleTask(this)">
+      <div class="task-header">
+        <div class="task-num">08</div>
+        <div>
+          <div class="task-title">API Integration Guide &mdash; How to Build With Fable 5</div>
+          <div class="task-pts">// 4 marks &middot; The practitioner's guide</div>
+        </div>
+        <div class="task-expand">&#9660;</div>
+      </div>
+      <div class="task-body">
+        <p class="task-desc">
+          A practical reference that a Tekravio engineer could use to start building with Fable 5 today.
+        </p>
+        <div class="req-list">
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>API model IDs:</strong> <code>claude-fable-5</code> for Fable 5. What is the correct API string for Mythos 5? Document the versioning scheme and what the Anthropic docs say about using dated vs undated model IDs in production.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Handling refusals in code:</strong> Write a code snippet (Python or TypeScript) that calls <code>claude-fable-5</code>, checks for <code>stop_reason: "refusal"</code>, and retries the request against <code>claude-opus-4-8</code> as a manual fallback. Add comments explaining each step.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Adaptive thinking in prompts:</strong> Fable 5 has adaptive thinking always on. What does the Anthropic docs say about how to structure prompts differently for Fable 5 vs earlier Claude models &mdash; particularly for long-context prompts and reasoning instructions? Document the key differences with before/after prompt examples.</div></div>
+          <div class="req"><div class="req-icon">&#10006;</div><div><strong>Fable 5 cheat sheet:</strong> Produce a one-page "Fable 5 Quick Reference" the Tekravio engineering team could bookmark: model ID, context window, pricing, the three classifier domains, how refusals work, fallback pattern, thinking configuration, and the top 3 things that are different from Opus 4.8. Make it scannable &mdash; the kind of thing you'd keep open in a browser tab while building.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tasks -->
+
+  <div class="sep"></div>
+
+  <!-- BONUS -->
+  <div class="sec-tag">// 02 &middot; Bonus Tasks</div>
+  <h2>Go Further &mdash; 30 Bonus Marks</h2>
+
+  <div class="bonus-box">
+    <div class="bonus-title">// Bonus Opportunities</div>
+    <div class="bonus-items">
+      <div class="bonus-item"><strong>+12 marks &mdash; Live Fable 5 Demo:</strong> Build a working prototype that calls <code>claude-fable-5</code> via the Anthropic API. It can be a code reviewer, a document analyser, an agentic task runner &mdash; anything real. Deliberately send at least one request that triggers a classifier refusal and show how your code handles the fallback to Opus 4.8. Include source code and a Loom walkthrough (under 5 minutes). This is the bonus that weighs the most because it shows you can build, not just research.</div>
+      <div class="bonus-item"><strong>+8 marks &mdash; System Card Deep Dive:</strong> Anthropic published a full system card for Fable 5 and Mythos 5. Find and read it. Document: what does the alignment assessment methodology actually measure, what is the full list of capability evaluations run, and what did Anthropic choose not to test and why? Cite specific sections.</div>
+      <div class="bonus-item"><strong>+6 marks &mdash; Project Glasswing Analysis:</strong> Research Project Glasswing in full. What has the project accomplished since April 2026? What does the "Glasswing initial update" (linked in Anthropic's announcement) report about how Mythos-class models helped cyber defenders? Which organisations have been approved? What are the criteria for the broader trusted access programme?</div>
+      <div class="bonus-item"><strong>+4 marks &mdash; The Anthropic IPO Context:</strong> Multiple sources note Fable 5's launch comes as Anthropic prepares to go public (SEC filing submitted). Document the connection between this model release and Anthropic's IPO positioning. How does Fable 5 change Anthropic's commercial story? What does the "less than half the price of Mythos Preview" pricing signal about Anthropic's market strategy?</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- FORMAT -->
+  <div class="sec-tag">// 03 &middot; Submission Format</div>
+  <h2>What to Deliver</h2>
+
+  <div class="callout cyan">
+    <div class="callout-head">// Required Deliverables</div>
+    <div class="req-list" style="margin-top:.5rem">
+      <div class="req" style="font-size:.9rem"><div class="req-icon" style="background:rgba(0,201,167,.15);color:var(--cyan)">&#10006;</div><div><strong>README.md</strong> &mdash; Primary research document. H2/H3 headers per module. Minimum 3,500 words. Tables and comparison charts where needed. No bullet-point soup &mdash; write in paragraphs with evidence.</div></div>
+      <div class="req" style="font-size:.9rem"><div class="req-icon" style="background:rgba(0,201,167,.15);color:var(--cyan)">&#10006;</div><div><strong>GitHub repo</strong> &mdash; Public repo named <code>fable5-mythos5-research-[your-name]</code>. Clean commit history.</div></div>
+      <div class="req" style="font-size:.9rem"><div class="req-icon" style="background:rgba(0,201,167,.15);color:var(--cyan)">&#10006;</div><div><strong>model-comparison.md</strong> &mdash; Side-by-side Fable 5 vs Mythos 5 vs Opus 4.8 vs Sonnet 4.6. Every spec, every pricing tier, every capability category. Copy-paste ready for a client slide.</div></div>
+      <div class="req" style="font-size:.9rem"><div class="req-icon" style="background:rgba(0,201,167,.15);color:var(--cyan)">&#10006;</div><div><strong>tekravio-use-case-map.md</strong> &mdash; Task 7 output for Studio, Academy, and Labs. Specific, not generic.</div></div>
+      <div class="req" style="font-size:.9rem"><div class="req-icon" style="background:rgba(0,201,167,.15);color:var(--cyan)">&#10006;</div><div><strong>fable5-cheat-sheet.md</strong> &mdash; Task 8 output. The quick reference card.</div></div>
+      <div class="req" style="font-size:.9rem"><div class="req-icon" style="background:rgba(0,201,167,.15);color:var(--cyan)">&#10006;</div><div><strong>sources.md</strong> &mdash; Every claim sourced. Primary sources only: anthropic.com, platform.claude.com/docs, the system card, and any benchmark documentation. No secondary summaries as primary citations.</div></div>
+    </div>
+  </div>
+
+  <div class="callout orange" style="margin-top:1.5rem">
+    <div class="callout-head">// What We Don't Accept</div>
+    <div style="font-size:.9rem;color:var(--muted);line-height:1.8">
+      &#10007; &nbsp;Repeating Anthropic's marketing language without analysis<br>
+      &#10007; &nbsp;Benchmark numbers without explaining what the benchmark actually tests<br>
+      &#10007; &nbsp;Missing the Fable vs Mythos distinction &mdash; this is the core of the assignment<br>
+      &#10007; &nbsp;Ignoring the classifier fallback mechanics &mdash; this is critical for any production integration<br>
+      &#10007; &nbsp;Generic "AI will change everything" conclusions &mdash; be specific about Tekravio's context<br>
+      &#10007; &nbsp;Outdated information &mdash; both models launched June 9, 2026. Check the live Anthropic docs before submitting
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- EVAL -->
+  <div class="sec-tag">// 04 &middot; Evaluation</div>
+  <h2>Scoring Breakdown</h2>
+
+  <div class="score-grid">
+    <div class="score-card"><div class="score-n" style="color:var(--purple)">30</div><div class="score-l">Technical Accuracy</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--cyan)">30</div><div class="score-l">Depth &amp; Evidence</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--orange)">25</div><div class="score-l">Applied Analysis</div></div>
+    <div class="score-card"><div class="score-n" style="color:var(--yellow)">15</div><div class="score-l">Clarity &amp; Format</div></div>
+  </div>
+
+  <div class="criteria">
+    <div class="cr"><div><div class="cr-title">Fable vs Mythos Distinction</div><div class="cr-desc">Is the classifier/safeguard difference documented with full precision? API shape, billing, fallback mechanics.</div></div><div class="cr-pts">20</div></div>
+    <div class="cr"><div><div class="cr-title">Capability Documentation</div><div class="cr-desc">Each capability domain has benchmark support, mechanism explanation, and a real use case. Not just a list.</div></div><div class="cr-pts">22</div></div>
+    <div class="cr"><div><div class="cr-title">Safety Architecture</div><div class="cr-desc">Three classifier domains documented with depth. The dual-use problem addressed honestly.</div></div><div class="cr-pts">16</div></div>
+    <div class="cr"><div><div class="cr-title">Pricing &amp; Access</div><div class="cr-desc">Every access path documented. Cost calculations correct. Subscription change explained.</div></div><div class="cr-pts">12</div></div>
+    <div class="cr"><div><div class="cr-title">Competitive Honesty</div><div class="cr-desc">Comparisons are evidence-based and honest. Acknowledges where Fable 5 is not the best choice.</div></div><div class="cr-pts">10</div></div>
+    <div class="cr"><div><div class="cr-title">Tekravio Application</div><div class="cr-desc">Task 7 shows genuine thinking about Studio, Academy, Labs &mdash; not generic AI adoption advice.</div></div><div class="cr-pts">10</div></div>
+    <div class="cr"><div><div class="cr-title">API Quick Reference</div><div class="cr-desc">Fable 5 cheat sheet is genuinely useful. Refusal handling code is correct and runnable.</div></div><div class="cr-pts">10</div></div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- RESOURCES -->
+  <div class="sec-tag">// 05 &middot; Where to Start</div>
+  <h2>Primary Sources</h2>
+  <p style="margin-bottom:1rem">Read these in this order. Start with the Anthropic announcement, then the API docs, then the system card. Everything else is secondary.</p>
+
+  <div class="code-block">anthropic.com/news/claude-fable-5-mythos-5
+  <span style="color:var(--muted)">  // Official launch announcement with benchmarks, capabilities, and safeguard architecture</span>
+
+platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5
+  <span style="color:var(--muted)">  // API docs: model IDs, refusal handling, fallback, adaptive thinking, billing</span>
+
+anthropic.com/claude-fable-5-mythos-5-system-card
+  <span style="color:var(--muted)">  // Full system card: alignment assessment, safety evals, capability tests</span>
+
+anthropic.com/glasswing
+  <span style="color:var(--muted)">  // Project Glasswing: what it is, who has access, initial update results</span>
+
+anthropic.com/research/next-generation-constitutional-classifiers
+  <span style="color:var(--muted)">  // The classifier lineage: prior work Fable 5's classifiers are built on</span>
+
+platform.claude.com/docs/en/about-claude/models/overview
+  <span style="color:var(--muted)">  // Full model family: all current API strings, specs, and pricing</span>
+
+platform.claude.com/docs/en/build-with-claude/refusals-and-fallback
+  <span style="color:var(--muted)">  // Refusal handling: stop_reason, server-side fallback, billing rules</span></div>
+
+  <div class="callout yellow" style="margin-top:1.5rem">
+    <div class="callout-head">// Time Sensitivity</div>
+    Fable 5 and Mythos 5 launched two days ago. Details &mdash; pricing, availability, benchmark comparisons, subscription access terms &mdash; may still be updated by Anthropic. Check the live documentation before finalising your submission. If something changes between the day you start and the day you submit, note the change and when it happened.
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- SUBMIT -->
+  <div class="sec-tag">// 06 &middot; Submission</div>
+  <h2>How to Submit</h2>
+
+  <p style="margin-bottom:1rem">Share your GitHub repo via email. Include your name, the subject line below, and one sentence on the most interesting or surprising thing you learned while researching these models.</p>
+
+  <div class="code-block">Subject: AI Intern Assignment &mdash; Fable 5 + Mythos 5 Research &mdash; [Your Name]
+Body:    GitHub: [your repo link]
+         Most surprising finding: [1 sentence]</div>
+
+  <div class="submit-box">
+    <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.5rem">Ready? Send your work.</div>
+    <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--purple);margin-bottom:.5rem">careers@tekravio.com</div>
+    <div style="font-size:.85rem;color:var(--muted)">Deadline: 5 days from receipt. Late submissions lose 10 marks per day. We read every submission personally &mdash; we expect the same rigour you would bring to a Tekravio Studio client deliverable.</div>
+  </div>
+
+</div><!-- /section -->
+</div><!-- /container -->
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">Tekr<span>avio</span> Academy</div>
+  <div class="footer-note">AI Research Intern Assignment &middot; Claude Fable 5 + Mythos 5 &middot; June 2026<br>tekravio.com/careers.html</div>
+</footer>
+
+<script>
+function toggleTask(card){card.classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  const t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+// Open first task
+document.querySelector('.task').classList.add('open');
+</script>
+</body>
+</html>
