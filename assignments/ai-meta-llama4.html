@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — Meta Llama 4 Scout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#0866ff;--ar:8,102,255}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700;color:var(--tx)}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(var(--ar),.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-60px;left:-40px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(var(--ar),.06) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:720px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.08em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.cb{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qref{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qref-n{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qref-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Research Intern · Meta · Llama 4 Scout</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Research Intern &middot; Assignment 05</div>
+  </div>
+  <p class="etag">// Meta AI &middot; 2026 &middot; Open-Weight Leader</p>
+  <h1 class="ht">Llama 4<br><span style="color:var(--ac)">Scout.</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">10M Tokens.</span></h1>
+  <p class="hs">The open-weight model leader in 2026. 10 million token context window &mdash; more than GPT-5.5 (1.1M), Gemini 3.1 Pro (1M), and Claude Fable 5 (1M) combined. 2,600 tokens per second inference. Apache 2.0 license. Free to self-host. Meta's bet: democratise AI by making frontier-adjacent capability available to anyone with a GPU. Your job: document exactly what this enables and where the limits are.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">License</div><div class="mpv">Apache 2.0</div></div></div>
+    <div class="mp"><div><div class="mpl">Context Window</div><div class="mpv">10M tokens</div></div></div>
+    <div class="mp"><div><div class="mpl">Inference Speed</div><div class="mpv">2,600 tokens/second</div></div></div>
+    <div class="mp"><div><div class="mpl">Cost</div><div class="mpv">Free to self-host</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">100 + 30 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Quick Facts</div>
+<div class="trow">
+  <span class="tag">Apache 2.0 License</span><span class="tag">10M context window</span><span class="tag">2,600 tokens/second</span>
+  <span class="tag">Free to self-host</span><span class="tag">Frontier-adjacent capability</span><span class="tag">Agentic workflows</span>
+  <span class="tag">HuggingFace weights</span><span class="tag">Ollama / vLLM supported</span><span class="tag">No API cost</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Context</div></div>
+  <div class="ctx-body">Llama 4 Scout is the open-weight model leader in 2026 &mdash; and its 10M token context window is its most distinctive feature. No commercial frontier model currently offers more than 2M tokens. Meta's Apache 2.0 license makes this completely free to use, modify, fine-tune, and distribute commercially.<br><br>
+  At <strong>2,600 tokens per second</strong>, Llama 4 Scout is dramatically faster than commercial APIs (typically 50&ndash;200 t/s). This speed + open weights combination unlocks applications that are impractical with commercial APIs: ultra-low-latency production inference, fully offline deployments, and real-time applications at scale without per-token costs. Meta's bet: democratise frontier-adjacent AI to build the largest possible developer ecosystem.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Research Modules</div>
+<div class="sh">Five Research Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This assignment is about understanding the open-weight model ecosystem as much as Llama 4 specifically.</p>
+<div class="tasks">  <div class="task" id="t1">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">The 10M Token Context Window &mdash; What It Actually Enables</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">10 million tokens is more than GPT-5.5 (1.1M), Gemini 3.1 Pro (1M), and Fable 5 (1M) combined. Document what this enables — and what the limits are.</p>
+      <div class="rl"><div class="rq"><strong>10M tokens in practical terms:</strong> Convert 10 million tokens into practical equivalents: pages of A4 text, hours of audio transcripts, lines of code, number of full books, and hours of subtitled video. What entire workflows become single-prompt tasks that previously required chunking, summarisation pipelines, or multi-pass processing?</div><div class="rq"><strong>Attention quality at extreme lengths:</strong> Does attention degrade across 10M tokens? What is known about Llama 4 Scout's recall accuracy ('needle-in-a-haystack' performance) at 1M, 5M, and 10M token positions? Compare to Claude Fable 5's performance on long-context recall tasks at its 1M limit.</div><div class="rq"><strong>Why commercial models cap at 1–2M:</strong> Commercial models like GPT-5.5 and Claude Fable 5 cap at 1–1.1M despite the hardware existing to go further. Document the four reasons: pricing model complexity, hallucination risk at extreme lengths, inference cost, and the limited number of enterprise customers who actually need more than 1M tokens. Why hasn't Anthropic or OpenAI offered 10M?</div><div class="rq"><strong>Use cases genuinely requiring 10M:</strong> Three specific enterprise use cases where 10M tokens is genuinely needed — not just nice-to-have: (a) full codebase analysis without chunking (describe a specific repository size), (b) entire legal case history in one prompt (describe the legal scenario), (c) year-long meeting transcript analysis. For each, explain precisely why the task breaks at 1M tokens.</div><div class="rq"><strong>The real limit of 10M context:</strong> 10M context does not mean perfect performance across 10M tokens. Document the known limitations: attention degradation, 'lost in the middle' effects, increased hallucination risk at extreme lengths. For which tasks does 10M context create genuine value vs which tasks degrade in quality?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t2">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">Apache 2.0 License &amp; Meta's Open-Source Strategy</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Apache 2.0 is one of the most permissive licenses. Combined with frontier-adjacent capability, document what this means for the AI industry.</p>
+      <div class="rl"><div class="rq"><strong>Apache 2.0 vs other licenses:</strong> Compare Apache 2.0 (Llama 4 Scout) vs MIT (DeepSeek V4 Pro) vs Grok's restrictive license (prohibits training other models on weights) vs CC-BY-NC (prohibits commercial use). For each specific restriction, document the enterprise use case that it blocks. What does Apache 2.0 allow that CC-BY-NC would prohibit?</div><div class="rq"><strong>Meta's strategic rationale:</strong> Why is Meta making frontier-adjacent AI free and open? They have no API revenue model for Llama. What is Meta's actual business motivation? How does the open Llama ecosystem serve Meta's commercial interests in advertising, social media, and enterprise software?</div><div class="rq"><strong>The Llama developer ecosystem:</strong> Llama has the largest open-weight AI developer ecosystem. Document: Ollama integration, vLLM support, HuggingFace community, academic usage. How large is the Llama 4 ecosystem vs DeepSeek's and Grok's? What does this community size mean for tooling, support, and fine-tuned model availability?</div><div class="rq"><strong>Agentic capabilities in Llama 4:</strong> Llama 4 is described as supporting agentic workflows. Document what specific agentic features are built into the Llama 4 family: tool use, multi-step planning, function calling. Compare to Claude Fable 5's adaptive thinking and GPT-5.5's Codex integration. What can Llama 4 do agentically that it cannot do?</div><div class="rq"><strong>Fine-tuning as a competitive advantage:</strong> Apache 2.0 allows fine-tuning for any purpose. A company that fine-tunes Llama 4 Scout on their proprietary data gets a custom model they own completely. Compare this to fine-tuning options on closed models (GPT-5.5, Fable 5). What is the cost and capability difference?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t3">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Performance: 2600 t/s &amp; Benchmark Position vs Commercial Frontier</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">2,600 t/s is dramatically faster than commercial APIs. Document where Llama 4 Scout performs and what the capability ceiling is.</p>
+      <div class="rl"><div class="rq"><strong>2,600 tokens per second in context:</strong> Commercial APIs typically achieve 50&ndash;200 t/s at the server level. 2,600 t/s is achievable on optimised hardware. What class of application becomes practical at 2,600 t/s that is impractical at 100 t/s? Give three specific real-time application categories that this unlocks.</div><div class="rq"><strong>Full Llama 4 family:</strong> Research the complete Llama 4 model family beyond Scout: every variant, parameter count, specific capabilities, minimum GPU hardware to run at each quantisation level, and recommended use case. Build a selection guide for a developer choosing within the Llama 4 family.</div><div class="rq"><strong>Benchmark position vs closed frontier:</strong> Research Llama 4 Scout's available scores on: GPQA Diamond, MMLU, HumanEval, and SWE-bench. How close is it to GPT-5.5 and Claude Fable 5? On which specific benchmarks is the capability gap small enough that the self-hosting cost advantage clearly wins the economic argument?</div><div class="rq"><strong>The capability ceiling of open-weight models:</strong> Llama 4 Scout is 'frontier-adjacent, not frontier.' Document the specific capability areas where Llama 4 Scout cannot match Fable 5 or GPT-5.5 despite competitive benchmark scores on general tasks. Estimate how many months the open-weight frontier typically lags behind closed frontier &mdash; and whether this gap is narrowing in 2026.</div><div class="rq"><strong>Quantisation trade-offs:</strong> Llama 4 Scout can be run at BF16 (full quality), int8 (slight quality reduction), and int4 (significant compression). Document the quality degradation at each level, the GPU memory requirement for each, and the inference speed change. At what quantisation level does the quality-cost trade-off break down for production use?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t4">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Self-Hosting Economics &amp; Deployment Architecture</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Free weights do not mean free deployment. Document the real total cost of ownership for self-hosting.</p>
+      <div class="rl"><div class="rq"><strong>Hardware requirements by quantisation:</strong> GPU memory to run Llama 4 Scout at BF16, int8, and int4. Calculate the minimum number of A100 (80GB), H100 (80GB), and H200 (141GB) GPUs needed for each. Monthly rental cost on AWS (p4d/p5), GCP (a3), and Lambda Labs for each configuration.</div><div class="rq"><strong>Serving frameworks compared:</strong> Ollama, vLLM, HuggingFace TGI, and llama.cpp. For each: ease of production setup, maximum throughput, GPU utilisation efficiency, and production monitoring support. Which would you recommend for a Tekravio Studio client that needs a reliable, maintainable self-hosted deployment?</div><div class="rq"><strong>Break-even analysis:</strong> At what monthly request volume does self-hosting Llama 4 Scout become cheaper than using Claude Fable 5 at $10/$50 per million tokens? Show the calculation including: hardware rental, energy (estimate at $0.15/kWh), and 20 hours/month of engineering maintenance time at ₹3,000/hour.</div><div class="rq"><strong>Data privacy as the unconditional win:</strong> HIPAA (US healthcare), GDPR Article 28 (EU data processing), and classified government environments all potentially require 'data never leaves your servers.' For these use cases, self-hosting is the only compliant path regardless of cost. Document three Tekravio Studio client scenarios where data residency is a hard requirement, not a preference.</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>For the break-even analysis, use real AWS pricing from the current AWS pricing page. Note the date you checked, as cloud pricing changes frequently.</p></div>
+    </div>
+  </div>  <div class="task" id="t5">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Tekravio Application &amp; When Open Wins Unconditionally</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Design specific Tekravio use cases where Llama 4 Scout is the right choice.</p>
+      <div class="rl"><div class="rq"><strong>Tekravio Academy deployment design:</strong> Academy trains students across 17 tech stacks with thousands of assignment evaluations. Design a complete Llama 4-based deployment for automated assignment evaluation and code review. Calculate the monthly cost vs using Claude Fable 5 API at the same volume. What capability trade-offs are you making?</div><div class="rq"><strong>Studio HIPAA client architecture:</strong> A Tekravio Studio healthcare client has a HIPAA requirement: patient data cannot be sent to any third-party API. Design the complete self-hosted architecture using Llama 4 Scout: hardware specification, serving framework, API gateway, monitoring, and expected latency. What is the monthly total cost of ownership?</div><div class="rq"><strong>Labs product opportunity:</strong> Tekravio Labs builds AI-powered products. Identify one product category where Llama 4 Scout's 10M context window creates a product that no commercial model can match. Describe the product, the target customer, the specific capability that requires 10M tokens, and why this is a viable commercial opportunity.</div><div class="rq"><strong>Honest limitations:</strong> Three biggest limitations of choosing Llama 4 Scout over Claude Fable 5 or GPT-5.5. For each limitation: which application category does it affect, and what is the specific capability gap that makes it a blocking issue (not just a minor quality difference)?</div><div class="rq"><strong>The open-weight future:</strong> Meta has committed to continuing Llama releases. DeepSeek releases open weights regularly. Does the availability of high-quality open-weight models change Tekravio's long-term strategy? Should Tekravio build its products primarily on commercial APIs or open-weight models? Build the argument for each, then give your recommendation.</div></div>
+      
+    </div>
+  </div></div>
+<div class='sep'></div>
+<div class='stag'>// 02 &middot; Design Questions</div>
+<div class='sh'>Answer in Your README</div>
+<p style='margin-bottom:1.25rem'>Four questions requiring specific evidence and calculations.</p>
+<div class="qref"><div class="qref-n">Q1</div><div class="qref-t">A startup wants to process entire GitHub repositories (averaging 800K tokens per repo) through AI for security vulnerability scanning. They need to process 10,000 repos per month. Design the Llama 4 Scout self-hosted architecture. Calculate: total GPU hours needed, monthly infrastructure cost, and cost-per-repo. Compare to using Claude Fable 5 API for the same workload.</div></div><div class="qref"><div class="qref-n">Q2</div><div class="qref-t">Llama 4 Scout achieves 2,600 t/s on optimised hardware. A real-time coding assistant needs responses in under 2 seconds. At 200 output tokens per response, what throughput is required? Can Llama 4 Scout serve this with a single GPU instance, or do you need multiple? Design the infrastructure for 100 concurrent developers.</div></div><div class="qref"><div class="qref-n">Q3</div><div class="qref-t">A company wants to fine-tune Llama 4 Scout on 5 years of their proprietary customer service conversations (50GB of text, approximately 20B tokens). What hardware is required? What is the training cost on cloud GPUs? How does the resulting fine-tuned model compare in cost and capability to prompt-engineering a commercial model like GPT-5.5?</div></div><div class="qref"><div class="qref-n">Q4</div><div class="qref-t">Apache 2.0 allows commercial use of Llama 4 Scout without paying Meta. But could Meta change the license on future Llama versions? Research Meta's license history across Llama 1, 2, 3, and 4. Has it become more or less restrictive over time? How should a company building a product on Llama 4 Scout plan for future license changes?</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 30 Additional Marks</div><div class="bi"><div class="bit"><strong>+15 marks — Local deployment benchmark:</strong> Run Llama 4 Scout locally using Ollama or vLLM on any available hardware. Document: setup time, hardware used, tokens/second achieved, and quality comparison on 5 real tasks vs Claude Fable 5 API. Which tasks show the biggest quality gap?</div><div class="bit"><strong>+10 marks — 10M context experiment:</strong> Design and run an experiment specifically requiring more than 1M tokens. Load an entire open-source codebase (React, Django, or similar) into context and ask complex architectural questions. Does the model find relationships across the full codebase that it would miss with chunking?</div><div class="bit"><strong>+5 marks — Fine-tuning roadmap:</strong> Design a hypothetical fine-tuning plan for Llama 4 Scout for one Tekravio Academy use case (e.g., Java code reviewer). Document: data requirements, expected training compute, LoRA configuration, and evaluation metrics.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Send your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Intern Assignment &mdash; Meta Llama 4 Scout &mdash; [Your Name]</code><br>Body: GitHub repo link + one sentence on your most surprising finding</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI Research Intern Assignment &middot; Meta AI &mdash; Llama 4 Scout &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function toggle(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
