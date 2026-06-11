@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — xAI Grok 4.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#cbd5e1;--ar:203,213,225}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700;color:var(--tx)}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(var(--ar),.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-60px;left:-40px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(var(--ar),.06) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:720px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.08em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.cb{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qref{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qref-n{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qref-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Research Intern · xAI · Grok 4.3</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Research Intern &middot; Assignment 03</div>
+  </div>
+  <p class="etag">// xAI &middot; Released April 30, 2026 &middot; Colossus-Trained Frontier</p>
+  <h1 class="ht">Grok<br><span style="color:var(--ac)">4.3.</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">X-Native.</span></h1>
+  <p class="hs">xAI's recommended Chat API model. Trained on Colossus &mdash; approximately 200,000 GPUs at 10&times; the compute of Grok 3. The only frontier model with native X/Twitter data access. Supports text, image, voice, and video. Priced at $1.25/$2.50 per million tokens. API alias: <code style="color:var(--ac)">grok-4.3-latest</code>. 1M context via API, 2M in the X/Grok app.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">API Model ID</div><div class="mpv">grok-4.3-latest</div></div></div>
+    <div class="mp"><div><div class="mpl">Context Window</div><div class="mpv">1M (API) &middot; 2M (App)</div></div></div>
+    <div class="mp"><div><div class="mpl">Pricing</div><div class="mpv">$1.25 / $2.50 per M tokens</div></div></div>
+    <div class="mp"><div><div class="mpl">Released</div><div class="mpv">April 30, 2026</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">100 + 30 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Quick Facts</div>
+<div class="trow">
+  <span class="tag">grok-4.3-latest</span><span class="tag">1M ctx API / 2M App</span><span class="tag">$1.25/$2.50 per M</span>
+  <span class="tag">Colossus ~200K GPUs</span><span class="tag">10× compute vs Grok 3</span><span class="tag">Text + Image + Voice + Video</span>
+  <span class="tag">X/Twitter native access</span><span class="tag">Remote MCP support</span><span class="tag">SWE-bench: 80.6%</span>
+  <span class="tag">Prompt caching</span><span class="tag">Function calling + structured outputs</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Context</div></div>
+  <div class="ctx-body">Grok 4.3 is xAI's most capable and fastest model, released April 30, 2026. It supersedes the Grok 4.20 beta line and is built on xAI's <strong>Colossus supercomputer</strong> &mdash; approximately 200,000 GPUs running at 10&times; the compute used to train Grok 3. The model supports <strong>text, image, voice, and video</strong> natively, giving it a multimodal breadth that GPT-5.5 lacks (no native video).<br><br>
+  Grok 4.3's defining differentiator: <strong>native X/Twitter data access</strong> via server-side tools. No other frontier model has real-time access to the X/Twitter firehose. At $1.25/$2.50 per million tokens, it is also one of the most competitively priced frontier models. Server-side tools include web search, X search, code execution, files, and remote MCP.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Research Modules</div>
+<div class="sh">Five Research Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Each module graded on accuracy, sourcing, and applied thinking. Primary sources only.</p>
+<div class="tasks">  <div class="task" id="t1">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">Colossus Supercomputer &amp; What 10&times; Compute Actually Delivers</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4 was trained on Colossus with ~200,000 GPUs at 10× the compute of Grok 3. Document what this scale means for capability, not just as a marketing claim.</p>
+      <div class="rl"><div class="rq"><strong>Colossus cluster specification:</strong> Research what is publicly known about xAI's Colossus supercomputer: GPU architecture, total FLOP capacity, and data centre location. How does ~200,000 GPUs compare to the known training infrastructure of OpenAI, Google, and Anthropic? What does training at this scale typically unlock in terms of emergent capabilities?</div><div class="rq"><strong>10× compute and scaling laws:</strong> Apply the Chinchilla scaling laws to estimate what a 10× compute increase should yield in terms of benchmark improvement. Does Grok 4.3's actual benchmark performance match, exceed, or fall short of the theoretical prediction? Where does it overdeliver and where does it underdeliver?</div><div class="rq"><strong>Grok 4 vs Grok 4 Heavy vs Grok 4.3:</strong> Grok 4.3 supersedes the Grok 4.20 beta line. What changed between Grok 4.20 and 4.3? What is Grok 4 Heavy and who is it designed for? When would you choose Grok 4 Heavy over Grok 4.3?</div><div class="rq"><strong>Video processing:</strong> Grok 4.3 supports native video processing, unlike GPT-5.5. Document the video input limits, supported formats, and what the model can reliably do with video content. Provide one specific enterprise use case where video support creates value that GPT-5.5 cannot deliver.</div><div class="rq"><strong>Context window discrepancy:</strong> Grok 4.3 has a 1M token API context window but a 2M token context in the X/Grok consumer app. Why the discrepancy? What technical or business reason explains this? For a developer building on the API, when does 1M tokens become a limiting constraint?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t2">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">X/Twitter Integration &amp; Real-Time Data Access</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4.3 has a capability no other frontier model has: native access to live X/Twitter data. Document what this means in practice.</p>
+      <div class="rl"><div class="rq"><strong>Server-side tools complete list:</strong> Grok 4.3 supports five server-side tools: web search, X search, code execution, files, and remote MCP. For each tool: document what data or service it accesses, how it is invoked in an API request, any known rate limits, and one specific use case where this tool creates value that other models cannot easily replicate.</div><div class="rq"><strong>X search vs web search:</strong> What does access to the X/Twitter firehose enable that general web search cannot? Document specific use cases: real-time market sentiment analysis, breaking news verification, brand monitoring, early financial signal detection. For each, explain why X-specific data has higher value than indexed web data for this task.</div><div class="rq"><strong>Comparison to other models' web access:</strong> GPT-5.5 has web browsing. Claude Fable 5 has web search as a tool. Gemini 3.1 Pro has Google Search integration. Grok 4.3 has X search. Document the meaningful differences between these four approaches: what data each can access, latency, and the enterprise use cases each is best for.</div><div class="rq"><strong>Limitations of X data:</strong> Be honest: X/Twitter data has real limitations. Document misinformation propagation, bot account contamination, survivorship bias, and recency weighting issues. How should a developer building a production application on Grok's X search account for these limitations in their design?</div><div class="rq"><strong>Remote MCP support:</strong> Grok 4.3 supports remote MCP (Model Context Protocol) as a server-side tool &mdash; connecting to any MCP-compatible external service without client-side SDK changes. What does this enable for enterprise integrations? Compare to Claude's MCP implementation from the client side.</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t3">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Benchmarks, Coding &amp; Agentic Performance</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Document Grok 4.3's performance on coding and agentic benchmarks, and the reasoning integration story.</p>
+      <div class="rl"><div class="rq"><strong>SWE-bench Verified at 80.6%:</strong> Grok 4.3 scores 80.6% on SWE-bench Verified. Compare to Claude Fable 5 (95% SWE-bench Verified) and GPT-5.5 (Terminal-Bench 2.0: 82.7%). These are different benchmarks. What does SWE-bench Verified specifically test? What does Terminal-Bench 2.0 test? Why are different benchmarks being used to claim 'best coding model'?</div><div class="rq"><strong>Reasoning + function calling:</strong> Grok 4.3 integrates reasoning with function calling and structured outputs. Explain what this means technically: the model can reason about which tools to call and what arguments to pass as part of its thinking process. How does this compare to GPT-5.5's function calling? What is the token cost overhead of enabling reasoning for tool decisions?</div><div class="rq"><strong>Long-chain agentic capability:</strong> Grok 4.3 is described as having 'top-tier long-chain agent capabilities.' Design a concrete enterprise workflow that uses all five of Grok's server-side tools together (X search + web search + code execution + files + MCP) in a multi-step agentic task. Which industry and use case benefits most from this full-tool combination?</div><div class="rq"><strong>Prompt caching economics:</strong> Grok 4.3 supports prompt caching. For a customer service application using a 50K-token system prompt at 10,000 requests per day at $1.25/M input tokens, calculate the monthly cost without caching vs with caching. What percentage reduction do you achieve?</div><div class="rq"><strong>Grok 4.3 competitive positioning:</strong> Build a benchmark table comparing Grok 4.3 to GPT-5.5, Gemini 3.1 Pro, Claude Fable 5, and DeepSeek V4 Pro on: SWE-bench (where available), GPQA Diamond (where available), pricing (input/output), context window, and multimodal support. Which model wins on each axis?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t4">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing, Access Paths &amp; Enterprise Risk</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Grok 4.3 at $1.25/$2.50 is competitive. Document the full access picture and the enterprise risk considerations.</p>
+      <div class="rl"><div class="rq"><strong>Pricing comparison table:</strong> Build a table: Grok 4.3 ($1.25/$2.50) vs GPT-5.5 ($5/$30) vs Gemini 3.1 Pro ($2/$12) vs Claude Fable 5 ($10/$50) vs DeepSeek V4 Pro ($1.74/$3.48). For a company with a $3,000/month AI budget, how many tokens does each model provide? Which delivers the best value for a high-volume, text-heavy workload?</div><div class="rq"><strong>Cloud availability:</strong> Is Grok 4.3 available on AWS Bedrock, Vertex AI, or Azure? For an enterprise customer that requires single-vendor cloud procurement (everything on AWS, or everything on GCP), what are the current limitations of building on Grok 4.3? What does this mean for enterprise adoption?</div><div class="rq"><strong>Open-source roadmap status:</strong> Elon Musk confirmed in February 2026 that xAI planned to open-source Grok 3. The targeted release date passed without published weights. As of your research date, what is the current status of Grok open-sourcing? What would open-sourcing Grok mean for the enterprise AI market?</div><div class="rq"><strong>The xAI company risk:</strong> xAI is deeply tied to Elon Musk's other companies (Tesla, SpaceX, X/Twitter). Document the enterprise risk of building a production application on Grok 4.3: model availability guarantees, pricing stability history, geopolitical exposure, and the regulatory risk of X/Twitter data access in EU deployments.</div><div class="rq"><strong>Tekravio use case:</strong> Which Tekravio vertical (Studio, Academy, Labs) benefits most from Grok 4.3's unique X data + competitive pricing combination? Design one specific product concept using Grok 4.3 that would be meaningfully inferior if built on any other model. Explain exactly which capability makes Grok the right choice.</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t5">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Honest Competitive Assessment</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Where Grok 4.3 is clearly the right choice and where it is not.</p>
+      <div class="rl"><div class="rq"><strong>Clear wins (3 scenarios):</strong> Three specific scenarios where Grok 4.3 is the obvious model choice: (a) a fintech company monitoring real-time X sentiment for trading signals, (b) a social media analytics platform, (c) a cost-sensitive developer building a multi-modal agentic coding assistant at scale. For each: cite the specific capability and calculate the cost advantage.</div><div class="rq"><strong>Where it falls short:</strong> Document 3 specific scenarios where Grok 4.3 is not the right choice despite its low price: (a) when SWE-bench accuracy at 95% is required, (b) when EU data residency is mandatory, (c) when the task requires Mythos-class scientific reasoning. For each, specify which model wins and why.</div><div class="rq"><strong>The Colossus advantage question:</strong> xAI built the Colossus cluster specifically to train Grok. They have announced plans for continued scaling. Does having a proprietary training supercomputer give xAI a sustainable competitive advantage, or can hyperscalers (Microsoft/OpenAI, Google) close the compute gap? Document your reasoning.</div><div class="rq"><strong>Honest 200-word verdict:</strong> Where is Grok 4.3 the right model for Tekravio to use? Where would you choose GPT-5.5 or Claude Fable 5 instead? Include a specific cost comparison for a realistic monthly workload where Grok wins and one where it doesn't.</div></div>
+      
+    </div>
+  </div></div>
+<div class='sep'></div>
+<div class='stag'>// 02 &middot; Design Questions</div>
+<div class='sh'>Answer in Your README</div>
+<p style='margin-bottom:1.25rem'>Four questions. Precise answers with evidence.</p>
+<div class="qref"><div class="qref-n">Q1</div><div class="qref-t">A fintech startup wants to build a trading signal tool that analyses X/Twitter sentiment on specific company tickers in real-time. Design the full Grok 4.3 architecture. Which server-side tools do you use? How do you handle X data quality issues (bots, sarcasm, misinformation)? What is the monthly API cost at 100,000 queries/day?</div></div><div class="qref"><div class="qref-n">Q2</div><div class="qref-t">Grok 4.3 scores 80.6% on SWE-bench Verified vs Claude Fable 5 at 95%. For a Tekravio Studio client that wants an AI-powered code review tool, does this 14.4% gap matter? Build the argument that it does matter and the argument that it doesn't, then give your recommendation.</div></div><div class="qref"><div class="qref-n">Q3</div><div class="qref-t">An EU enterprise wants to use Grok 4.3's X search for brand monitoring across European markets. What GDPR concerns arise from processing European citizens' X/Twitter posts? Is Grok 4.3 a compliant choice for this use case?</div></div><div class="qref"><div class="qref-n">Q4</div><div class="qref-t">xAI has not delivered on the announced Grok 3 open-source release. How does a history of missed open-source commitments affect your recommendation to build a production application on Grok 4.3? What contractual or architectural protections should an enterprise put in place?</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 30 Additional Marks</div><div class="bi"><div class="bit"><strong>+15 marks — X Search live demo:</strong> Build an application using Grok 4.3's X search tool to analyse real-time data on a topic of your choice. Compare what you get from X search vs web search on the same query. Document quality, freshness, and cost.</div><div class="bit"><strong>+10 marks — Colossus expansion research:</strong> Research xAI's announced Colossus expansion plans. What is the planned GPU count at full scale? What does the AI community predict about Grok 5's capabilities based on the compute roadmap?</div><div class="bit"><strong>+5 marks — MCP integration demo:</strong> Connect Grok 4.3 to any publicly available MCP server and document the complete setup. Show a working tool call and explain what the server provides.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Send your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Intern Assignment &mdash; xAI Grok 4.3 &mdash; [Your Name]</code><br>Body: GitHub repo link + one sentence on your most surprising finding</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI Research Intern Assignment &middot; xAI &mdash; Grok 4.3 &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function toggle(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
