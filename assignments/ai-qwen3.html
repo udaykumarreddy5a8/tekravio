@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI Research Intern — Alibaba Qwen 3.x</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#f97316;--ar:249,115,22}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2,h3{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700;color:var(--tx)}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,14vw,140px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-100px;right:-60px;width:560px;height:560px;background:radial-gradient(ellipse,rgba(var(--ar),.15) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-60px;left:-40px;width:480px;height:480px;background:radial-gradient(ellipse,rgba(var(--ar),.06) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.1rem);color:var(--mu);max-width:720px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.08em;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.cb{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cr{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2);border-left:3px solid #f87171}.cr .callout-h{color:#f87171}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qref{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qref-n{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qref-t{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+.eval-t{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.875rem}
+.eval-t th{padding:.75rem 1rem;text-align:left;font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--s2)}
+.eval-t td{padding:.875rem 1rem;border-bottom:1px solid var(--bd);color:#94a3b8;vertical-align:top}
+.eval-t tr:last-child td{border-bottom:none}.eval-t tr:hover td{background:rgba(255,255,255,.02)}
+.score-n{font-family:"Clash Display",sans-serif;font-size:1.2rem;color:var(--ac)}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700;color:var(--tx)}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Research Intern · Alibaba · Qwen 3.x</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Research Intern &middot; Assignment 06</div>
+  </div>
+  <p class="etag">// Alibaba Qwen &middot; 2026 &middot; 201 Languages &middot; Cheapest Frontier Value</p>
+  <h1 class="ht">Qwen<br><span style="color:var(--ac)">3.x.</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">201 Languages.</span></h1>
+  <p class="hs">The most multilingual frontier model family in the world. 201 languages. Apache 2.0 license. Qwen3.7 Max is the cheapest model in the top-10 by GPQA Diamond at $1.25/M input tokens. Qwen 3 235B scores 85.7% on AIME '24. Qwen 3.6-Flash introduces Linear-Attention Context Windows for 1M tokens with near-zero latency degradation. For global applications and multilingual enterprise workloads, Qwen is underestimated by most Western AI teams.</p>
+  <div class="mrow">
+    <div class="mp"><div><div class="mpl">Top Model</div><div class="mpv">Qwen 3 235B / Qwen3.7 Max</div></div></div>
+    <div class="mp"><div><div class="mpl">Languages</div><div class="mpv">201</div></div></div>
+    <div class="mp"><div><div class="mpl">Pricing</div><div class="mpv">$0.10 &ndash; $1.25 per M tokens</div></div></div>
+    <div class="mp"><div><div class="mpl">License</div><div class="mpv">Apache 2.0</div></div></div>
+    <div class="mp"><div><div class="mpl">Total Marks</div><div class="mpv">100 + 30 Bonus</div></div></div>
+  </div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Quick Facts</div>
+<div class="trow">
+  <span class="tag">Qwen 3 235B</span><span class="tag">Qwen3.7 Max</span><span class="tag">Qwen 3.6-Flash</span>
+  <span class="tag">201 languages</span><span class="tag">Apache 2.0</span><span class="tag">$0.10&ndash;$1.25 per M</span>
+  <span class="tag">AIME '24: 85.7%</span><span class="tag">Thinking mode on/off</span><span class="tag">Linear Attention at 1M</span>
+  <span class="tag">Cheapest top-10 GPQA Diamond</span><span class="tag">Qwen-Coder-Next variant</span>
+</div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Context</div></div>
+  <div class="ctx-body">The Qwen 3.x family from Alibaba Cloud is the most multilingual frontier model family in the world &mdash; <strong>201 languages</strong>, Apache 2.0 license, and prices ranging from $0.10/M (Qwen 3 9B) to $1.25/M (Qwen3.7 Max). Qwen3.7 Max is the <strong>cheapest model in the top-10 by GPQA Diamond score</strong>.<br><br>
+  Qwen 3 235B achieves 85.7% on AIME '24 (a math competition benchmark). The unique Qwen 3.6-Flash introduces <strong>Linear-Attention Context Windows</strong> that support 1M tokens with near-zero latency degradation &mdash; a technical achievement that standard quadratic attention cannot match at that scale. For Tekravio's planned international expansion, Qwen is the most important non-Western frontier model to understand.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Research Modules</div>
+<div class="sh">Five Research Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This assignment requires research into a model family often overlooked by Western-focused AI teams. Go deeper than the surface stats.</p>
+<div class="tasks">  <div class="task" id="t1">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">01</div>
+      <div><div class="tt">The Complete Qwen 3.x Family Map</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The Qwen family is large and frequently updated. Build a complete, accurate map of every current model.</p>
+      <div class="rl"><div class="rq"><strong>Full family table:</strong> Research and build a complete table for the Qwen 3.x family covering at minimum: Qwen 3 235B, Qwen 3.5, Qwen3.7 Max, Qwen 3.6-Flash, and Qwen 3 9B. For each: total parameter count, context window, supported modalities, API pricing per million tokens, whether Apache 2.0 weights are available, and the primary use case.</div><div class="rq"><strong>Qwen3.7 vs Qwen 3 235B:</strong> Qwen3.7 Max is described as the cheapest model in the top-10 by GPQA Diamond. What is its GPQA Diamond score? How does it compare to Qwen 3 235B on the same benchmark? What specifically changed in the .7 increment that improved GPQA performance?</div><div class="rq"><strong>Qwen 3.6-Flash and Linear Attention:</strong> Qwen 3.6-Flash introduces Linear-Attention Context Windows supporting 1M tokens with near-zero latency degradation. Explain Linear Attention vs standard quadratic (O(n²)) attention: what is the memory complexity difference, what does 'near-zero latency degradation' mean technically, and what quality trade-offs does it introduce?</div><div class="rq"><strong>Qwen-Coder-Next:</strong> There is a Qwen3-Coder-Next variant specifically for software engineering. Document what it adds over base Qwen 3 for coding tasks. How does it perform on SWE-bench Verified vs Claude Fable 5 (95%) and Devstral 2?</div><div class="rq"><strong>The Alibaba Cloud integration advantage:</strong> For companies already on Alibaba Cloud (common in Asia-Pacific, especially China, Southeast Asia), what native integration advantages does Qwen offer that AWS/GCP customers using Claude or Gemini would not have? What is the pricing difference for Alibaba Cloud customers vs API customers?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t2">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">02</div>
+      <div><div class="tt">201 Languages &mdash; The Multilingual Capability in Depth</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">No other frontier model covers 201 languages. This is Qwen's most distinctive capability for global enterprise. Document it with evidence.</p>
+      <div class="rl"><div class="rq"><strong>Quality across the language spectrum:</strong> Document Qwen's multilingual performance across the spectrum: high-resource languages (English, Chinese, French, Spanish, German), medium-resource (Hindi, Arabic, Indonesian, Turkish), and low-resource (regional Indian languages like Tamil/Telugu, Southeast Asian like Burmese/Khmer, African languages). Where does quality measurably degrade, and how does this compare to GPT-5.5's multilingual performance?</div><div class="rq"><strong>Multilingual benchmarks:</strong> Research Qwen 3.x's scores on multilingual benchmarks (MMMLU, multilingual MMLU, language-specific evaluations). Compare to Mistral Large 3 (80+ languages) and GPT-5.5's multilingual performance. On which specific languages is Qwen genuinely superior, and on which does GPT-5.5 or Mistral outperform it?</div><div class="rq"><strong>Enterprise multilingual use cases with ROI:</strong> Three specific enterprise scenarios with quantifiable ROI: (a) global customer support in 15 languages (calculate cost of Qwen 3.5 vs building a translation pipeline into a monolingual model), (b) multilingual legal document processing, (c) regional market research in emerging markets. For each, document the specific languages involved and the cost calculation.</div><div class="rq"><strong>Tekravio international expansion relevance:</strong> Tekravio plans international expansion including Germany and potentially Asia-Pacific markets. Design a specific product or service offering using Qwen 3.5's 201-language capability that would require a fundamentally different model stack without Qwen. Which Tekravio vertical (Studio, Academy, Labs) benefits most?</div><div class="rq"><strong>Mandarin Chinese specifically:</strong> Qwen is built by a Chinese company and has exceptionally strong Mandarin Chinese performance. Document Qwen's performance on Chinese language benchmarks specifically. For a company entering the Chinese market, is Qwen's Chinese language quality a decisive advantage over GPT-5.5 or Fable 5?</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t3">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">03</div>
+      <div><div class="tt">Mathematical Reasoning: AIME '24 at 85.7%</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Qwen 3 235B scores 85.7% on AIME '24. Document what this means and how Qwen's reasoning capabilities compare to other frontier models.</p>
+      <div class="rl"><div class="rq"><strong>AIME '24 explained:</strong> What is AIME (American Invitational Mathematics Examination)? What level of mathematical problem does it test? Compare 85.7% to Claude Fable 5's performance on the same benchmark, GPT-5.5, and DeepSeek R1 (MATH-500: 97.3%). Why do different models use different math benchmarks to make 'best at math' claims?</div><div class="rq"><strong>Thinking mode on vs off:</strong> Qwen 3 has a switchable thinking mode. Document what thinking mode adds to mathematical reasoning tasks: which problem types benefit, what is the average token overhead cost, and when is non-thinking mode accurate enough for production? Build a decision rule: 'Use thinking mode when..., use non-thinking when...'</div><div class="rq"><strong>Qwen vs DeepSeek for mathematical applications:</strong> Both Qwen and DeepSeek are strong on mathematical reasoning. For a quantitative finance application that requires mathematical derivations and numerical computation, which model at which price point delivers the best combination of mathematical accuracy and cost efficiency? Build the comparison with specific benchmark evidence.</div><div class="rq"><strong>Reasoning benchmark landscape:</strong> Document the full range of reasoning benchmarks and where Qwen 3.x ranks on each: AIME, MATH-500, GPQA Diamond, ARC-AGI-2 (if available), and any Qwen-specific benchmarks Alibaba publishes. For each benchmark, explain what it measures and why that matters for enterprise applications.</div><div class="rq"><strong>Mathematical reasoning enterprise use cases:</strong> Three specific enterprise scenarios where Qwen's mathematical reasoning capability creates value: actuarial calculations in insurance, quantitative modelling in hedge funds, and scientific data analysis in pharmaceuticals. For each, design the prompt engineering approach and estimate the accuracy gain vs a general-purpose model.</div></div>
+      
+    </div>
+  </div>  <div class="task" id="t4">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">04</div>
+      <div><div class="tt">Pricing: $0.10/M to $1.25/M &mdash; The Value Map</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">The Qwen family spans from one of the cheapest to the cheapest top-10 frontier model. Document the full pricing picture.</p>
+      <div class="rl"><div class="rq"><strong>Complete pricing table:</strong> Build the complete Qwen 3.x family pricing table from cheapest to most capable: Qwen 3 9B (~$0.10/M) to Qwen3.7 Max ($1.25/M). For each price point: the capability trade-off vs the tier above, and the use case where this tier makes economic sense.</div><div class="rq"><strong>Cheapest top-10 GPQA Diamond verification:</strong> List the current top-10 models by GPQA Diamond score (research this fresh &mdash; not from memory) and their input pricing as of your submission date. Is Qwen3.7 Max still the cheapest model in that tier? If not, what changed?</div><div class="rq"><strong>Self-hosting economics for Qwen 3 235B:</strong> Document the minimum hardware to run Qwen 3 235B at production quality (int8 quantisation or better). Calculate the monthly infrastructure cost on H100 GPUs (3 configurations: Lambda Labs, RunPod, and AWS). At what monthly API request volume does self-hosting become cheaper than API at $1.25/M?</div><div class="rq"><strong>Qwen vs Gemini for cost-sensitive workloads:</strong> Gemini 3.1 Pro costs $2/M input. Qwen3.7 Max costs $1.25/M. For a company processing 100M tokens/month of input, calculate the annual cost difference. For what benchmark performance gap would the $0.75/M price difference not be worth the savings?</div></div>
+      <div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Price data changes frequently. Note the exact date you checked Qwen pricing and link to the official Alibaba Cloud pricing page.</p></div>
+    </div>
+  </div>  <div class="task" id="t5">
+    <div class="th" onclick="toggle(this)">
+      <div class="tn">05</div>
+      <div><div class="tt">Strategic Assessment &amp; Tekravio Decision Framework</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb">
+      <p class="tdesc">Honest assessment of Qwen's position in the global AI landscape and what it means for Tekravio.</p>
+      <div class="rl"><div class="rq"><strong>Where Qwen is genuinely better:</strong> Document the domains where Qwen 3.x outperforms Western frontier models with evidence: Mandarin Chinese specifically, multilingual coverage below 50 supported languages, mathematical reasoning at the $1.25/M price point. Cite benchmark evidence for each claim. Do not repeat marketing language.</div><div class="rq"><strong>Geopolitical dimension:</strong> Alibaba is a publicly listed Chinese company, unlike DeepSeek (private). Does this change the enterprise risk calculation? For EU procurement, what is the current regulatory guidance on Alibaba/Qwen AI models? For US government and defense contractors, what restrictions apply? Document what is publicly known.</div><div class="rq"><strong>The 201-language moat:</strong> Qwen covers 201 languages. Mistral Large 3 covers 80+. GPT-5.5 covers approximately 50+ with meaningful quality. Is 201 languages a sustainable competitive moat, or will Western models catch up within 12 months? What would it cost Anthropic or OpenAI to match Qwen's multilingual coverage?</div><div class="rq"><strong>Tekravio expansion architecture:</strong> Tekravio plans international market expansion. Which Qwen model and which specific capability enables a Tekravio product that would require a completely different model stack without Qwen? Build the specific use case: target market, use case, why Qwen's specific capability (language coverage, price, math) is decisive.</div><div class="rq"><strong>Honest limitations:</strong> Three domains where Qwen 3.x is not the right choice despite its price advantage: (a) maximum coding accuracy on complex agentic tasks, (b) safety requirements for US-regulated enterprise, (c) vision and multimodal tasks. Document why and which model wins in each.</div></div>
+      
+    </div>
+  </div></div>
+<div class='sep'></div>
+<div class='stag'>// 02 &middot; Design Questions</div>
+<div class='sh'>Answer in Your README</div>
+<p style='margin-bottom:1.25rem'>Four questions requiring evidence, calculation, and strategic thinking.</p>
+<div class="qref"><div class="qref-n">Q1</div><div class="qref-t">A global HR software company wants to build a multilingual job description generator that works across 80 countries. They need quality output in 60+ languages including Thai, Indonesian, Arabic (formal), and 15 African languages. Design the model selection strategy: which languages use Qwen, which use GPT-5.5, and how do you route requests? Calculate monthly costs at 1M generations/month.</div></div><div class="qref"><div class="qref-n">Q2</div><div class="qref-t">Qwen3.7 Max is the 'cheapest model in the top-10 by GPQA Diamond.' But GPQA Diamond tests PhD-level science knowledge, not general enterprise tasks. For a Tekravio Studio client building a customer service bot, does GPQA Diamond rank matter? What benchmark would you actually use to evaluate model selection for this use case?</div></div><div class="qref"><div class="qref-n">Q3</div><div class="qref-t">A Southeast Asian fintech startup is building a financial analysis tool for markets in Thailand, Vietnam, Indonesia, and the Philippines. They have a $2,000/month API budget. Compare Qwen 3.5 vs GPT-5.5 for this use case: language support, financial reasoning quality, and total tokens processable per month at each price point. Which do you recommend?</div></div><div class="qref"><div class="qref-n">Q4</div><div class="qref-t">Linear Attention in Qwen 3.6-Flash achieves 1M token context with near-zero latency degradation vs standard quadratic attention which degrades quadratically. If Qwen 3.6-Flash can process a 1M token input in T seconds, how long would standard attention take for the same input on the same hardware? What does this mean for the practical viability of 10M context like Llama 4 Scout?</div></div><div class='sep'></div><div class="bx"><div class="bxt">// Bonus Tasks &mdash; 30 Additional Marks</div><div class="bi"><div class="bit"><strong>+15 marks — Multilingual quality audit:</strong> Test Qwen 3.5 and Claude Fable 5 on the same 5 prompts in 3 non-English languages (e.g., Hindi, Arabic, Indonesian). Document output quality, fluency, accuracy, and token counts. Include specific linguistic errors if any.</div><div class="bit"><strong>+10 marks — AIME problem solving comparison:</strong> Take 5 AIME 2024 competition problems. Run each through Qwen 3 235B (thinking on), Qwen 3 235B (thinking off), and Claude Fable 5. Compare: which solved it correctly, how many tokens used, and total cost per correct solution.</div><div class="bit"><strong>+5 marks — Linear Attention research:</strong> Find the technical paper or blog post describing Qwen 3.6-Flash's Linear Attention implementation. Explain the mathematical difference from standard O(n²) attention and why this matters for 1M+ context windows.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Ready? Send your work.</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.9rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Intern Assignment &mdash; Alibaba Qwen 3.x &mdash; [Your Name]</code><br>Body: GitHub repo link + one sentence on your most surprising finding</div>
+</div></div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI Research Intern Assignment &middot; Alibaba Qwen &mdash; Qwen 3.x Family &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function toggle(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){
+  var t=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';
+},{passive:true});
+</script>
+</body>
+</html>
