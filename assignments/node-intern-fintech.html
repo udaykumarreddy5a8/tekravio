@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Node.js Intern — FinSmart — FinTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#4ade80;--ar:74,222,128}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Node Intern · FinTech</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Node Intern · FinTech Domain</div>
+  </div>
+  <p class="etag">// Assignment 02 · Node.js · FinTech · Intermediate</p>
+  <h1 class="ht">FinSmart<br><span style="color:var(--ac)">Node.js</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Finance API.</span></h1>
+  <p class="hs">Build the Node.js/TypeScript backend for FinSmart. Financial applications require exact arithmetic &mdash; use the <code>decimal.js</code> library for all monetary calculations (BigDecimal equivalent in Node). Prisma's <code>Decimal</code> type maps to PostgreSQL's <code>DECIMAL</code>. Every transaction that modifies account balance must be in a Prisma interactive transaction.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">FinTech</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">FinSmart Node.js API</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Node.js 20 · TypeScript · Prisma Decimal</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Node.js 20 LTS</span><span class="tag">TypeScript 5 (strict)</span><span class="tag">Fastify 4.x</span>
+  <span class="tag">Prisma 5.x</span><span class="tag">PostgreSQL</span><span class="tag">Zod</span>
+  <span class="tag">jsonwebtoken</span><span class="tag">ioredis (optional)</span>
+  <span class="tag">Jest + Supertest</span><span class="tag">testcontainers-node</span><span class="tag">pino</span>
+</div><div class="sep"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">FinSmart Node.js uses <strong>Prisma's built-in <code>Decimal</code> type</strong> for all monetary fields and <code>decimal.js</code> for arithmetic. Never use JavaScript <code>number</code> for money. All balance modifications use Prisma <strong>interactive transactions</strong> (<code>prisma.$transaction(async (tx) => {...})</code>) to ensure atomicity. The Zod schema for the month parameter uses <code>.transform()</code> to convert the string '2026-06' to a <code>Date</code> object.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">TypeScript strict mode throughout. No <code>any</code>. Every Zod schema exported from a <code>schemas/</code> folder. Every Prisma query wrapped in a typed service class.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Account &amp; Transaction Management</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Typed account and transaction services with atomic balance updates.</p><div class="rl"><div class="rq"><strong>Prisma Decimal:</strong> All monetary fields use Prisma's <code>Decimal</code> type: <code>balance Decimal @default(0) @db.Decimal(19, 4)</code>. In TypeScript, use <code>import Decimal from 'decimal.js'</code> for all arithmetic. Never use <code>number</code> type for money.</div><div class="rq"><strong>Transaction service:</strong> <code>createTransaction(dto: CreateTransactionDto): Promise&lt;TransactionDto&gt;</code> uses a Prisma interactive transaction: <code>prisma.$transaction(async (tx) => { /* deduct/credit balance + create transaction record */ })</code>. The balance update uses a raw increment: <code>tx.account.update({ where: { id }, data: { balance: { increment: amount } } })</code>.</div><div class="rq"><strong>Account ownership:</strong> Every repository method that fetches or modifies an account must accept <code>userId</code> and include it in the <code>where</code> clause. Create a <code>verifyAccountOwnership(accountId: string, userId: string): Promise&lt;Account&gt;</code> utility that throws if ownership fails.</div><div class="rq"><strong>Balance recalculation:</strong> Implement <code>recalculateBalance(accountId: string): Promise&lt;Decimal&gt;</code> using Prisma's <code>aggregate</code>: <code>prisma.transaction.aggregate({ where: { accountId, type: 'INCOME' }, _sum: { amount: true } })</code>. Subtract expenses. Use this in tests to verify balance integrity.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Budget Management</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Budget upsert and spending calculation with Prisma aggregations.</p><div class="rl"><div class="rq"><strong>Budget upsert:</strong> Use Prisma <code>upsert</code>: <code>prisma.budget.upsert({ where: { userId_category_month: { userId, category, month } }, create: {...}, update: { limitAmount } })</code>. The compound unique index makes the upsert safe.</div><div class="rq"><strong>Budget with usage:</strong> <code>getBudgetsWithUsage(userId, month): Promise&lt;BudgetWithUsage[]&gt;</code>. One Prisma query using <code>include</code> + raw spend sum. Type the return: <code>type BudgetWithUsage = Budget & { spentAmount: Decimal; usagePercentage: number; status: BudgetStatus }</code>.</div><div class="rq"><strong>Zod for month parameter:</strong> Validate month query param as <code>z.string().regex(/^\d{4}-\d{2}$/).transform(s => new Date(s + '-01'))</code>. The transform converts '2026-06' to a <code>Date</code> object automatically.</div><div class="rq"><strong>Budget summary:</strong> Return an array including categories with spending but no budget: use a Prisma <code>findMany</code> on transactions grouped by category, then merge with budget data in TypeScript.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Savings Goals &amp; Deposits</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Goal deposits with balance deduction and projected date calculation.</p><div class="rl"><div class="rq"><strong>Goal deposit transaction:</strong> <code>depositToGoal(userId, goalId, { accountId, amount, note })</code> uses a Prisma interactive transaction: deduct from account balance, create GoalDeposit, increment goal.currentAmount, check if goal is now achieved and update status. All in one atomic operation.</div><div class="rq"><strong>Projected date:</strong> Use <code>decimal.js</code> for all calculations. Average daily deposit rate from last 30 days using Prisma aggregate. <code>const daysNeeded = remaining.div(dailyRate).ceil().toNumber()</code>. Return <code>null</code> if no recent deposits.</div><div class="rq"><strong>Goal types:</strong> TypeScript: <code>type GoalStatus = 'ACTIVE' | 'ACHIEVED' | 'ABANDONED'</code>. Use a union type, not enum. The service sets status to ACHIEVED when <code>currentAmount.gte(targetAmount)</code>.</div><div class="rq"><strong>Abandon goal:</strong> <code>abandonGoal(userId, goalId)</code> validates the goal belongs to the user and status is ACTIVE. Sets status to ABANDONED. This is the only valid way to close a non-achieved goal.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Analytics &amp; Recurring</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Aggregate reports and scheduled recurring transaction processing.</p><div class="rl"><div class="rq"><strong>Monthly report:</strong> Use Prisma's <code>groupBy</code> for category breakdown: <code>prisma.transaction.groupBy({ by: ['category'], where: {...}, _sum: { amount: true }, _count: true, orderBy: { _sum: { amount: 'desc' } } })</code>. Return typed: <code>CategoryBreakdown[]</code>.</div><div class="rq"><strong>6-month trend:</strong> Build the 6-month income vs expense trend using a Prisma raw query or a loop of aggregates. Return as <code>TrendPoint[]</code> where <code>type TrendPoint = { month: string; income: Decimal; expenses: Decimal; net: Decimal }</code>.</div><div class="rq"><strong>Recurring transaction job:</strong> Use <code>node-cron</code> or Fastify's lifecycle hooks for a daily job. Process all active recurring transactions where <code>nextDueDate &lt;= today</code> in a loop. Wrap each in <code>prisma.$transaction()</code>. Catch per-item errors with <code>logger.error()</code> and continue.</div><div class="rq"><strong>Job idempotency:</strong> Ensure the recurring job does not double-process transactions if it runs twice in the same day (e.g., server restart). Use a <code>processedDate</code> field on the RecurringTransaction record: skip if processedDate equals today.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Testing &amp; Deployment</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Jest unit tests with Prisma mocks and one containerised integration test.</p><div class="rl"><div class="rq"><strong>Prisma mock setup:</strong> Use <code>jest-mock-extended</code> or manual mocks: <code>jest.mock('../prisma', () => ({ prisma: { account: { findFirst: jest.fn(), update: jest.fn() }, transaction: { create: jest.fn() }, $transaction: jest.fn() } }))</code>. Reset mocks in <code>beforeEach</code>.</div><div class="rq"><strong>Unit tests:</strong> 6 tests for <code>TransactionService</code>: (a) INCOME increases balance, (b) EXPENSE decreases balance, (c) insufficient balance throws typed error, (d) account not owned by user throws 403, (e) Decimal arithmetic: 100.10 + 200.20 = 300.30 (not 300.3000000000001), (f) budget status is OVER_BUDGET when usage > 100%.</div><div class="rq"><strong>Integration test:</strong> <code>@testcontainers/postgresql</code> test: create account with balance 1000, create expense transaction of 500, assert balance = 500, assert WalletTransaction created, assert balance recalculation matches.</div><div class="rq"><strong>docker-compose:</strong> Services: <code>api</code>, <code>postgres</code>, optional <code>redis</code>. Prisma migrations run automatically via entrypoint: <code>npx prisma migrate deploy && node dist/index.js</code>.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Node.js-specific design patterns &mdash; these come up in every backend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Prisma's interactive transaction <code>prisma.$transaction(async (tx) => {...})</code> gives you a scoped transaction client. Why do you need to use <code>tx.account.update()</code> inside the transaction instead of the regular <code>prisma.account.update()</code>?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">You use <code>decimal.js</code> for arithmetic. But Prisma returns <code>Decimal</code> objects (from the <code>@prisma/client/runtime</code> package), not <code>decimal.js</code> <code>Decimal</code> objects. They are different types. How do you convert between them safely?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Your recurring transaction job runs at 8 AM daily. If the server was down from 7 AM to 9 AM, the job runs at 9 AM. It processes all transactions with nextDueDate <= today, which is correct. But what if the server was down for 3 days? Does your implementation handle multi-day backlogs correctly?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">The budget summary must include categories that have transactions but no budget. Prisma's ORM cannot do a RIGHT JOIN from the budgets table. How do you implement this? Do you use Prisma's raw SQL (<code>$queryRaw</code>), or do you merge two separate queries in TypeScript?</div></div><div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — CSV export endpoint:</strong> Implement <code>GET /api/reports/export?from=&to=</code> that streams a CSV file using Node.js streams. Use a Transform stream to convert Prisma transaction rows to CSV lines. Set <code>Content-Type: text/csv</code> and <code>Content-Disposition: attachment</code>.</div><div class="bit"><strong>+7 marks — Prisma Client Extension:</strong> Add a Prisma Client Extension that automatically adds <code>createdAt</code> and <code>updatedAt</code> to create/update operations and validates that monetary amounts are never negative before any database write.</div><div class="bit"><strong>+5 marks — Input sanitisation:</strong> All string inputs (description, account name) must be sanitised: trim whitespace, limit length, strip HTML tags. Implement as a Zod transform that applies to all string fields in all schemas.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Node Intern — FinSmart FinTech &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Node.js Intern Assignment &middot; FinTech &mdash; FinSmart &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
