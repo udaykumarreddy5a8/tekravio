@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Python Intern — FinSmart — FinTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#fbbf24;--ar:251,191,36}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Python Intern · FinTech</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Python Intern · FinTech Domain</div>
+  </div>
+  <p class="etag">// Assignment 02 · Python · FinTech · Intermediate</p>
+  <h1 class="ht">FinSmart<br><span style="color:var(--ac)">FastAPI</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Finance API.</span></h1>
+  <p class="hs">Build the Python/FastAPI backend for FinSmart. Use Python's built-in <code>decimal.Decimal</code> with <code>ROUND_HALF_UP</code> for all monetary calculations. SQLAlchemy <code>DECIMAL(19,4)</code> column type for all monetary DB fields. FastAPI's dependency injection for the current user and DB session.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">FinTech</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">FinSmart FastAPI</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Python 3.12 · FastAPI · Decimal</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Python 3.12+</span><span class="tag">FastAPI</span><span class="tag">SQLAlchemy 2.x (async)</span>
+  <span class="tag">Pydantic v2</span><span class="tag">PostgreSQL</span><span class="tag">Alembic</span>
+  <span class="tag">python-jose (JWT)</span><span class="tag">bcrypt</span><span class="tag">pytest + httpx</span>
+  <span class="tag">Docker Compose</span>
+</div><div class="sep"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">FinSmart FastAPI uses Python's built-in <code>decimal.Decimal</code> with <code>ROUND_HALF_UP</code> for all monetary arithmetic. SQLAlchemy <code>DECIMAL(19,4)</code> for all monetary DB columns. All balance modifications use SQLAlchemy's <code>async with db.begin():</code> transaction context manager. The recurring transactions job runs via <strong>APScheduler</strong> integrated into FastAPI's lifespan events.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Type hints on every function. Pydantic v2 models for all request/response schemas. <code>async def</code> for all route handlers and database queries. <code>mypy --strict</code> must pass.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Account &amp; Transaction Management</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Typed account and transaction service with atomic balance update.</p><div class="rl"><div class="rq"><strong>SQLAlchemy Decimal:</strong> <code>balance: Mapped[Decimal] = mapped_column(DECIMAL(19, 4), default=Decimal('0'))</code>. All arithmetic: <code>from decimal import Decimal, ROUND_HALF_UP</code>. Use: <code>result = Decimal('100.10') + Decimal('200.20')</code>.</div><div class="rq"><strong>Async transaction:</strong> <code>async def create_transaction(dto: TransactionCreate, db: AsyncSession, user: User) -> TransactionResponse</code>. Use SQLAlchemy's <code>async with db.begin():</code> to wrap the balance update + transaction insert. If any statement fails, the context manager rolls back automatically.</div><div class="rq"><strong>Account ownership dependency:</strong> <code>async def get_user_account(account_id: UUID, db: AsyncSession, user: User = Depends(get_current_user)) -> Account</code>. Raises <code>HTTPException(404)</code> if not found, <code>HTTPException(403)</code> if not owned by user.</div><div class="rq"><strong>Balance recalculation:</strong> Use SQLAlchemy aggregate: <code>income = await db.scalar(select(func.sum(Transaction.amount)).where(Transaction.account_id == aid, Transaction.type == 'INCOME')) or Decimal('0')</code>. Return <code>income - expenses</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Budget Management</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Upsert budget with SQLAlchemy and compute usage in Python.</p><div class="rl"><div class="rq"><strong>Upsert with ON CONFLICT:</strong> Use PostgreSQL's <code>insert().on_conflict_do_update()</code> via SQLAlchemy: <code>stmt = insert(Budget).values(...).on_conflict_do_update(index_elements=['user_id','category','month'], set_={'limit_amount': dto.limit_amount})</code>.</div><div class="rq"><strong>Budget with usage:</strong> Query all budgets for user+month, then query transaction sums grouped by category in one query: <code>select(Transaction.category, func.sum(Transaction.amount)).where(...).group_by(Transaction.category)</code>. Merge in Python.</div><div class="rq"><strong>BudgetStatus enum:</strong> Python <code>enum.StrEnum</code>: <code>class BudgetStatus(StrEnum): ON_TRACK = 'ON_TRACK'; WARNING = 'WARNING'; OVER_BUDGET = 'OVER_BUDGET'</code>. Compute: <code>pct = (spent / limit * 100).quantize(Decimal('0.01'), ROUND_HALF_UP)</code>.</div><div class="rq"><strong>Month parameter validation:</strong> Pydantic: <code>month: str = Query(pattern=r'^\d{4}-\d{2}$')</code>. In the route: parse to date with <code>datetime.strptime(month + '-01', '%Y-%m-%d').date()</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Savings Goals &amp; Deposits</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Goal deposits with atomic account deduction and projected date calculation.</p><div class="rl"><div class="rq"><strong>Goal deposit:</strong> <code>async with db.begin(): deduct account balance; add to goal current_amount; create GoalDeposit; if goal.current_amount >= goal.target_amount: goal.status = GoalStatus.ACHIEVED</code>. All in one SQLAlchemy transaction context.</div><div class="rq"><strong>Projected date:</strong> Use Python's <code>relativedelta</code> or timedelta math. Average daily deposit: <code>daily_rate = recent_total / Decimal('30')</code>. Days needed: <code>math.ceil(float(remaining / daily_rate))</code>. Return <code>date.today() + timedelta(days=days_needed)</code>.</div><div class="rq"><strong>Pydantic validators:</strong> Use Pydantic v2's <code>@field_validator</code>: <code>@field_validator('target_date') @classmethod def target_must_be_future(cls, v): if v <= date.today(): raise ValueError('Target date must be in the future'); return v</code>.</div><div class="rq"><strong>Goal response:</strong> Use Pydantic <code>computed_field</code>: <code>@computed_field @property def progress_percentage(self) -> Decimal: return (self.current_amount / self.target_amount * 100).quantize(Decimal('0.1'), ROUND_HALF_UP)</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Analytics &amp; Reports</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Group-by aggregations with SQLAlchemy and Python dataclass-based report building.</p><div class="rl"><div class="rq"><strong>Category breakdown:</strong> <code>select(Transaction.category, func.sum(Transaction.amount).label('total'), func.count().label('count')).where(...).group_by(Transaction.category).order_by(desc('total'))</code>. Map rows to <code>CategoryBreakdown</code> Pydantic models.</div><div class="rq"><strong>6-month trend:</strong> Build with a list comprehension: <code>[ await get_month_totals(user_id, month, db) for month in last_6_months ]</code>. Or use one SQL query with <code>date_trunc('month', Transaction.transaction_date)</code> grouping. Document which approach and why.</div><div class="rq"><strong>Recurring transactions:</strong> Use APScheduler with FastAPI lifespan events: <code>@asynccontextmanager async def lifespan(app): scheduler.start(); yield; scheduler.shutdown()</code>. The job runs at 8 AM daily via <code>scheduler.add_job(process_recurring, CronTrigger(hour=8))</code>.</div><div class="rq"><strong>Cash flow report:</strong> Return a <code>dataclass</code> (not Pydantic, just for the calculation): <code>@dataclass class CashFlow: opening: Decimal; credits: Decimal; debits: Decimal; closing: Decimal</code>. Validate <code>closing == opening + credits - debits</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Testing &amp; Structure</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">pytest async tests and Alembic migrations.</p><div class="rl"><div class="rq"><strong>Test fixtures:</strong> Use pytest fixtures: <code>@pytest.fixture async def db_session() -> AsyncGenerator[AsyncSession, None]</code> with a test PostgreSQL database (or SQLite for unit tests). A <code>@pytest.fixture async def test_user(db_session)</code> creates a user for tests.</div><div class="rq"><strong>Unit tests:</strong> 6 tests: (a) INCOME increases balance, (b) EXPENSE decreases balance, (c) deduct more than balance raises <code>ValueError</code>, (d) budget status: 85% usage = WARNING, (e) decimal arithmetic: 100.10 + 200.20 = 300.30 (not float), (f) projected date with zero deposits returns None.</div><div class="rq"><strong>Integration test:</strong> <code>@pytest.mark.asyncio async def test_create_transaction_updates_balance</code>: create account via API, create INCOME transaction, GET account and assert balance updated, create EXPENSE transaction, assert balance decremented.</div><div class="rq"><strong>Alembic setup:</strong> <code>alembic init alembic</code>, configure <code>alembic.ini</code> and <code>env.py</code> for async SQLAlchemy. Create initial migration: <code>alembic revision --autogenerate -m 'initial'</code>. Show the generated migration file.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Python/FastAPI-specific patterns.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Python's <code>decimal.Decimal</code> arithmetic is exact. But when you write <code>Decimal('100.10') + Decimal('200.20')</code>, what do you get? Is it exactly <code>300.30</code> or <code>300.3</code>? What is the difference, and when does it matter for financial display?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">SQLAlchemy's <code>async with db.begin():</code> creates a transaction that auto-commits on exit and auto-rollbacks on exception. But what if you need to do something AFTER the transaction commits (e.g., send a notification)? How do you structure this correctly?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Your 6-month trend can be computed either with a loop of 6 async queries or with one SQL query using <code>date_trunc</code>. The one-query approach sends one round trip to the database. The loop approach sends 6 round trips but each query is simpler. Which do you implement and why?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">APScheduler runs a recurring transaction job. The FastAPI app is deployed with 3 workers (Gunicorn with 3 uvicorn workers). The scheduler runs in each worker. The cron job will run 3 times. How do you prevent this?</div></div><div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Celery + Redis:</strong> Replace APScheduler with Celery for the recurring transaction job. The Celery worker runs separately from the FastAPI app. Configure with Redis as the broker. Show the docker-compose with FastAPI, Celery worker, Redis, and PostgreSQL.</div><div class="bit"><strong>+7 marks — Response caching:</strong> Cache the 6-month trend report in Redis with a 1-hour TTL. Use <code>redis.asyncio</code>. Cache key: <code>f'trend:{user_id}:{months}'</code>. Invalidate on new transaction creation.</div><div class="bit"><strong>+5 marks — Streaming CSV export:</strong> Use FastAPI's <code>StreamingResponse</code> with a generator that yields CSV rows: <code>async def generate_csv() -> AsyncGenerator[str, None]: yield header; async for tx in query: yield row</code>.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Python Intern — FinSmart FinTech &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Python Intern Assignment &middot; FinTech &mdash; FinSmart &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
