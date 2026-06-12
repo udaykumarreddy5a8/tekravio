@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · React Intern — ConnectHub — Social Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#61dafb;--ar:97,218,251}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// React Intern · Social Media</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// React Intern · Social Media Domain</div>
+  </div>
+  <p class="etag">// Assignment 05 · React · Social Media · Intermediate</p>
+  <h1 class="ht">ConnectHub<br><span style="color:var(--ac)">Social</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Feed App.</span></h1>
+  <p class="hs">Build the React frontend for ConnectHub. The feed uses infinite scroll. Posts can be liked and commented in real time. Following/unfollowing updates the UI instantly with optimistic updates. Private accounts show a lock icon and a follow request button instead of posts. This is the most interaction-heavy assignment &mdash; every click should feel immediate.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Social Media</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">ConnectHub Frontend</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">React 18 · TypeScript · TanStack Query</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">TanStack Query (React Query)</span>
+  <span class="tag">Zustand</span><span class="tag">React Router v6</span><span class="tag">Tailwind CSS</span>
+  <span class="tag">Axios</span><span class="tag">React Hook Form + Zod</span><span class="tag">Vite</span>
+  <span class="tag">Vitest + Testing Library</span>
+</div><div class="sep"></div>
+<div class="ctx-h" style="display:none"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">ConnectHub is the most interaction-heavy React assignment. <strong>Every interaction should feel instant</strong> using optimistic updates. The feed uses <code>useInfiniteQuery</code>. Like/unlike uses <code>useMutation</code> with <code>onMutate</code> for optimistic updates. The follow button has 4 distinct states that must be rendered correctly based on the <code>followStatus</code> field returned by the API. No interaction should require waiting for an API response to update the UI.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This is a frontend assignment. Every module requires working UI components, not just API calls. Show state, loading, and error states for every async operation.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Feed &amp; Infinite Scroll</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The home feed with infinite scroll and post interactions.</p><div class="rl"><div class="rq"><strong>Infinite scroll feed:</strong> Use TanStack Query's <code>useInfiniteQuery</code> to load the home feed. When the user scrolls to within 200px of the bottom, automatically load the next page. Use an <code>IntersectionObserver</code> hook to detect the scroll trigger. Show a loading spinner at the bottom while fetching more.</div><div class="rq"><strong>Post card:</strong> Each PostCard: user avatar (with click-to-profile), username, display name, timestamp (relative: '2h ago'), post text (truncated at 3 lines with 'Show more'), image grid (1 image = full width, 2 = side by side, 3+ = grid with overflow count). Like button, comment count button, share button.</div><div class="rq"><strong>Optimistic like:</strong> Clicking the like button: immediately toggle the icon filled/unfilled and increment/decrement the like count. Call the like/unlike API in the background. If the API fails, revert to original state and show an error toast. The UI must never wait for the API response to update the like icon.</div><div class="rq"><strong>Empty feed:</strong> When the user follows no one, show an empty state with suggestions: 'Start by following some people' with a list of recommended accounts (fetched from a public API endpoint).</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Post Creation &amp; Comments</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Creating posts and the comment thread.</p><div class="rl"><div class="rq"><strong>Post composer:</strong> A 'What's on your mind?' input at the top of the feed. Clicking expands to a modal with: textarea (character countdown 2000), image URL input (+ Add Image button with preview), visibility selector (PUBLIC / FOLLOWERS_ONLY / PRIVATE) as icon buttons. 'Post' button disabled if text is empty.</div><div class="rq"><strong>Comment section:</strong> Clicking the comment count button on a post expands a comment panel below the post card (not a separate page). Shows top-level comments with their direct replies collapsed under a 'N replies' toggle. Reply form shows inline when clicking 'Reply' on a comment.</div><div class="rq"><strong>Nested comments:</strong> Replies are indented. A 'View N replies' expander shows them. The reply input auto-fills <code>@username</code>. Character limit 500 with live countdown. Submitting a reply optimistically adds it to the thread.</div><div class="rq"><strong>Delete post/comment:</strong> Author can delete their own posts and comments. A '...' menu on hover shows 'Delete'. Confirmation popover (not modal). After deletion, the post/comment fades out with an animation and is removed from the DOM.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Follow System &amp; Profile</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">User profiles, follow/unfollow, and the private account experience.</p><div class="rl"><div class="rq"><strong>User profile page:</strong> Header: cover photo area, avatar (large), display name, username, bio, follower/following counts (clickable to open lists). A 'Follow' / 'Following' / 'Requested' button based on relationship state. Post grid below.</div><div class="rq"><strong>Follow button states:</strong> Four states with distinct visual treatment: (1) Follow (outlined button), (2) Following (filled green, hover shows 'Unfollow' in red), (3) Requested (grey, hover shows 'Cancel Request'), (4) Blocked (shown as 'Blocked', with an option to unblock). All transitions optimistic.</div><div class="rq"><strong>Private account:</strong> If viewing a private account you don't follow: show avatar + bio + follower count, but replace the post grid with a lock icon + 'This account is private. Follow to see their posts.' If you sent a follow request, show 'Requested &mdash; waiting for approval.'</div><div class="rq"><strong>Followers/following lists:</strong> Modal showing the list. Each entry: avatar, name, username, follow button (same 4-state button). The list is infinite-scroll within the modal. Search input filters the list client-side.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Notifications</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Real-time-feeling notification bell and notification list.</p><div class="rl"><div class="rq"><strong>Notification bell:</strong> Header icon with unread count badge. The badge shows up to 99+. Clicking opens a dropdown of recent notifications (last 5). A 'View all' link goes to the notifications page. The unread count refreshes every 30 seconds via TanStack Query polling.</div><div class="rq"><strong>Notification types:</strong> Each notification has a specific icon and message: 🔔 'Alice followed you', 💙 'Bob liked your post', 💬 'Carol commented on your photo', ✅ 'Dave approved your follow request'. Clicking a notification navigates to the relevant content and marks it as read.</div><div class="rq"><strong>Notifications page:</strong> Full list of notifications, paginated. Unread items have a blue left border. 'Mark all as read' button at the top. Each item shows: avatar, message, time, and is clickable to the relevant content.</div><div class="rq"><strong>Polling vs real-time:</strong> Implement polling (every 30 seconds via TanStack Query <code>refetchInterval</code>). In your README, explain what you would replace polling with in a production app (WebSocket or SSE) and why.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Search &amp; Explore</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">User search and content discovery.</p><div class="rl"><div class="rq"><strong>Search page:</strong> A search input with debounce (300ms). Results split into two tabs: People and Posts. People results show the 4-state follow button. Post results show a mini card (author, truncated text, like count).</div><div class="rq"><strong>Trending hashtags:</strong> A sidebar widget on the feed page showing top 10 hashtags (fetched from <code>GET /api/hashtags/trending</code>). Clicking a hashtag navigates to its posts page. The widget refreshes every 5 minutes.</div><div class="rq"><strong>Hashtag page:</strong> <code>/hashtag/{tag}</code> &mdash; a feed of posts with that hashtag using the same infinite-scroll PostCard. A header shows the hashtag, total post count.</div><div class="rq"><strong>Suggested accounts:</strong> A sidebar widget on the feed showing 5 accounts to follow (random or by follow-of-follow logic). Each has the follow button. 'Refresh' link loads a new set of 5.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">These come up in every React frontend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Your optimistic like updates the local like count instantly. But TanStack Query's cache has the old count. When the post card re-renders from the cache (e.g., after a page focus), it might show the old count momentarily. How do you keep the optimistic update in sync with the cache?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">The notification badge shows unread count from a query that polls every 30 seconds. The user reads a notification on the notifications page, marking it as read. But the bell badge still shows the old unread count until the next 30-second poll. How do you make the badge update immediately after the read action?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">The feed uses infinite scroll. The user scrolls down 10 pages, clicks a post to view it, then presses Back. Where do they land in the feed? How do you restore the user's scroll position in the infinite list? What does TanStack Query do by default, and is it correct?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">The follow button has 4 states that depend on an API response. While the API is loading (e.g., after clicking Follow), what state does the button show? If you show a spinner, what prevents the user from clicking it again during the loading?</div></div>
+<div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Infinite scroll with scroll restoration:</strong> When the user navigates away from the feed and comes back, restore their scroll position and the loaded pages using TanStack Query's <code>keepPreviousData</code> and a custom scroll restoration hook.</div><div class="bit"><strong>+7 marks — Image upload:</strong> Replace image URL input with actual image upload. Use the browser's File API to select an image, preview it client-side before upload, then POST it as multipart/form-data to the backend. Show upload progress.</div><div class="bit"><strong>+5 marks — Post skeleton loading:</strong> Instead of a spinner when the feed loads, show PostCard skeleton screens (grey pulsing rectangles in the shape of the card). The skeletons match the exact layout of the real cards.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>React Intern — ConnectHub Social Media &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">React Intern Assignment &middot; Social Media &mdash; ConnectHub &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
