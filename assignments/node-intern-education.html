@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Node.js Intern — EduTrack — Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#4ade80;--ar:74,222,128}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Node Intern · Education</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Node Intern · Education Domain</div>
+  </div>
+  <p class="etag">// Assignment 01 · Node.js · EdTech · Intermediate</p>
+  <h1 class="ht">EduTrack<br><span style="color:var(--ac)">Node.js</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">API.</span></h1>
+  <p class="hs">Build the Node.js/TypeScript backend for EduTrack. Same domain as the Java version but different implementation patterns. Focus areas: Zod schema composition for nested DTOs, Prisma's select/include for efficient queries, Fastify hooks for JWT middleware, and proper TypeScript generics for API response wrappers. No <code>any</code> types. No implicit <code>Promise&lt;void&gt;</code> that hides errors.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Education</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">EduTrack Node.js API</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Node.js 20 · TypeScript · Fastify</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Node.js 20 LTS</span><span class="tag">TypeScript 5 (strict)</span><span class="tag">Fastify 4.x</span>
+  <span class="tag">Prisma 5.x</span><span class="tag">PostgreSQL</span><span class="tag">Zod</span>
+  <span class="tag">jsonwebtoken</span><span class="tag">ioredis (optional)</span>
+  <span class="tag">Jest + Supertest</span><span class="tag">testcontainers-node</span><span class="tag">pino</span>
+</div><div class="sep"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">EduTrack Node.js API uses <strong>Fastify</strong> (not Express) for its built-in TypeScript support and performance. <strong>Zod</strong> for all request validation &mdash; define schemas in a <code>schemas/</code> folder and infer TypeScript types from them with <code>z.infer&lt;&gt;</code>. <strong>Prisma 5.x</strong> for all database access &mdash; never use raw SQL for business logic. <code>tsc --noEmit</code> must pass with zero errors before submission.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">TypeScript strict mode throughout. No <code>any</code>. Every Zod schema exported from a <code>schemas/</code> folder. Every Prisma query wrapped in a typed service class.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Course &amp; Content Management</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Typed course CRUD with Zod validation and Prisma relations.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">course.schema.ts</span><span class="cb-tag">Zod + TypeScript</span></div><pre><span class="kw">import</span> { z } <span class="kw">from</span> <span class="str">'zod'</span>;
+
+<span class="kw">export const</span> <span class="ty">CreateCourseSchema</span> = z.object({
+  title: z.string().min(<span class="nu">5</span>).max(<span class="nu">100</span>),
+  category: z.enum([<span class="str">'PROGRAMMING'</span>, <span class="str">'DESIGN'</span>, <span class="str">'DATA_SCIENCE'</span>, <span class="str">'BUSINESS'</span>, <span class="str">'OTHER'</span>]),
+  difficulty: z.enum([<span class="str">'BEGINNER'</span>, <span class="str">'INTERMEDIATE'</span>, <span class="str">'ADVANCED'</span>]),
+  price: z.number().nonnegative().max(<span class="nu">99999.99</span>),
+});
+
+<span class="kw">export type</span> <span class="ty">CreateCourseDto</span> = z.infer&lt;<span class="kw">typeof</span> <span class="ty">CreateCourseSchema</span>&gt;;
+
+<span class="cm">// Reuse schema for update (all fields optional)</span>
+<span class="kw">export const</span> <span class="ty">UpdateCourseSchema</span> = <span class="ty">CreateCourseSchema</span>.partial();</pre></div><div class="rl"><div class="rq"><strong>Prisma schema:</strong> Define <code>Course</code>, <code>CourseModule</code>, <code>Lesson</code> models. Use <code>@@unique</code> for course slug (auto-generated from title). Use <code>@default(autoincrement())</code> for moduleOrder so ordering works without manual index management.</div><div class="rq"><strong>Zod schemas:</strong> Create <code>CreateCourseSchema</code>, <code>CreateModuleSchema</code>, <code>CreateLessonSchema</code> with strict validation. Compose them: <code>CourseWithModulesSchema = CreateCourseSchema.extend({ modules: CreateModuleSchema.array().min(1) })</code>. Export all schemas from a single <code>schemas/course.schema.ts</code>.</div><div class="rq"><strong>Service layer:</strong> <code>CourseService</code> class with methods: <code>create(dto: CreateCourseDto): Promise&lt;CourseDto&gt;</code>. Use Prisma transactions to create course + modules + lessons atomically. Return a typed <code>CourseDto</code> using Prisma's <code>Prisma.CourseGetPayload&lt;typeof courseSelect&gt;</code>.</div><div class="rq"><strong>Publish validation:</strong> <code>publishCourse(id: string): Promise&lt;void&gt;</code> &mdash; validate at least 1 module with 1 lesson via Prisma count query. Throw a typed <code>AppError</code> class (extends Error) with a <code>statusCode</code> field.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Enrollment &amp; Progress</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Enrollment with business rules and progress calculation using Prisma aggregates.</p><div class="rl"><div class="rq"><strong>Enrollment service:</strong> <code>EnrollmentService.enroll(userId, courseId)</code> &mdash; check: course is published, not already enrolled. Use <code>prisma.enrollment.create()</code> with a <code>try/catch</code> on Prisma's <code>P2002</code> (unique constraint) error to handle duplicates cleanly.</div><div class="rq"><strong>Lesson completion:</strong> <code>markLessonComplete(userId, lessonId): Promise&lt;ProgressDto&gt;</code> &mdash; validate enrollment via Prisma: check that the lesson's course matches an enrollment for this user. Use an <code>upsert</code> for idempotency.</div><div class="rq"><strong>Progress query:</strong> Calculate progress in one Prisma query: <code>prisma.$transaction([prisma.lesson.count({ where: { module: { courseId } } }), prisma.lessonProgress.count({ where: { userId, lesson: { module: { courseId } } } })])</code>. Return both counts and compute percentage.</div><div class="rq"><strong>Completion status:</strong> <code>getCompletionStatus(userId, enrollmentId): Promise&lt;CompletionStatusDto&gt;</code>. Typed return: <code>{ lessonsComplete: boolean; quizzesPassed: boolean; eligible: boolean; certificateCode: string | null }</code>.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>For the completion certificate code, generate it with <code>crypto.randomUUID()</code> from Node's built-in <code>node:crypto</code> module. Store it on the Enrollment record. Never regenerate it once set.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Quiz System</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Quiz creation, attempt submission, and scoring with TypeScript type safety.</p><div class="rl"><div class="rq"><strong>Quiz attempt types:</strong> Define the attempt result type: <code>type AttemptResult = { score: number; status: 'PASSED' | 'FAILED'; correctCount: number; totalCount: number }</code>. The service method signature: <code>submitAttempt(userId: string, quizId: string, answers: AnswerDto[]): Promise&lt;AttemptResult&gt;</code>.</div><div class="rq"><strong>Scoring logic:</strong> In the service: map answers to a <code>Map&lt;string, string&gt;</code> (questionId → selectedOptionId). Then for each question in the quiz, check if the selected option's <code>isCorrect</code> is true. Use Prisma's <code>include: { questions: { include: { options: true } } }</code>.</div><div class="rq"><strong>Attempt validation:</strong> Before scoring: fetch all attempts for this user+quiz. If status PASSED exists: throw <code>new AppError('Quiz already passed', 409)</code>. If count >= maxAttempts: throw <code>new AppError('Max attempts exceeded', 422)</code>. Use TypeScript's discriminated union for error types.</div><div class="rq"><strong>GET quiz for student:</strong> <code>GET /api/quizzes/:id</code> &mdash; return quiz with questions and options BUT filter out the <code>isCorrect</code> field using a Prisma <code>select</code> that explicitly omits it. Never expose which option is correct before submission.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Search &amp; Dashboards</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Typed search with Prisma where clauses and efficient aggregation queries.</p><div class="rl"><div class="rq"><strong>Course search:</strong> Build <code>searchCourses(filters: CourseFiltersDto)</code> using a dynamic Prisma <code>where</code> object. TypeScript: <code>const where: Prisma.CourseWhereInput = { published: true }</code>. Conditionally add <code>category</code>, <code>difficulty</code>, <code>price</code> range. Use Prisma's <code>_count</code> to include enrollment count.</div><div class="rq"><strong>Student dashboard:</strong> Return type: <code>interface StudentDashboard { enrollments: EnrollmentWithProgress[]; completedCourses: CompletedCourse[]; }</code>. Fetch all data in one Prisma transaction.</div><div class="rq"><strong>Instructor dashboard:</strong> <code>InstructorDashboard.perCourse</code> includes <code>completionRate: number</code>. Calculate with two Prisma aggregate queries: total enrolled, students with all lessons done.</div><div class="rq"><strong>Pagination helper:</strong> Create a reusable <code>paginate&lt;T&gt;(model, args, page, size): Promise&lt;PaginatedResponse&lt;T&gt;&gt;</code> generic function that returns <code>{ data, total, page, size, totalPages }</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Testing &amp; Error Handling</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Fastify error handling, Jest unit tests, and one Testcontainers integration test.</p><div class="rl"><div class="rq"><strong>AppError class:</strong> <code>class AppError extends Error { constructor(public message: string, public statusCode: number, public code?: string) { super(message) } }</code>. Register a Fastify <code>setErrorHandler</code> that catches <code>AppError</code> (returns statusCode + message) and Zod errors (returns 400 + formatted field errors).</div><div class="rq"><strong>Unit tests:</strong> Jest tests for <code>QuizAttemptService</code>: mock Prisma with <code>jest.mock('../prisma')</code>. Test: (a) successful pass returns PASSED status, (b) already-passed quiz throws 409, (c) max attempts exceeded throws 422, (d) score calculation: 3 of 5 correct = 60.</div><div class="rq"><strong>Integration test:</strong> One <code>@testcontainers/postgresql</code> integration test: seed a course, enroll a student, mark all lessons complete, verify completion status returns eligible=true. Use Fastify's <code>inject</code> method for HTTP requests.</div><div class="rq"><strong>Structured logging:</strong> Use <code>pino</code> (built into Fastify). Every service method logs: <code>logger.info({ userId, courseId }, 'Student enrolled in course')</code>. Errors logged with <code>logger.error({ err, userId }, 'Enrollment failed')</code>. Log level configurable via <code>LOG_LEVEL</code> env var.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Node.js-specific design patterns &mdash; these come up in every backend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Prisma's <code>findUnique</code> throws an error if the record doesn't exist when you use the <code>orThrow</code> variant. But if you use <code>findUnique</code> (without orThrow), it returns <code>null</code>. Which do you use in your service methods, and how do you handle the null case with TypeScript's type narrowing?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">You have a service method that does: (1) check enrollment exists, (2) mark lesson complete, (3) check if course is now complete, (4) generate certificate if eligible. Should this be one Prisma transaction? What happens if step 3 or 4 fails after step 2 succeeds?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Fastify uses JSON schema for request validation by default, but you're using Zod. How do you wire up Zod validation to Fastify's request parsing? Do you use the <code>fastify-type-provider-zod</code> plugin or validate manually in the route handler? What's the difference?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">Your pagination function takes a generic <code>T</code>: <code>paginate&lt;T&gt;()</code>. But Prisma's model types are not directly generic &mdash; you need to call <code>prisma.course.findMany()</code> or <code>prisma.user.findMany()</code>. How do you write a type-safe paginate function that works for any Prisma model?</div></div><div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Prisma middleware for soft delete:</strong> Add a Prisma middleware (now called Client Extensions in Prisma 5) that automatically adds <code>WHERE deletedAt IS NULL</code> to all <code>findMany</code> and <code>findUnique</code> calls on models that have a <code>deletedAt</code> field.</div><div class="bit"><strong>+7 marks — Rate limiting:</strong> Add a rate limiter middleware using <code>@fastify/rate-limit</code> with a Redis backend. Course enrollment: max 10/minute per user. Quiz submission: max 5/minute per user. Return 429 with a <code>Retry-After</code> header.</div><div class="bit"><strong>+5 marks — OpenAPI from Zod:</strong> Use <code>fastify-zod</code> or <code>@fastify/swagger</code> with zod-to-json-schema to auto-generate OpenAPI docs from your Zod schemas. All endpoints documented at <code>/docs</code>.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Node Intern — EduTrack Education &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Node.js Intern Assignment &middot; Education &mdash; EduTrack &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
