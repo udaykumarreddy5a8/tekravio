@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · React Intern — FinSmart — FinTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#61dafb;--ar:97,218,251}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// React Intern · FinTech</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// React Intern · FinTech Domain</div>
+  </div>
+  <p class="etag">// Assignment 02 · React · FinTech · Intermediate</p>
+  <h1 class="ht">FinSmart<br><span style="color:var(--ac)">Dashboard</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">UI.</span></h1>
+  <p class="hs">Build the React frontend for FinSmart Personal Finance. The UI is data-heavy: charts, tables, and numbers everywhere. The challenge is making financial data feel clear and actionable, not overwhelming. Every number must be formatted correctly (₹1,23,456.78 Indian format). Charts update when filters change. Forms for transaction entry must be fast &mdash; a user might enter 20 transactions in a row.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">FinTech</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">FinSmart Dashboard</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">React 18 · TypeScript · Recharts</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">TanStack Query (React Query)</span>
+  <span class="tag">Zustand</span><span class="tag">React Router v6</span><span class="tag">Tailwind CSS</span>
+  <span class="tag">Axios</span><span class="tag">React Hook Form + Zod</span><span class="tag">Vite</span>
+  <span class="tag">Vitest + Testing Library</span>
+</div><div class="sep"></div>
+<div class="ctx-h" style="display:none"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">FinSmart frontend is <strong>chart-heavy and number-heavy</strong>. Use Recharts for all visualisations. All monetary values must use the Indian number format (₹1,23,456.78) &mdash; use <code>Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' })</code>. Every form must prevent double-submission (disable button on submit). Every API error must be caught and shown to the user &mdash; no silent failures.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This is a frontend assignment. Every module requires working UI components, not just API calls. Show state, loading, and error states for every async operation.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Dashboard Overview &amp; Charts</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The main dashboard: stat cards, income/expense chart, category breakdown pie chart.</p><div class="rl"><div class="rq"><strong>Stats row:</strong> Four animated stat cards: Total Income, Total Expenses, Net Savings, Savings Rate (%). Cards show current month data. Each has a colored indicator showing MoM change (green arrow up / red arrow down with percentage).</div><div class="rq"><strong>Income vs Expense chart:</strong> A Recharts <code>BarChart</code> showing the last 6 months side-by-side bars (income blue, expense red). Use <code>ResponsiveContainer</code> to make it fill its parent. Hovering a bar shows a custom tooltip with exact amounts. Month selector to shift the window.</div><div class="rq"><strong>Category donut chart:</strong> A <code>PieChart</code> (donut style) showing expense breakdown by category for the selected month. Clicking a slice filters the transaction table below to show only that category's transactions. Selected slice animates outward.</div><div class="rq"><strong>Account balances:</strong> A horizontal list of account cards. Each shows: account name, type icon, current balance (formatted as ₹X,XX,XXX.XX), and a mini sparkline chart of the last 7 days' balance (use Recharts <code>LineChart</code> at small size).</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Transaction Table &amp; Entry Form</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The core workflow: logging transactions quickly and finding them easily.</p><div class="rl"><div class="rq"><strong>Transaction table:</strong> Paginated table (20 rows/page) with columns: date, account, category icon + name, description, amount (income green, expense red). Column header click sorts. Multi-filter bar above: date range picker, account dropdown, category multi-select, type toggle (All/Income/Expense). Filters are applied via API query params (not client-side filtering of all data).</div><div class="rq"><strong>Quick-entry form:</strong> A persistent form panel (sidebar or bottom drawer). Fields: amount, type (toggle button, not dropdown), category (icon grid picker, not dropdown &mdash; faster to click), account (dropdown), date (default today), description. Submit with Enter key. After submit, the transaction table updates instantly via React Query cache invalidation and the form resets, ready for next entry.</div><div class="rq"><strong>Inline edit:</strong> Clicking a transaction row enters inline edit mode for the description and amount fields. Press Enter to save, Escape to cancel. Show save/cancel buttons. Unsaved changes show a dirty indicator (dot on the row).</div><div class="rq"><strong>Bulk delete:</strong> Checkboxes on each row. 'Select All' checkbox in header. Bulk delete button appears when ≥ 1 selected, showing count: 'Delete 3 transactions'. Confirmation modal before proceeding.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Budget Tracker</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Monthly budgets visualised as progress bars with status colours.</p><div class="rl"><div class="rq"><strong>Budget list:</strong> A card grid, one per budget category. Each card: category icon + name, budget amount, spent amount, remaining, percentage used as a progress bar. Bar colour: green (<70%), amber (70&ndash;90%), red (>90%). Cards sorted: over-budget first.</div><div class="rq"><strong>Budget form:</strong> Click '+' to add a budget. Inline form (no modal): category selector (grid of icons), amount input. Validation: cannot set budget for a category that already has one for the current month. On submit, optimistically add to the list.</div><div class="rq"><strong>Month switcher:</strong> Navigation arrows to switch months. Budget data reloads for the selected month. A 'This Month' button returns to current.</div><div class="rq"><strong>Overspend warning:</strong> When any category crosses 100% of budget, show a prominent banner at the top of the page: 'You have overspent in 2 categories this month.' Clicking it scrolls to those cards.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Savings Goals</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Goal progress cards with deposit flow.</p><div class="rl"><div class="rq"><strong>Goal cards:</strong> Each goal shows: name, target amount, current amount, progress bar, days remaining, projected completion date. A visual ring chart (not just a bar) showing percentage complete. Achieved goals show a completion confetti animation (use <code>canvas-confetti</code>).</div><div class="rq"><strong>Deposit modal:</strong> Clicking 'Add Deposit' opens a modal: amount input, account selector (to deduct from), note. After submit, update the goal's current amount optimistically and reload the goal card.</div><div class="rq"><strong>Create goal:</strong> A form: name, target amount (with suggested presets: Emergency Fund 3 months, Vacation, etc.), target date, linked account. The form validates that target date is in the future.</div><div class="rq"><strong>Goals summary:</strong> At top of the Goals page: 'Total Saved: ₹X across Y goals'. A simple progress toward collective savings target.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Reports &amp; Export</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The analytics view that turns transactions into insights.</p><div class="rl"><div class="rq"><strong>Monthly report:</strong> Two-column layout: left shows the summary numbers (total income, expenses, net savings, top 3 categories with bars), right shows the income vs expense bar chart. A month/year picker at the top. Print button that opens the browser print dialog with a print-friendly CSS.</div><div class="rq"><strong>Category drill-down:</strong> Clicking a category in the report shows a transaction list for that category + month in a slide-in panel. The list is paginated.</div><div class="rq"><strong>CSV export:</strong> 'Export CSV' button downloads a CSV of all transactions in the filtered date range. Use a client-side CSV generator (no backend endpoint needed). Use the <code>Blob</code> API and a hidden anchor click. Filename: <code>finsmart-transactions-2026-06.csv</code>.</div><div class="rq"><strong>Type safety for money:</strong> Create a <code>Money</code> type and a <code>formatMoney(amount: number, currency: string)</code> utility. Use Indian number formatting: <code>₹1,23,456.78</code> (not <code>₹123,456.78</code>). Every number in the UI that represents money must pass through this formatter.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">These come up in every React frontend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Your transaction table fetches page 1. The user adds a transaction. You invalidate the query cache. But the new transaction might appear on page 1 (pushing another item to page 2) or might not appear on page 1 at all depending on sort order. How do you handle this UI inconsistency?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">The category donut chart slice click should filter the transaction table. The chart and table are separate components. How do you share this 'selected category' state? Local state in the parent? Zustand? URL params? What are the trade-offs of each approach?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">A user enters 20 transactions in a row using the quick-entry form. Each submit triggers a React Query mutation that invalidates the transaction table cache. The table refetches 20 times. Is this a performance problem? How would you batch or debounce cache invalidations?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">You need to display ₹1,23,456.78 (Indian format) not ₹123,456.78. The built-in <code>Intl.NumberFormat</code> supports Indian locale. Write the exact formatter call and explain why using <code>en-IN</code> locale matters.</div></div>
+<div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Recharts custom tooltip:</strong> Build a fully custom tooltip component for all charts that shows the data formatted as ₹ amounts with proper Indian formatting, a category icon, and a MoM comparison. The tooltip should use a CSS transition when it appears.</div><div class="bit"><strong>+7 marks — Keyboard navigation:</strong> The quick-entry form should work entirely with keyboard. Tab navigates fields. Category grid is navigable with arrow keys. Enter submits. Document all keyboard shortcuts in a help modal (<code>?</code> key).</div><div class="bit"><strong>+5 marks — Recurring transaction UI:</strong> Build a Recurring Transactions section showing upcoming recurring items as a calendar-style list (next 30 days). Items due today are highlighted.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>React Intern — FinSmart FinTech &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">React Intern Assignment &middot; FinTech &mdash; FinSmart &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
