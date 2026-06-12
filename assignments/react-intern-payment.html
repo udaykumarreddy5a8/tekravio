@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · React Intern — PayFlow — Payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#61dafb;--ar:97,218,251}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// React Intern · Payments</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// React Intern · Payments Domain</div>
+  </div>
+  <p class="etag">// Assignment 03 · React · Payments · Intermediate</p>
+  <h1 class="ht">PayFlow<br><span style="color:var(--ac)">Wallet &amp;</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Checkout UI.</span></h1>
+  <p class="hs">Build the React frontend for PayFlow. Two user interfaces: a customer wallet &amp; checkout UI, and a merchant payment dashboard. The key challenges: a multi-step checkout form that does not lose state on back-navigation, a payment status screen that polls the backend every 3 seconds until resolved, and a wallet top-up flow with real-time balance update.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Payments</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">PayFlow Frontend</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">React 18 · TypeScript · TanStack Query</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">TanStack Query (React Query)</span>
+  <span class="tag">Zustand</span><span class="tag">React Router v6</span><span class="tag">Tailwind CSS</span>
+  <span class="tag">Axios</span><span class="tag">React Hook Form + Zod</span><span class="tag">Vite</span>
+  <span class="tag">Vitest + Testing Library</span>
+</div><div class="sep"></div>
+<div class="ctx-h" style="display:none"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">PayFlow frontend has <strong>two distinct UIs</strong>: customer and merchant. Both share auth but have completely different layouts after login. The most interesting challenge is the <strong>payment status polling</strong> &mdash; it must start on submit, update the UI in real time, and stop cleanly on navigation or terminal state. Use <code>useInfiniteQuery</code> for the wallet statement infinite scroll and <code>refetchInterval</code> for status polling.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This is a frontend assignment. Every module requires working UI components, not just API calls. Show state, loading, and error states for every async operation.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Wallet Dashboard &amp; Top-Up</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The customer's wallet overview and top-up flow.</p><div class="rl"><div class="rq"><strong>Wallet card:</strong> Prominent card showing current balance (large, animated count-up on load), account status (ACTIVE badge), and three quick-action buttons: Top Up, Pay, History.</div><div class="rq"><strong>Top-up modal:</strong> A three-step modal: (1) Enter amount (validation: 1&ndash;100,000, number-only input with a soft keyboard hint), (2) Choose payment method (card-style selectors for UPI / Card / Net Banking), (3) Confirmation screen showing amount + method + 'Confirm &amp; Add' button. A back button on steps 2 and 3 goes back without losing selections.</div><div class="rq"><strong>Balance animation:</strong> After a successful top-up, animate the balance from old value to new value over 1 second. Use a <code>useCountUp</code> hook.</div><div class="rq"><strong>Wallet statement:</strong> Paginated table of wallet transactions: type icon (credit green arrow / debit red arrow), description, amount, date, reference ID. Infinite scroll (not page buttons). Implemented with TanStack Query's <code>useInfiniteQuery</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Payment / Checkout Flow</div><div class="tp">// 25 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">A multi-step checkout that handles the full payment lifecycle.</p><div class="rl"><div class="rq"><strong>Checkout steps:</strong> Three steps managed by a stepper component: (1) Order summary (merchant name, order ID, amount), (2) Payment method selection (Wallet / UPI / Card), (3) Confirmation. Stepper shows progress. Back button works on all steps and does not lose selections.</div><div class="rq"><strong>Wallet balance check:</strong> On step 2, if the user selects Wallet and their balance is less than the payment amount, show an inline warning: 'Insufficient balance. You need ₹X more.' with a shortcut 'Top Up Now' link that opens the top-up modal in a portal, then returns to checkout.</div><div class="rq"><strong>Idempotency key:</strong> Generate a UUID v4 as the idempotency key when the checkout flow begins. Store it in component state. Pass it as <code>X-Idempotency-Key</code> header on the payment API call. If the user submits twice (e.g., double-click), the same key is used, and the backend returns the existing payment.</div><div class="rq"><strong>Payment result:</strong> After submission: navigate to a payment status page with the payment ID in the URL. This page polls <code>GET /api/payments/{id}</code> every 3 seconds using TanStack Query's <code>refetchInterval</code>. Show a spinner while PROCESSING, a green success screen with confetti on SUCCESS, a red failure screen with retry option on FAILED. Stop polling when a terminal state is reached.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Transaction History &amp; Refunds</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Customer's payment history with refund request flow.</p><div class="rl"><div class="rq"><strong>Payment history:</strong> Table of past payments: merchant name, order ID, date, amount, status badge (SUCCESS green, FAILED red, PENDING yellow). Filter by status and date range. Click a row to open a slide-in detail panel.</div><div class="rq"><strong>Payment detail panel:</strong> Shows: all payment fields, merchant name, wallet balance at time of payment (if available), and &mdash; if payment is SUCCESS and within 7 days &mdash; a 'Request Refund' button.</div><div class="rq"><strong>Refund form:</strong> A bottom sheet (on mobile) or modal (on desktop). Input: amount (pre-filled with payment amount, editable for partial refund), reason text. Validation: amount must be > 0 and ≤ refundable amount. On submit, show success and update the payment row's status badge to show 'Refund Pending'.</div><div class="rq"><strong>Refund status:</strong> A separate 'My Refunds' section showing refund requests with their statuses. PENDING shown with a clock icon, PROCESSED with a green check, REJECTED with an explanation.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Merchant Dashboard</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The merchant-facing interface for viewing payments and settlements.</p><div class="rl"><div class="rq"><strong>Payment verification:</strong> A prominent 'Verify Payment' widget: input field for Order ID, a search button, and a result display. If payment is SUCCESS: show a green confirmation with amount and timestamp. If PENDING/FAILED: show appropriate status. Keyboard shortcut: Enter triggers search.</div><div class="rq"><strong>Settlement summary:</strong> A summary card for the current month: total transactions, gross amount, total refunded, net settlement amount (highlighted in green). Below it, a day-by-day bar chart of daily transaction volume.</div><div class="rq"><strong>Payments table:</strong> Paginated list of all payments to this merchant. Columns: order ID, customer ID (masked), amount, method, status, date. Searchable by order ID. Exportable to CSV.</div><div class="rq"><strong>Suspended state:</strong> If the merchant's account is SUSPENDED, the entire dashboard shows a fullscreen overlay: 'Account Suspended. Contact support.' No actions are allowed. The overlay cannot be dismissed.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Auth, Error Handling &amp; UX Polish</div><div class="tp">// 17 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The reliability layer: errors, edge cases, and UX details.</p><div class="rl"><div class="rq"><strong>Auth &amp; role routing:</strong> After login, check the user's role (CUSTOMER / MERCHANT). Route to the wallet dashboard for CUSTOMER or the merchant dashboard for MERCHANT. A customer navigating to a merchant URL sees a 403 page and vice versa.</div><div class="rq"><strong>API error handling:</strong> All API errors must be caught. For 4xx: show the error message from the API response body inline near the relevant action (not a toast for validation errors). For 5xx or network errors: show a toast with 'Something went wrong. Please try again.'</div><div class="rq"><strong>Payment polling edge case:</strong> The payment status polling runs every 3 seconds. What if the user navigates away while polling? The polling must stop when the component unmounts. Implement with TanStack Query's <code>enabled</code> flag based on status.</div><div class="rq"><strong>Form double-submission prevention:</strong> Every form button shows a loading state on submit and is disabled until the API responds. Implement a <code>useSubmit</code> hook that wraps any async function, manages loading state, and prevents concurrent calls.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">These come up in every React frontend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">The checkout flow is a 3-step form. The user is on step 3 and clicks Back. What happens to the data they entered on steps 1 and 2? Where do you store intermediate form state? React state, React Hook Form, or Zustand?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">The payment status page polls every 3 seconds. The page has been open for 10 minutes with the payment stuck in PROCESSING (backend is down). How do you handle this? At what point do you stop polling and show an error?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">You generate the idempotency key when the checkout flow begins. What if the user opens two checkout tabs for the same order at the same time? They would have different idempotency keys. Is this a frontend problem or a backend problem?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">The refund amount input is pre-filled with the full payment amount. The user types '500' to request a partial refund of ₹500. How do you validate that ₹500 is ≤ the remaining refundable amount (original amount - already refunded)? Where does this business logic live?</div></div>
+<div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Optimistic wallet update:</strong> When a payment is submitted, optimistically deduct the amount from the displayed wallet balance before the API responds. If the payment fails, restore the balance. Implement with TanStack Query's optimistic update pattern.</div><div class="bit"><strong>+7 marks — Receipt download:</strong> After a successful payment, provide a 'Download Receipt' button that generates a PDF receipt client-side using <code>@react-pdf/renderer</code>. Include: payment ID, merchant name, amount, date, and a simple logo.</div><div class="bit"><strong>+5 marks — Currency formatting:</strong> Support both INR and USD display (even though the backend only uses INR). A currency toggle in the header shows amounts converted using a hardcoded rate. All amounts update when the currency changes.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>React Intern — PayFlow Payments &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">React Intern Assignment &middot; Payments &mdash; PayFlow &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
