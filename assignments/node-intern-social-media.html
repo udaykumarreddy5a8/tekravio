@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Node.js Intern — ConnectHub — Social Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#4ade80;--ar:74,222,128}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Node Intern · Social Media</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Node Intern · Social Media Domain</div>
+  </div>
+  <p class="etag">// Assignment 05 · Node.js · Social Media · Intermediate</p>
+  <h1 class="ht">ConnectHub<br><span style="color:var(--ac)">Node.js</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Social API.</span></h1>
+  <p class="hs">Build the Node.js backend for ConnectHub. Key patterns: Prisma's relation filtering for private account visibility rules, cursor-based pagination for the feed, optimistic like count updates with atomic Prisma <code>increment</code>, and a TypeScript discriminated union for follow status.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Social Media</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">ConnectHub Node.js API</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Node.js 20 · TypeScript · Fastify · Prisma</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Node.js 20 LTS</span><span class="tag">TypeScript 5 (strict)</span><span class="tag">Fastify 4.x</span>
+  <span class="tag">Prisma 5.x</span><span class="tag">PostgreSQL</span><span class="tag">Zod</span>
+  <span class="tag">jsonwebtoken</span><span class="tag">ioredis (optional)</span>
+  <span class="tag">Jest + Supertest</span><span class="tag">testcontainers-node</span><span class="tag">pino</span>
+</div><div class="sep"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">ConnectHub Node.js uses <strong>cursor-based pagination</strong> for the feed (more efficient than offset at scale). The follow status is a <strong>TypeScript discriminated union</strong> returned by a service method. Like count updates use Prisma's atomic <code>increment</code> operator &mdash; never a fetch-then-update pattern. Notification creation is <strong>fire-and-forget</strong> using <code>process.nextTick</code> so it does not block the main response.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">TypeScript strict mode throughout. No <code>any</code>. Every Zod schema exported from a <code>schemas/</code> folder. Every Prisma query wrapped in a typed service class.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">User Profile &amp; Auth</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Fastify JWT auth with Prisma user management.</p><div class="rl"><div class="rq"><strong>Auth setup:</strong> Use <code>@fastify/jwt</code>. Register with secret from env. Add <code>fastify.decorate('authenticate', ...)</code> that verifies the JWT and attaches <code>req.user: { id: string, role: Role }</code>. Protected routes add <code>preHandler: [fastify.authenticate]</code>.</div><div class="rq"><strong>Registration:</strong> Zod: <code>RegisterSchema = z.object({ username: z.string().min(3).max(30).regex(/^[a-zA-Z0-9_]+$/), email: z.string().email(), password: z.string().min(8) })</code>. Hash with <code>bcrypt</code>. Catch Prisma P2002 for duplicate username/email and return typed error.</div><div class="rq"><strong>Profile response type:</strong> Define: <code>type ProfileResponse = BaseProfile & ({ isPrivate: false } | { isPrivate: true; isFollowing: boolean; followStatus: FollowStatus | null })</code>. For private accounts, include whether the viewer is following. For public accounts, omit follow status entirely.</div><div class="rq"><strong>Search:</strong> <code>GET /api/users/search?q=X</code> using Prisma <code>mode: 'insensitive'</code>: <code>where: { OR: [{ username: { contains: q, mode: 'insensitive' } }, { displayName: { contains: q, mode: 'insensitive' } }] }</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Follow System</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Follow/unfollow with Prisma enum and TypeScript discriminated union for status.</p><div class="rl"><div class="rq"><strong>Follow status type:</strong> TypeScript: <code>type FollowState = { status: 'NOT_FOLLOWING' } | { status: 'PENDING'; requestId: string } | { status: 'APPROVED'; since: Date } | { status: 'BLOCKED' }</code>. The <code>getFollowState(followerId, followingId)</code> method returns this union.</div><div class="rq"><strong>Follow service:</strong> <code>follow(followerId, followingUsername)</code>: validate not self, check current state using <code>getFollowState</code>, throw typed errors for invalid transitions. Create follow with status APPROVED (public) or PENDING (private). Return the new <code>FollowState</code>.</div><div class="rq"><strong>Follow request management:</strong> <code>approveRequest(requestId, ownerId)</code>: verify the request's <code>followingId === ownerId</code>. Update status to APPROVED. <code>rejectRequest</code>: delete the Follow record.</div><div class="rq"><strong>Follower count:</strong> Use Prisma's <code>_count</code> relation: <code>prisma.user.findUnique({ where: { id }, select: { _count: { select: { followers: { where: { status: 'APPROVED' } }, following: { where: { status: 'APPROVED' } } } } } })</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Posts &amp; Visibility</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Post creation with Prisma soft delete and visibility enforcement.</p><div class="rl"><div class="rq"><strong>Post visibility query:</strong> A helper <code>buildPostVisibilityWhere(viewerId: string): Prisma.PostWhereInput</code> returns the appropriate WHERE clause based on: public posts on any account, FOLLOWERS_ONLY posts on accounts where viewerId is an APPROVED follower, PRIVATE posts only by the post author.</div><div class="rq"><strong>Like count atomic update:</strong> <code>likePost(userId, postId)</code>: create a <code>PostLike</code> record, then use <code>prisma.post.update({ where: { id: postId }, data: { likeCount: { increment: 1 } } })</code>. Both in a Prisma transaction. Catch P2002 on the PostLike unique constraint to handle duplicate likes.</div><div class="rq"><strong>Soft delete:</strong> Add <code>deletedAt DateTime?</code> to Post. Add a Prisma Client Extension that modifies all <code>post.findMany</code> and <code>post.findUnique</code> queries to add <code>where: { deletedAt: null }</code> automatically. Verify this works in a test.</div><div class="rq"><strong>Comment tree:</strong> <code>GET /api/posts/:id/comments</code> returns top-level comments with <code>replies</code> included: <code>prisma.comment.findMany({ where: { postId, parentId: null }, include: { replies: { take: 5, orderBy: { createdAt: 'asc' } } } })</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Feed &amp; Notifications</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Cursor-based feed pagination and typed notification creation.</p><div class="rl"><div class="rq"><strong>Cursor-based feed:</strong> <code>getFeed(userId, cursor?: string, limit = 20)</code>: <code>prisma.post.findMany({ where: buildFeedWhere(userId), take: limit + 1, skip: cursor ? 1 : 0, cursor: cursor ? { id: cursor } : undefined, orderBy: { createdAt: 'desc' } })</code>. If results.length > limit, the last item is the next cursor (remove it from the returned data).</div><div class="rq"><strong>Notification factory:</strong> Create a <code>NotificationFactory</code> class with static methods: <code>static newFollower(actorId, recipientId): CreateNotificationDto</code>, <code>static postLiked(actorId, recipientId, postId)</code>, etc. The notification content is pre-formatted in the factory. Services call the factory, not inline string construction.</div><div class="rq"><strong>Notification creation side effect:</strong> In <code>FollowService.follow()</code>, after creating the follow record, call <code>notificationService.create(NotificationFactory.newFollower(...))</code>. Do NOT await this &mdash; fire and forget. Use <code>process.nextTick(() => notificationService.create(...))</code> or Fastify's background task pattern so notification creation does not block the follow response.</div><div class="rq"><strong>Unread count:</strong> <code>GET /api/notifications/unread-count</code> returns <code>{ count: number }</code>. Simple: <code>prisma.notification.count({ where: { recipientId, isRead: false } })</code>. This endpoint is called frequently &mdash; it should be extremely fast.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Hashtags &amp; Testing</div><div class="tp">// 16 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Hashtag extraction, post tagging, and unit tests for the visibility logic.</p><div class="rl"><div class="rq"><strong>Hashtag parsing:</strong> <code>extractHashtags(content: string): string[]</code> using a regex: <code>content.match(/#[a-zA-Z][a-zA-Z0-9_]*/g)?.map(t => t.slice(1).toLowerCase()) ?? []</code>. On post create, upsert each hashtag and create <code>PostHashtag</code> join records in one Prisma transaction.</div><div class="rq"><strong>Trending hashtags:</strong> <code>GET /api/hashtags/trending?limit=10</code> using Prisma <code>groupBy</code> on <code>PostHashtag</code> filtered to last 24 hours: <code>prisma.postHashtag.groupBy({ by: ['hashtagId'], where: { post: { createdAt: { gte: oneDayAgo } } }, _count: true, orderBy: { _count: { hashtagId: 'desc' } }, take: limit })</code>.</div><div class="rq"><strong>Unit tests:</strong> 6 tests for <code>FollowService</code>: (a) follow public account → APPROVED, (b) follow private → PENDING, (c) follow self → throws, (d) double follow → throws AlreadyFollowing, (e) getFollowState returns correct union variant, (f) block user removes existing follow relationship.</div><div class="rq"><strong>Visibility test:</strong> Test <code>buildPostVisibilityWhere</code>: given a viewerId, assert the WHERE clause structure is correct for viewing another user's posts. Use Jest's <code>expect(result).toMatchObject({...})</code> to verify the nested Prisma where object shape.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Node.js-specific design patterns &mdash; these come up in every backend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">Cursor-based pagination uses the last item's ID as the cursor for the next page. But if a new post is created between page 1 and page 2 fetches, it might appear at the top of page 1 in a re-fetch but not in page 2. Is this a problem for a social media feed? How does Instagram/Twitter handle this?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">You fire-and-forget notification creation with <code>process.nextTick()</code>. If the notification creation throws an error, it's caught by an uncaughtRejection handler but the follow response has already been sent as success. Should notification creation failure cause the follow to fail? Make the argument for and against.</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Your Prisma Client Extension adds <code>WHERE deletedAt IS NULL</code> to all Post queries. But what about queries that explicitly need to find deleted posts (e.g., an admin moderation endpoint)? How do you bypass the extension for those queries?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">The <code>buildPostVisibilityWhere</code> function returns a complex nested Prisma WHERE object. This object is tested via <code>toMatchObject</code>. But the real proof is whether it actually filters correctly in the database. Why is a pure unit test of the WHERE object insufficient, and what kind of test actually verifies the visibility rules?</div></div><div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Full-text search:</strong> Add PostgreSQL full-text search for posts and users using Prisma's preview feature. Index post content with <code>@@index([content], type: BrinIndex)</code>. Implement <code>GET /api/search?q=</code> returning both user and post results.</div><div class="bit"><strong>+7 marks — Story expiry job:</strong> If you implemented stories: add a cron job that marks stories as expired when <code>expiresAt <= now()</code>. Use Prisma's <code>updateMany</code> for efficiency. Ensure the job is idempotent.</div><div class="bit"><strong>+5 marks — Block implementation:</strong> Implement the full block flow: when user A blocks user B, remove any existing A↔B follow relationships, create a Block record, and ensure B's follow attempts to A throw a meaningful error. Use a Prisma transaction for the removal + block creation.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Node Intern — ConnectHub Social Media &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Node.js Intern Assignment &middot; Social Media &mdash; ConnectHub &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
