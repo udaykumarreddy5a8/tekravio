@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · React Intern — EduTrack — Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#61dafb;--ar:97,218,251}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// React Intern · Education</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// React Intern · Education Domain</div>
+  </div>
+  <p class="etag">// Assignment 01 · React · EdTech · Intermediate</p>
+  <h1 class="ht">EduTrack<br><span style="color:var(--ac)">React</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Frontend.</span></h1>
+  <p class="hs">Build the complete React frontend for the EduTrack learning platform. Students browse courses, enroll, track lesson progress, and take quizzes. The key React challenge: the quiz timer runs in the browser, quiz state must persist if the user accidentally refreshes, and progress percentages update optimistically. Don't just wire up API calls &mdash; think about every loading and error state a user can encounter.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Education</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">EduTrack Frontend</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">React 18 · TypeScript · TanStack Query</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">TanStack Query (React Query)</span>
+  <span class="tag">Zustand</span><span class="tag">React Router v6</span><span class="tag">Tailwind CSS</span>
+  <span class="tag">Axios</span><span class="tag">React Hook Form + Zod</span><span class="tag">Vite</span>
+  <span class="tag">Vitest + Testing Library</span>
+</div><div class="sep"></div>
+<div class="ctx-h" style="display:none"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">EduTrack frontend connects to the EduTrack Spring Boot/Node/Python API. Mock the API with <strong>MSW (Mock Service Worker)</strong> during development &mdash; your UI should work end-to-end without a running backend. Every component has three states to handle: <strong>loading</strong> (skeleton/spinner), <strong>error</strong> (error message + retry), and <strong>empty</strong> (illustration + helpful message). All three must be implemented for every data-fetching component.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">This is a frontend assignment. Every module requires working UI components, not just API calls. Show state, loading, and error states for every async operation.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Course Catalog &amp; Enrollment</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The entry point of the app. Course browsing with real-time filters and smooth enrollment flow.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">CourseCard.tsx</span><span class="cb-tag">TSX</span></div><pre><span class="kw">interface</span> <span class="ty">CourseCardProps</span> {
+  course: <span class="ty">Course</span>;
+  onEnroll: (courseId: <span class="ty">string</span>) => <span class="ty">Promise</span>&lt;<span class="ty">void</span>&gt;;
+}
+
+<span class="kw">export const</span> <span class="ty">CourseCard</span> = ({ course, onEnroll }: <span class="ty">CourseCardProps</span>) => {
+  <span class="kw">const</span> [enrolling, setEnrolling] = useState(<span class="nu">false</span>);
+  <span class="kw">const</span> handleEnroll = <span class="kw">async</span> () => {
+    setEnrolling(<span class="nu">true</span>);
+    <span class="kw">try</span> { <span class="kw">await</span> onEnroll(course.id); }
+    <span class="kw">catch</span> (e) { toast.error(<span class="str">"Enrollment failed"</span>); }
+    <span class="kw">finally</span> { setEnrolling(<span class="nu">false</span>); }
+  };
+  <span class="kw">return</span> ( <span class="cm">/* ... card JSX */</span> );
+}</pre></div><div class="rl"><div class="rq"><strong>Course listing page:</strong> Grid of CourseCard components. Each card shows: thumbnail, title, instructor avatar + name, difficulty badge, category tag, price (or FREE badge), enrolled student count, average rating (stars). Clicking enrolls or navigates to course detail based on enrollment status.</div><div class="rq"><strong>Filter sidebar:</strong> Filters: category (multi-select checkboxes), difficulty (radio), price (FREE / PAID / range slider), rating (≥ 4 stars toggle). All filters apply client-side to already-fetched results OR re-query the API on change &mdash; document your choice and why.</div><div class="rq"><strong>Search:</strong> Debounced search input (300ms) that queries the API. Show a loading skeleton while fetching. Show a 'No results for X' empty state. Preserve search and filter state in URL params so the user can share/bookmark the filtered view.</div><div class="rq"><strong>Enrollment flow:</strong> 'Enroll Now' button: (1) show a confirmation modal for paid courses, (2) call the enrollment API, (3) show a loading spinner on the button, (4) on success navigate to the course player, (5) on error show a toast notification. Never leave the button in a broken state.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Course Player &amp; Lesson Progress</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The lesson view with a sidebar, video/content area, and real-time progress tracking.</p><div class="rl"><div class="rq"><strong>Course player layout:</strong> Two-panel layout: left sidebar (module accordion with lesson list), right content area (lesson content). Each lesson in the sidebar shows: title, duration, type icon (video/article/quiz), and a tick if completed. Completed lessons show with a strikethrough + green tick.</div><div class="rq"><strong>Progress bar:</strong> A sticky progress bar at the top showing X of Y lessons complete. Updates instantly (optimistically) when user marks a lesson complete. If the API call fails, revert the optimistic update and show an error toast.</div><div class="rq"><strong>Lesson completion:</strong> At the bottom of each lesson: 'Mark as Complete' button. Once marked, it changes to 'Completed ✓' (disabled). The button is only available if the user is enrolled. If not enrolled, show 'Enroll to access' overlay instead of content.</div><div class="rq"><strong>Navigation:</strong> 'Previous' and 'Next' lesson buttons. Keyboard shortcuts: ArrowRight for next, ArrowLeft for previous. Auto-navigate to next lesson after marking current as complete (after a 2-second delay with a countdown). Remember last-watched lesson in localStorage.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Use TanStack Query's <code>useMutation</code> with <code>onMutate</code> for optimistic lesson completion. Roll back in <code>onError</code>. This is the pattern that makes the UI feel instant even with slow network.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Quiz Interface</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">A timed quiz with auto-submit and state persistence across page refreshes.</p><div class="rl"><div class="rq"><strong>Quiz UI:</strong> Display one question at a time OR all questions on one page (implement one, document your choice). Each question shows MCQ options as clickable cards, not radio inputs. Selected option highlights in the accent color. Questions show a completion indicator (e.g., '3 of 10 answered').</div><div class="rq"><strong>Timer:</strong> Countdown timer displayed prominently. When it hits 0, auto-submit whatever answers have been selected. Timer state stored in <code>sessionStorage</code> so a page refresh does not reset it. Show a warning toast when 60 seconds remain.</div><div class="rq"><strong>Submission &amp; result:</strong> On submit: show a loading state, then a results screen. Results: score percentage, pass/fail badge, correct vs incorrect per question (reveal correct answer for wrong ones). Show 'Retake Quiz' button if attempts remaining, or 'No retakes remaining' if exhausted.</div><div class="rq"><strong>State persistence:</strong> If the user closes the quiz tab and reopens it: restore their in-progress answers and remaining time from <code>sessionStorage</code>. When quiz is submitted or time runs out, clear the stored state.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Student Dashboard</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">The student's home screen — a clear view of their learning activity.</p><div class="rl"><div class="rq"><strong>Enrolled courses:</strong> A list (not grid) of enrolled courses with: progress bar (percentage), last activity date, 'Continue' button that navigates to the last incomplete lesson. Sort by last activity, most recent first.</div><div class="rq"><strong>Stats row:</strong> Four stat cards: Courses Enrolled, Lessons Completed, Quizzes Passed, Certificates Earned. Animate the numbers counting up on page load (use a simple counter hook: increment from 0 to target over 1 second).</div><div class="rq"><strong>Recent activity:</strong> A timeline of the last 10 actions: 'Completed lesson X in Course Y', 'Passed quiz Z', etc. Each item shows a relative timestamp ('2 hours ago'). Implement a custom <code>useRelativeTime(date)</code> hook.</div><div class="rq"><strong>Certificate section:</strong> A grid of earned certificates. Each is a styled card with course name, completion date, and a 'Download PDF' button (hits the backend endpoint). Placeholder illustration when no certificates yet.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Auth &amp; Protected Routes</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Authentication flow and route protection — the scaffolding for everything else.</p><div class="rl"><div class="rq"><strong>Auth pages:</strong> Login and Register pages. Forms built with React Hook Form + Zod validation. Show field-level validation errors inline. Show a spinner on the submit button during the API call. On success, store the JWT in memory (not localStorage) and redirect to dashboard.</div><div class="rq"><strong>Token management:</strong> Store JWT in memory (Zustand store) and the refresh token in an <code>httpOnly</code> cookie (set by the backend). On page reload, silently refresh the token. Implement a 401 interceptor in Axios that automatically attempts a token refresh on a failed request.</div><div class="rq"><strong>Protected routes:</strong> Wrap protected pages in a <code>RequireAuth</code> component. If not authenticated, redirect to login with the intended URL in state so the user is sent back after login.</div><div class="rq"><strong>Loading state:</strong> On app startup, while checking auth status (calling <code>/api/users/me</code>), show a full-screen loading spinner. Don't flash the login page before determining auth status &mdash; this is a common UX mistake.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">These come up in every React frontend interview.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">You use TanStack Query to fetch course data. A user enrolls in a course. The enrollment success triggers a refetch of the course list. But the user is on page 3 of paginated results. How do you invalidate only the affected query cache entry without refetching all pages?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">The quiz timer is stored in sessionStorage. But what if the user opens the quiz on two tabs simultaneously? Tab 1 is at 4:30 remaining; Tab 2 restores from sessionStorage and also shows 4:30, but they diverge from there. Is this a real problem in your implementation? How would you prevent it?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Your optimistic lesson completion updates the local progress bar instantly. But if two lessons are marked complete in quick succession (fast clicking), can the progress bar show incorrect values? Walk through the race condition.</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">You store the JWT in a Zustand store (memory). The user opens a new tab. The JWT is not in localStorage so the new tab has no token. How does the new tab authenticate? What does the user experience?</div></div>
+<div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Dark/Light mode:</strong> Implement a theme toggle using Tailwind's <code>dark:</code> variant and a custom hook. Persist preference in localStorage. Default to system preference using <code>window.matchMedia('(prefers-color-scheme: dark)')</code>.</div><div class="bit"><strong>+7 marks — Offline fallback:</strong> Use a Service Worker (via Vite PWA plugin) to cache course catalog data. When offline, show a banner and serve cached data. Show which data is stale.</div><div class="bit"><strong>+5 marks — Accessibility audit:</strong> Run your app through Lighthouse and fix all accessibility issues (score ≥ 90). Document every fix: what was wrong, what ARIA attribute or HTML change fixed it.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>React Intern — EduTrack Education &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">React Intern Assignment &middot; Education &mdash; EduTrack &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
