@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Python Intern — PayFlow — Payments</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#fbbf24;--ar:251,191,36}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Python Intern · Payments</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Python Intern · Payments Domain</div>
+  </div>
+  <p class="etag">// Assignment 03 · Python · Payments · Intermediate</p>
+  <h1 class="ht">PayFlow<br><span style="color:var(--ac)">FastAPI</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Payments API.</span></h1>
+  <p class="hs">Build the Python/FastAPI backend for PayFlow. Key patterns: idempotency using SQLAlchemy's <code>INSERT ... ON CONFLICT DO NOTHING</code> and checking for the existing record, payment status as a Python <code>StrEnum</code>, and wallet deductions in SQLAlchemy async transactions.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Domain</div><div class="mpv">Payments</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">PayFlow FastAPI</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Python 3.12 · FastAPI · SQLAlchemy</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Python 3.12+</span><span class="tag">FastAPI</span><span class="tag">SQLAlchemy 2.x (async)</span>
+  <span class="tag">Pydantic v2</span><span class="tag">PostgreSQL</span><span class="tag">Alembic</span>
+  <span class="tag">python-jose (JWT)</span><span class="tag">bcrypt</span><span class="tag">pytest + httpx</span>
+  <span class="tag">Docker Compose</span>
+</div><div class="sep"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">PayFlow FastAPI uses SQLAlchemy's <code>INSERT ... ON CONFLICT DO NOTHING</code> for idempotency. The <strong><code>UPDATE ... WHERE balance >= amount</code></strong> pattern for wallet deduction is atomic at the database level &mdash; no need for application-level locking. Payment status is a Python <strong><code>StrEnum</code></strong> stored as a native PostgreSQL ENUM. FastAPI <strong>dependencies</strong> (<code>Depends()</code>) handle auth, DB session, and role checking.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Type hints on every function. Pydantic v2 models for all request/response schemas. <code>async def</code> for all route handlers and database queries. <code>mypy --strict</code> must pass.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Wallet Management</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Auto-created wallet with async balance operations.</p><div class="rl"><div class="rq"><strong>Auto-create wallet:</strong> Use a SQLAlchemy event listener: <code>@event.listens_for(User, 'after_insert') def create_wallet(mapper, connection, target): connection.execute(insert(Wallet).values(user_id=target.id, balance=0))</code>. Or create it in the user registration service. Document your choice.</div><div class="rq"><strong>Deduct function:</strong> <code>async def deduct_wallet(user_id: UUID, amount: Decimal, db: AsyncSession) -> Wallet</code>. Use SQLAlchemy's update with a WHERE clause: <code>stmt = update(Wallet).where(Wallet.user_id == user_id, Wallet.balance >= amount).values(balance=Wallet.balance - amount).returning(Wallet)</code>. If no row updated, raise <code>InsufficientBalanceError</code>.</div><div class="rq"><strong>Top-up endpoint:</strong> Pydantic: <code>class TopUpRequest(BaseModel): amount: Decimal = Field(gt=0, le=Decimal('100000'), decimal_places=2); method: PaymentMethod</code>. Route adds to wallet balance in a transaction.</div><div class="rq"><strong>Cursor pagination:</strong> Return <code>{'data': items, 'next_cursor': items[-1].id if len(items) == size else None}</code>. Query: <code>stmt.where(WalletTransaction.id < cursor).order_by(WalletTransaction.id.desc()).limit(size)</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Payment Processing &amp; Idempotency</div><div class="tp">// 25 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Idempotency via ON CONFLICT and status tracking.</p><div class="rl"><div class="rq"><strong>Idempotency header:</strong> FastAPI dependency: <code>async def idempotency_key(x_idempotency_key: str = Header(alias='X-Idempotency-Key')) -> str: return x_idempotency_key</code>. Inject with <code>Depends(idempotency_key)</code> on the payment creation route.</div><div class="rq"><strong>INSERT ON CONFLICT:</strong> <code>stmt = insert(Payment).values(..., idempotency_key=key).on_conflict_do_nothing(index_elements=['user_id', 'idempotency_key'])</code>. After executing: if no rowcount, the payment already existed &mdash; fetch and return it. This avoids a SELECT before INSERT.</div><div class="rq"><strong>Payment status StrEnum:</strong> <code>class PaymentStatus(StrEnum): INITIATED = 'INITIATED'; PROCESSING = 'PROCESSING'; SUCCESS = 'SUCCESS'; FAILED = 'FAILED'</code>. SQLAlchemy: <code>status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus), default=PaymentStatus.INITIATED)</code>.</div><div class="rq"><strong>Async payment flow:</strong> In an async context: <code>async with db.begin(): payment.status = PaymentStatus.PROCESSING; wallet = await deduct_wallet(...); payment.status = PaymentStatus.SUCCESS</code>. Except <code>InsufficientBalanceError</code>: set FAILED. All changes committed atomically by the <code>async with db.begin()</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Refund Management</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Refund lifecycle with Pydantic validation and typed errors.</p><div class="rl"><div class="rq"><strong>Refund validator:</strong> Pydantic v2 model validator: <code>@model_validator(mode='after') def validate_refund_amount(self) -> 'RefundCreate': if self.amount > self.max_refundable: raise ValueError(f'Amount exceeds refundable: {self.max_refundable}'); return self</code>. The <code>max_refundable</code> is computed and passed to the schema.</div><div class="rq"><strong>Eligibility check:</strong> <code>async def check_refund_eligibility(payment_id: UUID, user_id: UUID, db: AsyncSession) -> Payment</code>. Fetch payment, check status == SUCCESS, check age <= 7 days (<code>datetime.utcnow() - payment.processed_at <= timedelta(days=7)</code>), check no existing PENDING refund. Raise specific <code>HTTPException</code> for each violation.</div><div class="rq"><strong>Process refund:</strong> Admin endpoint. SQLAlchemy transaction: credit wallet, set refund status to PROCESSED, update payment's <code>refunded_amount</code> using <code>update(Payment).values(refunded_amount=Payment.refunded_amount + refund.amount)</code>.</div><div class="rq"><strong>Refund type detection:</strong> <code>def get_refund_type(payment: Payment, refund: Refund) -> RefundType: total_refunded = payment.refunded_amount + refund.amount; return RefundType.FULL if total_refunded == payment.amount else RefundType.PARTIAL</code>.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Merchant &amp; Settlement</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Merchant role, payment verification, and settlement aggregation.</p><div class="rl"><div class="rq"><strong>Role-based dependency:</strong> <code>async def require_merchant(current_user: User = Depends(get_current_user)) -> User: if current_user.role != Role.MERCHANT: raise HTTPException(status_code=403, detail='Merchant access required'); return current_user</code>.</div><div class="rq"><strong>Settlement aggregation:</strong> Use SQLAlchemy with date_trunc: <code>select(func.date_trunc('day', Payment.processed_at).label('day'), func.count().label('count'), func.sum(Payment.amount).label('total')).where(Payment.merchant_id == merchant_id).group_by('day').order_by('day')</code>.</div><div class="rq"><strong>Payment verification:</strong> <code>GET /api/merchant/payments/verify</code> with <code>order_id: str = Query(...)</code>. Return: <code>VerificationResponse(verified=payment.status == 'SUCCESS', status=payment.status, amount=payment.amount if payment.status == 'SUCCESS' else None)</code>.</div><div class="rq"><strong>Suspended check:</strong> Middleware function: <code>async def check_merchant_status(merchant_id: UUID, db: AsyncSession) -> None: merchant = await db.get(User, merchant_id); if merchant.status == 'SUSPENDED': raise HTTPException(422, 'Merchant suspended')</code>. Call from payment creation service.</div></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Testing &amp; Error Handling</div><div class="tp">// 15 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">pytest async tests for idempotency and balance operations.</p><div class="rl"><div class="rq"><strong>Test idempotency:</strong> Mock SQLAlchemy to return no inserted rows on the first call (simulating an existing payment). Assert the service calls a SELECT to fetch the existing payment and returns it unchanged.</div><div class="rq"><strong>Wallet deduct test:</strong> Use SQLite in-memory for unit tests (<code>AsyncSession</code> with <code>aiosqlite</code>). Test: (a) deduct 400 from 500 → balance 100, (b) deduct 600 from 500 → <code>InsufficientBalanceError</code>, (c) assert the update WHERE clause includes <code>balance >= amount</code>.</div><div class="rq"><strong>FastAPI test client:</strong> Use <code>httpx.AsyncClient(app=app)</code>. Test the <code>X-Idempotency-Key</code> requirement: POST to /api/payments without the header → 422 response with 'field required' error for the header.</div><div class="rq"><strong>Global exception handlers:</strong> Register handlers for: <code>InsufficientBalanceError</code> → 422, <code>RefundNotEligibleError</code> → 422, <code>DuplicateIdempotencyKeyError</code> → 200 (return existing). All return <code>{'detail': message, 'code': error_code}</code>.</div></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Python/FastAPI-specific patterns.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">The SQLAlchemy <code>UPDATE ... WHERE balance >= amount</code> pattern for wallet deduction is atomic at the database level. But what if your application uses multiple database replicas (one primary for writes, replicas for reads)? Could this pattern break?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">Python's <code>async with db.begin():</code> auto-commits on success and auto-rolls back on exception. But what if an exception occurs AFTER the transaction commits but BEFORE the HTTP response is sent (e.g., during response serialization)? Is this possible with FastAPI?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Pydantic v2's <code>@model_validator(mode='after')</code> receives the fully validated model instance. You use it to validate that refund amount ≤ max_refundable. But <code>max_refundable</code> is a database value that must be fetched first. How do you pass this database value into the Pydantic model for validation?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">FastAPI's <code>Depends()</code> creates a dependency chain. If three different route handlers all depend on <code>get_current_user</code> which depends on <code>get_db</code>, how many database sessions are created? Does FastAPI reuse the same session across dependency calls within a single request?</div></div><div class="sep"></div><div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Async webhook:</strong> When a payment status changes to SUCCESS or FAILED, send a webhook to the merchant asynchronously using <code>httpx.AsyncClient</code>. Use FastAPI's <code>BackgroundTasks</code> to fire it without blocking the response. Add 3 retry attempts with exponential backoff.</div><div class="bit"><strong>+7 marks — Payment expiry background task:</strong> A background task that runs every minute: find PROCESSING payments older than 10 minutes and mark them FAILED. Use <code>asyncio.create_task</code> in the FastAPI lifespan event, not APScheduler. Handle task cancellation on app shutdown.</div><div class="bit"><strong>+5 marks — Structured error responses:</strong> Create a custom <code>ErrorResponse</code> Pydantic model: <code>class ErrorResponse(BaseModel): detail: str; code: str; timestamp: datetime; path: str</code>. All exception handlers return this model. Use FastAPI's <code>responses</code> parameter to document error responses in OpenAPI.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Python Intern — PayFlow Payments &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Python Intern Assignment &middot; Payments &mdash; PayFlow &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
