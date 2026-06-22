@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · AI & Automation Intern — AI Prompt Engineer &amp; Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#6366f1;--ar:99,102,241}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// AI Prompt Engineer · Tekravio</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// AI Prompt Engineer Intern · Tekravio</div>
+  </div>
+  <p class="etag">// Assignment · AI Prompt Engineer & Business Automation Specialist · Intermediate</p>
+  <h1 class="ht">TekrAI<br><span style="color:var(--ac)">Starter</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Kit.</span></h1>
+  <p class="hs">Build Tekravio's AI automation foundation from scratch. This assignment has five modules that mirror your actual day-one responsibilities: designing production-ready prompts, automating a real business process, comparing AI models for specific use cases, building a working RAG system or AI agent, and writing a governance policy. We are not testing theory. We are testing whether you can ship things that work.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Role</div><div class="mpv">AI Prompt Engineer & Business Automation</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">TekrAI Starter Kit</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Any AI model · n8n / Make · Python or JS</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">7 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 25 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Prompt Engineering</span><span class="tag">n8n / Make / Zapier</span>
+  <span class="tag">OpenAI · Anthropic · Google · Mistral</span><span class="tag">LangChain / LlamaIndex</span>
+  <span class="tag">Python or JavaScript</span><span class="tag">Vector DBs (Chroma / Pinecone / Weaviate)</span>
+  <span class="tag">REST APIs · Webhooks · JSON</span><span class="tag">RAG · Embeddings</span>
+  <span class="tag">AI Agents · Tool Calling</span><span class="tag">Pydantic / Zod (structured outputs)</span>
+</div>
+<div class="callout co" style="margin-bottom:1.5rem"><div class="callout-h">// Important</div>
+<p>You may use any AI model or automation tool for this assignment. <strong>Do not restrict yourself to one platform.</strong> We want to see that you can choose the right tool for the right task. A candidate who uses GPT-4 for everything scores lower than one who thoughtfully picks different models for different modules.</p></div>
+<div class="sep"></div>
+<div class="ctx-h" style="display:none"></div><div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">Tekravio is a technology services and consulting company. Our developers, HR team, sales team, and founders repeat dozens of tasks every day that AI can handle: reviewing pull requests, screening candidates, summarising meeting notes, writing outreach emails, logging tasks. <strong>Your job is to make this stop.</strong><br><br>This assignment gives you a slice of Tekravio's real operations. Pick use cases that feel real to you &mdash; the more specific and practical your solutions, the better your score. We will evaluate not just whether it works but whether a non-technical person at Tekravio could use it on day one.</div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Do all five. Each module is a real Tekravio responsibility. Skipping a module is skipping part of the job.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Prompt Engineering Showcase</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Design three production-ready prompts for Tekravio. These are not demo prompts &mdash; they must be clean enough to put into a prompt library and hand to a team member tomorrow.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">Structured output example — Code Review Prompt</span><span class="cb-tag">System Prompt</span></div><pre><span class="kw">You are</span> a senior software engineer at Tekravio.
+<span class="kw">When given code</span>, you review it and respond ONLY as JSON.
+<span class="kw">Never</span> add explanation outside the JSON block.
+
+<span class="str">Response schema:</span>
+{
+  <span class="str">"rating"</span>: <span class="ty">number</span>,        <span class="cm">// 1-10</span>
+  <span class="str">"language"</span>: <span class="ty">string</span>,
+  <span class="str">"bugs"</span>: [
+    { <span class="str">"line"</span>: <span class="ty">number</span>, <span class="str">"issue"</span>: <span class="ty">string</span>, <span class="str">"fix"</span>: <span class="ty">string</span> }
+  ],
+  <span class="str">"security_issues"</span>: [<span class="ty">string</span>],
+  <span class="str">"improvements"</span>: [<span class="ty">string</span>],
+  <span class="str">"summary"</span>: <span class="ty">string</span>       <span class="cm">// one sentence</span>
+}
+
+<span class="kw">Rules:</span>
+<span class="ann">- If no bugs found, return empty array, not null</span>
+<span class="ann">- Rating above 8 only if zero critical bugs</span>
+<span class="ann">- security_issues only for actual vulnerabilities</span></pre></div><div class="rl"><div class="rq"><strong>Prompt 1 &mdash; Code Review:</strong> A system prompt that acts as a senior Java/Python code reviewer. Given a code snippet, it must: identify bugs, security issues, and code smells; rate the code 1&ndash;10 with justification; suggest specific line-level improvements; and output in a structured JSON format with fields: <code>rating</code>, <code>bugs</code>, <code>security_issues</code>, <code>improvements</code>, <code>summary</code>. Test it on a real snippet you write. Show the raw output.</div><div class="rq"><strong>Prompt 2 &mdash; Candidate Screening:</strong> A prompt that takes a job description + a resume text and outputs: fit score (0&ndash;100), top 3 strengths relative to the JD, top 3 gaps, a recommended interview question list (5 questions), and a one-line recruiter summary. The output must always be structured &mdash; no free-form paragraphs. Test with the AI Prompt Engineer JD from this assignment and a sample resume you create.</div><div class="rq"><strong>Prompt 3 &mdash; Meeting Summary:</strong> A prompt that converts raw meeting transcript text into: action items (owner + due date), key decisions made, open questions, and a 3-sentence executive summary. Test it on a realistic mock transcript you write (minimum 300 words of transcript). Output must be clean enough to paste into a Notion page.</div><div class="rq"><strong>Prompt iteration log:</strong> For ONE of the three prompts above, show a v1 → v2 iteration. Include: what v1 produced, what was wrong with it, exactly what you changed in the prompt and why, and what v2 produced. This is the most important part of Module 1 &mdash; showing you can debug prompts.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>The most common prompt engineering mistake is not specifying the output format precisely enough. Show in your iteration log exactly how an imprecise output format caused a problem and how you fixed it.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">Business Process Automation</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Pick one repetitive Tekravio business process, document it, build the automation, and prove it works. This is your flagship deliverable &mdash; the thing you'd demo on day one.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">Sample n8n workflow — email → AI screen → sheet</span><span class="cb-tag">JSON skeleton</span></div><pre><span class="cm">// n8n workflow node structure</span>
+{
+  <span class="str">"nodes"</span>: [
+    { <span class="str">"type"</span>: <span class="str">"EmailTrigger"</span>, <span class="str">"name"</span>: <span class="str">"New Application"</span> },
+    {
+      <span class="str">"type"</span>: <span class="str">"HttpRequest"</span>, <span class="str">"name"</span>: <span class="str">"AI Screen Resume"</span>,
+      <span class="str">"params"</span>: {
+        <span class="str">"url"</span>: <span class="str">"https://api.anthropic.com/v1/messages"</span>,
+        <span class="str">"body"</span>: { <span class="str">"model"</span>: <span class="str">"claude-sonnet-4-6"</span>,
+          <span class="str">"messages"</span>: [{ <span class="str">"role"</span>: <span class="str">"user"</span>,
+            <span class="str">"content"</span>: <span class="str">"Screen this resume: {{emailBody}}"</span>}]}
+      }
+    },
+    { <span class="str">"type"</span>: <span class="str">"GoogleSheets"</span>, <span class="str">"name"</span>: <span class="str">"Log to Candidates"</span> },
+    { <span class="str">"type"</span>: <span class="str">"Gmail"</span>, <span class="str">"name"</span>: <span class="str">"Send Auto-Reply"</span> }
+  ]
+}</pre></div><div class="rl"><div class="rq"><strong>Choose your process:</strong> Pick exactly ONE from this list (or propose your own if better): (A) New job application received via email → screen resume → create candidate record in a spreadsheet → send auto-reply to applicant. (B) Developer pushes code → trigger code review AI → post review summary to Slack channel. (C) Meeting ends → transcript processed → action items extracted → tasks created in a project management tool. (D) Lead fills a contact form → research their company via AI → draft personalised outreach email → log to CRM sheet.</div><div class="rq"><strong>Process documentation:</strong> Before building, document the process: draw a simple flow diagram (can be text-based: Step 1 → Step 2 → Step 3). Define: trigger (what starts it), inputs (what data enters), steps (what happens in sequence), outputs (what the result is), tools involved, estimated time it takes manually. One A4 page maximum.</div><div class="rq"><strong>Build it:</strong> Implement the automation using n8n, Make, Zapier, Python with scheduling, or a combination. It must: connect at least two external tools or services (Gmail + Sheets, Slack + Notion, etc.), call at least one AI model API for a real task (not just formatting), handle a basic error state (what happens if the AI returns an empty response?), and be runnable with a single trigger.</div><div class="rq"><strong>Prove it works:</strong> Provide: a screen recording (Loom link) OR a sequence of screenshots showing the automation running end-to-end with real data. Show the trigger, the AI processing step, and the final output. If you used n8n or Make, export the workflow JSON and include it in your submission.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>If you cannot build the full automation due to API access limitations, build as much as you can and clearly mock the missing step with a placeholder. Explain what the mock replaces and how you would implement it with real access.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">AI Model Comparison</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Pick one Tekravio use case and run the same prompt through four different AI models. Write an honest comparison and a model recommendation with business justification.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">Cost calculation — template</span><span class="cb-tag">Python</span></div><pre><span class="kw">models</span> = {
+  <span class="str">"gpt-4o"</span>:          { <span class="str">"input"</span>: <span class="nu">2.50</span>, <span class="str">"output"</span>: <span class="nu">10.00</span> },  <span class="cm"># per 1M tokens</span>
+  <span class="str">"claude-sonnet-4-6"</span>: { <span class="str">"input"</span>: <span class="nu">3.00</span>, <span class="str">"output"</span>: <span class="nu">15.00</span> },
+  <span class="str">"gemini-1.5-pro"</span>:   { <span class="str">"input"</span>: <span class="nu">1.25</span>, <span class="str">"output"</span>: <span class="nu">5.00</span>  },
+  <span class="str">"mistral-large-3"</span>:  { <span class="str">"input"</span>: <span class="nu">2.00</span>, <span class="str">"output"</span>: <span class="nu">6.00</span>  },
+}
+
+<span class="kw">def</span> <span class="ty">monthly_cost</span>(model, avg_input_tokens, avg_output_tokens, runs_per_month):
+    p = models[model]
+    <span class="kw">return</span> ((avg_input_tokens * p[<span class="str">"input"</span>] +
+             avg_output_tokens * p[<span class="str">"output"</span>]) / <span class="nu">1_000_000</span>) * runs_per_month
+
+<span class="cm"># Example: 500 email drafts / month, ~800 input + 400 output tokens</span>
+<span class="kw">for</span> model <span class="kw">in</span> models:
+    cost = monthly_cost(model, <span class="nu">800</span>, <span class="nu">400</span>, <span class="nu">500</span>)
+    <span class="ty">print</span>(<span class="str">f"{model}: ${cost:.2f}/month"</span>)</pre></div><div class="rl"><div class="rq"><strong>Choose your use case:</strong> Pick one: (A) Writing personalised cold outreach emails from a lead's LinkedIn profile. (B) Reviewing a 200-line Python function for bugs and security issues. (C) Answering a technical HR question from the Tekravio employee handbook. (D) Generating unit test cases for a Spring Boot REST endpoint.</div><div class="rq"><strong>The four models:</strong> Test at minimum four models. Suggested: GPT-4o or GPT-5.5, Claude Sonnet 4.6 or Fable 5, Gemini 1.5 Pro or Gemini 3.1 Pro, and one open-source model (Llama 4 Scout via Groq, Mistral Large 3, or Qwen 3 via OpenRouter). Use the exact same prompt on all four. Record the actual outputs.</div><div class="rq"><strong>Comparison matrix:</strong> Build a table comparing all four models across: output quality (subjective 1&ndash;10 with reasoning), accuracy / hallucination risk (did any make something up?), response time (seconds), estimated cost per 1,000 runs (calculate from API pricing × token count), context window (is it relevant for this use case?), and privacy considerations (is sending this data to this provider safe?).</div><div class="rq"><strong>Recommendation:</strong> Write a one-paragraph recommendation: which model would you use at Tekravio for this use case, and why? Include a fallback model if the primary is unavailable or too expensive. If cost is a deciding factor, show the math: e.g. 500 emails/month × average 800 tokens = X tokens = ₹Y/month.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>This module is worth 18 marks but is often the most insightful for reviewers. Candidates who blindly recommend GPT-4 for everything fail this module. The right answer depends on the use case.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Mini RAG System or AI Agent</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Build one working system. Either a RAG pipeline that answers questions from a document set, or a multi-step AI agent that completes a real task end-to-end. Real code, real output.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">Option A — RAG pipeline skeleton</span><span class="cb-tag">Python</span></div><pre><span class="kw">from</span> langchain.document_loaders <span class="kw">import</span> DirectoryLoader
+<span class="kw">from</span> langchain.text_splitter <span class="kw">import</span> RecursiveCharacterTextSplitter
+<span class="kw">from</span> langchain_openai <span class="kw">import</span> OpenAIEmbeddings
+<span class="kw">from</span> langchain_chroma <span class="kw">import</span> Chroma
+<span class="kw">from</span> langchain_anthropic <span class="kw">import</span> ChatAnthropic
+
+<span class="cm"># 1. Load docs</span>
+docs = DirectoryLoader(<span class="str">"./tekravio_kb"</span>).load()
+
+<span class="cm"># 2. Chunk</span>
+chunks = RecursiveCharacterTextSplitter(
+    chunk_size=<span class="nu">500</span>, chunk_overlap=<span class="nu">50</span>
+).split_documents(docs)
+
+<span class="cm"># 3. Embed + store</span>
+db = Chroma.from_documents(chunks, OpenAIEmbeddings())
+
+<span class="cm"># 4. Query</span>
+<span class="kw">def</span> <span class="ty">ask</span>(question: str) -> str:
+    results = db.similarity_search(question, k=<span class="nu">3</span>)
+    context = <span class="str">"
+
+"</span>.join(r.page_content <span class="kw">for</span> r <span class="kw">in</span> results)
+    <span class="kw">return</span> ChatAnthropic(model=<span class="str">"claude-sonnet-4-6"</span>).invoke(
+        <span class="str">f"Context:
+{context}
+
+Question: {question}
+
+Cite your source."</span>
+    ).content</pre></div><div class="rl"><div class="rq"><strong>Option A &mdash; RAG System:</strong> Build a RAG system that answers questions from a small Tekravio knowledge base. Create 3&ndash;5 sample documents (job descriptions, an HR policy, a technical spec &mdash; you can write these yourself). Implement: document loading and chunking, embedding with any model (OpenAI, Cohere, or a local model), storage in a vector DB (Chroma, Pinecone free tier, FAISS, or Qdrant), retrieval with cosine similarity, and answer generation with source citation. Test with 5 questions and show the retrieved chunks alongside the answer.</div><div class="rq"><strong>Option B &mdash; AI Agent:</strong> Build a multi-step AI agent that completes a task using tool calling. Suggested task: given a GitHub username, (1) fetch their public repos via GitHub API, (2) analyse their top 3 repos using AI, (3) generate a candidate technical profile. OR: given a company name, (1) search for recent news, (2) extract key facts, (3) draft a personalised sales email. Use OpenAI function calling, Anthropic tool use, or LangChain with tools. Show at least 3 tool calls in the agent trace.</div><div class="rq"><strong>Code quality requirements:</strong> Regardless of Option A or B: all code must run with a single command (<code>python main.py</code> or <code>node index.js</code>). Include a <code>requirements.txt</code> or <code>package.json</code>. Add a <code>.env.example</code> file showing which API keys are needed. Handle the case where the API returns an error or no results. README must explain how to run it in under 5 minutes.</div><div class="rq"><strong>Test and document:</strong> Run your system with 5 test inputs. For each test: show the input, show the output, mark it as correct / partially correct / incorrect, and explain any incorrect outputs. If your system hallucinates or retrieves wrong chunks, explain why and what you would improve.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>We do not care which option you pick. We care about: does it run, does it produce useful output, and can you explain what it does and where it fails? A working simple system beats a broken complex one every time.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">AI Governance &amp; Prompt Security</div><div class="tp">// 16 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Write the documents that would govern AI usage at Tekravio. This is not a box-ticking exercise. These documents will protect real company and client data.</p><div class="rl"><div class="rq"><strong>Tekravio AI Usage Policy:</strong> Write a one-page (500&ndash;800 word) AI Usage Policy for Tekravio covering: (a) which AI tools are approved and for what use cases, (b) what information must NEVER be entered into any AI tool (client source code, employee data, contracts, financial data), (c) what to do before using a new AI tool not on the approved list, (d) who owns the output of AI-generated work, (e) how to handle AI errors or hallucinations in a client deliverable. Make it practical &mdash; something a developer or HR team member would actually read and follow.</div><div class="rq"><strong>Prompt injection risk assessment:</strong> Explain prompt injection: what it is, why it matters in a business context, and give two realistic examples of how it could harm Tekravio (e.g. a support chatbot being manipulated to reveal internal data). For each example: describe the attack, describe the prompt-level defence you would add (not application-level security &mdash; prompt-level), and show the before/after prompt.</div><div class="rq"><strong>Hallucination prevention checklist:</strong> Create a 10-point checklist that a Tekravio team member runs before trusting any AI output for a client-facing deliverable. For each point: state the check and explain why it matters. Example format: <code>[ ] Verify all names, numbers, and dates cited by the AI against original sources — AI frequently fabricates statistics.</code></div><div class="rq"><strong>Automation safety rules:</strong> Define 5 safety rules for any automated workflow that runs without human supervision at Tekravio. Address: maximum actions per run, what triggers a human approval checkpoint, how sensitive data is handled in transit between tools, what the fallback is if an API fails, and how you log what the automation did for audit purposes.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>A company that uses AI without governance documents is one incident away from a serious client or legal problem. This module tests whether you have the maturity to build AI systems responsibly &mdash; not just technically.</p></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">These come up on day one. We discuss them in the review call &mdash; short written answers, honest thinking.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">A developer at Tekravio asks you to build a GitHub Actions workflow that uses Claude to review every pull request and auto-approve it if the AI gives a score above 8/10. What are the risks of full auto-approval, and how would you redesign the workflow to keep a human in the loop without making it annoying?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">Tekravio's HR team wants to use an AI prompt to screen 200 resumes and shortlist the top 20. The prompt was written by a developer and tested on 10 resumes. Two months later, the HR lead notices that shortlisted candidates are almost always from a specific set of universities. What likely happened at the prompt level, and how would you audit and fix it?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">You built an n8n automation that reads emails, extracts tasks, and creates Jira tickets. One morning it creates 340 tickets from a single email thread. Walk through exactly what caused this and describe the specific safeguard you add to the automation to prevent it happening again.</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">A client asks Tekravio to build an internal AI assistant using their proprietary documentation. The client wants to use OpenAI's API. What data privacy questions do you ask the client before proceeding, and under what conditions would you recommend a self-hosted open-source model instead?</div></div>
+<div class="sep"></div>
+<div class="stag">// 03 &middot; Submission Checklist</div>
+<div class="sh">What to Include</div>
+<div class="ctx"><div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// Required deliverables</div></div>
+<div class="ctx-body">
+<strong>GitHub Repository</strong> containing:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module1/</code> &mdash; Three prompt files (.md or .txt) + iteration log<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module2/</code> &mdash; Process doc + workflow JSON/screenshots + Loom link in README<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module3/</code> &mdash; Comparison table (markdown or spreadsheet) + recommendation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module4/</code> &mdash; Working code + <code>requirements.txt</code> + <code>.env.example</code> + test results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module5/</code> &mdash; AI Usage Policy + Prompt Injection doc + Hallucination checklist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>README.md</code> &mdash; Design question answers + how to run Module 4 + what you'd do differently<br><br>
+<strong>Email to</strong> <code>careers@tekravio.com</code><br>
+Subject: <code>Application for AI Prompt Engineer &amp; Business Automation Specialist – Tekravio</code><br>
+Body: GitHub link + one sentence per module on what you're most proud of + your availability for a call
+</div></div>
+<div class="sep"></div>
+<div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+10 marks — Prompt Library UI:</strong> Build a simple web page (plain HTML + JS, or a React app) that acts as a prompt library. It should: display prompts organised by category (coding, HR, sales, operations), allow searching by keyword, show the prompt template with variable placeholders highlighted (e.g. <code>{{candidate_name}}</code>), and let a user copy a prompt to clipboard. Store prompts in a local JSON file. This is the start of Tekravio's real internal prompt library.</div><div class="bit"><strong>+9 marks — Cost dashboard:</strong> Extend your model comparison (Module 3) with a cost calculator web page or Python script. Input: use case name, estimated monthly runs, average input/output token counts. Output: monthly cost in USD and INR for all models you tested, ranked cheapest to most expensive, with a recommendation row. Use live or recent API pricing.</div><div class="bit"><strong>+6 marks — Human-in-the-loop:</strong> Add a human approval step to your Module 2 automation. When the AI output confidence is low (e.g. fit score below 60%, or the AI flags uncertainty), pause the workflow and send an approval request (email, Slack message, or a simple HTML form) to a designated reviewer. The automation continues only after approval. Show this path working.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>AI Prompt Engineer & Business Automation — Tekravio &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">AI & Automation Intern Assignment &middot; Tekravio &mdash; TekrAI Starter Kit &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
