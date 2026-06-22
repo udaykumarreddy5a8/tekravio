@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tekravio · Data Analytics Intern — Junior Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--s1:#0b0f1e;--s2:#111829;--bd:rgba(255,255,255,.07);--tx:#e2e8f0;--mu:#5a6080;--r:12px;--ac:#06b6d4;--ar:6,182,212}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:"Outfit",sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px}
+h1,h2{font-family:"Clash Display",sans-serif;font-weight:700;letter-spacing:-.02em}
+code{font-family:"Fira Code",monospace;font-size:.82em;background:rgba(var(--ar),.12);border:1px solid rgba(var(--ar),.25);color:var(--ac);padding:2px 7px;border-radius:4px}
+p{color:#94a3b8}p strong{color:var(--tx)}
+.wrap{max-width:900px;margin:0 auto;padding:0 clamp(20px,6vw,56px)}
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,6,14,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 clamp(20px,4vw,48px);height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"Clash Display",sans-serif;font-size:1.2rem;font-weight:700}.logo em{color:var(--ac);font-style:normal}
+.hbg{font-family:"Fira Code",monospace;font-size:.67rem;padding:4px 12px;border-radius:100px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac);letter-spacing:.1em;text-transform:uppercase}
+.pbar{position:fixed;top:60px;left:0;right:0;height:2px;z-index:99;background:var(--bd)}
+.pfill{height:100%;background:var(--ac);width:0%;transition:width .1s}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,130px) clamp(20px,6vw,56px) 56px;position:relative;overflow:hidden;border-bottom:1px solid var(--bd)}
+.hero::before{content:"";position:absolute;top:-80px;right:-50px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(var(--ar),.13) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-50px;left:-40px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(var(--ar),.05) 0%,transparent 65%);pointer-events:none}
+.htop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.75rem;position:relative;z-index:1}
+.etag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);margin-bottom:1.25rem;position:relative;z-index:1}
+.ht{font-size:clamp(2.4rem,7vw,4.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;position:relative;z-index:1}
+.hs{font-size:clamp(.95rem,2vw,1.075rem);color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:2.5rem;position:relative;z-index:1}
+.mrow{display:flex;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.mp{display:flex;align-items:center;gap:.75rem;background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:.75rem 1.25rem}
+.mpl{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.mpv{font-size:.9rem;font-weight:600;color:var(--tx);margin-top:2px}
+.sec{padding:clamp(40px,8vw,72px) 0}
+.stag{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.sh{font-family:"Clash Display",sans-serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1.15;margin-bottom:1rem}
+.sep{height:1px;background:var(--bd);margin:3rem 0}
+.ctx{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-radius:var(--r);overflow:hidden;margin-bottom:2rem}
+.ctx-h{padding:1rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.75rem}
+.ctx-dot{width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.ctx-l{font-family:"Fira Code",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac)}
+.ctx-body{padding:1.5rem;font-size:.9375rem;color:#94a3b8;line-height:1.8}.ctx-body strong{color:var(--tx)}
+.tasks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.task{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;background:var(--s1)}
+.th{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent}
+.task.open .th{border-bottom-color:var(--bd)}
+.tn{font-family:"Fira Code",monospace;font-size:.7rem;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;background:rgba(var(--ar),.15);color:var(--ac)}
+.tt{font-family:"Clash Display",sans-serif;font-size:1rem;font-weight:600;color:var(--tx);line-height:1.2}
+.tp{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.1em;color:var(--mu);margin-top:.2rem}
+.tch{margin-left:auto;flex-shrink:0;color:var(--mu);transition:transform .25s;font-size:1rem}
+.task.open .tch{transform:rotate(180deg);color:var(--ac)}
+.tb{padding:1.5rem;background:var(--s2);display:none}
+.task.open .tb{display:block}
+.tdesc{font-size:.9375rem;color:#94a3b8;line-height:1.7;margin-bottom:1.25rem}
+.rl{display:flex;flex-direction:column;gap:.6rem}
+.rq{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8;line-height:1.55}
+.rq::before{content:"&#x2192;";flex-shrink:0;margin-top:.125rem;font-family:"Fira Code",monospace;font-size:.7rem;color:var(--ac)}
+.rq strong{color:var(--tx)}
+.sg{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.sgl{font-family:"Fira Code",monospace;font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.625rem;color:var(--ac)}
+.codeblock{background:#020408;border:1px solid rgba(var(--ar),.15);border-radius:8px;overflow:hidden;margin:.75rem 0}
+.cb-h{background:var(--s1);padding:.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.cb-f{font-family:"Fira Code",monospace;font-size:.68rem;color:var(--mu)}.cb-tag{font-family:"Fira Code",monospace;font-size:.62rem;color:var(--ac);background:rgba(var(--ar),.1);padding:2px 8px;border-radius:3px}
+pre{padding:1rem 1.25rem;overflow-x:auto;font-family:"Fira Code",monospace;font-size:.75rem;line-height:1.8;color:#94a3b8}
+.kw{color:#a78bfa}.ty{color:#38bdf8}.str{color:#4ade80}.ann{color:var(--ac)}.cm{color:#3a4a6a}.nu{color:#fbbf24}
+.callout{border:1px solid;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.875rem;line-height:1.7}
+.callout-h{font-family:"Fira Code",monospace;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.375rem}
+.cy{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.2);border-left:3px solid #fbbf24}.cy .callout-h{color:#fbbf24}
+.co{background:rgba(255,112,67,.05);border-color:rgba(255,112,67,.2);border-left:3px solid #ff7043}.co .callout-h{color:#ff7043}
+.cg{background:rgba(var(--ar),.05);border-color:rgba(var(--ar),.2);border-left:3px solid var(--ac)}.cg .callout-h{color:var(--ac)}
+.callout p{color:#94a3b8;margin:0}.callout p strong{color:var(--tx)}
+.trow{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.tag{font-family:"Fira Code",monospace;font-size:.65rem;padding:4px 10px;border-radius:4px;background:rgba(var(--ar),.1);border:1px solid rgba(var(--ar),.25);color:var(--ac)}
+.bx{border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.04);border-radius:var(--r);padding:1.5rem 2rem;margin-bottom:2rem}
+.bxt{font-family:"Fira Code",monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fbbf24;margin-bottom:.75rem}
+.bi{display:flex;flex-direction:column;gap:.5rem}
+.bit{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:#94a3b8}
+.bit::before{content:"&#x2756;";color:#fbbf24;flex-shrink:0;margin-top:2px;font-size:.7rem}
+.sub-box{background:linear-gradient(135deg,rgba(var(--ar),.12),rgba(var(--ar),.06));border:1px solid rgba(var(--ar),.25);border-radius:var(--r);padding:2rem;text-align:center;margin-top:1.5rem}
+.qbox{background:var(--s1);border:1px solid rgba(var(--ar),.2);border-left:3px solid var(--ac);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin:.875rem 0}
+.qn{font-family:"Fira Code",monospace;font-size:.65rem;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem}
+.qt{font-size:.9375rem;color:#c0d0e8;font-weight:500;line-height:1.6}
+footer{border-top:1px solid var(--bd);padding:1.75rem clamp(20px,6vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-family:"Clash Display",sans-serif;font-size:1.05rem;font-weight:700}.fl em{color:var(--ac);font-style:normal}
+.fn{font-family:"Fira Code",monospace;font-size:.7rem;color:var(--mu);text-align:right}
+@media(max-width:640px){.htop{flex-direction:column;align-items:flex-start;gap:.75rem}.mrow{flex-direction:column}}</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+  <div class="hbg">// Data Analyst Intern · Tekravio</div>
+</header>
+<div class="pbar"><div class="pfill" id="pf"></div></div>
+<div class="hero">
+  <div class="htop">
+    <div class="logo">Tekr<em>avio</em> <span style="font-size:13px;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:400"> Academy</span></div>
+    <div class="hbg">// Junior Data Analyst · Tekravio</div>
+  </div>
+  <p class="etag">// Assignment · Junior Data Analyst · Fresher / 0–1 Year · Practical</p>
+  <h1 class="ht">DataLens<br><span style="color:var(--ac)">Analyst</span><br><span style="-webkit-text-stroke:1.5px var(--tx);color:transparent">Assignment.</span></h1>
+  <p class="hs">Five practical modules covering everything you will do on day one at Tekravio: clean messy data, write SQL queries, build a dashboard, apply statistics, and train a basic ML model. Each module uses a realistic dataset and a realistic business question. We are not testing whether you know the theory. We are testing whether you can produce an output a business team can actually use.</p>
+  <div class="mrow"><div class="mp"><div><div class="mpl">Role</div><div class="mpv">Junior Data Analyst</div></div></div><div class="mp"><div><div class="mpl">Project</div><div class="mpv">DataLens — Tekravio Analytics</div></div></div><div class="mp"><div><div class="mpl">Stack</div><div class="mpv">Python · SQL · Power BI / Tableau · Scikit-learn</div></div></div><div class="mp"><div><div class="mpl">Deadline</div><div class="mpv">3 Days</div></div></div><div class="mp"><div><div class="mpl">Marks</div><div class="mpv">100 + 20 Bonus</div></div></div></div>
+</div><main><div class="wrap"><div class="sec">
+<div class="stag">// 00 &middot; Stack</div><div class="trow">
+  <span class="tag">Python 3.x</span><span class="tag">Pandas</span><span class="tag">NumPy</span>
+  <span class="tag">Matplotlib / Seaborn</span><span class="tag">Scikit-learn</span>
+  <span class="tag">SQL (MySQL / PostgreSQL)</span><span class="tag">Power BI or Tableau</span>
+  <span class="tag">Excel</span><span class="tag">Jupyter Notebook / Google Colab</span>
+  <span class="tag">Git + GitHub</span>
+</div>
+<div class="callout cg" style="margin-bottom:1.5rem"><div class="callout-h">// Dataset Rule</div>
+<p>You may use any publicly available dataset from <strong>Kaggle, UCI, data.gov.in, or World Bank</strong>. Do not use datasets that contain personal or sensitive real-world data. Every notebook must include the dataset source URL in the first Markdown cell. All notebooks must be submitted as <code>.ipynb</code> files that run without errors.</p></div>
+<div class="sep"></div>
+<div class="ctx">
+  <div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// The Problem</div></div>
+  <div class="ctx-body">Tekravio works with business and technology clients. Our teams collect data from sales, HR, operations, and product systems &mdash; but the data is rarely clean, rarely documented, and rarely visualised. <strong>Your job is to fix that.</strong><br><br>For this assignment you will work with provided or publicly available datasets. Choose datasets that feel realistic &mdash; e-commerce orders, HR attrition, sales performance, customer churn, or financial transactions. You can use any dataset from Kaggle, UCI, or data.gov.in. <strong>Include your dataset source in every notebook.</strong></div>
+</div>
+<div class="sep"></div>
+<div class="stag">// 01 &middot; Modules</div>
+<div class="sh">Five Modules &mdash; 100 Marks</div>
+<p style="margin-bottom:2rem">Work through all five. Each builds on the previous. Use the same dataset across modules where possible — it shows continuity of analysis.</p>
+<div class="tasks">  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">01</div><div><div class="tt">Data Cleaning &amp; Exploratory Data Analysis</div><div class="tp">// 22 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Clean a messy real-world dataset and produce an EDA notebook that tells a story. A stakeholder reading your notebook should understand the data without looking at any raw CSV.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">eda_starter.py — cleaning pattern</span><span class="cb-tag">Python</span></div><pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">import</span> seaborn <span class="kw">as</span> sns
+
+df = pd.read_csv(<span class="str">'your_dataset.csv'</span>)
+
+<span class="cm"># Step 1 — audit</span>
+<span class="ty">print</span>(df.info())
+<span class="ty">print</span>(df.isnull().sum().sort_values(ascending=<span class="nu">False</span>))
+<span class="ty">print</span>(df.duplicated().sum())
+
+<span class="cm"># Step 2 — clean</span>
+df = df.drop_duplicates()
+df[<span class="str">'revenue'</span>] = df[<span class="str">'revenue'</span>].fillna(df[<span class="str">'revenue'</span>].median())
+df[<span class="str">'category'</span>] = df[<span class="str">'category'</span>].str.strip().str.lower()
+df[<span class="str">'order_date'</span>] = pd.to_datetime(df[<span class="str">'order_date'</span>])
+
+<span class="cm"># Step 3 — outliers with IQR</span>
+Q1, Q3 = df[<span class="str">'revenue'</span>].quantile([<span class="nu">0.25</span>, <span class="nu">0.75</span>])
+IQR = Q3 - Q1
+df = df[df[<span class="str">'revenue'</span>].between(Q1 - <span class="nu">1.5</span>*IQR, Q3 + <span class="nu">1.5</span>*IQR)]</pre></div><div class="rl"><div class="rq"><strong>Choose a dataset:</strong> Pick one dataset with at least 5,000 rows and 8+ columns. Recommended: e-commerce transactions (Kaggle), HR employee attrition (IBM HR Analytics), retail sales, or customer order data. Include the source URL in your notebook header.</div><div class="rq"><strong>Data cleaning:</strong> Identify and fix: missing values (document your strategy per column — mean/median/mode/drop — and justify why), duplicate rows, inconsistent data types (dates stored as strings, numbers stored as objects), outliers (detect using IQR or Z-score, decide whether to remove or cap, and explain your decision), and inconsistent category labels (e.g. 'Yes' vs 'yes' vs '1').</div><div class="rq"><strong>Exploratory analysis:</strong> Produce at least 8 visualisations covering: distribution of key numerical columns (histograms), category counts (bar charts), correlation heatmap, time-series trend if date column exists, top 5 / bottom 5 analysis of a key metric, and one custom chart that reveals an insight you found interesting. Every chart must have a title, axis labels, and a one-sentence insight written below it in a Markdown cell.</div><div class="rq"><strong>Summary section:</strong> End the notebook with a Markdown summary: 3 key findings from the data, 2 potential business questions this data could answer, and 1 data quality issue you could not fully fix and why.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>Jupyter / Google Colab notebooks must run top-to-bottom without errors before submission. Restart the kernel and Run All before zipping. A notebook that errors on cell 3 cannot be graded.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">02</div><div><div class="tt">SQL Analysis</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Write SQL queries to answer 8 business questions from your dataset. SQL is the daily language of data analysts — this module tests whether you can get answers from a database without Python.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">SQL — window function example</span><span class="cb-tag">SQL</span></div><pre><span class="cm">-- Q7: Cumulative monthly revenue (running total)</span>
+<span class="kw">SELECT</span>
+    DATE_FORMAT(order_date, <span class="str">'%Y-%m'</span>)  <span class="kw">AS</span> month,
+    SUM(revenue)                        <span class="kw">AS</span> monthly_revenue,
+    SUM(SUM(revenue)) <span class="kw">OVER</span> (
+        <span class="kw">ORDER BY</span> DATE_FORMAT(order_date, <span class="str">'%Y-%m'</span>)
+    )                                   <span class="kw">AS</span> cumulative_revenue
+<span class="kw">FROM</span> orders
+<span class="kw">GROUP BY</span> month
+<span class="kw">ORDER BY</span> month;
+
+<span class="cm">-- Q8: Your own business question (example)</span>
+<span class="cm">-- "Which product category has the highest return rate?"</span>
+<span class="kw">SELECT</span>
+    category,
+    COUNT(*) <span class="kw">AS</span> total_orders,
+    SUM(<span class="kw">CASE WHEN</span> status = <span class="str">'returned'</span> <span class="kw">THEN</span> <span class="nu">1</span> <span class="kw">ELSE</span> <span class="nu">0</span> <span class="kw">END</span>) <span class="kw">AS</span> returns,
+    ROUND(<span class="nu">100.0</span> * SUM(<span class="kw">CASE WHEN</span> status = <span class="str">'returned'</span> <span class="kw">THEN</span> <span class="nu">1</span> <span class="kw">ELSE</span> <span class="nu">0</span> <span class="kw">END</span>) / COUNT(*), <span class="nu">2</span>) <span class="kw">AS</span> return_rate_pct
+<span class="kw">FROM</span> orders
+<span class="kw">GROUP BY</span> category
+<span class="kw">ORDER BY</span> return_rate_pct <span class="kw">DESC</span>;</pre></div><div class="rl"><div class="rq"><strong>Set up your database:</strong> Load your dataset (same one from Module 1 or a new one) into MySQL, PostgreSQL, or SQLite. Show a screenshot or output of the CREATE TABLE statement and the first 5 rows. If you use SQLite + Python, that is fine — show the connection setup.</div><div class="rq"><strong>8 required queries:</strong> Write and run these 8 queries (adapt column names to your dataset): (1) Total revenue / count by category, sorted descending. (2) Monthly trend — GROUP BY year and month. (3) Top 10 customers by total spend. (4) Average order value by region or segment. (5) Customers who have not purchased in the last 90 days. (6) A JOIN between at least two tables (or simulate with a subquery). (7) Running total / cumulative metric using a window function. (8) A business question YOU chose — state the question first, then write the query.</div><div class="rq"><strong>Query quality:</strong> Every query must: include a comment above it stating the business question, use meaningful aliases, and produce output you screenshot or display via <code>pd.read_sql()</code> in your notebook. No magic queries without explanation.</div><div class="rq"><strong>Findings:</strong> After all 8 queries, write a short paragraph (5–7 sentences) summarising what the SQL analysis revealed that the Python EDA did not, or confirmed.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>If you cannot install MySQL/PostgreSQL locally, use SQLite with Python's <code>sqlite3</code> library or use an online tool like DB Fiddle. What matters is the SQL — not the database engine.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">03</div><div><div class="tt">Dashboard &amp; Visualisation</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Build one interactive dashboard that a non-technical business stakeholder can open and understand in under 60 seconds. Choose Power BI, Tableau, Looker Studio, or a Plotly/Dash app in Python.</p><div class="rl"><div class="rq"><strong>Dashboard requirements:</strong> Your dashboard must contain: (a) a date/time filter or slicer, (b) at minimum 5 different chart types (bar, line, pie/donut, KPI card, and one more of your choice), (c) at least 3 KPI summary cards at the top (e.g. Total Revenue, Total Orders, Average Order Value), (d) one chart that shows a trend over time, (e) one chart that compares categories or segments.</div><div class="rq"><strong>Design quality:</strong> Apply these rules: consistent colour palette (choose 2–3 colours maximum), every chart has a title, data labels where they help readability, no 3D charts, no rainbow colour schemes, logical layout (most important insight top-left). A cluttered dashboard with 10 charts scores lower than a clean one with 5.</div><div class="rq"><strong>Storytelling:</strong> Add a text box or title section at the top of the dashboard with: the dataset name, the date range of the data, and a one-sentence 'headline insight' (e.g. 'Revenue grew 23% QoQ driven by Electronics category'). The stakeholder should know the main takeaway before reading any chart.</div><div class="rq"><strong>Share your dashboard:</strong> Export as PDF or screenshot every page/tab. If using Power BI, export the .pbix file. If Tableau Public, share the public link. If Python Dash, include the <code>app.py</code> file that can be run with <code>python app.py</code>.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>You can use a different dataset for this module if your Module 1 dataset does not visualise well. A business sales dataset, HR dataset, or financial dataset tends to produce the most compelling dashboards.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">04</div><div><div class="tt">Statistical Analysis</div><div class="tp">// 18 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Apply statistics to answer a real business question. This module tests whether you understand WHY a statistical test is the right tool — not just how to run it.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">Hypothesis test — T-test example</span><span class="cb-tag">Python</span></div><pre><span class="kw">from</span> scipy <span class="kw">import</span> stats
+<span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+<span class="cm"># Business question: Do premium customers spend more than standard?</span>
+premium = df[df[<span class="str">'segment'</span>] == <span class="str">'Premium'</span>][<span class="str">'order_value'</span>]
+standard = df[df[<span class="str">'segment'</span>] == <span class="str">'Standard'</span>][<span class="str">'order_value'</span>]
+
+t_stat, p_value = stats.ttest_ind(premium, standard)
+
+<span class="ty">print</span>(<span class="str">f"T-statistic: {t_stat:.4f}"</span>)
+<span class="ty">print</span>(<span class="str">f"P-value:     {p_value:.4f}"</span>)
+
+<span class="kw">if</span> p_value < <span class="nu">0.05</span>:
+    <span class="ty">print</span>(<span class="str">"Reject H₀: significant difference in spending."</span>)
+<span class="kw">else</span>:
+    <span class="ty">print</span>(<span class="str">"Fail to reject H₀: no significant difference."</span>)
+
+<span class="cm"># Always check assumptions</span>
+<span class="cm"># 1. Is each group normally distributed? (Shapiro-Wilk if n < 50)</span>
+<span class="cm"># 2. Equal variances? (Levene test)</span></pre></div><div class="rl"><div class="rq"><strong>Descriptive statistics:</strong> For your key numerical columns: compute mean, median, mode, standard deviation, variance, skewness, kurtosis. Identify which columns are normally distributed vs skewed. Show the distribution with a histogram + KDE overlay. Write one sentence interpreting each distribution in business terms.</div><div class="rq"><strong>Hypothesis test:</strong> Choose and run ONE hypothesis test. Options: (A) T-test — do two customer segments spend significantly differently? (B) Chi-square — is there a significant relationship between product category and return rate? (C) ANOVA — do three or more regions have significantly different average order values? State: the null hypothesis H₀, the alternative hypothesis H₁, your significance level α (use 0.05), the test result (p-value), and your conclusion in plain English.</div><div class="rq"><strong>Correlation analysis:</strong> Compute the correlation matrix for all numerical columns. Plot it as a heatmap. Identify the strongest positive and negative correlations. For the strongest correlation, create a scatter plot and explain whether it suggests causation or merely correlation and why.</div><div class="rq"><strong>Insight report:</strong> Write a 200&ndash;300 word business insight report based purely on your statistical findings. Write it as if you are presenting to Tekravio's management team: no code, no jargon, just findings and what the business should do with them.</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>You must justify your choice of statistical test. If you run a T-test, explain why a T-test and not a Mann-Whitney U test. The justification shows whether you understand the assumption behind the test.</p></div></div>
+  </div>  <div class="task">
+    <div class="th" onclick="T(this)">
+      <div class="tn">05</div><div><div class="tt">Machine Learning Model</div><div class="tp">// 20 marks</div></div>
+      <span class="tch">&#9660;</span>
+    </div>
+    <div class="tb"><p class="tdesc">Train a basic ML model to solve a real prediction problem from your dataset. This is not a deep-learning assignment — we want a clean, well-explained Scikit-learn model with proper evaluation.</p><div class="codeblock"><div class="cb-h"><span class="cb-f">ML pipeline — classification</span><span class="cb-tag">Python</span></div><pre><span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split
+<span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler, LabelEncoder
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> classification_report, confusion_matrix
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+X = df.drop(columns=[<span class="str">'target'</span>])
+y = df[<span class="str">'target'</span>]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=<span class="nu">0.2</span>, random_state=<span class="nu">42</span>, stratify=y)
+
+scaler = StandardScaler()
+X_train_sc = scaler.fit_transform(X_train)
+X_test_sc  = scaler.transform(X_test)
+
+<span class="cm"># Model 1</span>
+lr = LogisticRegression(max_iter=<span class="nu">1000</span>)
+lr.fit(X_train_sc, y_train)
+<span class="ty">print</span>(classification_report(y_test, lr.predict(X_test_sc)))
+
+<span class="cm"># Model 2</span>
+rf = RandomForestClassifier(n_estimators=<span class="nu">100</span>, random_state=<span class="nu">42</span>)
+rf.fit(X_train, y_train)
+<span class="ty">print</span>(classification_report(y_test, rf.predict(X_test)))
+
+<span class="cm"># Feature importance</span>
+importances = pd.Series(rf.feature_importances_, index=X.columns)
+importances.nlargest(<span class="nu">10</span>).plot(kind=<span class="str">'barh'</span>)</pre></div><div class="rl"><div class="rq"><strong>Define the problem:</strong> Choose ONE prediction task: (A) Classification — predict customer churn (yes/no), product return (yes/no), or employee attrition (yes/no). (B) Regression — predict order revenue, customer lifetime value, or a numerical KPI. State clearly: what you are predicting (target variable), which columns you are using to predict it (features), and why this prediction would be useful to Tekravio or a business client.</div><div class="rq"><strong>Data preparation:</strong> Prepare features: encode categorical columns (<code>LabelEncoder</code> or <code>get_dummies</code>), scale numerical features (<code>StandardScaler</code> or <code>MinMaxScaler</code>), handle any remaining nulls, split data into train (80%) and test (20%) sets using <code>train_test_split</code> with <code>random_state=42</code>.</div><div class="rq"><strong>Train and evaluate:</strong> Train at least TWO models and compare them. For classification: Logistic Regression + Random Forest. For regression: Linear Regression + Random Forest Regressor. Report for classification: accuracy, precision, recall, F1-score, and confusion matrix. Report for regression: MAE, MSE, RMSE, and R² score. Choose the better model and explain why using the metrics — not intuition.</div><div class="rq"><strong>Feature importance:</strong> For your best model, extract and plot feature importance (Random Forest provides this natively; for Logistic Regression use the coefficients). Identify the top 5 most important features. Write one sentence per feature explaining why it makes business sense (or does not).</div></div><div class="callout cy" style="margin-top:1rem"><div class="callout-h">// Note</div><p>If your dataset is imbalanced (e.g. only 5% churn), accuracy alone is misleading. Note this in your notebook and use F1-score or ROC-AUC as your primary metric. Mention this explicitly.</p></div></div>
+  </div></div>
+<div class="sep"></div>
+<div class="stag">// 02 &middot; Design Questions</div>
+<div class="sh">Answer in README.md</div>
+<p style="margin-bottom:1.25rem">Short, honest answers — these come up on day one with a real business stakeholder.</p>
+<div class="qbox"><div class="qn">Q1</div><div class="qt">You clean a dataset and find that 30% of the 'revenue' column is missing. You fill it with the median. Later your ML model shows 'revenue' as the most important feature. Should you trust this finding? What did filling nulls with median do to the real distribution of revenue, and how might it have influenced the model?</div></div><div class="qbox"><div class="qn">Q2</div><div class="qt">Your dashboard shows that the 'North' region has the highest sales. Your manager asks you to recommend increasing the sales team in the North. What additional analysis would you do before making this recommendation? What data could make this recommendation wrong?</div></div><div class="qbox"><div class="qn">Q3</div><div class="qt">Your Random Forest model achieves 96% accuracy on a churn prediction dataset. You check the data and find that 95% of customers did NOT churn. Explain what is happening and what metric you would use instead. How would you fix the model?</div></div><div class="qbox"><div class="qn">Q4</div><div class="qt">A business stakeholder asks you to predict next quarter's revenue from historical sales data. You train a Linear Regression model on 2 years of monthly data and get a good R² of 0.88. But when you deploy it for next quarter, the predictions are far off. What could explain this? Name two specific causes and how you would detect them before deployment.</div></div>
+<div class="sep"></div>
+<div class="stag">// 03 &middot; Submission Checklist</div>
+<div class="sh">What to Send</div>
+<div class="ctx"><div class="ctx-h"><div class="ctx-dot"></div><div class="ctx-l">// GitHub Repository Structure</div></div>
+<div class="ctx-body">
+<strong>Repository name:</strong> <code>tekravio-da-assignment-[YourName]</code><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module1_eda.ipynb</code> &mdash; Cleaning + EDA notebook (runs top to bottom, no errors)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module2_sql.ipynb</code> or <code>queries.sql</code> &mdash; 8 SQL queries with outputs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module3_dashboard/</code> &mdash; .pbix / Tableau link / app.py + screenshots<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module4_statistics.ipynb</code> &mdash; Stats analysis + business insight report<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>module5_ml.ipynb</code> &mdash; ML model + evaluation + feature importance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>README.md</code> &mdash; Design question answers + dataset source + how to run<br>
+&nbsp;&nbsp;&nbsp;&nbsp;→ <code>data/</code> &mdash; Dataset CSV (or link if too large) + data dictionary<br><br>
+<strong>Email to:</strong> <code>careers@tekravio.com</code><br>
+Subject: <code>Application for Junior Data Analyst – Tekravio</code><br>
+Body: GitHub link + your strongest skill + two projects you're proud of + why Tekravio
+</div></div>
+<div class="sep"></div>
+<div class="bx"><div class="bxt">// Bonus &mdash; 20 Additional Marks</div><div class="bi"><div class="bit"><strong>+8 marks — Customer segmentation:</strong> Apply K-Means clustering to segment customers (or products, or regions) in your dataset. Use the Elbow Method to find the optimal number of clusters. Create a scatter plot of the clusters coloured by segment. Write a one-paragraph business interpretation: what is each cluster, and what marketing or operational action would you recommend for each?</div><div class="bit"><strong>+7 marks — Automated report:</strong> Write a Python script that reads your dataset, runs the key metrics (total revenue, top 5 categories, monthly trend), and automatically generates a PDF or HTML report using a library like <code>reportlab</code>, <code>fpdf2</code>, or just <code>pandas.to_html()</code>. The report must be reproducible: run the script on a new month's data and it produces an updated report.</div><div class="bit"><strong>+5 marks — Time series forecast:</strong> If your dataset has a date column, use <code>statsmodels</code> or <code>Prophet</code> to forecast the next 30 days or 3 months of a key metric. Plot the forecast with confidence intervals. State whether the forecast is reliable given the amount of historical data you have.</div></div></div><div class="sub-box">
+  <div style="font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:.5rem">Submit Your Work</div>
+  <div style="font-family:'Fira Code',monospace;font-size:.85rem;color:var(--ac);margin-bottom:.5rem">careers@tekravio.com</div>
+  <div style="font-size:.85rem;color:var(--mu)">Subject: <code>Junior Data Analyst — Tekravio &mdash; [Your Name]</code> &middot; GitHub link in body</div>
+</div>
+</div></div></main>
+<footer>
+  <div class="fl">Tekr<em>avio</em> Academy</div>
+  <div class="fn">Data Analytics Intern Assignment &middot; Tekravio &mdash; DataLens &middot; 2026<br>tekravio.com/careers.html</div>
+</footer>
+<script>
+function T(el){el.closest('.task').classList.toggle('open')}
+window.addEventListener('scroll',function(){var t=document.body.scrollHeight-window.innerHeight;document.getElementById('pf').style.width=(window.scrollY/t*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
